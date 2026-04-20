@@ -4,31 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PS5 Vault · Tracker gier PlayStation 5</title>
-  <meta name="description" content="Prowadź kolekcję gier PS5, listę życzeń, śledź nadchodzące premiery. Integracja z RAWG, bezpłatna, bez reklam. Aplikacja webowa od SkuDev.">
+  <meta name="description" content="Prowadź kolekcję gier PS5, listę życzeń, śledź premiery. Web app + Android w testach Play Store. Bezpłatna, bez reklam.">
   <meta property="og:title" content="PS5 Vault">
-  <meta property="og:description" content="Tracker gier PS5. Kolekcja, wishlist, premiery. Bezpłatny, bez reklam.">
+  <meta property="og:description" content="Tracker gier PS5. Kolekcja, wishlist, premiery. Bezpłatny.">
   <meta property="og:type" content="website">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231E2618'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23E0B858' font-family='monospace' font-weight='700'%3EV%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231E2618'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23D4A547' font-family='monospace' font-weight='700'%3EV%3C/text%3E%3C/svg%3E">
 
   <style>
     :root {
-      /* Borrowed from parent site but tilted darker/gamer */
       --bg:          #141810;
       --bg-2:        #1E2618;
       --bg-3:        #2A342A;
       --ink:         #F5F0E0;
       --ink-2:       #C5BFA8;
       --ink-3:       #8A8670;
-      --accent:      #E0B858;   /* mustard gold — gamer reward feel */
+      --accent:      #D4A547;
       --accent-dim:  #9A7F3D;
-      --coral:       #D96654;
+      --coral:       #C95A48;
       --sage:        #6B8E6F;
-      --cream:       #FBF7EF;
       --border:      rgba(245, 240, 224, 0.08);
       --border-2:    rgba(245, 240, 224, 0.16);
     }
@@ -47,7 +45,6 @@
       overflow-x: hidden;
     }
 
-    /* Subtle grid overlay */
     body::before {
       content: '';
       position: fixed;
@@ -65,14 +62,14 @@
       position: fixed;
       inset: 0;
       background-image:
-        radial-gradient(circle at 70% 20%, rgba(224, 184, 88, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 10% 80%, rgba(217, 102, 84, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 70% 20%, rgba(212, 165, 71, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 10% 80%, rgba(201, 90, 72, 0.04) 0%, transparent 50%);
       pointer-events: none;
       z-index: 0;
     }
 
     .container {
-      max-width: 1120px;
+      max-width: 1080px;
       margin: 0 auto;
       padding: 0 28px;
       position: relative;
@@ -81,7 +78,7 @@
 
     /* ═══ HEADER ═══ */
     header {
-      padding: 22px 0;
+      padding: 20px 0;
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
@@ -100,13 +97,13 @@
     .logo {
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
-      font-size: 16px;
-      letter-spacing: 0.02em;
+      font-size: 15px;
+      letter-spacing: 0.04em;
       color: var(--ink);
       text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .logo-icon {
@@ -120,6 +117,7 @@
       font-weight: 700;
       border-radius: 6px;
       font-size: 15px;
+      font-family: 'JetBrains Mono', monospace;
     }
 
     .back-link {
@@ -137,7 +135,6 @@
     /* ═══ HERO ═══ */
     .hero {
       padding: 80px 0 60px;
-      position: relative;
     }
 
     .hero-tag {
@@ -173,8 +170,8 @@
     .hero h1 {
       font-family: 'Fraunces', serif;
       font-weight: 400;
-      font-size: clamp(48px, 9vw, 108px);
-      line-height: 0.95;
+      font-size: clamp(46px, 9vw, 100px);
+      line-height: 0.96;
       letter-spacing: -0.035em;
       color: var(--ink);
       margin-bottom: 36px;
@@ -188,7 +185,7 @@
 
     .hero p.lead {
       font-size: clamp(17px, 1.6vw, 20px);
-      line-height: 1.6;
+      line-height: 1.65;
       color: var(--ink-2);
       max-width: 54ch;
       margin-bottom: 44px;
@@ -224,7 +221,7 @@
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(224, 184, 88, 0.3);
+      box-shadow: 0 8px 24px rgba(212, 165, 71, 0.3);
     }
 
     .btn-secondary {
@@ -240,7 +237,7 @@
 
     .hero-meta {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       flex-wrap: wrap;
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
@@ -252,7 +249,7 @@
       color: var(--accent);
     }
 
-    /* ═══ STATS STRIP ═══ */
+    /* ═══ STATS ═══ */
     .stats {
       padding: 40px 0;
       border-top: 1px solid var(--border);
@@ -266,13 +263,11 @@
       gap: 24px;
     }
 
-    .stat {
-      text-align: center;
-    }
+    .stat { text-align: center; }
 
     .stat-val {
       font-family: 'Fraunces', serif;
-      font-size: clamp(28px, 4vw, 40px);
+      font-size: clamp(26px, 3.8vw, 38px);
       font-weight: 500;
       line-height: 1;
       color: var(--accent);
@@ -302,18 +297,18 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .section-h {
       font-family: 'Fraunces', serif;
       font-weight: 400;
-      font-size: clamp(32px, 5vw, 52px);
+      font-size: clamp(30px, 4.5vw, 48px);
       line-height: 1.1;
       letter-spacing: -0.02em;
       color: var(--ink);
-      max-width: 18ch;
-      margin-bottom: 56px;
+      max-width: 20ch;
+      margin-bottom: 48px;
     }
 
     .section-h em {
@@ -324,14 +319,14 @@
     .feat-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 20px;
     }
 
     .feat {
       background: var(--bg-2);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 32px 28px;
+      border-radius: 10px;
+      padding: 28px 24px;
       transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
       position: relative;
       overflow: hidden;
@@ -339,44 +334,30 @@
 
     .feat:hover {
       border-color: var(--accent-dim);
-      transform: translateY(-4px);
+      transform: translateY(-3px);
     }
-
-    .feat::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      opacity: 0;
-      transition: opacity 0.25s;
-    }
-
-    .feat:hover::before { opacity: 1; }
 
     .feat-icon {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       color: var(--accent);
       letter-spacing: 0.1em;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .feat h3 {
       font-family: 'Fraunces', serif;
       font-weight: 500;
-      font-size: 22px;
+      font-size: 20px;
       line-height: 1.25;
       letter-spacing: -0.01em;
       color: var(--ink);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .feat p {
-      font-size: 15px;
+      font-size: 14.5px;
       line-height: 1.6;
       color: var(--ink-2);
     }
@@ -385,7 +366,7 @@
       .feat-grid { grid-template-columns: 1fr; }
     }
 
-    /* ═══ HOW IT WORKS (code block style) ═══ */
+    /* ═══ HOW IT WORKS ═══ */
     .how {
       padding: 100px 0;
       background: var(--bg-2);
@@ -400,16 +381,12 @@
       margin-top: 40px;
     }
 
-    .step {
-      position: relative;
-    }
-
     .step-num {
       font-family: 'JetBrains Mono', monospace;
       font-size: 14px;
       color: var(--accent);
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -425,14 +402,14 @@
     .step h3 {
       font-family: 'Fraunces', serif;
       font-weight: 500;
-      font-size: 24px;
+      font-size: 22px;
       line-height: 1.25;
       color: var(--ink);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .step p {
-      font-size: 15px;
+      font-size: 14.5px;
       line-height: 1.6;
       color: var(--ink-2);
     }
@@ -443,39 +420,39 @@
 
     /* ═══ CTA FINAL ═══ */
     .final {
-      padding: 120px 0;
+      padding: 100px 0;
       text-align: center;
-      position: relative;
     }
 
     .final h2 {
       font-family: 'Fraunces', serif;
       font-weight: 400;
-      font-size: clamp(36px, 6vw, 64px);
+      font-size: clamp(34px, 5.5vw, 60px);
       line-height: 1.05;
       letter-spacing: -0.025em;
       color: var(--ink);
-      margin-bottom: 24px;
-      max-width: 18ch;
+      margin-bottom: 20px;
+      max-width: 20ch;
       margin-inline: auto;
     }
 
     .final h2 em { font-style: italic; color: var(--accent); }
 
     .final p {
-      font-size: 17px;
+      font-size: 16px;
       color: var(--ink-2);
       max-width: 48ch;
-      margin: 0 auto 40px;
+      margin: 0 auto 36px;
     }
 
     /* ═══ FOOTER ═══ */
     footer {
-      padding: 32px 0 40px;
+      padding: 28px 0 36px;
       border-top: 1px solid var(--border);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
+      font-size: 11px;
       color: var(--ink-3);
+      letter-spacing: 0.04em;
     }
 
     .footer-row {
@@ -507,10 +484,10 @@
     }
 
     .fade-up { animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-    .delay-1 { animation-delay: 0.12s; }
-    .delay-2 { animation-delay: 0.24s; }
-    .delay-3 { animation-delay: 0.36s; }
-    .delay-4 { animation-delay: 0.48s; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
   </style>
 </head>
 
@@ -520,7 +497,7 @@
   <header>
     <div class="container">
       <nav class="nav">
-        <a href="/" class="logo">
+        <a href="/ps5-vault/" class="logo">
           <span class="logo-icon">V</span>
           PS5_VAULT
         </a>
@@ -532,21 +509,21 @@
   <!-- ═══ HERO ═══ -->
   <section class="hero">
     <div class="container">
-      <div class="hero-tag fade-up">LIVE · FREE · NO ADS</div>
+      <div class="hero-tag fade-up">CLOSED TESTING · PLAY STORE</div>
 
       <h1 class="fade-up delay-1">
-        Twoja kolekcja <em>PS5.</em> Wreszcie pod kontrolą.
+        Wiesz jakie masz gry <em>na PS5?</em>
       </h1>
 
       <p class="lead fade-up delay-2">
-        Prowadź listę gier które masz, chcesz mieć, kończysz właśnie albo odkładasz na półkę.
-        Zintegrowana z bazą RAWG — 500&nbsp;000+ gier, automatyczne okładki, daty premier,
-        powiadomienia o nadchodzących tytułach.
+        Ja też nie wiedziałem. Kupowałem na promkach rzeczy których nigdy nie uruchomiłem,
+        dubletowałem, zapominałem o premierach. Zrobiłem sobie apkę, wyszło w miarę — więc
+        dzielę się. Teraz w testach Google Play, wersja webowa już działa.
       </p>
 
       <div class="hero-ctas fade-up delay-3">
         <a href="https://matiseekk-dot.github.io/Games/" target="_blank" rel="noopener" class="btn btn-primary">
-          Otwórz aplikację →
+          Otwórz w przeglądarce →
         </a>
         <a href="#features" class="btn btn-secondary">
           Co potrafi
@@ -554,10 +531,10 @@
       </div>
 
       <div class="hero-meta fade-up delay-4">
-        <span>Web app</span>
-        <span>Działa w przeglądarce</span>
-        <span>Bez instalacji</span>
+        <span>Web — działa teraz</span>
+        <span>Android — testy Play Store</span>
         <span>Bez konta</span>
+        <span>Bez reklam</span>
       </div>
     </div>
   </section>
@@ -568,19 +545,19 @@
       <div class="stats-grid">
         <div class="stat">
           <div class="stat-val">500K+</div>
-          <div class="stat-lbl">Gier w bazie</div>
+          <div class="stat-lbl">Gier w bazie RAWG</div>
         </div>
         <div class="stat">
           <div class="stat-val">6</div>
-          <div class="stat-lbl">Statusy w kolekcji</div>
+          <div class="stat-lbl">Statusów w kolekcji</div>
         </div>
         <div class="stat">
           <div class="stat-val">0 zł</div>
-          <div class="stat-lbl">Cena używania</div>
+          <div class="stat-lbl">Za używanie</div>
         </div>
         <div class="stat">
           <div class="stat-val">0</div>
-          <div class="stat-lbl">Reklam i trackerów</div>
+          <div class="stat-lbl">Reklam</div>
         </div>
       </div>
     </div>
@@ -590,44 +567,44 @@
   <section class="features" id="features">
     <div class="container">
       <div class="section-label">// FUNKCJE</div>
-      <h2 class="section-h">Wszystko czego potrzebujesz by <em>ogarnąć bibliotekę</em>.</h2>
+      <h2 class="section-h">Co w niej <em>siedzi</em>.</h2>
 
       <div class="feat-grid">
 
         <div class="feat">
           <div class="feat-icon">01 · COLLECTION</div>
-          <h3>Kolekcja z podziałem na statusy</h3>
-          <p>Mam, gram teraz, skończyłem, odłożyłem, planuję, ukryłem — 6 statusów plus własne notatki i ocena. Liczniki dla każdej kategorii.</p>
+          <h3>Sześć statusów kolekcji</h3>
+          <p>Mam · gram teraz · skończyłem · odłożyłem · planuję · ukryłem. Plus własna notatka i ocena. Liczniki żeby widzieć co i ile masz.</p>
         </div>
 
         <div class="feat">
-          <div class="feat-icon">02 · RAWG API</div>
-          <h3>Automatyczne dane o grach</h3>
-          <p>Wpisz nazwę, dostajesz okładkę, opis, datę premiery, gatunek, oceny Metacritic. Nie musisz nic uzupełniać ręcznie.</p>
+          <div class="feat-icon">02 · RAWG</div>
+          <h3>Automatycznie dociąga dane</h3>
+          <p>Wpisujesz nazwę, apka dociąga okładkę, opis, datę premiery, gatunek, oceny. Nie klepiesz ręcznie jak w Excelu.</p>
         </div>
 
         <div class="feat">
-          <div class="feat-icon">03 · RELEASES</div>
-          <h3>Tracker nadchodzących premier</h3>
-          <p>Sekcja „planuję" sortuje się po najbliższych premierach. Badge pokazuje ile dni zostało. Apka przypomni Ci 3 dni przed.</p>
+          <div class="feat-icon">03 · PREMIERY</div>
+          <h3>Countdown do premier</h3>
+          <p>Lista "planuję" sortuje się po najbliższej premierze. Pokazuje ile dni zostało. Przypomni 3 dni przed.</p>
         </div>
 
         <div class="feat">
           <div class="feat-icon">04 · WISHLIST</div>
-          <h3>Lista życzeń z priorytetami</h3>
-          <p>Ranking „bardzo chcę" — „kiedyś może". Kiedy gra dostanie promocję, nie zgubi się w zaległej liście jak w PlayStation Store.</p>
+          <h3>Lista życzeń z priorytetem</h3>
+          <p>Bardzo chcę · może kiedyś · na promkę. Gdy gra tanieje, wiadomo czy to "kupuj od razu" czy "odłóż".</p>
         </div>
 
         <div class="feat">
           <div class="feat-icon">05 · OFFLINE</div>
-          <h3>Działa bez internetu</h3>
-          <p>Wszystkie Twoje dane są w przeglądarce. Raz załadowana apka działa bez sieci. Nowe gry dodasz gdy wróci wi-fi.</p>
+          <h3>Działa bez netu</h3>
+          <p>Wszystkie Twoje dane żyją w przeglądarce. Raz załadowana apka działa offline. Nowe gry dodasz jak wróci wi-fi.</p>
         </div>
 
         <div class="feat">
           <div class="feat-icon">06 · PRIVACY</div>
-          <h3>Twoje dane zostają u Ciebie</h3>
-          <p>Nie ma konta. Nie ma serwera. Nie ma trackerów. Apka żyje lokalnie w Twojej przeglądarce — nikt się nie dowie co grasz.</p>
+          <h3>Nie wysyłam nigdzie Twoich danych</h3>
+          <p>Nie ma konta. Nie ma serwera. Nie ma analityki. Dane żyją na Twoim urządzeniu i nigdzie ich nie wysyłam.</p>
         </div>
 
       </div>
@@ -638,34 +615,34 @@
   <section class="how">
     <div class="container">
       <div class="section-label">// JAK TO DZIAŁA</div>
-      <h2 class="section-h">Trzy kliknięcia i masz <em>swoją bibliotekę</em>.</h2>
+      <h2 class="section-h">Trzy kliknięcia i jesteś <em>w domu</em>.</h2>
 
       <div class="steps">
         <div class="step">
           <div class="step-num">01</div>
-          <h3>Otwórz apkę</h3>
-          <p>Klik na link, otwiera się w przeglądarce. Żadnej rejestracji, żadnego sklepu, żadnego loga na telefon.</p>
+          <h3>Klikasz link</h3>
+          <p>Otwiera się w przeglądarce. Bez rejestracji, bez emaila, bez ściągania niczego na telefon.</p>
         </div>
         <div class="step">
           <div class="step-num">02</div>
-          <h3>Dodaj grę</h3>
-          <p>Wpisz nazwę. Apka dociąga okładkę, opis, datę z RAWG. Wybierz status, dodaj notatkę, zapisz.</p>
+          <h3>Wpisujesz grę</h3>
+          <p>Apka dociąga dane z RAWG. Ty wybierasz status, dodajesz notatkę jeśli chcesz, zapisujesz.</p>
         </div>
         <div class="step">
           <div class="step-num">03</div>
-          <h3>Wracaj kiedy chcesz</h3>
-          <p>Twoja biblioteka czeka. Dodaj do wishlist, oznacz jako ukończone, sprawdź co wychodzi w następnym miesiącu.</p>
+          <h3>Wracasz kiedy chcesz</h3>
+          <p>Kolekcja czeka. Sprawdź co wychodzi w następnym miesiącu, co masz nieskończone, co odłożone.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ FINAL CTA ═══ -->
+  <!-- ═══ CTA FINAL ═══ -->
   <section class="final">
     <div class="container">
-      <h2>Otwórz PS5 Vault <em>teraz.</em></h2>
-      <p>Działa na każdym urządzeniu. Telefon, komputer, tablet. Bez rejestracji, bez instalacji, bez płacenia.</p>
-      <a href="https://matiseekk-dot.github.io/Games/" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:17px; padding:18px 36px;">
+      <h2>Otwórz <em>teraz.</em></h2>
+      <p>Działa na telefonie, komputerze, tablecie. Bez konta, bez instalacji, bez płacenia.</p>
+      <a href="https://matiseekk-dot.github.io/Games/" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:16px; padding:18px 36px;">
         Start → matiseekk-dot.github.io/Games
       </a>
     </div>
@@ -679,7 +656,7 @@
         <ul class="footer-links">
           <li><a href="/">SkuDev</a></li>
           <li><a href="https://github.com/matiseekk-dot/Games" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="mailto:hello@skudev.pl">Email</a></li>
+          <li><a href="mailto:skudev6@gmail.com">Email</a></li>
         </ul>
       </div>
     </div>

@@ -3,37 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SkuDev · Apki od Mateusza</title>
-  <meta name="description" content="Portfolio aplikacji SkuDev — Spokojny Rodzic, PS5 Vault, FinTrack PRO. Apki tworzone przez indie developera po godzinach.">
+  <title>SkuDev · Mateusz robi apki</title>
+  <meta name="description" content="Apki robione po godzinach. Spokojny Rodzic, PS5 Vault, Metal Vault, FinTrack, Taśma Tracker. Od Mateusza.">
   <meta property="og:title" content="SkuDev">
-  <meta property="og:description" content="Apki dla rodziców, graczy, zapracowanych. Od jednego dewelopera.">
+  <meta property="og:description" content="Mateusz robi apki po godzinach. Zajrzyj.">
   <meta property="og:type" content="website">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='%23D96654'/%3E%3Ctext x='50' y='68' font-size='48' text-anchor='middle' fill='white' font-family='serif' font-weight='600'%3ES%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231A1F18'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23D4A547' font-family='monospace' font-weight='700'%3ES%3C/text%3E%3C/svg%3E">
 
   <style>
     :root {
-      --cream:       #FBF7EF;
-      --cream-2:     #F5EEE0;
-      --paper:       #FFFFFF;
-      --ink:         #1E2618;
-      --ink-2:       #4A5349;
-      --ink-3:       #7A8275;
+      --bg:          #141810;
+      --bg-2:        #1E2618;
+      --bg-3:        #2A342A;
+      --ink:         #F5F0E0;
+      --ink-2:       #C5BFA8;
+      --ink-3:       #8A8670;
+      --accent:      #D4A547;
+      --accent-dim:  #9A7F3D;
+      --coral:       #C95A48;
       --sage:        #6B8E6F;
-      --sage-dark:   #3F5842;
-      --sage-light:  #DCE8DC;
-      --coral:       #D96654;
-      --coral-light: #F8E6E0;
-      --mustard:     #E0B858;
-      --dusk:        #3F4A45;
-      --border:      rgba(30, 38, 24, 0.08);
-      --border-dark: rgba(30, 38, 24, 0.14);
-      --shadow:      0 1px 2px rgba(30, 38, 24, 0.06), 0 8px 28px rgba(30, 38, 24, 0.05);
-      --shadow-lg:   0 2px 6px rgba(30, 38, 24, 0.08), 0 18px 50px rgba(30, 38, 24, 0.09);
+      --border:      rgba(245, 240, 224, 0.08);
+      --border-2:    rgba(245, 240, 224, 0.16);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -45,24 +40,39 @@
       font-size: 16px;
       line-height: 1.55;
       color: var(--ink);
-      background: var(--cream);
+      background: var(--bg);
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
+    /* Subtle grid + ambient glow */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
       background-image:
-        radial-gradient(circle at 20% 30%, rgba(107, 142, 111, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(217, 102, 84, 0.025) 0%, transparent 50%);
+        linear-gradient(rgba(245, 240, 224, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245, 240, 224, 0.015) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 75% 15%, rgba(212, 165, 71, 0.06) 0%, transparent 50%),
+        radial-gradient(circle at 15% 85%, rgba(201, 90, 72, 0.04) 0%, transparent 50%);
       pointer-events: none;
       z-index: 0;
     }
 
     .container {
-      max-width: 1120px;
+      max-width: 1080px;
       margin: 0 auto;
       padding: 0 28px;
       position: relative;
@@ -71,13 +81,13 @@
 
     /* ═══ HEADER ═══ */
     header {
-      padding: 22px 0;
+      padding: 20px 0;
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(8px);
-      background: rgba(251, 247, 239, 0.92);
+      backdrop-filter: blur(12px);
+      background: rgba(20, 24, 16, 0.85);
     }
 
     .nav {
@@ -88,45 +98,43 @@
     }
 
     .logo {
-      font-family: 'Fraunces', serif;
-      font-weight: 500;
-      font-size: 22px;
-      letter-spacing: -0.02em;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.04em;
       color: var(--ink);
       text-decoration: none;
-      font-style: italic;
       display: flex;
-      align-items: baseline;
-      gap: 6px;
+      align-items: center;
+      gap: 10px;
     }
 
     .logo::before {
       content: '';
       width: 10px;
       height: 10px;
-      border-radius: 50%;
-      background: var(--coral);
-      display: inline-block;
-      margin-right: 2px;
-      transform: translateY(1px);
+      background: var(--accent);
+      border-radius: 2px;
+      box-shadow: 0 0 12px rgba(212, 165, 71, 0.5);
     }
 
     .nav-links {
       display: flex;
       gap: 28px;
       list-style: none;
-      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
       font-weight: 500;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.06em;
     }
 
     .nav-links a {
-      color: var(--ink-2);
+      color: var(--ink-3);
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    .nav-links a:hover { color: var(--coral); }
+    .nav-links a:hover { color: var(--accent); }
 
     @media (max-width: 640px) {
       .nav-links { display: none; }
@@ -138,148 +146,144 @@
       position: relative;
     }
 
-    .hero-kicker {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--sage-dark);
-      margin-bottom: 28px;
-      display: flex;
+    .hero-terminal {
+      display: inline-flex;
       align-items: center;
       gap: 10px;
+      padding: 7px 14px;
+      border: 1px solid var(--border-2);
+      border-radius: 6px;
+      background: rgba(245, 240, 224, 0.02);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--ink-2);
+      margin-bottom: 36px;
     }
 
-    .hero-kicker::before {
+    .hero-terminal::before {
       content: '';
-      width: 32px;
-      height: 1px;
-      background: var(--sage-dark);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: blink 1.6s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0.2; }
     }
 
     .hero h1 {
       font-family: 'Fraunces', serif;
       font-weight: 400;
-      font-size: clamp(46px, 9vw, 104px);
+      font-size: clamp(46px, 9vw, 100px);
       line-height: 0.98;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.035em;
       color: var(--ink);
-      max-width: 14ch;
       margin-bottom: 36px;
+      max-width: 14ch;
     }
 
     .hero h1 em {
       font-style: italic;
-      color: var(--coral);
+      color: var(--accent);
       font-weight: 400;
     }
 
     .hero p.lead {
-      font-size: clamp(17px, 1.6vw, 20px);
-      line-height: 1.6;
+      font-size: clamp(16px, 1.5vw, 19px);
+      line-height: 1.65;
       color: var(--ink-2);
-      max-width: 56ch;
-      margin-bottom: 32px;
+      max-width: 52ch;
     }
 
-    .hero-meta {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      font-size: 13px;
-      color: var(--ink-3);
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-    }
-
-    .hero-meta span {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .hero-meta span::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--coral);
+    .hero p.lead + p.lead {
+      margin-top: 18px;
     }
 
     /* ═══ DIVIDER ═══ */
     .divider {
       display: flex;
       align-items: center;
-      gap: 20px;
-      padding: 20px 0 40px;
+      gap: 16px;
+      padding: 40px 0 32px;
     }
 
     .divider-line {
       flex: 1;
       height: 1px;
-      background: var(--border-dark);
+      background: var(--border-2);
     }
 
     .divider-label {
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      font-size: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
       color: var(--ink-3);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
     }
 
-    /* ═══ SECTION LABEL ═══ */
+    /* ═══ PROJECTS ═══ */
+    .projects {
+      padding: 40px 0 80px;
+    }
+
     .section-label {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--sage-dark);
-      margin-bottom: 16px;
+      color: var(--accent);
+      margin-bottom: 14px;
     }
 
     .section-h {
       font-family: 'Fraunces', serif;
       font-weight: 400;
-      font-size: clamp(34px, 5vw, 56px);
-      line-height: 1.08;
+      font-size: clamp(30px, 4.5vw, 48px);
+      line-height: 1.1;
       letter-spacing: -0.02em;
       color: var(--ink);
-      max-width: 18ch;
-      margin-bottom: 60px;
+      max-width: 22ch;
+      margin-bottom: 48px;
     }
 
     .section-h em {
       font-style: italic;
-      color: var(--sage-dark);
+      color: var(--accent);
     }
 
-    /* ═══ PROJECTS ═══ */
-    .projects {
-      padding: 60px 0 100px;
-    }
-
-    .projects-grid {
+    .projects-list {
       display: grid;
       grid-template-columns: 1fr;
       gap: 0;
-      border-top: 1px solid var(--border-dark);
+      border-top: 1px solid var(--border-2);
     }
 
     .project {
-      border-bottom: 1px solid var(--border-dark);
-      padding: 40px 0;
+      border-bottom: 1px solid var(--border-2);
+      padding: 32px 0;
       display: grid;
-      grid-template-columns: 80px 1fr auto;
-      gap: 32px;
+      grid-template-columns: 60px 1fr auto;
+      gap: 28px;
       align-items: start;
       text-decoration: none;
       color: inherit;
-      transition: padding-left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition: padding-left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), background 0.2s;
       position: relative;
+      padding-left: 0;
     }
 
-    .project:hover {
+    .project.linked {
+      cursor: pointer;
+    }
+
+    .project.linked:hover {
       padding-left: 16px;
+      background: rgba(245, 240, 224, 0.015);
     }
 
     .project::before {
@@ -288,227 +292,227 @@
       left: 0;
       top: 0;
       bottom: 0;
-      width: 3px;
-      background: var(--coral);
+      width: 2px;
+      background: var(--accent);
       transform: scaleY(0);
       transform-origin: top;
       transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
-    .project:hover::before {
+    .project.linked:hover::before {
       transform: scaleY(1);
     }
 
     .project-num {
-      font-family: 'Fraunces', serif;
-      font-size: 48px;
-      font-weight: 400;
-      line-height: 1;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
       color: var(--ink-3);
-      opacity: 0.6;
-      font-variant-numeric: tabular-nums;
+      padding-top: 10px;
+      letter-spacing: 0.04em;
     }
 
     .project-body { min-width: 0; }
 
-    .project-meta {
+    .project-tags {
       display: flex;
-      gap: 12px;
+      gap: 8px;
       margin-bottom: 12px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      flex-wrap: wrap;
     }
 
     .tag {
-      padding: 3px 10px;
-      border-radius: 100px;
-      background: var(--sage-light);
-      color: var(--sage-dark);
+      font-family: 'JetBrains Mono', monospace;
+      padding: 3px 9px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
     }
 
-    .tag.live { background: var(--coral-light); color: var(--coral); }
-    .tag.planning { background: var(--cream-2); color: var(--ink-3); }
+    .tag.testing { background: rgba(212, 165, 71, 0.14); color: var(--accent); }
+    .tag.wip     { background: rgba(107, 142, 111, 0.16); color: var(--sage); }
+    .tag.planned { background: rgba(138, 134, 112, 0.14); color: var(--ink-3); }
+    .tag.meta    { background: rgba(245, 240, 224, 0.05); color: var(--ink-2); }
 
     .project h3 {
       font-family: 'Fraunces', serif;
       font-weight: 500;
-      font-size: clamp(24px, 3vw, 32px);
-      line-height: 1.2;
-      letter-spacing: -0.02em;
+      font-size: clamp(22px, 2.6vw, 28px);
+      line-height: 1.25;
+      letter-spacing: -0.015em;
       color: var(--ink);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .project h3 em {
       font-style: italic;
-      color: var(--coral);
+      color: var(--accent);
       font-weight: 400;
     }
 
     .project-desc {
-      font-size: 16px;
-      line-height: 1.55;
+      font-size: 15px;
+      line-height: 1.6;
       color: var(--ink-2);
-      max-width: 56ch;
+      max-width: 58ch;
     }
 
     .project-arrow {
-      font-size: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
       color: var(--ink-3);
       align-self: center;
       transition: transform 0.3s, color 0.3s;
     }
 
-    .project:hover .project-arrow {
+    .project.linked:hover .project-arrow {
       transform: translateX(6px);
-      color: var(--coral);
+      color: var(--accent);
+    }
+
+    .project:not(.linked) .project-arrow {
+      display: none;
     }
 
     @media (max-width: 720px) {
-      .project { grid-template-columns: 48px 1fr; gap: 20px; padding: 32px 0; }
-      .project-num { font-size: 32px; }
-      .project-arrow { display: none; }
+      .project {
+        grid-template-columns: 48px 1fr;
+        gap: 20px;
+        padding: 28px 0;
+      }
+      .project-arrow { display: none !important; }
     }
 
-    /* ═══ ABOUT (dark) ═══ */
+    /* ═══ ABOUT ═══ */
     .about {
-      background: var(--ink);
-      color: var(--cream);
       padding: 100px 0;
       position: relative;
-      overflow: hidden;
     }
 
-    .about::before {
-      content: '';
-      position: absolute;
-      top: 20%;
-      right: -100px;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(217, 102, 84, 0.12) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .about::after {
-      content: '';
-      position: absolute;
-      bottom: 10%;
-      left: -80px;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(107, 142, 111, 0.1) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .about .section-label { color: var(--mustard); }
-
-    .about-intro {
+    .about-lead {
       font-family: 'Fraunces', serif;
       font-weight: 400;
-      font-size: clamp(24px, 3.5vw, 40px);
-      line-height: 1.3;
-      letter-spacing: -0.02em;
-      color: var(--cream);
+      font-size: clamp(24px, 3.2vw, 36px);
+      line-height: 1.35;
+      letter-spacing: -0.015em;
+      color: var(--ink);
       max-width: 28ch;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
-    .about-intro em {
+    .about-lead em {
       font-style: italic;
-      color: var(--mustard);
+      color: var(--accent);
     }
 
     .about-text {
-      font-size: 17px;
+      font-size: 16px;
       line-height: 1.7;
-      color: var(--cream-2);
-      max-width: 58ch;
-      margin-bottom: 20px;
+      color: var(--ink-2);
+      max-width: 56ch;
+      margin-bottom: 18px;
     }
 
     .about-sign {
-      margin-top: 40px;
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      font-size: 16px;
-      color: var(--cream-2);
-      opacity: 0.7;
-    }
-
-    .about-links {
-      margin-top: 32px;
+      margin-top: 36px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-3);
+      letter-spacing: 0.08em;
       display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
     }
 
-    .about-links a {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--mustard);
-      text-decoration: none;
-      padding-bottom: 2px;
-      border-bottom: 1px solid rgba(224, 184, 88, 0.3);
-      transition: border-color 0.2s;
-    }
-
-    .about-links a:hover {
-      border-bottom-color: var(--mustard);
+    .about-sign::before {
+      content: '//';
+      color: var(--accent);
     }
 
     /* ═══ CONTACT ═══ */
     .contact {
-      padding: 100px 0;
-      background: var(--cream-2);
-      text-align: center;
+      padding: 80px 0 100px;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    @media (max-width: 720px) {
+      .contact-wrap { grid-template-columns: 1fr; gap: 32px; }
     }
 
     .contact h2 {
       font-family: 'Fraunces', serif;
       font-weight: 400;
-      font-size: clamp(34px, 5vw, 56px);
+      font-size: clamp(28px, 4vw, 42px);
       line-height: 1.1;
       letter-spacing: -0.02em;
       color: var(--ink);
       margin-bottom: 20px;
-      max-width: 22ch;
-      margin-inline: auto;
+      max-width: 14ch;
     }
 
-    .contact h2 em { font-style: italic; color: var(--coral); }
+    .contact h2 em { font-style: italic; color: var(--accent); }
 
     .contact p {
-      font-size: 17px;
+      font-size: 16px;
+      line-height: 1.6;
       color: var(--ink-2);
-      max-width: 48ch;
-      margin: 0 auto 32px;
+      max-width: 40ch;
     }
 
-    .contact-email {
-      display: inline-block;
-      font-family: 'Fraunces', serif;
-      font-size: 22px;
-      font-style: italic;
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 28px 0 0;
+      border-top: 1px solid var(--border-2);
+    }
+
+    .contact-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
       color: var(--ink);
       text-decoration: none;
-      padding: 12px 0;
-      border-bottom: 2px solid var(--coral);
-      transition: color 0.2s;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.2s, padding-left 0.2s;
     }
 
-    .contact-email:hover { color: var(--coral); }
+    .contact-link:hover {
+      color: var(--accent);
+      padding-left: 8px;
+    }
+
+    .contact-link-label {
+      color: var(--ink-3);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .contact-link-value {
+      font-weight: 500;
+    }
 
     /* ═══ FOOTER ═══ */
     footer {
-      padding: 32px 0 40px;
+      padding: 28px 0 36px;
       border-top: 1px solid var(--border);
-      font-size: 13px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
       color: var(--ink-3);
+      letter-spacing: 0.05em;
     }
 
     .footer-row {
@@ -516,39 +520,19 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 12px;
     }
-
-    .footer-brand {
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 20px;
-      list-style: none;
-    }
-
-    .footer-links a {
-      color: var(--ink-3);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover { color: var(--coral); }
 
     /* ═══ ANIMATIONS ═══ */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(14px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
     .fade-up { animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-    .delay-1 { animation-delay: 0.12s; }
-    .delay-2 { animation-delay: 0.24s; }
-    .delay-3 { animation-delay: 0.36s; }
-    .delay-4 { animation-delay: 0.48s; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
   </style>
 </head>
 
@@ -558,11 +542,11 @@
   <header>
     <div class="container">
       <nav class="nav">
-        <a href="/" class="logo">SkuDev</a>
+        <a href="/" class="logo">skudev</a>
         <ul class="nav-links">
-          <li><a href="#projects">Apki</a></li>
-          <li><a href="#about">O mnie</a></li>
-          <li><a href="#contact">Kontakt</a></li>
+          <li><a href="#projects">PROJEKTY</a></li>
+          <li><a href="#about">O MNIE</a></li>
+          <li><a href="#contact">KONTAKT</a></li>
         </ul>
       </nav>
     </div>
@@ -571,23 +555,21 @@
   <!-- ═══ HERO ═══ -->
   <section class="hero">
     <div class="container">
-      <div class="hero-kicker fade-up">Indie dev · Polska</div>
+      <div class="hero-terminal fade-up">~/skudev · indie dev · PL</div>
 
       <h1 class="fade-up delay-1">
-        Apki, które rozwiązują <em>prawdziwe</em> problemy.
+        Apki robione <em>po godzinach.</em>
       </h1>
 
       <p class="lead fade-up delay-2">
-        Cześć, jestem Mateusz. Na co dzień pracuję w banku, po godzinach buduję aplikacje
-        dla siebie i dla ludzi. Każda powstała z prawdziwej potrzeby — mojej, mojej
-        rodziny albo kogoś komu chciałem pomóc.
+        Cześć, jestem Mateusz. Nie jestem startupem, nie mam zespołu, nie biorę inwestorów.
+        W dzień pracuję w banku, wieczorami coś sobie koduję.
       </p>
 
-      <div class="hero-meta fade-up delay-3">
-        <span>5+ wdrożonych apek</span>
-        <span>Wszystkie po polsku</span>
-        <span>Bez ściemy marketingowej</span>
-      </div>
+      <p class="lead fade-up delay-3">
+        Każda apka wyszła z czegoś co mnie wkurzyło. Czasem działa, czasem jeszcze nie,
+        zawsze próbuję żeby było w miarę pożyteczne.
+      </p>
     </div>
   </section>
 
@@ -596,74 +578,92 @@
     <div class="container">
       <div class="divider">
         <div class="divider-line"></div>
-        <div class="divider-label">portfolio</div>
+        <div class="divider-label">projekty</div>
         <div class="divider-line"></div>
       </div>
 
-      <div class="section-label">Co robię</div>
-      <h2 class="section-h">Kilka apek, każda z <em>konkretnym</em> celem.</h2>
+      <div class="section-label">// CO TERAZ ROBIĘ</div>
+      <h2 class="section-h">Pięć rzeczy w <em>różnych etapach</em>.</h2>
 
-      <div class="projects-grid">
+      <div class="projects-list">
 
-        <a href="/spokojny-rodzic/" class="project">
+        <a href="/spokojny-rodzic/" class="project linked">
           <div class="project-num">01</div>
           <div class="project-body">
-            <div class="project-meta">
-              <span class="tag">Wkrótce w Play Store</span>
-              <span class="tag">2026</span>
+            <div class="project-tags">
+              <span class="tag testing">Closed testing</span>
+              <span class="tag meta">Android</span>
             </div>
             <h3>Spokojny Rodzic <em>·</em> Calm Parent</h3>
             <p class="project-desc">
-              Apka która wie co robić gdy dziecko jest chore. Kalkulator bezpiecznych dawek
-              leków, analiza trendu gorączki, raport PDF dla pediatry. Pierwsza polska apka
-              z kalkulatorem dawek dla niemowląt.
+              Apka dla rodziców niemowlaków. Liczy bezpieczną dawkę paracetamolu i ibuprofenu
+              dla wagi dziecka, śledzi gorączkę, generuje PDF na wizytę u pediatry.
+              W testach Google Play przed premierą.
             </p>
           </div>
           <div class="project-arrow">→</div>
         </a>
 
-        <a href="/ps5-vault/" class="project">
+        <a href="/ps5-vault/" class="project linked">
           <div class="project-num">02</div>
           <div class="project-body">
-            <div class="project-meta">
-              <span class="tag live">Na żywo</span>
-              <span class="tag">Web app</span>
+            <div class="project-tags">
+              <span class="tag testing">Testy Play Store</span>
+              <span class="tag meta">Web + Android</span>
             </div>
             <h3>PS5 Vault</h3>
             <p class="project-desc">
-              Tracker gier PS5 z integracją RAWG. Kolekcja, lista życzeń, daty premier,
-              powiadomienia o nadchodzących grach. Bezpłatna, bez reklam, działa w przeglądarce.
+              Tracker gier PlayStation 5. Kolekcja, lista życzeń, nadchodzące premiery,
+              automatyczne okładki z RAWG. Działa w przeglądarce, wersja mobilna w testach.
             </p>
           </div>
           <div class="project-arrow">→</div>
         </a>
 
-        <a href="https://skudev.gumroad.com/l/fintrack-pro" target="_blank" rel="noopener" class="project">
+        <div class="project">
           <div class="project-num">03</div>
           <div class="project-body">
-            <div class="project-meta">
-              <span class="tag live">Sprzedaż na Gumroad</span>
-              <span class="tag">$9</span>
+            <div class="project-tags">
+              <span class="tag wip">W rozwoju</span>
+              <span class="tag meta">Web</span>
+            </div>
+            <h3>Metal Vault</h3>
+            <p class="project-desc">
+              Tracker kolekcji muzyki metalowej — vinyl, CD, cyfrowo. Żeby wiedzieć co mam,
+              co dublet, co jeszcze brakuje do zestawu. Zaawansowany projekt, sporo już
+              gotowe pod spodem.
+            </p>
+          </div>
+        </div>
+
+        <div class="project">
+          <div class="project-num">04</div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="tag wip">W rozwoju</span>
+              <span class="tag meta">Web</span>
             </div>
             <h3>FinTrack <em>PRO</em></h3>
             <p class="project-desc">
-              Osobisty tracker finansów z prognozą, burn rate, wydatkami wspólnymi,
-              cyklami budżetowymi. Wersja PL i EN, jednorazowa opłata, bez subskrypcji.
+              Tracker finansów osobistych dla ludzi których pensja wpada nie 1-go.
+              Burn rate, prognozy, wspólne wydatki z partnerem, cykle budżetowe.
+              Obecnie przebudowywany pod nową wersję.
             </p>
           </div>
-          <div class="project-arrow">→</div>
-        </a>
+        </div>
 
-        <div class="project" style="cursor:default; opacity:0.75;">
-          <div class="project-num">04</div>
+        <div class="project">
+          <div class="project-num">05</div>
           <div class="project-body">
-            <div class="project-meta">
-              <span class="tag planning">W planach</span>
+            <div class="project-tags">
+              <span class="tag planned">W planach</span>
+              <span class="tag meta">Web</span>
             </div>
             <h3>Taśma Tracker</h3>
             <p class="project-desc">
-              Zaawansowany tracker kuponów sportowych — Kelly calculator, heatmapa,
-              achievements, analiza bankrolla. Narzędzie dla poważnych analityków zakładów.
+              Narzędzie dla ludzi obstawiających zakłady sportowe — Kelly calculator,
+              heatmapa wyników, analiza bankrolla, achievements. Wersja alpha istnieje,
+              czeka na dokończenie.
             </p>
           </div>
         </div>
@@ -675,51 +675,58 @@
   <!-- ═══ ABOUT ═══ -->
   <section class="about" id="about">
     <div class="container">
-      <div class="section-label">O mnie</div>
-
-      <p class="about-intro">
-        Indie dev, który nie rzuca pracy w banku, żeby <em>robić apki z pasji</em>.
-      </p>
-
-      <p class="about-text">
-        Nazywam się Mateusz. W dzień pracuję w compliance w banku — specjalizuję się
-        w przeciwdziałaniu praniu pieniędzy i regulacjach finansowych. W wieczory
-        i weekendy buduję aplikacje pod marką SkuDev.
-      </p>
-
-      <p class="about-text">
-        Każda moja apka powstała z prawdziwej potrzeby. <em>Spokojny Rodzic</em> bo
-        szukałem w panice dawki paracetamolu dla mojego dziecka o 2 w nocy.
-        <em>PS5 Vault</em> bo chciałem ogarnąć swoją kolekcję gier.
-        <em>FinTrack PRO</em> bo żadna z dostępnych aplikacji finansowych nie radziła sobie
-        z tym że moja pensja wpada 20-go, a nie 1-go.
-      </p>
-
-      <p class="about-text">
-        Nie sprzedaję Ci "life changing experience". Robię konkretne narzędzia, które
-        rozwiązują konkretne problemy. Jak Ci pomogą — świetnie. Jak nie — nie ma
-        sprawy, znajdziesz coś innego.
-      </p>
-
-      <div class="about-sign">— kwiecień 2026</div>
-
-      <div class="about-links">
-        <a href="https://github.com/matiseekk-dot" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://skudev.gumroad.com" target="_blank" rel="noopener">Gumroad</a>
-        <a href="mailto:hello@skudev.pl">Email</a>
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-label">kto stoi za tym</div>
+        <div class="divider-line"></div>
       </div>
+
+      <div class="section-label">// O MNIE</div>
+      <h2 class="section-h">Jedna osoba, <em>kilka rzeczy</em>, brak pośpiechu.</h2>
+
+      <p class="about-lead">
+        W dzień pracuję w banku. Wieczorami koduję.
+      </p>
+
+      <p class="about-text">
+        Każdy z tych projektów wyszedł z konkretnej sytuacji. Dziecko dostało gorączki —
+        okazało się że nie ma sensownej apki po polsku która powie mi co mam robić.
+        Zrobiłem. Kupa gier w Play Store i nie pamiętam co mam — zrobiłem. Płyty metalowe
+        się mnożą i nie wiem co kupiłem dwa razy — robię.
+      </p>
+
+      <p class="about-text">
+        Nie sprzedaję nikomu rewolucji. Nie mam podcastu o produktivity. Nie piszę
+        threadów na Twitterze. Po prostu robię rzeczy które mi brakowały i dzielę się
+        nimi na wypadek gdyby komuś innemu też pasowały.
+      </p>
+
+      <div class="about-sign">mateusz · kwiecień 2026</div>
     </div>
   </section>
 
   <!-- ═══ CONTACT ═══ -->
   <section class="contact" id="contact">
     <div class="container">
-      <h2>Masz pomysł na apkę? <em>Porozmawiajmy.</em></h2>
-      <p>
-        Zawsze chętnie usłyszę o problemie który warto rozwiązać. Szybko odpisuję,
-        żadnych CRM-ów, żadnych automatów.
-      </p>
-      <a href="mailto:hello@skudev.pl" class="contact-email">hello@skudev.pl</a>
+      <div class="contact-wrap">
+        <div>
+          <h2>Masz pytanie albo <em>pomysł</em>?</h2>
+          <p>
+            Odpisuję sam, nie ma CRM-u, nie ma chatbota. Najlepiej mailem, ale jak
+            wolisz przez GitHub — też ok.
+          </p>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:skudev6@gmail.com" class="contact-link">
+            <span class="contact-link-label">EMAIL</span>
+            <span class="contact-link-value">skudev6@gmail.com →</span>
+          </a>
+          <a href="https://github.com/matiseekk-dot" target="_blank" rel="noopener" class="contact-link">
+            <span class="contact-link-label">GITHUB</span>
+            <span class="contact-link-value">matiseekk-dot →</span>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -727,13 +734,8 @@
   <footer>
     <div class="container">
       <div class="footer-row">
-        <div class="footer-brand">SkuDev · Mateusz · 2026</div>
-        <ul class="footer-links">
-          <li><a href="#projects">Apki</a></li>
-          <li><a href="#about">O mnie</a></li>
-          <li><a href="mailto:hello@skudev.pl">Email</a></li>
-          <li><a href="https://github.com/matiseekk-dot" target="_blank" rel="noopener">GitHub</a></li>
-        </ul>
+        <div>skudev.pl · 2026</div>
+        <div>MADE IN POLAND · BY HAND</div>
       </div>
     </div>
   </footer>
