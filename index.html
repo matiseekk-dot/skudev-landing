@@ -3,20 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Spokojny Rodzic · Aplikacja dla rodziców niemowlaków</title>
-  <meta name="description" content="Pierwsza polska aplikacja z kalkulatorem bezpiecznych dawek paracetamolu i ibuprofenu dla dzieci. Śledź temperaturę, karmienia, sen. Raport PDF dla pediatry.">
-  <meta property="og:title" content="Spokojny Rodzic">
-  <meta property="og:description" content="Apka która wie co robić gdy dziecko jest chore.">
+  <title>SkuDev · Apki od Mateusza</title>
+  <meta name="description" content="Portfolio aplikacji SkuDev — Spokojny Rodzic, PS5 Vault, FinTrack PRO. Apki tworzone przez indie developera po godzinach.">
+  <meta property="og:title" content="SkuDev">
+  <meta property="og:description" content="Apki dla rodziców, graczy, zapracowanych. Od jednego dewelopera.">
   <meta property="og:type" content="website">
-  <meta property="og:locale" content="pl_PL">
 
-  <!-- Fonts: Fraunces (serif display) + Manrope (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- Favicon placeholder -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='78' font-size='88'%3E🍼%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='42' fill='%23D96654'/%3E%3Ctext x='50' y='68' font-size='48' text-anchor='middle' fill='white' font-family='serif' font-weight='600'%3ES%3C/text%3E%3C/svg%3E">
 
   <style>
     :root {
@@ -50,11 +47,9 @@
       color: var(--ink);
       background: var(--cream);
       -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
       overflow-x: hidden;
     }
 
-    /* Paper texture overlay */
     body::before {
       content: '';
       position: fixed;
@@ -78,7 +73,6 @@
     header {
       padding: 22px 0;
       border-bottom: 1px solid var(--border);
-      background: var(--cream);
       position: sticky;
       top: 0;
       z-index: 50;
@@ -117,43 +111,34 @@
       transform: translateY(1px);
     }
 
-    .lang-toggle {
+    .nav-links {
       display: flex;
-      background: var(--paper);
-      border: 1px solid var(--border-dark);
-      border-radius: 100px;
-      padding: 3px;
+      gap: 28px;
+      list-style: none;
       font-size: 13px;
       font-weight: 500;
+      letter-spacing: 0.04em;
     }
 
-    .lang-toggle button {
-      border: none;
-      background: transparent;
-      padding: 6px 14px;
-      border-radius: 100px;
-      cursor: pointer;
+    .nav-links a {
       color: var(--ink-2);
-      font-family: inherit;
-      font-weight: 600;
-      font-size: 12px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: all 0.2s;
+      text-decoration: none;
+      transition: color 0.2s;
     }
 
-    .lang-toggle button.active {
-      background: var(--ink);
-      color: var(--cream);
+    .nav-links a:hover { color: var(--coral); }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
     }
 
     /* ═══ HERO ═══ */
     .hero {
-      padding: 80px 0 100px;
+      padding: 100px 0 80px;
       position: relative;
     }
 
-    .hero-label {
+    .hero-kicker {
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.14em;
@@ -165,7 +150,7 @@
       gap: 10px;
     }
 
-    .hero-label::before {
+    .hero-kicker::before {
       content: '';
       width: 32px;
       height: 1px;
@@ -179,7 +164,7 @@
       line-height: 0.98;
       letter-spacing: -0.03em;
       color: var(--ink);
-      max-width: 13ch;
+      max-width: 14ch;
       margin-bottom: 36px;
     }
 
@@ -191,136 +176,34 @@
 
     .hero p.lead {
       font-size: clamp(17px, 1.6vw, 20px);
-      line-height: 1.55;
+      line-height: 1.6;
       color: var(--ink-2);
-      max-width: 52ch;
-      margin-bottom: 48px;
+      max-width: 56ch;
+      margin-bottom: 32px;
     }
 
-    /* ═══ SIGNUP FORM ═══ */
-    .signup {
-      background: var(--paper);
-      border: 1px solid var(--border-dark);
-      border-radius: 4px;
-      padding: 32px 30px;
-      max-width: 540px;
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-
-    .signup::before {
-      content: '01';
-      position: absolute;
-      top: -14px;
-      left: 24px;
-      background: var(--cream);
-      padding: 0 10px;
-      font-family: 'Fraunces', serif;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--ink-3);
-      letter-spacing: 0.04em;
-    }
-
-    .signup-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--ink-3);
-      margin-bottom: 6px;
-    }
-
-    .signup-title {
-      font-family: 'Fraunces', serif;
-      font-size: 22px;
-      font-weight: 500;
-      line-height: 1.25;
-      color: var(--ink);
-      margin-bottom: 18px;
-    }
-
-    .form-row {
+    .hero-meta {
       display: flex;
-      gap: 10px;
-      align-items: stretch;
-    }
-
-    .form-row input[type="email"] {
-      flex: 1;
-      padding: 14px 16px;
-      border: 1px solid var(--border-dark);
-      border-radius: 3px;
-      font-family: inherit;
-      font-size: 15px;
-      color: var(--ink);
-      background: var(--cream);
-      outline: none;
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .form-row input[type="email"]:focus {
-      border-color: var(--sage-dark);
-      background: var(--paper);
-    }
-
-    .btn-primary {
-      padding: 14px 22px;
-      background: var(--ink);
-      color: var(--cream);
-      border: none;
-      border-radius: 3px;
-      font-family: inherit;
-      font-weight: 600;
-      font-size: 14px;
-      letter-spacing: 0.02em;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-
-    .btn-primary:hover {
-      background: var(--sage-dark);
-      transform: translateY(-1px);
-    }
-
-    .btn-primary:active { transform: translateY(0); }
-
-    .signup-note {
-      font-size: 12px;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 13px;
       color: var(--ink-3);
-      margin-top: 14px;
-      line-height: 1.5;
-    }
-
-    .signup-note strong { color: var(--ink-2); font-weight: 600; }
-
-    .signup.success { border-color: var(--sage); background: var(--sage-light); }
-    .signup.success .form-row, .signup.success .signup-title, .signup.success .signup-label { display: none; }
-    .signup-success-msg {
-      display: none;
       font-family: 'Fraunces', serif;
-      font-size: 20px;
-      font-weight: 500;
-      color: var(--sage-dark);
-      line-height: 1.4;
-    }
-    .signup.success .signup-success-msg { display: block; }
-
-    /* Decorative hero elements */
-    .hero-deco {
-      position: absolute;
-      top: 120px;
-      right: -40px;
-      width: 420px;
-      max-width: 50%;
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.96;
+      font-style: italic;
     }
 
-    @media (max-width: 960px) {
-      .hero-deco { display: none; }
+    .hero-meta span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-meta span::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--coral);
     }
 
     /* ═══ DIVIDER ═══ */
@@ -328,7 +211,7 @@
       display: flex;
       align-items: center;
       gap: 20px;
-      padding: 60px 0 40px;
+      padding: 20px 0 40px;
     }
 
     .divider-line {
@@ -342,56 +225,9 @@
       font-style: italic;
       font-size: 14px;
       color: var(--ink-3);
-      font-weight: 400;
-      letter-spacing: 0.02em;
     }
 
-    /* ═══ WHY SECTION (testimonial-style) ═══ */
-    .why {
-      padding: 40px 0 100px;
-    }
-
-    .why-quote {
-      font-family: 'Fraunces', serif;
-      font-weight: 400;
-      font-size: clamp(28px, 4.5vw, 48px);
-      line-height: 1.25;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      max-width: 22ch;
-      margin-bottom: 32px;
-      position: relative;
-    }
-
-    .why-quote::before {
-      content: '"';
-      font-family: 'Fraunces', serif;
-      font-weight: 400;
-      font-size: 5em;
-      line-height: 0.6;
-      color: var(--coral);
-      position: absolute;
-      left: -0.4em;
-      top: 0.25em;
-      opacity: 0.5;
-    }
-
-    .why-byline {
-      font-size: 13px;
-      color: var(--ink-3);
-      font-style: italic;
-      font-family: 'Fraunces', serif;
-    }
-
-    /* ═══ FEATURES ═══ */
-    .features {
-      padding: 80px 0;
-      background: var(--paper);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-
+    /* ═══ SECTION LABEL ═══ */
     .section-label {
       font-size: 12px;
       font-weight: 700;
@@ -408,7 +244,7 @@
       line-height: 1.08;
       letter-spacing: -0.02em;
       color: var(--ink);
-      max-width: 14ch;
+      max-width: 18ch;
       margin-bottom: 60px;
     }
 
@@ -417,118 +253,127 @@
       color: var(--sage-dark);
     }
 
-    .feat-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
+    /* ═══ PROJECTS ═══ */
+    .projects {
+      padding: 60px 0 100px;
     }
 
-    .feat {
-      padding: 44px 36px;
-      background: var(--paper);
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .project {
+      border-bottom: 1px solid var(--border-dark);
+      padding: 40px 0;
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 32px;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      transition: padding-left 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
       position: relative;
     }
 
-    .feat-num {
+    .project:hover {
+      padding-left: 16px;
+    }
+
+    .project::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--coral);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .project:hover::before {
+      transform: scaleY(1);
+    }
+
+    .project-num {
       font-family: 'Fraunces', serif;
-      font-size: 14px;
-      color: var(--ink-3);
-      margin-bottom: 20px;
-      letter-spacing: 0.04em;
-    }
-
-    .feat-icon {
-      font-size: 36px;
-      margin-bottom: 24px;
-      display: block;
+      font-size: 48px;
+      font-weight: 400;
       line-height: 1;
+      color: var(--ink-3);
+      opacity: 0.6;
+      font-variant-numeric: tabular-nums;
     }
 
-    .feat h3 {
+    .project-body { min-width: 0; }
+
+    .project-meta {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .tag {
+      padding: 3px 10px;
+      border-radius: 100px;
+      background: var(--sage-light);
+      color: var(--sage-dark);
+    }
+
+    .tag.live { background: var(--coral-light); color: var(--coral); }
+    .tag.planning { background: var(--cream-2); color: var(--ink-3); }
+
+    .project h3 {
       font-family: 'Fraunces', serif;
       font-weight: 500;
-      font-size: 24px;
-      line-height: 1.25;
-      letter-spacing: -0.01em;
+      font-size: clamp(24px, 3vw, 32px);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
       color: var(--ink);
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
-    .feat p {
-      font-size: 15px;
-      line-height: 1.6;
+    .project h3 em {
+      font-style: italic;
+      color: var(--coral);
+      font-weight: 400;
+    }
+
+    .project-desc {
+      font-size: 16px;
+      line-height: 1.55;
       color: var(--ink-2);
-      max-width: 42ch;
+      max-width: 56ch;
     }
 
-    .feat.highlight {
-      background: var(--sage-light);
+    .project-arrow {
+      font-size: 24px;
+      color: var(--ink-3);
+      align-self: center;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .project:hover .project-arrow {
+      transform: translateX(6px);
+      color: var(--coral);
     }
 
     @media (max-width: 720px) {
-      .feat-grid { grid-template-columns: 1fr; }
-      .feat { padding: 36px 28px; }
+      .project { grid-template-columns: 48px 1fr; gap: 20px; padding: 32px 0; }
+      .project-num { font-size: 32px; }
+      .project-arrow { display: none; }
     }
 
-    /* ═══ SCREENSHOTS ═══ */
-    .screens {
-      padding: 100px 0;
-    }
-
-    .screens-row {
-      display: flex;
-      gap: 24px;
-      overflow-x: auto;
-      padding: 20px 0 30px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border-dark) transparent;
-      scroll-snap-type: x mandatory;
-    }
-
-    .screens-row::-webkit-scrollbar { height: 6px; }
-    .screens-row::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 3px; }
-
-    .screen {
-      flex: 0 0 240px;
-      scroll-snap-align: start;
-    }
-
-    .screen-img {
-      width: 100%;
-      aspect-ratio: 9 / 16;
-      background: var(--ink);
-      border-radius: 22px;
-      border: 8px solid var(--ink);
-      box-shadow: var(--shadow-lg);
-      object-fit: cover;
-      display: block;
-    }
-
-    .screen-caption {
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      font-size: 14px;
-      color: var(--ink-2);
-      margin-top: 16px;
-      line-height: 1.4;
-    }
-
-    .screen-caption strong {
-      font-style: normal;
-      font-family: 'Manrope', sans-serif;
-      font-weight: 600;
-      color: var(--ink);
-      display: block;
-      font-size: 13px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 2px;
-    }
-
-    /* ═══ MAKER ═══ */
-    .maker {
+    /* ═══ ABOUT (dark) ═══ */
+    .about {
       background: var(--ink);
       color: var(--cream);
       padding: 100px 0;
@@ -536,51 +381,94 @@
       overflow: hidden;
     }
 
-    .maker::before {
+    .about::before {
       content: '';
       position: absolute;
       top: 20%;
       right: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(217, 102, 84, 0.12) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .about::after {
+      content: '';
+      position: absolute;
+      bottom: 10%;
+      left: -80px;
       width: 300px;
       height: 300px;
-      background: radial-gradient(circle, rgba(217, 102, 84, 0.14) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(107, 142, 111, 0.1) 0%, transparent 70%);
       border-radius: 50%;
+      pointer-events: none;
     }
 
-    .maker .section-label { color: var(--mustard); }
+    .about .section-label { color: var(--mustard); }
 
-    .maker-text {
+    .about-intro {
       font-family: 'Fraunces', serif;
       font-weight: 400;
-      font-size: clamp(22px, 2.8vw, 30px);
-      line-height: 1.45;
-      letter-spacing: -0.01em;
+      font-size: clamp(24px, 3.5vw, 40px);
+      line-height: 1.3;
+      letter-spacing: -0.02em;
       color: var(--cream);
-      max-width: 30ch;
-      margin-bottom: 28px;
+      max-width: 28ch;
+      margin-bottom: 32px;
     }
 
-    .maker-text em {
+    .about-intro em {
       font-style: italic;
       color: var(--mustard);
     }
 
-    .maker-sign {
+    .about-text {
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--cream-2);
+      max-width: 58ch;
+      margin-bottom: 20px;
+    }
+
+    .about-sign {
+      margin-top: 40px;
       font-family: 'Fraunces', serif;
       font-style: italic;
       font-size: 16px;
       color: var(--cream-2);
-      opacity: 0.8;
+      opacity: 0.7;
     }
 
-    /* ═══ FINAL CTA ═══ */
-    .final {
+    .about-links {
+      margin-top: 32px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .about-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--mustard);
+      text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 1px solid rgba(224, 184, 88, 0.3);
+      transition: border-color 0.2s;
+    }
+
+    .about-links a:hover {
+      border-bottom-color: var(--mustard);
+    }
+
+    /* ═══ CONTACT ═══ */
+    .contact {
       padding: 100px 0;
-      text-align: center;
       background: var(--cream-2);
+      text-align: center;
     }
 
-    .final h2 {
+    .contact h2 {
       font-family: 'Fraunces', serif;
       font-weight: 400;
       font-size: clamp(34px, 5vw, 56px);
@@ -588,26 +476,36 @@
       letter-spacing: -0.02em;
       color: var(--ink);
       margin-bottom: 20px;
-      max-width: 20ch;
+      max-width: 22ch;
       margin-inline: auto;
     }
 
-    .final p {
+    .contact h2 em { font-style: italic; color: var(--coral); }
+
+    .contact p {
       font-size: 17px;
       color: var(--ink-2);
-      margin-bottom: 40px;
       max-width: 48ch;
-      margin-inline: auto;
+      margin: 0 auto 32px;
     }
 
-    .final .signup {
-      margin: 0 auto;
-      text-align: left;
+    .contact-email {
+      display: inline-block;
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      font-style: italic;
+      color: var(--ink);
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 2px solid var(--coral);
+      transition: color 0.2s;
     }
+
+    .contact-email:hover { color: var(--coral); }
 
     /* ═══ FOOTER ═══ */
     footer {
-      padding: 40px 0 50px;
+      padding: 32px 0 40px;
       border-top: 1px solid var(--border);
       font-size: 13px;
       color: var(--ink-3);
@@ -618,7 +516,12 @@
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
     }
 
     .footer-links {
@@ -630,17 +533,10 @@
     .footer-links a {
       color: var(--ink-3);
       text-decoration: none;
-      font-weight: 500;
       transition: color 0.2s;
     }
 
     .footer-links a:hover { color: var(--coral); }
-
-    .footer-brand {
-      font-family: 'Fraunces', serif;
-      font-style: italic;
-      color: var(--ink-2);
-    }
 
     /* ═══ ANIMATIONS ═══ */
     @keyframes fadeUp {
@@ -653,27 +549,21 @@
     .delay-2 { animation-delay: 0.24s; }
     .delay-3 { animation-delay: 0.36s; }
     .delay-4 { animation-delay: 0.48s; }
-    .delay-5 { animation-delay: 0.60s; }
-
-    /* Hide elements based on language */
-    html[lang="pl"] [data-lang="en"] { display: none; }
-    html[lang="en"] [data-lang="pl"] { display: none; }
   </style>
 </head>
 
 <body>
+
   <!-- ═══ HEADER ═══ -->
   <header>
     <div class="container">
       <nav class="nav">
-        <a href="#" class="logo">
-          <span data-lang="pl">Spokojny Rodzic</span>
-          <span data-lang="en">Calm Parent</span>
-        </a>
-        <div class="lang-toggle">
-          <button class="active" onclick="setLang('pl')" id="btn-pl">PL</button>
-          <button onclick="setLang('en')" id="btn-en">EN</button>
-        </div>
+        <a href="/" class="logo">SkuDev</a>
+        <ul class="nav-links">
+          <li><a href="#projects">Apki</a></li>
+          <li><a href="#about">O mnie</a></li>
+          <li><a href="#contact">Kontakt</a></li>
+        </ul>
       </nav>
     </div>
   </header>
@@ -681,288 +571,155 @@
   <!-- ═══ HERO ═══ -->
   <section class="hero">
     <div class="container">
-      <div class="hero-label fade-up">
-        <span data-lang="pl">Aplikacja dla rodziców · Android</span>
-        <span data-lang="en">App for parents · Android</span>
-      </div>
+      <div class="hero-kicker fade-up">Indie dev · Polska</div>
 
       <h1 class="fade-up delay-1">
-        <span data-lang="pl">Apka, która wie <em>co robić</em>, gdy dziecko jest chore.</span>
-        <span data-lang="en">The app that <em>knows what to do</em> when your baby is sick.</span>
+        Apki, które rozwiązują <em>prawdziwe</em> problemy.
       </h1>
 
       <p class="lead fade-up delay-2">
-        <span data-lang="pl">Kalkulator bezpiecznych dawek paracetamolu i ibuprofenu dla wagi dziecka. Analiza trendu gorączki. Raport PDF dla pediatry. Pierwsza polska apka stworzona przez rodzica dla rodziców.</span>
-        <span data-lang="en">A weight-based safe dose calculator for paracetamol and ibuprofen. Fever trend analysis. PDF reports for your pediatrician. Built by a parent, for parents.</span>
+        Cześć, jestem Mateusz. Na co dzień pracuję w banku, po godzinach buduję aplikacje
+        dla siebie i dla ludzi. Każda powstała z prawdziwej potrzeby — mojej, mojej
+        rodziny albo kogoś komu chciałem pomóc.
       </p>
 
-      <form class="signup fade-up delay-3" id="signup-form" onsubmit="return handleSignup(event, 'hero')">
-        <div class="signup-label">
-          <span data-lang="pl">Early access</span>
-          <span data-lang="en">Early access</span>
-        </div>
-        <div class="signup-title">
-          <span data-lang="pl">Powiadom mnie, gdy apka będzie w Google Play.</span>
-          <span data-lang="en">Let me know when the app launches on Google Play.</span>
-        </div>
-        <div class="form-row">
-          <input type="email" name="email" placeholder="twoj@email.pl" required autocomplete="email" data-lang="pl">
-          <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" data-lang="en">
-          <input type="hidden" name="source" value="spokojnyrodzic.pl / hero">
-          <button type="submit" class="btn-primary">
-            <span data-lang="pl">Zapisz mnie →</span>
-            <span data-lang="en">Notify me →</span>
-          </button>
-        </div>
-        <div class="signup-note">
-          <span data-lang="pl">🔒 <strong>Tylko powiadomienie o premierze.</strong> Zero spamu, zero newslettera. Apka ukaże się na przełomie maja i czerwca 2026.</span>
-          <span data-lang="en">🔒 <strong>One email when the app launches.</strong> No spam, no newsletter. Target release: late May / early June 2026.</span>
-        </div>
-        <div class="signup-success-msg">
-          <span data-lang="pl">✓ Gotowe! Odezwę się dokładnie raz — w dniu premiery. Dzięki za zaufanie.</span>
-          <span data-lang="en">✓ Done! I'll email you exactly once — the day the app launches. Thanks for trusting me.</span>
-        </div>
-      </form>
+      <div class="hero-meta fade-up delay-3">
+        <span>5+ wdrożonych apek</span>
+        <span>Wszystkie po polsku</span>
+        <span>Bez ściemy marketingowej</span>
+      </div>
     </div>
   </section>
 
-  <!-- ═══ WHY / ORIGIN STORY ═══ -->
-  <section class="why">
+  <!-- ═══ PROJECTS ═══ -->
+  <section class="projects" id="projects">
     <div class="container">
       <div class="divider">
         <div class="divider-line"></div>
-        <div class="divider-label">
-          <span data-lang="pl">skąd ta apka</span>
-          <span data-lang="en">the story</span>
-        </div>
+        <div class="divider-label">portfolio</div>
         <div class="divider-line"></div>
       </div>
 
-      <p class="why-quote">
-        <span data-lang="pl">O drugiej w nocy szukałem w Google bezpiecznej dawki paracetamolu dla 7-kilogramowego dziecka. Dwa razy źle policzyłem zanim komukolwiek uwierzyłem.</span>
-        <span data-lang="en">At 2am I was googling "safe paracetamol dose for 7kg baby." I did the math wrong twice on my phone before trusting anything.</span>
-      </p>
-      <p class="why-byline">
-        <span data-lang="pl">— Mateusz, ojciec, twórca aplikacji</span>
-        <span data-lang="en">— Mateusz, father, app creator</span>
-      </p>
-    </div>
-  </section>
+      <div class="section-label">Co robię</div>
+      <h2 class="section-h">Kilka apek, każda z <em>konkretnym</em> celem.</h2>
 
-  <!-- ═══ FEATURES ═══ -->
-  <section class="features">
-    <div class="container">
-      <div class="section-label">
-        <span data-lang="pl">Co potrafi</span>
-        <span data-lang="en">What it does</span>
-      </div>
-      <h2 class="section-h">
-        <span data-lang="pl">Sześć rzeczy, których nie ma <em>żadna inna</em> polska apka.</span>
-        <span data-lang="en">Six things <em>no other</em> baby app does well.</span>
-      </h2>
+      <div class="projects-grid">
 
-      <div class="feat-grid">
-        <div class="feat highlight">
-          <div class="feat-num">01</div>
-          <span class="feat-icon">💊</span>
-          <h3>
-            <span data-lang="pl">Kalkulator dawek leków</span>
-            <span data-lang="en">Weight-based dose calculator</span>
-          </h3>
-          <p>
-            <span data-lang="pl">Paracetamol i ibuprofen — dokładna dawka dla wagi i wieku dziecka. Żadna inna polska apka tego nie ma.</span>
-            <span data-lang="en">Paracetamol and ibuprofen — exact dose for your baby's weight and age. Huckleberry doesn't have this. Glow doesn't. Nobody does.</span>
-          </p>
+        <a href="/spokojny-rodzic/" class="project">
+          <div class="project-num">01</div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="tag">Wkrótce w Play Store</span>
+              <span class="tag">2026</span>
+            </div>
+            <h3>Spokojny Rodzic <em>·</em> Calm Parent</h3>
+            <p class="project-desc">
+              Apka która wie co robić gdy dziecko jest chore. Kalkulator bezpiecznych dawek
+              leków, analiza trendu gorączki, raport PDF dla pediatry. Pierwsza polska apka
+              z kalkulatorem dawek dla niemowląt.
+            </p>
+          </div>
+          <div class="project-arrow">→</div>
+        </a>
+
+        <a href="/ps5-vault/" class="project">
+          <div class="project-num">02</div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="tag live">Na żywo</span>
+              <span class="tag">Web app</span>
+            </div>
+            <h3>PS5 Vault</h3>
+            <p class="project-desc">
+              Tracker gier PS5 z integracją RAWG. Kolekcja, lista życzeń, daty premier,
+              powiadomienia o nadchodzących grach. Bezpłatna, bez reklam, działa w przeglądarce.
+            </p>
+          </div>
+          <div class="project-arrow">→</div>
+        </a>
+
+        <a href="https://skudev.gumroad.com/l/fintrack-pro" target="_blank" rel="noopener" class="project">
+          <div class="project-num">03</div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="tag live">Sprzedaż na Gumroad</span>
+              <span class="tag">$9</span>
+            </div>
+            <h3>FinTrack <em>PRO</em></h3>
+            <p class="project-desc">
+              Osobisty tracker finansów z prognozą, burn rate, wydatkami wspólnymi,
+              cyklami budżetowymi. Wersja PL i EN, jednorazowa opłata, bez subskrypcji.
+            </p>
+          </div>
+          <div class="project-arrow">→</div>
+        </a>
+
+        <div class="project" style="cursor:default; opacity:0.75;">
+          <div class="project-num">04</div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="tag planning">W planach</span>
+            </div>
+            <h3>Taśma Tracker</h3>
+            <p class="project-desc">
+              Zaawansowany tracker kuponów sportowych — Kelly calculator, heatmapa,
+              achievements, analiza bankrolla. Narzędzie dla poważnych analityków zakładów.
+            </p>
+          </div>
         </div>
 
-        <div class="feat">
-          <div class="feat-num">02</div>
-          <span class="feat-icon">🌡️</span>
-          <h3>
-            <span data-lang="pl">Analiza trendu gorączki</span>
-            <span data-lang="en">Fever trend analysis</span>
-          </h3>
-          <p>
-            <span data-lang="pl">Apka widzi, czy temperatura rośnie, czy spada. Mówi, kiedy warto zadzwonić do lekarza — bez strachu w oczach.</span>
-            <span data-lang="en">Sees whether temperature is rising or stabilizing. Tells you when to call the doctor — without the panic.</span>
-          </p>
-        </div>
-
-        <div class="feat">
-          <div class="feat-num">03</div>
-          <span class="feat-icon">📄</span>
-          <h3>
-            <span data-lang="pl">Raport PDF dla pediatry</span>
-            <span data-lang="en">PDF report for your pediatrician</span>
-          </h3>
-          <p>
-            <span data-lang="pl">Wszystkie pomiary, karmienia, sen, leki z ostatnich 2 tygodni — na jednej kartce. Wydrukuj lub pokaż na telefonie.</span>
-            <span data-lang="en">All measurements, feedings, sleep, meds from the last 2 weeks — on a single page. Print it or show on your phone.</span>
-          </p>
-        </div>
-
-        <div class="feat">
-          <div class="feat-num">04</div>
-          <span class="feat-icon">💉</span>
-          <h3>
-            <span data-lang="pl">Polski PSO wbudowany</span>
-            <span data-lang="en">Built-in Polish vaccination schedule</span>
-          </h3>
-          <p>
-            <span data-lang="pl">Program Szczepień Ochronnych — 14 szczepień z polskimi terminami. Nie musisz tłumaczyć ACIP z USA.</span>
-            <span data-lang="en">Full Polish PSO schedule — 14 vaccines with local dates. Or add your own country's schedule.</span>
-          </p>
-        </div>
-
-        <div class="feat">
-          <div class="feat-num">05</div>
-          <span class="feat-icon">🍼</span>
-          <h3>
-            <span data-lang="pl">Śledzenie dnia niemowlaka</span>
-            <span data-lang="en">Full daily tracking</span>
-          </h3>
-          <p>
-            <span data-lang="pl">Karmienia, sen, pieluchy, temperatura, waga, milestones, ząbki — wszystko w jednej apce. Działa offline.</span>
-            <span data-lang="en">Feedings, sleep, diapers, temperature, weight, milestones, teething — all in one app. Works offline.</span>
-          </p>
-        </div>
-
-        <div class="feat highlight">
-          <div class="feat-num">06</div>
-          <span class="feat-icon">🔒</span>
-          <h3>
-            <span data-lang="pl">Bez reklam, bez sprzedaży danych</span>
-            <span data-lang="en">No ads, no data selling</span>
-          </h3>
-          <p>
-            <span data-lang="pl">Twoje dane zostają u Ciebie — zaszyfrowane na Twoim koncie Google. Apka utrzymuje się z Premium, nie z reklam.</span>
-            <span data-lang="en">Your data stays yours — encrypted on your Google account. The app is funded by Premium subscriptions, not ads.</span>
-          </p>
-        </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ SCREENSHOTS ═══ -->
-  <section class="screens">
+  <!-- ═══ ABOUT ═══ -->
+  <section class="about" id="about">
     <div class="container">
-      <div class="section-label">
-        <span data-lang="pl">Podgląd apki</span>
-        <span data-lang="en">Preview</span>
-      </div>
-      <h2 class="section-h">
-        <span data-lang="pl">Zbudowana, żeby <em>szybko wpisywać</em> jedną ręką.</span>
-        <span data-lang="en">Built for <em>quick one-handed</em> logging.</span>
-      </h2>
+      <div class="section-label">O mnie</div>
 
-      <div class="screens-row">
-        <div class="screen">
-          <img src="screenshots/01-main.png" alt="" class="screen-img" onerror="this.style.background='var(--sage-light)';this.alt=''">
-          <div class="screen-caption">
-            <strong>01 · <span data-lang="pl">Główny ekran</span><span data-lang="en">Home</span></strong>
-            <span data-lang="pl">Status dziecka, szybkie akcje, alerty.</span>
-            <span data-lang="en">Baby status, quick actions, alerts.</span>
-          </div>
-        </div>
+      <p class="about-intro">
+        Indie dev, który nie rzuca pracy w banku, żeby <em>robić apki z pasji</em>.
+      </p>
 
-        <div class="screen">
-          <img src="screenshots/02-fever.png" alt="" class="screen-img" onerror="this.style.background='var(--coral-light)';this.alt=''">
-          <div class="screen-caption">
-            <strong>02 · <span data-lang="pl">Gorączka</span><span data-lang="en">Fever</span></strong>
-            <span data-lang="pl">Trend + sugestia "zadzwoń do lekarza".</span>
-            <span data-lang="en">Trend + "call doctor" suggestion.</span>
-          </div>
-        </div>
+      <p class="about-text">
+        Nazywam się Mateusz. W dzień pracuję w compliance w banku — specjalizuję się
+        w przeciwdziałaniu praniu pieniędzy i regulacjach finansowych. W wieczory
+        i weekendy buduję aplikacje pod marką SkuDev.
+      </p>
 
-        <div class="screen">
-          <img src="screenshots/03-dose.png" alt="" class="screen-img" onerror="this.style.background='var(--cream-2)';this.alt=''">
-          <div class="screen-caption">
-            <strong>03 · <span data-lang="pl">Dawka leku</span><span data-lang="en">Dose</span></strong>
-            <span data-lang="pl">Kalkulator dla wagi dziecka.</span>
-            <span data-lang="en">Calculator for baby's weight.</span>
-          </div>
-        </div>
+      <p class="about-text">
+        Każda moja apka powstała z prawdziwej potrzeby. <em>Spokojny Rodzic</em> bo
+        szukałem w panice dawki paracetamolu dla mojego dziecka o 2 w nocy.
+        <em>PS5 Vault</em> bo chciałem ogarnąć swoją kolekcję gier.
+        <em>FinTrack PRO</em> bo żadna z dostępnych aplikacji finansowych nie radziła sobie
+        z tym że moja pensja wpada 20-go, a nie 1-go.
+      </p>
 
-        <div class="screen">
-          <img src="screenshots/04-pdf.png" alt="" class="screen-img" onerror="this.style.background='var(--sage-light)';this.alt=''">
-          <div class="screen-caption">
-            <strong>04 · <span data-lang="pl">Raport PDF</span><span data-lang="en">PDF report</span></strong>
-            <span data-lang="pl">Dla pediatry, na wizytę.</span>
-            <span data-lang="en">For pediatrician visits.</span>
-          </div>
-        </div>
+      <p class="about-text">
+        Nie sprzedaję Ci "life changing experience". Robię konkretne narzędzia, które
+        rozwiązują konkretne problemy. Jak Ci pomogą — świetnie. Jak nie — nie ma
+        sprawy, znajdziesz coś innego.
+      </p>
 
-        <div class="screen">
-          <img src="screenshots/05-growth.png" alt="" class="screen-img" onerror="this.style.background='var(--cream-2)';this.alt=''">
-          <div class="screen-caption">
-            <strong>05 · <span data-lang="pl">Wzrost</span><span data-lang="en">Growth</span></strong>
-            <span data-lang="pl">Waga, wzrost, obwód głowy.</span>
-            <span data-lang="en">Weight, height, head circumference.</span>
-          </div>
-        </div>
+      <div class="about-sign">— kwiecień 2026</div>
+
+      <div class="about-links">
+        <a href="https://github.com/matiseekk-dot" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://skudev.gumroad.com" target="_blank" rel="noopener">Gumroad</a>
+        <a href="mailto:hello@skudev.pl">Email</a>
       </div>
     </div>
   </section>
 
-  <!-- ═══ MAKER / ABOUT ═══ -->
-  <section class="maker">
+  <!-- ═══ CONTACT ═══ -->
+  <section class="contact" id="contact">
     <div class="container">
-      <div class="section-label">
-        <span data-lang="pl">O twórcy</span>
-        <span data-lang="en">The maker</span>
-      </div>
-
-      <p class="maker-text">
-        <span data-lang="pl">Nazywam się <em>Mateusz</em>. Na co dzień pracuję w banku, po godzinach jestem indie developerem pod marką SkuDev. Jestem też tatą.</span>
-        <span data-lang="en">I'm <em>Mateusz</em>. I work at a bank by day, build apps by night under the SkuDev brand. And I'm a father.</span>
-      </p>
-      <p class="maker-text">
-        <span data-lang="pl">Spokojny Rodzic buduję z jednego powodu: nie chcę, żeby inny tata o 2 w nocy musiał googlować dawkę paracetamolu.</span>
-        <span data-lang="en">I'm building Calm Parent for one reason: no other parent should be googling paracetamol doses at 2am.</span>
-      </p>
-
-      <div class="maker-sign">
-        <span data-lang="pl">— kwiecień 2026</span>
-        <span data-lang="en">— April 2026</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ FINAL CTA ═══ -->
-  <section class="final">
-    <div class="container">
-      <h2>
-        <span data-lang="pl">Bądź pierwszym rodzicem w Polsce, który dostanie apkę.</span>
-        <span data-lang="en">Be one of the first to know when the app goes live.</span>
-      </h2>
+      <h2>Masz pomysł na apkę? <em>Porozmawiajmy.</em></h2>
       <p>
-        <span data-lang="pl">Zapisz się, a dam Ci znać dokładnie w dniu premiery. Zero newslettera, zero reklam — jeden email i koniec.</span>
-        <span data-lang="en">Sign up and I'll email you exactly once — the day the app launches. No newsletter, no marketing — just a single notification.</span>
+        Zawsze chętnie usłyszę o problemie który warto rozwiązać. Szybko odpisuję,
+        żadnych CRM-ów, żadnych automatów.
       </p>
-
-      <form class="signup" onsubmit="return handleSignup(event, 'footer')">
-        <div class="signup-label">
-          <span data-lang="pl">Early access</span>
-          <span data-lang="en">Early access</span>
-        </div>
-        <div class="signup-title">
-          <span data-lang="pl">Dołącz do listy premiery</span>
-          <span data-lang="en">Join the launch list</span>
-        </div>
-        <div class="form-row">
-          <input type="email" name="email" placeholder="twoj@email.pl" required autocomplete="email" data-lang="pl">
-          <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" data-lang="en">
-          <input type="hidden" name="source" value="spokojnyrodzic.pl / final">
-          <button type="submit" class="btn-primary">
-            <span data-lang="pl">Zapisz mnie →</span>
-            <span data-lang="en">Notify me →</span>
-          </button>
-        </div>
-        <div class="signup-success-msg">
-          <span data-lang="pl">✓ Gotowe! Odezwę się dokładnie raz — w dniu premiery.</span>
-          <span data-lang="en">✓ Done! I'll email you exactly once — the day the app launches.</span>
-        </div>
-      </form>
+      <a href="mailto:hello@skudev.pl" class="contact-email">hello@skudev.pl</a>
     </div>
   </section>
 
@@ -970,75 +727,16 @@
   <footer>
     <div class="container">
       <div class="footer-row">
-        <div class="footer-brand">
-          <span data-lang="pl">Spokojny Rodzic · produkt <a href="https://skudev.gumroad.com" style="color:var(--coral);text-decoration:none">SkuDev</a></span>
-          <span data-lang="en">Calm Parent · a <a href="https://skudev.gumroad.com" style="color:var(--coral);text-decoration:none">SkuDev</a> product</span>
-        </div>
+        <div class="footer-brand">SkuDev · Mateusz · 2026</div>
         <ul class="footer-links">
-          <li><a href="mailto:hello@skudev.pl">hello@skudev.pl</a></li>
-          <li><a href="https://matiseekk-dot.github.io/babylog/privacy.html">Privacy</a></li>
-          <li><a href="https://github.com/matiseekk-dot/babylog">GitHub</a></li>
+          <li><a href="#projects">Apki</a></li>
+          <li><a href="#about">O mnie</a></li>
+          <li><a href="mailto:hello@skudev.pl">Email</a></li>
+          <li><a href="https://github.com/matiseekk-dot" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
       </div>
     </div>
   </footer>
 
-  <script>
-    // ═══════════════════════════════════════════════
-    //  LANGUAGE TOGGLE
-    //  Auto-detect + manual switch
-    // ═══════════════════════════════════════════════
-    function setLang(lang) {
-      document.documentElement.lang = lang;
-      document.getElementById('btn-pl').classList.toggle('active', lang === 'pl');
-      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-      localStorage.setItem('lang', lang);
-      document.title = lang === 'pl'
-        ? 'Spokojny Rodzic · Aplikacja dla rodziców niemowlaków'
-        : 'Calm Parent · The baby app that knows what to do';
-    }
-
-    // Auto-detect on load
-    (() => {
-      const saved = localStorage.getItem('lang');
-      if (saved) return setLang(saved);
-      const browser = (navigator.language || 'en').toLowerCase();
-      setLang(browser.startsWith('pl') ? 'pl' : 'en');
-    })();
-
-    // ═══════════════════════════════════════════════
-    //  SIGNUP (Formspree)
-    //  Replace FORMSPREE_ID with your actual ID
-    // ═══════════════════════════════════════════════
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mkokvjjo';
-
-    async function handleSignup(e, location) {
-      e.preventDefault();
-      const form = e.target;
-      const visibleEmailInput = form.querySelector(`input[type="email"][data-lang="${document.documentElement.lang}"]`);
-      const email = visibleEmailInput.value.trim();
-      if (!email) return false;
-
-      try {
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email,
-            source: form.querySelector('input[name="source"]').value,
-            lang: document.documentElement.lang,
-          }),
-        });
-        if (res.ok) {
-          form.classList.add('success');
-        } else {
-          alert('Ups, coś poszło nie tak. Spróbuj jeszcze raz albo napisz do mnie na hello@skudev.pl');
-        }
-      } catch (err) {
-        alert('Brak połączenia. Sprawdź internet i spróbuj ponownie.');
-      }
-      return false;
-    }
-  </script>
 </body>
 </html>

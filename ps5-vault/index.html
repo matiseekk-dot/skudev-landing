@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PS5 Vault · Tracker gier PlayStation 5</title>
+  <meta name="description" content="Prowadź kolekcję gier PS5, listę życzeń, śledź nadchodzące premiery. Integracja z RAWG, bezpłatna, bez reklam. Aplikacja webowa od SkuDev.">
+  <meta property="og:title" content="PS5 Vault">
+  <meta property="og:description" content="Tracker gier PS5. Kolekcja, wishlist, premiery. Bezpłatny, bez reklam.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231E2618'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23E0B858' font-family='monospace' font-weight='700'%3EV%3C/text%3E%3C/svg%3E">
+
+  <style>
+    :root {
+      /* Borrowed from parent site but tilted darker/gamer */
+      --bg:          #141810;
+      --bg-2:        #1E2618;
+      --bg-3:        #2A342A;
+      --ink:         #F5F0E0;
+      --ink-2:       #C5BFA8;
+      --ink-3:       #8A8670;
+      --accent:      #E0B858;   /* mustard gold — gamer reward feel */
+      --accent-dim:  #9A7F3D;
+      --coral:       #D96654;
+      --sage:        #6B8E6F;
+      --cream:       #FBF7EF;
+      --border:      rgba(245, 240, 224, 0.08);
+      --border-2:    rgba(245, 240, 224, 0.16);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', -apple-system, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Subtle grid overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245, 240, 224, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245, 240, 224, 0.015) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 70% 20%, rgba(224, 184, 88, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 10% 80%, rgba(217, 102, 84, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ═══ HEADER ═══ */
+    header {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(20, 24, 16, 0.85);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--accent);
+      color: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      border-radius: 6px;
+      font-size: 15px;
+    }
+
+    .back-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink-3);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .back-link:hover { color: var(--accent); }
+
+    /* ═══ HERO ═══ */
+    .hero {
+      padding: 80px 0 60px;
+      position: relative;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border: 1px solid var(--border-2);
+      border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 36px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: clamp(48px, 9vw, 108px);
+      line-height: 0.95;
+      letter-spacing: -0.035em;
+      color: var(--ink);
+      margin-bottom: 36px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .hero p.lead {
+      font-size: clamp(17px, 1.6vw, 20px);
+      line-height: 1.6;
+      color: var(--ink-2);
+      max-width: 54ch;
+      margin-bottom: 44px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 28px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(224, 184, 88, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--border-2);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-3);
+    }
+
+    .hero-meta span::before {
+      content: '/ ';
+      color: var(--accent);
+    }
+
+    /* ═══ STATS STRIP ═══ */
+    .stats {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-2);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-val {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 500;
+      line-height: 1;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .stat-lbl {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+
+    @media (max-width: 640px) {
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 20px; }
+    }
+
+    /* ═══ FEATURES ═══ */
+    .features {
+      padding: 100px 0 80px;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .section-h {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      max-width: 18ch;
+      margin-bottom: 56px;
+    }
+
+    .section-h em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feat {
+      background: var(--bg-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feat:hover {
+      border-color: var(--accent-dim);
+      transform: translateY(-4px);
+    }
+
+    .feat::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .feat:hover::before { opacity: 1; }
+
+    .feat-icon {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+
+    .feat h3 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .feat p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink-2);
+    }
+
+    @media (max-width: 720px) {
+      .feat-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ═══ HOW IT WORKS (code block style) ═══ */
+    .how {
+      padding: 100px 0;
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .step {
+      position: relative;
+    }
+
+    .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .step-num::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-2);
+    }
+
+    .step h3 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 1.25;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .step p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink-2);
+    }
+
+    @media (max-width: 720px) {
+      .steps { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    /* ═══ CTA FINAL ═══ */
+    .final {
+      padding: 120px 0;
+      text-align: center;
+      position: relative;
+    }
+
+    .final h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: clamp(36px, 6vw, 64px);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin-bottom: 24px;
+      max-width: 18ch;
+      margin-inline: auto;
+    }
+
+    .final h2 em { font-style: italic; color: var(--accent); }
+
+    .final p {
+      font-size: 17px;
+      color: var(--ink-2);
+      max-width: 48ch;
+      margin: 0 auto 40px;
+    }
+
+    /* ═══ FOOTER ═══ */
+    footer {
+      padding: 32px 0 40px;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-3);
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--ink-3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ═══ ANIMATIONS ═══ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up { animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+    .delay-1 { animation-delay: 0.12s; }
+    .delay-2 { animation-delay: 0.24s; }
+    .delay-3 { animation-delay: 0.36s; }
+    .delay-4 { animation-delay: 0.48s; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="logo">
+          <span class="logo-icon">V</span>
+          PS5_VAULT
+        </a>
+        <a href="/" class="back-link">← skudev.pl</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-tag fade-up">LIVE · FREE · NO ADS</div>
+
+      <h1 class="fade-up delay-1">
+        Twoja kolekcja <em>PS5.</em> Wreszcie pod kontrolą.
+      </h1>
+
+      <p class="lead fade-up delay-2">
+        Prowadź listę gier które masz, chcesz mieć, kończysz właśnie albo odkładasz na półkę.
+        Zintegrowana z bazą RAWG — 500&nbsp;000+ gier, automatyczne okładki, daty premier,
+        powiadomienia o nadchodzących tytułach.
+      </p>
+
+      <div class="hero-ctas fade-up delay-3">
+        <a href="https://matiseekk-dot.github.io/Games/" target="_blank" rel="noopener" class="btn btn-primary">
+          Otwórz aplikację →
+        </a>
+        <a href="#features" class="btn btn-secondary">
+          Co potrafi
+        </a>
+      </div>
+
+      <div class="hero-meta fade-up delay-4">
+        <span>Web app</span>
+        <span>Działa w przeglądarce</span>
+        <span>Bez instalacji</span>
+        <span>Bez konta</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ STATS ═══ -->
+  <section class="stats">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-val">500K+</div>
+          <div class="stat-lbl">Gier w bazie</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">6</div>
+          <div class="stat-lbl">Statusy w kolekcji</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">0 zł</div>
+          <div class="stat-lbl">Cena używania</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">0</div>
+          <div class="stat-lbl">Reklam i trackerów</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-label">// FUNKCJE</div>
+      <h2 class="section-h">Wszystko czego potrzebujesz by <em>ogarnąć bibliotekę</em>.</h2>
+
+      <div class="feat-grid">
+
+        <div class="feat">
+          <div class="feat-icon">01 · COLLECTION</div>
+          <h3>Kolekcja z podziałem na statusy</h3>
+          <p>Mam, gram teraz, skończyłem, odłożyłem, planuję, ukryłem — 6 statusów plus własne notatki i ocena. Liczniki dla każdej kategorii.</p>
+        </div>
+
+        <div class="feat">
+          <div class="feat-icon">02 · RAWG API</div>
+          <h3>Automatyczne dane o grach</h3>
+          <p>Wpisz nazwę, dostajesz okładkę, opis, datę premiery, gatunek, oceny Metacritic. Nie musisz nic uzupełniać ręcznie.</p>
+        </div>
+
+        <div class="feat">
+          <div class="feat-icon">03 · RELEASES</div>
+          <h3>Tracker nadchodzących premier</h3>
+          <p>Sekcja „planuję" sortuje się po najbliższych premierach. Badge pokazuje ile dni zostało. Apka przypomni Ci 3 dni przed.</p>
+        </div>
+
+        <div class="feat">
+          <div class="feat-icon">04 · WISHLIST</div>
+          <h3>Lista życzeń z priorytetami</h3>
+          <p>Ranking „bardzo chcę" — „kiedyś może". Kiedy gra dostanie promocję, nie zgubi się w zaległej liście jak w PlayStation Store.</p>
+        </div>
+
+        <div class="feat">
+          <div class="feat-icon">05 · OFFLINE</div>
+          <h3>Działa bez internetu</h3>
+          <p>Wszystkie Twoje dane są w przeglądarce. Raz załadowana apka działa bez sieci. Nowe gry dodasz gdy wróci wi-fi.</p>
+        </div>
+
+        <div class="feat">
+          <div class="feat-icon">06 · PRIVACY</div>
+          <h3>Twoje dane zostają u Ciebie</h3>
+          <p>Nie ma konta. Nie ma serwera. Nie ma trackerów. Apka żyje lokalnie w Twojej przeglądarce — nikt się nie dowie co grasz.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ HOW IT WORKS ═══ -->
+  <section class="how">
+    <div class="container">
+      <div class="section-label">// JAK TO DZIAŁA</div>
+      <h2 class="section-h">Trzy kliknięcia i masz <em>swoją bibliotekę</em>.</h2>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Otwórz apkę</h3>
+          <p>Klik na link, otwiera się w przeglądarce. Żadnej rejestracji, żadnego sklepu, żadnego loga na telefon.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Dodaj grę</h3>
+          <p>Wpisz nazwę. Apka dociąga okładkę, opis, datę z RAWG. Wybierz status, dodaj notatkę, zapisz.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Wracaj kiedy chcesz</h3>
+          <p>Twoja biblioteka czeka. Dodaj do wishlist, oznacz jako ukończone, sprawdź co wychodzi w następnym miesiącu.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FINAL CTA ═══ -->
+  <section class="final">
+    <div class="container">
+      <h2>Otwórz PS5 Vault <em>teraz.</em></h2>
+      <p>Działa na każdym urządzeniu. Telefon, komputer, tablet. Bez rejestracji, bez instalacji, bez płacenia.</p>
+      <a href="https://matiseekk-dot.github.io/Games/" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:17px; padding:18px 36px;">
+        Start → matiseekk-dot.github.io/Games
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div>PS5_VAULT · część <a href="/" style="color:var(--accent);text-decoration:none">skudev.pl</a></div>
+        <ul class="footer-links">
+          <li><a href="/">SkuDev</a></li>
+          <li><a href="https://github.com/matiseekk-dot/Games" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="mailto:hello@skudev.pl">Email</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
