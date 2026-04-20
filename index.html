@@ -523,6 +523,141 @@
       gap: 12px;
     }
 
+
+    /* ═══ POSITIONING ═══ */
+    .positioning {
+      padding: 0 0 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .positioning-line {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(19px, 2.4vw, 26px);
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
+      color: var(--ink-2);
+      max-width: 48ch;
+      padding: 8px 0 40px;
+    }
+
+    .positioning-line em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    /* ═══ CHANGELOG ═══ */
+    .project-changelog {
+      list-style: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border-2);
+    }
+
+    .project-changelog li {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-3);
+      padding: 4px 0;
+      display: flex;
+      gap: 12px;
+      line-height: 1.5;
+    }
+
+    .project-changelog li span {
+      color: var(--accent);
+      font-weight: 600;
+      flex-shrink: 0;
+      width: 48px;
+    }
+
+    /* ═══ NOW ═══ */
+    .now-section {
+      padding: 80px 0 60px;
+    }
+
+    .now-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      padding-top: 16px;
+    }
+
+    @media (max-width: 720px) {
+      .now-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .now-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .now-h {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 26px;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    .now-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .now-list li {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-2);
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .now-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 10px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    /* ═══ FOOTER updated ═══ */
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .footer-right {
+      text-align: right;
+    }
+
+    .footer-brand {
+      font-weight: 600;
+      color: var(--ink-2);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-meta {
+      font-size: 10px;
+      color: var(--ink-3);
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 560px) {
+      .footer-right { text-align: left; }
+    }
+
+
     /* ═══ ANIMATIONS ═══ */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(14px); }
@@ -545,6 +680,7 @@
         <a href="/" class="logo">skudev</a>
         <ul class="nav-links">
           <li><a href="#projects">PROJEKTY</a></li>
+          <li><a href="#now">NOW</a></li>
           <li><a href="#about">O MNIE</a></li>
           <li><a href="#contact">KONTAKT</a></li>
         </ul>
@@ -573,6 +709,15 @@
     </div>
   </section>
 
+  <!-- ═══ BRAND POSITIONING ═══ -->
+  <section class="positioning">
+    <div class="container">
+      <p class="positioning-line">
+        Wszystko na <em>Androida</em>. Głównie dla polskiego odbiorcy. Zawsze bez reklam i bez sprzedawania danych komukolwiek.
+      </p>
+    </div>
+  </section>
+
   <!-- ═══ PROJECTS ═══ -->
   <section class="projects" id="projects">
     <div class="container">
@@ -582,8 +727,8 @@
         <div class="divider-line"></div>
       </div>
 
-      <div class="section-label">// CO TERAZ ROBIĘ</div>
-      <h2 class="section-h">Pięć rzeczy w <em>różnych etapach</em>.</h2>
+      <div class="section-label">// PROJEKTY</div>
+      <h2 class="section-h">Co <em>teraz</em> robię.</h2>
 
       <div class="projects-list">
 
@@ -600,6 +745,11 @@
               dla wagi dziecka, śledzi gorączkę, generuje PDF na wizytę u pediatry.
               W testach Google Play przed premierą.
             </p>
+            <ul class="project-changelog">
+              <li><span>20 kwi</span> Tryb potty training + tracker ząbków</li>
+              <li><span>19 kwi</span> Zamknięte testy Play Store (1.0.1)</li>
+              <li><span>15 kwi</span> Pierwsza wersja dla PrimeTestLab</li>
+            </ul>
           </div>
           <div class="project-arrow">→</div>
         </a>
@@ -608,14 +758,19 @@
           <div class="project-num">02</div>
           <div class="project-body">
             <div class="project-tags">
-              <span class="tag testing">Testy Play Store</span>
-              <span class="tag meta">Web + Android</span>
+              <span class="tag testing">Closed testing</span>
+              <span class="tag meta">Android</span>
             </div>
             <h3>PS5 Vault</h3>
             <p class="project-desc">
               Tracker gier PlayStation 5. Kolekcja, lista życzeń, nadchodzące premiery,
-              automatyczne okładki z RAWG. Działa w przeglądarce, wersja mobilna w testach.
+              automatyczne okładki z RAWG. W zamkniętych testach Google Play.
             </p>
+            <ul class="project-changelog">
+              <li><span>18 kwi</span> Zamknięte testy Play Store</li>
+              <li><span>12 kwi</span> Tracker premier + countdown</li>
+              <li><span>05 kwi</span> Integracja z RAWG API</li>
+            </ul>
           </div>
           <div class="project-arrow">→</div>
         </a>
@@ -705,6 +860,41 @@
     </div>
   </section>
 
+  
+  <!-- ═══ NOW ═══ -->
+  <section class="now-section" id="now">
+    <div class="container">
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-label">status</div>
+        <div class="divider-line"></div>
+      </div>
+
+      <div class="now-grid">
+        <div class="now-col">
+          <div class="now-label">// NOW · kwiecień 2026</div>
+          <h3 class="now-h">Pracuję nad</h3>
+          <ul class="now-list">
+            <li>Spokojny Rodzic — closed testing, premiera wkrótce</li>
+            <li>PS5 Vault — testy zamknięte Play Store</li>
+            <li>Metal Vault — rozbudowa bazy płyt</li>
+            <li>skudev.pl — właśnie ta strona</li>
+          </ul>
+        </div>
+        <div class="now-col">
+          <div class="now-label">// DONE · ostatnio</div>
+          <h3 class="now-h">Co ogarnąłem</h3>
+          <ul class="now-list">
+            <li>Domena skudev.pl</li>
+            <li>Tryb toalety per dziecko (Spokojny Rodzic)</li>
+            <li>Tracker ząbków</li>
+            <li>Zamknięte testy Google Play</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ CONTACT ═══ -->
   <section class="contact" id="contact">
     <div class="container">
@@ -734,8 +924,14 @@
   <footer>
     <div class="container">
       <div class="footer-row">
-        <div>skudev.pl · 2026</div>
-        <div>MADE IN POLAND · BY HAND</div>
+        <div class="footer-col">
+          <div class="footer-brand">skudev.pl</div>
+          <div class="footer-meta">ostatnia aktualizacja · 20 kwietnia 2026</div>
+        </div>
+        <div class="footer-col footer-right">
+          <div class="footer-brand">by hand · in Poland</div>
+          <div class="footer-meta">indie · no ads · no tracking</div>
+        </div>
       </div>
     </div>
   </footer>

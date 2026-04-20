@@ -477,6 +477,109 @@
 
     .footer-links a:hover { color: var(--accent); }
 
+
+
+    /* Signup form */
+    .signup-form {
+      display: flex;
+      gap: 10px;
+      max-width: 480px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .signup-form input[type="email"] {
+      flex: 1;
+      min-width: 220px;
+      padding: 14px 18px;
+      border: 1px solid var(--border-2);
+      border-radius: 6px;
+      background: rgba(245, 240, 224, 0.03);
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .signup-form input[type="email"]::placeholder { color: var(--ink-3); }
+    .signup-form input[type="email"]:focus {
+      border-color: var(--accent);
+      background: rgba(245, 240, 224, 0.05);
+    }
+
+    .signup-success {
+      display: none;
+      margin-top: 24px;
+      padding: 14px 20px;
+      background: rgba(107, 142, 111, 0.14);
+      border: 1px solid var(--sage);
+      border-radius: 8px;
+      color: var(--sage);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .signup-form.success { display: none; }
+    .signup-form.success + .signup-success { display: block; }
+
+
+
+    /* ═══ SCREENSHOTS ═══ */
+    .screens {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .screens-row {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding: 20px 0 30px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-2) transparent;
+      scroll-snap-type: x mandatory;
+    }
+
+    .screens-row::-webkit-scrollbar { height: 6px; }
+    .screens-row::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
+
+    .screen {
+      flex: 0 0 220px;
+      scroll-snap-align: start;
+    }
+
+    .screen-img {
+      width: 100%;
+      aspect-ratio: 9 / 19.5;
+      background: var(--bg-2);
+      border-radius: 24px;
+      border: 6px solid var(--bg-2);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 20px 50px rgba(0, 0, 0, 0.25);
+      object-fit: cover;
+      display: block;
+    }
+
+    .screen-caption {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-3);
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    .screen-caption strong {
+      font-weight: 600;
+      color: var(--ink);
+      display: block;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
     /* ═══ ANIMATIONS ═══ */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
@@ -509,7 +612,7 @@
   <!-- ═══ HERO ═══ -->
   <section class="hero">
     <div class="container">
-      <div class="hero-tag fade-up">CLOSED TESTING · PLAY STORE</div>
+      <div class="hero-tag fade-up">CLOSED TESTING · ANDROID</div>
 
       <h1 class="fade-up delay-1">
         Wiesz jakie masz gry <em>na PS5?</em>
@@ -518,12 +621,12 @@
       <p class="lead fade-up delay-2">
         Ja też nie wiedziałem. Kupowałem na promkach rzeczy których nigdy nie uruchomiłem,
         dubletowałem, zapominałem o premierach. Zrobiłem sobie apkę, wyszło w miarę — więc
-        dzielę się. Teraz w testach Google Play, wersja webowa już działa.
+        dzielę się. Teraz w zamkniętych testach Google Play.
       </p>
 
       <div class="hero-ctas fade-up delay-3">
-        <a href="https://matiseekk-dot.github.io/Games/" target="_blank" rel="noopener" class="btn btn-primary">
-          Otwórz w przeglądarce →
+        <a href="#signup" class="btn btn-primary">
+          Dołącz do beta testów →
         </a>
         <a href="#features" class="btn btn-secondary">
           Co potrafi
@@ -531,8 +634,8 @@
       </div>
 
       <div class="hero-meta fade-up delay-4">
-        <span>Web — działa teraz</span>
-        <span>Android — testy Play Store</span>
+        <span>Android</span>
+        <span>Zamknięte testy Play Store</span>
         <span>Bez konta</span>
         <span>Bez reklam</span>
       </div>
@@ -598,7 +701,7 @@
         <div class="feat">
           <div class="feat-icon">05 · OFFLINE</div>
           <h3>Działa bez netu</h3>
-          <p>Wszystkie Twoje dane żyją w przeglądarce. Raz załadowana apka działa offline. Nowe gry dodasz jak wróci wi-fi.</p>
+          <p>Przeglądasz kolekcję, oznaczasz statusy, piszesz notatki bez internetu. Tylko wyszukiwanie nowych gier wymaga wi-fi.</p>
         </div>
 
         <div class="feat">
@@ -607,6 +710,56 @@
           <p>Nie ma konta. Nie ma serwera. Nie ma analityki. Dane żyją na Twoim urządzeniu i nigdzie ich nie wysyłam.</p>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SCREENSHOTS ═══ -->
+  <section class="screens">
+    <div class="container">
+      <div class="section-label">// PODGLĄD</div>
+      <h2 class="section-h">Jak to <em>wygląda</em>.</h2>
+
+      <div class="screens-row">
+        <div class="screen">
+          <img src="screenshots/01-home.png" alt="Ekran główny" class="screen-img" onerror="this.style.background='linear-gradient(135deg, var(--bg-2), var(--bg-3))';this.alt=''">
+          <div class="screen-caption">
+            <strong>01 · Kolekcja</strong>
+            Lista Twoich gier z podziałem na statusy.
+          </div>
+        </div>
+
+        <div class="screen">
+          <img src="screenshots/02-collection.png" alt="Statusy" class="screen-img" onerror="this.style.background='linear-gradient(135deg, var(--bg-2), var(--bg-3))';this.alt=''">
+          <div class="screen-caption">
+            <strong>02 · Statusy</strong>
+            Mam · Gram · Skończyłem · Planuję.
+          </div>
+        </div>
+
+        <div class="screen">
+          <img src="screenshots/03-search.png" alt="Wyszukiwanie" class="screen-img" onerror="this.style.background='linear-gradient(135deg, var(--bg-2), var(--bg-3))';this.alt=''">
+          <div class="screen-caption">
+            <strong>03 · Dodawanie</strong>
+            Wpisujesz nazwę — RAWG dociąga resztę.
+          </div>
+        </div>
+
+        <div class="screen">
+          <img src="screenshots/04-releases.png" alt="Premiery" class="screen-img" onerror="this.style.background='linear-gradient(135deg, var(--bg-2), var(--bg-3))';this.alt=''">
+          <div class="screen-caption">
+            <strong>04 · Premiery</strong>
+            Countdown do najbliższych.
+          </div>
+        </div>
+
+        <div class="screen">
+          <img src="screenshots/05-details.png" alt="Szczegóły gry" class="screen-img" onerror="this.style.background='linear-gradient(135deg, var(--bg-2), var(--bg-3))';this.alt=''">
+          <div class="screen-caption">
+            <strong>05 · Detale</strong>
+            Okładka, opis, Twoja notatka.
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -620,31 +773,40 @@
       <div class="steps">
         <div class="step">
           <div class="step-num">01</div>
-          <h3>Klikasz link</h3>
-          <p>Otwiera się w przeglądarce. Bez rejestracji, bez emaila, bez ściągania niczego na telefon.</p>
+          <h3>Dołączasz do testów</h3>
+          <p>Wpisujesz email, dostajesz zaproszenie do zamkniętych testów Google Play. Instalujesz jak każdą inną apkę.</p>
         </div>
         <div class="step">
           <div class="step-num">02</div>
-          <h3>Wpisujesz grę</h3>
-          <p>Apka dociąga dane z RAWG. Ty wybierasz status, dodajesz notatkę jeśli chcesz, zapisujesz.</p>
+          <h3>Dodajesz swoje gry</h3>
+          <p>Wpisujesz nazwę, apka dociąga dane z RAWG. Wybierasz status, dodajesz notatkę, zapisujesz.</p>
         </div>
         <div class="step">
           <div class="step-num">03</div>
-          <h3>Wracasz kiedy chcesz</h3>
-          <p>Kolekcja czeka. Sprawdź co wychodzi w następnym miesiącu, co masz nieskończone, co odłożone.</p>
+          <h3>Dajesz feedback</h3>
+          <p>Coś Ci się nie podoba? Napisz. Jestem jedną osobą, odpisuję sam, bug fix może iść szybko.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ═══ CTA FINAL ═══ -->
-  <section class="final">
+  <section class="final" id="signup">
     <div class="container">
-      <h2>Otwórz <em>teraz.</em></h2>
-      <p>Działa na telefonie, komputerze, tablecie. Bez konta, bez instalacji, bez płacenia.</p>
-      <a href="https://matiseekk-dot.github.io/Games/" target="_blank" rel="noopener" class="btn btn-primary" style="font-size:16px; padding:18px 36px;">
-        Start → matiseekk-dot.github.io/Games
-      </a>
+      <h2>Dołącz do <em>beta testów.</em></h2>
+      <p>Wpisz email — wyślę Ci zaproszenie do zamkniętych testów Google Play gdy apka będzie gotowa. Zero spamu, jeden email i koniec.</p>
+
+      <form class="signup-form" onsubmit="return handleSignup(event)">
+        <input type="email" name="email" placeholder="twoj@email.pl" required autocomplete="email">
+        <input type="hidden" name="source" value="skudev.pl/ps5-vault / final">
+        <button type="submit" class="btn btn-primary">
+          Zapisz mnie →
+        </button>
+      </form>
+
+      <div class="signup-success">
+        ✓ Gotowe! Odezwę się z zaproszeniem gdy apka będzie gotowa do testów.
+      </div>
     </div>
   </section>
 
@@ -661,6 +823,38 @@
       </div>
     </div>
   </footer>
+
+
+  <script>
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mkokvjjo';
+
+    async function handleSignup(e) {
+      e.preventDefault();
+      const form = e.target;
+      const email = form.querySelector('input[type="email"]').value.trim();
+      if (!email) return false;
+
+      try {
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            source: form.querySelector('input[name="source"]').value,
+            app: 'PS5 Vault',
+          }),
+        });
+        if (res.ok) {
+          form.classList.add('success');
+        } else {
+          alert('Ups, coś poszło nie tak. Napisz do mnie: skudev6@gmail.com');
+        }
+      } catch (err) {
+        alert('Brak połączenia. Spróbuj ponownie.');
+      }
+      return false;
+    }
+  </script>
 
 </body>
 </html>
