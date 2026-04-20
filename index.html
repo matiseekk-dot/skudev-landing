@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spokojny Rodzic · Aplikacja dla rodziców niemowlaków</title>
+  <meta name="description" content="Pierwsza polska aplikacja z kalkulatorem bezpiecznych dawek paracetamolu i ibuprofenu dla dzieci. Śledź temperaturę, karmienia, sen. Raport PDF dla pediatry.">
+  <meta property="og:title" content="Spokojny Rodzic">
+  <meta property="og:description" content="Apka która wie co robić gdy dziecko jest chore.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pl_PL">
+
+  <!-- Fonts: Fraunces (serif display) + Manrope (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Favicon placeholder -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='78' font-size='88'%3E🍼%3C/text%3E%3C/svg%3E">
+
+  <style>
+    :root {
+      --cream:       #FBF7EF;
+      --cream-2:     #F5EEE0;
+      --paper:       #FFFFFF;
+      --ink:         #1E2618;
+      --ink-2:       #4A5349;
+      --ink-3:       #7A8275;
+      --sage:        #6B8E6F;
+      --sage-dark:   #3F5842;
+      --sage-light:  #DCE8DC;
+      --coral:       #D96654;
+      --coral-light: #F8E6E0;
+      --mustard:     #E0B858;
+      --dusk:        #3F4A45;
+      --border:      rgba(30, 38, 24, 0.08);
+      --border-dark: rgba(30, 38, 24, 0.14);
+      --shadow:      0 1px 2px rgba(30, 38, 24, 0.06), 0 8px 28px rgba(30, 38, 24, 0.05);
+      --shadow-lg:   0 2px 6px rgba(30, 38, 24, 0.08), 0 18px 50px rgba(30, 38, 24, 0.09);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', -apple-system, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--cream);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+
+    /* Paper texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(107, 142, 111, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(217, 102, 84, 0.025) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ═══ HEADER ═══ */
+    header {
+      padding: 22px 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--cream);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      background: rgba(251, 247, 239, 0.92);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-decoration: none;
+      font-style: italic;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .logo::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--coral);
+      display: inline-block;
+      margin-right: 2px;
+      transform: translateY(1px);
+    }
+
+    .lang-toggle {
+      display: flex;
+      background: var(--paper);
+      border: 1px solid var(--border-dark);
+      border-radius: 100px;
+      padding: 3px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .lang-toggle button {
+      border: none;
+      background: transparent;
+      padding: 6px 14px;
+      border-radius: 100px;
+      cursor: pointer;
+      color: var(--ink-2);
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+
+    .lang-toggle button.active {
+      background: var(--ink);
+      color: var(--cream);
+    }
+
+    /* ═══ HERO ═══ */
+    .hero {
+      padding: 80px 0 100px;
+      position: relative;
+    }
+
+    .hero-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-label::before {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: var(--sage-dark);
+    }
+
+    .hero h1 {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: clamp(46px, 9vw, 104px);
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      max-width: 13ch;
+      margin-bottom: 36px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--coral);
+      font-weight: 400;
+    }
+
+    .hero p.lead {
+      font-size: clamp(17px, 1.6vw, 20px);
+      line-height: 1.55;
+      color: var(--ink-2);
+      max-width: 52ch;
+      margin-bottom: 48px;
+    }
+
+    /* ═══ SIGNUP FORM ═══ */
+    .signup {
+      background: var(--paper);
+      border: 1px solid var(--border-dark);
+      border-radius: 4px;
+      padding: 32px 30px;
+      max-width: 540px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .signup::before {
+      content: '01';
+      position: absolute;
+      top: -14px;
+      left: 24px;
+      background: var(--cream);
+      padding: 0 10px;
+      font-family: 'Fraunces', serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-3);
+      letter-spacing: 0.04em;
+    }
+
+    .signup-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 6px;
+    }
+
+    .signup-title {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      font-weight: 500;
+      line-height: 1.25;
+      color: var(--ink);
+      margin-bottom: 18px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .form-row input[type="email"] {
+      flex: 1;
+      padding: 14px 16px;
+      border: 1px solid var(--border-dark);
+      border-radius: 3px;
+      font-family: inherit;
+      font-size: 15px;
+      color: var(--ink);
+      background: var(--cream);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .form-row input[type="email"]:focus {
+      border-color: var(--sage-dark);
+      background: var(--paper);
+    }
+
+    .btn-primary {
+      padding: 14px 22px;
+      background: var(--ink);
+      color: var(--cream);
+      border: none;
+      border-radius: 3px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover {
+      background: var(--sage-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:active { transform: translateY(0); }
+
+    .signup-note {
+      font-size: 12px;
+      color: var(--ink-3);
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+
+    .signup-note strong { color: var(--ink-2); font-weight: 600; }
+
+    .signup.success { border-color: var(--sage); background: var(--sage-light); }
+    .signup.success .form-row, .signup.success .signup-title, .signup.success .signup-label { display: none; }
+    .signup-success-msg {
+      display: none;
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--sage-dark);
+      line-height: 1.4;
+    }
+    .signup.success .signup-success-msg { display: block; }
+
+    /* Decorative hero elements */
+    .hero-deco {
+      position: absolute;
+      top: 120px;
+      right: -40px;
+      width: 420px;
+      max-width: 50%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.96;
+    }
+
+    @media (max-width: 960px) {
+      .hero-deco { display: none; }
+    }
+
+    /* ═══ DIVIDER ═══ */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 60px 0 40px;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border-dark);
+    }
+
+    .divider-label {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-3);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    /* ═══ WHY SECTION (testimonial-style) ═══ */
+    .why {
+      padding: 40px 0 100px;
+    }
+
+    .why-quote {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: clamp(28px, 4.5vw, 48px);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      max-width: 22ch;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .why-quote::before {
+      content: '"';
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: 5em;
+      line-height: 0.6;
+      color: var(--coral);
+      position: absolute;
+      left: -0.4em;
+      top: 0.25em;
+      opacity: 0.5;
+    }
+
+    .why-byline {
+      font-size: 13px;
+      color: var(--ink-3);
+      font-style: italic;
+      font-family: 'Fraunces', serif;
+    }
+
+    /* ═══ FEATURES ═══ */
+    .features {
+      padding: 80px 0;
+      background: var(--paper);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+      margin-bottom: 16px;
+    }
+
+    .section-h {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      max-width: 14ch;
+      margin-bottom: 60px;
+    }
+
+    .section-h em {
+      font-style: italic;
+      color: var(--sage-dark);
+    }
+
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .feat {
+      padding: 44px 36px;
+      background: var(--paper);
+      position: relative;
+    }
+
+    .feat-num {
+      font-family: 'Fraunces', serif;
+      font-size: 14px;
+      color: var(--ink-3);
+      margin-bottom: 20px;
+      letter-spacing: 0.04em;
+    }
+
+    .feat-icon {
+      font-size: 36px;
+      margin-bottom: 24px;
+      display: block;
+      line-height: 1;
+    }
+
+    .feat h3 {
+      font-family: 'Fraunces', serif;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .feat p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--ink-2);
+      max-width: 42ch;
+    }
+
+    .feat.highlight {
+      background: var(--sage-light);
+    }
+
+    @media (max-width: 720px) {
+      .feat-grid { grid-template-columns: 1fr; }
+      .feat { padding: 36px 28px; }
+    }
+
+    /* ═══ SCREENSHOTS ═══ */
+    .screens {
+      padding: 100px 0;
+    }
+
+    .screens-row {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding: 20px 0 30px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border-dark) transparent;
+      scroll-snap-type: x mandatory;
+    }
+
+    .screens-row::-webkit-scrollbar { height: 6px; }
+    .screens-row::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 3px; }
+
+    .screen {
+      flex: 0 0 240px;
+      scroll-snap-align: start;
+    }
+
+    .screen-img {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      background: var(--ink);
+      border-radius: 22px;
+      border: 8px solid var(--ink);
+      box-shadow: var(--shadow-lg);
+      object-fit: cover;
+      display: block;
+    }
+
+    .screen-caption {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--ink-2);
+      margin-top: 16px;
+      line-height: 1.4;
+    }
+
+    .screen-caption strong {
+      font-style: normal;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 600;
+      color: var(--ink);
+      display: block;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    /* ═══ MAKER ═══ */
+    .maker {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 100px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .maker::before {
+      content: '';
+      position: absolute;
+      top: 20%;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(217, 102, 84, 0.14) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+
+    .maker .section-label { color: var(--mustard); }
+
+    .maker-text {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: clamp(22px, 2.8vw, 30px);
+      line-height: 1.45;
+      letter-spacing: -0.01em;
+      color: var(--cream);
+      max-width: 30ch;
+      margin-bottom: 28px;
+    }
+
+    .maker-text em {
+      font-style: italic;
+      color: var(--mustard);
+    }
+
+    .maker-sign {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--cream-2);
+      opacity: 0.8;
+    }
+
+    /* ═══ FINAL CTA ═══ */
+    .final {
+      padding: 100px 0;
+      text-align: center;
+      background: var(--cream-2);
+    }
+
+    .final h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 400;
+      font-size: clamp(34px, 5vw, 56px);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 20px;
+      max-width: 20ch;
+      margin-inline: auto;
+    }
+
+    .final p {
+      font-size: 17px;
+      color: var(--ink-2);
+      margin-bottom: 40px;
+      max-width: 48ch;
+      margin-inline: auto;
+    }
+
+    .final .signup {
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    /* ═══ FOOTER ═══ */
+    footer {
+      padding: 40px 0 50px;
+      border-top: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--ink-3);
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--ink-3);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--coral); }
+
+    .footer-brand {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      color: var(--ink-2);
+    }
+
+    /* ═══ ANIMATIONS ═══ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up { animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+    .delay-1 { animation-delay: 0.12s; }
+    .delay-2 { animation-delay: 0.24s; }
+    .delay-3 { animation-delay: 0.36s; }
+    .delay-4 { animation-delay: 0.48s; }
+    .delay-5 { animation-delay: 0.60s; }
+
+    /* Hide elements based on language */
+    html[lang="pl"] [data-lang="en"] { display: none; }
+    html[lang="en"] [data-lang="pl"] { display: none; }
+  </style>
+</head>
+
+<body>
+  <!-- ═══ HEADER ═══ -->
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="#" class="logo">
+          <span data-lang="pl">Spokojny Rodzic</span>
+          <span data-lang="en">Calm Parent</span>
+        </a>
+        <div class="lang-toggle">
+          <button class="active" onclick="setLang('pl')" id="btn-pl">PL</button>
+          <button onclick="setLang('en')" id="btn-en">EN</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-label fade-up">
+        <span data-lang="pl">Aplikacja dla rodziców · Android</span>
+        <span data-lang="en">App for parents · Android</span>
+      </div>
+
+      <h1 class="fade-up delay-1">
+        <span data-lang="pl">Apka, która wie <em>co robić</em>, gdy dziecko jest chore.</span>
+        <span data-lang="en">The app that <em>knows what to do</em> when your baby is sick.</span>
+      </h1>
+
+      <p class="lead fade-up delay-2">
+        <span data-lang="pl">Kalkulator bezpiecznych dawek paracetamolu i ibuprofenu dla wagi dziecka. Analiza trendu gorączki. Raport PDF dla pediatry. Pierwsza polska apka stworzona przez rodzica dla rodziców.</span>
+        <span data-lang="en">A weight-based safe dose calculator for paracetamol and ibuprofen. Fever trend analysis. PDF reports for your pediatrician. Built by a parent, for parents.</span>
+      </p>
+
+      <form class="signup fade-up delay-3" id="signup-form" onsubmit="return handleSignup(event, 'hero')">
+        <div class="signup-label">
+          <span data-lang="pl">Early access</span>
+          <span data-lang="en">Early access</span>
+        </div>
+        <div class="signup-title">
+          <span data-lang="pl">Powiadom mnie, gdy apka będzie w Google Play.</span>
+          <span data-lang="en">Let me know when the app launches on Google Play.</span>
+        </div>
+        <div class="form-row">
+          <input type="email" name="email" placeholder="twoj@email.pl" required autocomplete="email" data-lang="pl">
+          <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" data-lang="en">
+          <input type="hidden" name="source" value="spokojnyrodzic.pl / hero">
+          <button type="submit" class="btn-primary">
+            <span data-lang="pl">Zapisz mnie →</span>
+            <span data-lang="en">Notify me →</span>
+          </button>
+        </div>
+        <div class="signup-note">
+          <span data-lang="pl">🔒 <strong>Tylko powiadomienie o premierze.</strong> Zero spamu, zero newslettera. Apka ukaże się na przełomie maja i czerwca 2026.</span>
+          <span data-lang="en">🔒 <strong>One email when the app launches.</strong> No spam, no newsletter. Target release: late May / early June 2026.</span>
+        </div>
+        <div class="signup-success-msg">
+          <span data-lang="pl">✓ Gotowe! Odezwę się dokładnie raz — w dniu premiery. Dzięki za zaufanie.</span>
+          <span data-lang="en">✓ Done! I'll email you exactly once — the day the app launches. Thanks for trusting me.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══ WHY / ORIGIN STORY ═══ -->
+  <section class="why">
+    <div class="container">
+      <div class="divider">
+        <div class="divider-line"></div>
+        <div class="divider-label">
+          <span data-lang="pl">skąd ta apka</span>
+          <span data-lang="en">the story</span>
+        </div>
+        <div class="divider-line"></div>
+      </div>
+
+      <p class="why-quote">
+        <span data-lang="pl">O drugiej w nocy szukałem w Google bezpiecznej dawki paracetamolu dla 7-kilogramowego dziecka. Dwa razy źle policzyłem zanim komukolwiek uwierzyłem.</span>
+        <span data-lang="en">At 2am I was googling "safe paracetamol dose for 7kg baby." I did the math wrong twice on my phone before trusting anything.</span>
+      </p>
+      <p class="why-byline">
+        <span data-lang="pl">— Mateusz, ojciec, twórca aplikacji</span>
+        <span data-lang="en">— Mateusz, father, app creator</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ FEATURES ═══ -->
+  <section class="features">
+    <div class="container">
+      <div class="section-label">
+        <span data-lang="pl">Co potrafi</span>
+        <span data-lang="en">What it does</span>
+      </div>
+      <h2 class="section-h">
+        <span data-lang="pl">Sześć rzeczy, których nie ma <em>żadna inna</em> polska apka.</span>
+        <span data-lang="en">Six things <em>no other</em> baby app does well.</span>
+      </h2>
+
+      <div class="feat-grid">
+        <div class="feat highlight">
+          <div class="feat-num">01</div>
+          <span class="feat-icon">💊</span>
+          <h3>
+            <span data-lang="pl">Kalkulator dawek leków</span>
+            <span data-lang="en">Weight-based dose calculator</span>
+          </h3>
+          <p>
+            <span data-lang="pl">Paracetamol i ibuprofen — dokładna dawka dla wagi i wieku dziecka. Żadna inna polska apka tego nie ma.</span>
+            <span data-lang="en">Paracetamol and ibuprofen — exact dose for your baby's weight and age. Huckleberry doesn't have this. Glow doesn't. Nobody does.</span>
+          </p>
+        </div>
+
+        <div class="feat">
+          <div class="feat-num">02</div>
+          <span class="feat-icon">🌡️</span>
+          <h3>
+            <span data-lang="pl">Analiza trendu gorączki</span>
+            <span data-lang="en">Fever trend analysis</span>
+          </h3>
+          <p>
+            <span data-lang="pl">Apka widzi, czy temperatura rośnie, czy spada. Mówi, kiedy warto zadzwonić do lekarza — bez strachu w oczach.</span>
+            <span data-lang="en">Sees whether temperature is rising or stabilizing. Tells you when to call the doctor — without the panic.</span>
+          </p>
+        </div>
+
+        <div class="feat">
+          <div class="feat-num">03</div>
+          <span class="feat-icon">📄</span>
+          <h3>
+            <span data-lang="pl">Raport PDF dla pediatry</span>
+            <span data-lang="en">PDF report for your pediatrician</span>
+          </h3>
+          <p>
+            <span data-lang="pl">Wszystkie pomiary, karmienia, sen, leki z ostatnich 2 tygodni — na jednej kartce. Wydrukuj lub pokaż na telefonie.</span>
+            <span data-lang="en">All measurements, feedings, sleep, meds from the last 2 weeks — on a single page. Print it or show on your phone.</span>
+          </p>
+        </div>
+
+        <div class="feat">
+          <div class="feat-num">04</div>
+          <span class="feat-icon">💉</span>
+          <h3>
+            <span data-lang="pl">Polski PSO wbudowany</span>
+            <span data-lang="en">Built-in Polish vaccination schedule</span>
+          </h3>
+          <p>
+            <span data-lang="pl">Program Szczepień Ochronnych — 14 szczepień z polskimi terminami. Nie musisz tłumaczyć ACIP z USA.</span>
+            <span data-lang="en">Full Polish PSO schedule — 14 vaccines with local dates. Or add your own country's schedule.</span>
+          </p>
+        </div>
+
+        <div class="feat">
+          <div class="feat-num">05</div>
+          <span class="feat-icon">🍼</span>
+          <h3>
+            <span data-lang="pl">Śledzenie dnia niemowlaka</span>
+            <span data-lang="en">Full daily tracking</span>
+          </h3>
+          <p>
+            <span data-lang="pl">Karmienia, sen, pieluchy, temperatura, waga, milestones, ząbki — wszystko w jednej apce. Działa offline.</span>
+            <span data-lang="en">Feedings, sleep, diapers, temperature, weight, milestones, teething — all in one app. Works offline.</span>
+          </p>
+        </div>
+
+        <div class="feat highlight">
+          <div class="feat-num">06</div>
+          <span class="feat-icon">🔒</span>
+          <h3>
+            <span data-lang="pl">Bez reklam, bez sprzedaży danych</span>
+            <span data-lang="en">No ads, no data selling</span>
+          </h3>
+          <p>
+            <span data-lang="pl">Twoje dane zostają u Ciebie — zaszyfrowane na Twoim koncie Google. Apka utrzymuje się z Premium, nie z reklam.</span>
+            <span data-lang="en">Your data stays yours — encrypted on your Google account. The app is funded by Premium subscriptions, not ads.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SCREENSHOTS ═══ -->
+  <section class="screens">
+    <div class="container">
+      <div class="section-label">
+        <span data-lang="pl">Podgląd apki</span>
+        <span data-lang="en">Preview</span>
+      </div>
+      <h2 class="section-h">
+        <span data-lang="pl">Zbudowana, żeby <em>szybko wpisywać</em> jedną ręką.</span>
+        <span data-lang="en">Built for <em>quick one-handed</em> logging.</span>
+      </h2>
+
+      <div class="screens-row">
+        <div class="screen">
+          <img src="screenshots/01-main.png" alt="" class="screen-img" onerror="this.style.background='var(--sage-light)';this.alt=''">
+          <div class="screen-caption">
+            <strong>01 · <span data-lang="pl">Główny ekran</span><span data-lang="en">Home</span></strong>
+            <span data-lang="pl">Status dziecka, szybkie akcje, alerty.</span>
+            <span data-lang="en">Baby status, quick actions, alerts.</span>
+          </div>
+        </div>
+
+        <div class="screen">
+          <img src="screenshots/02-fever.png" alt="" class="screen-img" onerror="this.style.background='var(--coral-light)';this.alt=''">
+          <div class="screen-caption">
+            <strong>02 · <span data-lang="pl">Gorączka</span><span data-lang="en">Fever</span></strong>
+            <span data-lang="pl">Trend + sugestia "zadzwoń do lekarza".</span>
+            <span data-lang="en">Trend + "call doctor" suggestion.</span>
+          </div>
+        </div>
+
+        <div class="screen">
+          <img src="screenshots/03-dose.png" alt="" class="screen-img" onerror="this.style.background='var(--cream-2)';this.alt=''">
+          <div class="screen-caption">
+            <strong>03 · <span data-lang="pl">Dawka leku</span><span data-lang="en">Dose</span></strong>
+            <span data-lang="pl">Kalkulator dla wagi dziecka.</span>
+            <span data-lang="en">Calculator for baby's weight.</span>
+          </div>
+        </div>
+
+        <div class="screen">
+          <img src="screenshots/04-pdf.png" alt="" class="screen-img" onerror="this.style.background='var(--sage-light)';this.alt=''">
+          <div class="screen-caption">
+            <strong>04 · <span data-lang="pl">Raport PDF</span><span data-lang="en">PDF report</span></strong>
+            <span data-lang="pl">Dla pediatry, na wizytę.</span>
+            <span data-lang="en">For pediatrician visits.</span>
+          </div>
+        </div>
+
+        <div class="screen">
+          <img src="screenshots/05-growth.png" alt="" class="screen-img" onerror="this.style.background='var(--cream-2)';this.alt=''">
+          <div class="screen-caption">
+            <strong>05 · <span data-lang="pl">Wzrost</span><span data-lang="en">Growth</span></strong>
+            <span data-lang="pl">Waga, wzrost, obwód głowy.</span>
+            <span data-lang="en">Weight, height, head circumference.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MAKER / ABOUT ═══ -->
+  <section class="maker">
+    <div class="container">
+      <div class="section-label">
+        <span data-lang="pl">O twórcy</span>
+        <span data-lang="en">The maker</span>
+      </div>
+
+      <p class="maker-text">
+        <span data-lang="pl">Nazywam się <em>Mateusz</em>. Na co dzień pracuję w banku, po godzinach jestem indie developerem pod marką SkuDev. Jestem też tatą.</span>
+        <span data-lang="en">I'm <em>Mateusz</em>. I work at a bank by day, build apps by night under the SkuDev brand. And I'm a father.</span>
+      </p>
+      <p class="maker-text">
+        <span data-lang="pl">Spokojny Rodzic buduję z jednego powodu: nie chcę, żeby inny tata o 2 w nocy musiał googlować dawkę paracetamolu.</span>
+        <span data-lang="en">I'm building Calm Parent for one reason: no other parent should be googling paracetamol doses at 2am.</span>
+      </p>
+
+      <div class="maker-sign">
+        <span data-lang="pl">— kwiecień 2026</span>
+        <span data-lang="en">— April 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FINAL CTA ═══ -->
+  <section class="final">
+    <div class="container">
+      <h2>
+        <span data-lang="pl">Bądź pierwszym rodzicem w Polsce, który dostanie apkę.</span>
+        <span data-lang="en">Be one of the first to know when the app goes live.</span>
+      </h2>
+      <p>
+        <span data-lang="pl">Zapisz się, a dam Ci znać dokładnie w dniu premiery. Zero newslettera, zero reklam — jeden email i koniec.</span>
+        <span data-lang="en">Sign up and I'll email you exactly once — the day the app launches. No newsletter, no marketing — just a single notification.</span>
+      </p>
+
+      <form class="signup" onsubmit="return handleSignup(event, 'footer')">
+        <div class="signup-label">
+          <span data-lang="pl">Early access</span>
+          <span data-lang="en">Early access</span>
+        </div>
+        <div class="signup-title">
+          <span data-lang="pl">Dołącz do listy premiery</span>
+          <span data-lang="en">Join the launch list</span>
+        </div>
+        <div class="form-row">
+          <input type="email" name="email" placeholder="twoj@email.pl" required autocomplete="email" data-lang="pl">
+          <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" data-lang="en">
+          <input type="hidden" name="source" value="spokojnyrodzic.pl / final">
+          <button type="submit" class="btn-primary">
+            <span data-lang="pl">Zapisz mnie →</span>
+            <span data-lang="en">Notify me →</span>
+          </button>
+        </div>
+        <div class="signup-success-msg">
+          <span data-lang="pl">✓ Gotowe! Odezwę się dokładnie raz — w dniu premiery.</span>
+          <span data-lang="en">✓ Done! I'll email you exactly once — the day the app launches.</span>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="container">
+      <div class="footer-row">
+        <div class="footer-brand">
+          <span data-lang="pl">Spokojny Rodzic · produkt <a href="https://skudev.gumroad.com" style="color:var(--coral);text-decoration:none">SkuDev</a></span>
+          <span data-lang="en">Calm Parent · a <a href="https://skudev.gumroad.com" style="color:var(--coral);text-decoration:none">SkuDev</a> product</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="mailto:hello@skudev.pl">hello@skudev.pl</a></li>
+          <li><a href="https://matiseekk-dot.github.io/babylog/privacy.html">Privacy</a></li>
+          <li><a href="https://github.com/matiseekk-dot/babylog">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ═══════════════════════════════════════════════
+    //  LANGUAGE TOGGLE
+    //  Auto-detect + manual switch
+    // ═══════════════════════════════════════════════
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      document.getElementById('btn-pl').classList.toggle('active', lang === 'pl');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      localStorage.setItem('lang', lang);
+      document.title = lang === 'pl'
+        ? 'Spokojny Rodzic · Aplikacja dla rodziców niemowlaków'
+        : 'Calm Parent · The baby app that knows what to do';
+    }
+
+    // Auto-detect on load
+    (() => {
+      const saved = localStorage.getItem('lang');
+      if (saved) return setLang(saved);
+      const browser = (navigator.language || 'en').toLowerCase();
+      setLang(browser.startsWith('pl') ? 'pl' : 'en');
+    })();
+
+    // ═══════════════════════════════════════════════
+    //  SIGNUP (Formspree)
+    //  Replace FORMSPREE_ID with your actual ID
+    // ═══════════════════════════════════════════════
+    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mkokvjjo';
+
+    async function handleSignup(e, location) {
+      e.preventDefault();
+      const form = e.target;
+      const visibleEmailInput = form.querySelector(`input[type="email"][data-lang="${document.documentElement.lang}"]`);
+      const email = visibleEmailInput.value.trim();
+      if (!email) return false;
+
+      try {
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            source: form.querySelector('input[name="source"]').value,
+            lang: document.documentElement.lang,
+          }),
+        });
+        if (res.ok) {
+          form.classList.add('success');
+        } else {
+          alert('Ups, coś poszło nie tak. Spróbuj jeszcze raz albo napisz do mnie na hello@skudev.pl');
+        }
+      } catch (err) {
+        alert('Brak połączenia. Sprawdź internet i spróbuj ponownie.');
+      }
+      return false;
+    }
+  </script>
+</body>
+</html>
