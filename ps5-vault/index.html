@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PS5 Vault · Tracker gier PlayStation 5</title>
-  <meta name="description" content="Prowadź kolekcję gier PS5, listę życzeń, śledź premiery. Web app + Android w testach Play Store. Bezpłatna, bez reklam.">
-  <meta property="og:title" content="PS5 Vault">
-  <meta property="og:description" content="Tracker gier PS5. Kolekcja, wishlist, premiery. Bezpłatny.">
+  <title>PS5 Vault · Tracker gier PlayStation 5 · SkuDev</title>
+  <meta name="description" content="Tracker gier PS5 z realnym kosztem kolekcji, trackerem godzin grania i countdownem do premier. Multi-platform, PL/EN, bez konta, bez reklam. W zamkniętych testach Google Play.">
+  <meta property="og:title" content="PS5 Vault · Twoje gry, Twoje pieniądze, Twój czas">
+  <meta property="og:description" content="Tracker który liczy kolekcję — i rachunek za nią.">
   <meta property="og:type" content="website">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231E2618'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23D4A547' font-family='monospace' font-weight='700'%3EV%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231A1F18'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23D4A547' font-family='monospace' font-weight='700'%3EV%3C/text%3E%3C/svg%3E">
 
   <style>
     :root {
@@ -55,6 +55,8 @@
       background-size: 48px 48px;
       pointer-events: none;
       z-index: 0;
+      mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
     }
 
     body::after {
@@ -62,8 +64,8 @@
       position: fixed;
       inset: 0;
       background-image:
-        radial-gradient(circle at 70% 20%, rgba(212, 165, 71, 0.06) 0%, transparent 50%),
-        radial-gradient(circle at 10% 80%, rgba(201, 90, 72, 0.04) 0%, transparent 50%);
+        radial-gradient(circle at 75% 15%, rgba(201, 90, 72, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 15% 85%, rgba(212, 165, 71, 0.04) 0%, transparent 50%);
       pointer-events: none;
       z-index: 0;
     }
@@ -95,367 +97,431 @@
     }
 
     .logo {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      font-size: 15px;
-      letter-spacing: 0.04em;
-      color: var(--ink);
-      text-decoration: none;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--ink);
     }
 
-    .logo-icon {
-      width: 28px;
-      height: 28px;
-      background: var(--accent);
-      color: var(--bg);
+    .logo-mark {
+      width: 36px; height: 36px;
+      background: var(--coral);
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      border-radius: 6px;
-      font-size: 15px;
       font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: #FDF8F0;
+      font-size: 18px;
     }
 
-    .back-link {
+    .logo-text {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+    }
+
+    .logo-text em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .nav-back {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
-      font-weight: 500;
       color: var(--ink-3);
       text-decoration: none;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
       transition: color 0.2s;
     }
-
-    .back-link:hover { color: var(--accent); }
+    .nav-back:hover { color: var(--accent); }
 
     /* ═══ HERO ═══ */
     .hero {
       padding: 80px 0 60px;
+      position: relative;
     }
 
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 14px;
-      border: 1px solid var(--border-2);
-      border-radius: 100px;
+    .hero-eyebrow {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.1em;
+      font-size: 12px;
       color: var(--accent);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(40px, 6vw, 68px);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 28px;
+      max-width: 14ch;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .hero-lead {
+      font-size: 19px;
+      color: var(--ink-2);
+      line-height: 1.6;
+      max-width: 52ch;
       margin-bottom: 36px;
     }
 
-    .hero-tag::before {
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      background: rgba(107, 142, 111, 0.1);
+      border: 1px solid rgba(107, 142, 111, 0.3);
+      border-radius: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--sage);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-status::before {
       content: '';
-      width: 6px;
-      height: 6px;
+      width: 6px; height: 6px;
+      background: var(--sage);
       border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 10px var(--accent);
+      box-shadow: 0 0 8px var(--sage);
       animation: pulse 2s infinite;
     }
 
     @keyframes pulse {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
+      50% { opacity: 0.5; }
     }
 
-    .hero h1 {
-      font-family: 'Fraunces', serif;
-      font-weight: 400;
-      font-size: clamp(46px, 9vw, 100px);
-      line-height: 0.96;
-      letter-spacing: -0.035em;
-      color: var(--ink);
-      margin-bottom: 36px;
+    /* ═══ STORY ═══ */
+    .story {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
     }
 
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
-      font-weight: 400;
+    .story-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
     }
 
-    .hero p.lead {
-      font-size: clamp(17px, 1.6vw, 20px);
-      line-height: 1.65;
-      color: var(--ink-2);
-      max-width: 54ch;
-      margin-bottom: 44px;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 32px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 15px 28px;
-      border-radius: 8px;
-      font-family: inherit;
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-      letter-spacing: 0.01em;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: var(--bg);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(212, 165, 71, 0.3);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--ink);
-      border: 1px solid var(--border-2);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-    }
-
-    .hero-meta {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
+    .story-label {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
       color: var(--ink-3);
-    }
-
-    .hero-meta span::before {
-      content: '/ ';
-      color: var(--accent);
-    }
-
-    /* ═══ STATS ═══ */
-    .stats {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: var(--bg-2);
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-
-    .stat { text-align: center; }
-
-    .stat-val {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(26px, 3.8vw, 38px);
-      font-weight: 500;
-      line-height: 1;
-      color: var(--accent);
-      margin-bottom: 8px;
-    }
-
-    .stat-lbl {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.1em;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: var(--ink-3);
+      margin-bottom: 24px;
     }
 
-    @media (max-width: 640px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 20px; }
+    .story-quote {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(22px, 3vw, 28px);
+      line-height: 1.45;
+      color: var(--ink);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 24px;
+    }
+
+    .story-quote em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .story-author {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--ink-3);
     }
 
     /* ═══ FEATURES ═══ */
     .features {
-      padding: 100px 0 80px;
+      padding: 80px 0 60px;
+      border-top: 1px solid var(--border);
     }
 
     .section-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
+      font-size: 12px;
       color: var(--accent);
-      margin-bottom: 14px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      font-weight: 600;
     }
 
-    .section-h {
+    .section-title {
       font-family: 'Fraunces', serif;
-      font-weight: 400;
-      font-size: clamp(30px, 4.5vw, 48px);
+      font-size: clamp(30px, 4.5vw, 44px);
+      font-weight: 500;
       line-height: 1.1;
-      letter-spacing: -0.02em;
-      color: var(--ink);
+      letter-spacing: -1.2px;
       max-width: 20ch;
-      margin-bottom: 48px;
+      margin-bottom: 60px;
     }
 
-    .section-h em {
+    .section-title em {
       font-style: italic;
       color: var(--accent);
+      font-weight: 400;
     }
 
-    .feat-grid {
+    .features-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .feat {
-      background: var(--bg-2);
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px;
+      background: var(--border);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 28px 24px;
-      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
-      position: relative;
+      border-radius: 4px;
       overflow: hidden;
     }
 
-    .feat:hover {
-      border-color: var(--accent-dim);
-      transform: translateY(-3px);
+    .feature {
+      background: var(--bg);
+      padding: 32px 28px;
+      position: relative;
+      transition: background 0.2s;
     }
 
-    .feat-icon {
+    .feature:hover {
+      background: var(--bg-2);
+    }
+
+    .feature-num {
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-      margin-bottom: 14px;
+      color: var(--ink-3);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
     }
 
-    .feat h3 {
+    .feature-emoji {
+      font-size: 32px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .feature h3 {
       font-family: 'Fraunces', serif;
-      font-weight: 500;
       font-size: 20px;
+      font-weight: 500;
       line-height: 1.25;
-      letter-spacing: -0.01em;
-      color: var(--ink);
       margin-bottom: 10px;
+      letter-spacing: -0.4px;
     }
 
-    .feat p {
-      font-size: 14.5px;
+    .feature p {
+      font-size: 14px;
       line-height: 1.6;
       color: var(--ink-2);
     }
 
-    @media (max-width: 720px) {
-      .feat-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ═══ HOW IT WORKS ═══ */
-    .how {
-      padding: 100px 0;
-      background: var(--bg-2);
+    /* ═══ PREVIEW (phones) ═══ */
+    .preview {
+      padding: 80px 0 60px;
       border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
     }
 
-    .steps {
+    .phones-row {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 28px;
       margin-top: 40px;
     }
 
-    .step-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
-      color: var(--accent);
-      font-weight: 700;
-      margin-bottom: 18px;
+    .phone {
       display: flex;
-      align-items: center;
-      gap: 12px;
+      flex-direction: column;
+      gap: 14px;
     }
 
-    .step-num::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border-2);
+    .phone-frame {
+      position: relative;
+      padding: 8px;
+      background: linear-gradient(145deg, #2A342A, #1E2618);
+      border-radius: 36px;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.05) inset,
+        0 30px 60px -20px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .step h3 {
+    .phone-frame:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.05) inset,
+        0 40px 80px -20px rgba(201, 90, 72, 0.3);
+    }
+
+    .phone-screen {
+      width: 100%;
+      aspect-ratio: 9 / 19.5;
+      background: #080B14;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .phone-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .phone-meta {
+      padding: 0 4px;
+    }
+
+    .phone-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .phone-title {
       font-family: 'Fraunces', serif;
+      font-size: 17px;
       font-weight: 500;
-      font-size: 22px;
-      line-height: 1.25;
-      color: var(--ink);
-      margin-bottom: 10px;
+      line-height: 1.3;
+      letter-spacing: -0.3px;
+      margin-bottom: 4px;
     }
 
-    .step p {
-      font-size: 14.5px;
-      line-height: 1.6;
-      color: var(--ink-2);
+    .phone-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--ink-3);
     }
 
-    @media (max-width: 720px) {
-      .steps { grid-template-columns: 1fr; gap: 32px; }
-    }
-
-    /* ═══ CTA FINAL ═══ */
-    .final {
-      padding: 100px 0;
+    /* ═══ CTA ═══ */
+    .cta {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
       text-align: center;
     }
 
-    .final h2 {
-      font-family: 'Fraunces', serif;
-      font-weight: 400;
-      font-size: clamp(34px, 5.5vw, 60px);
-      line-height: 1.05;
-      letter-spacing: -0.025em;
-      color: var(--ink);
-      margin-bottom: 20px;
-      max-width: 20ch;
-      margin-inline: auto;
+    .cta-inner {
+      max-width: 560px;
+      margin: 0 auto;
     }
 
-    .final h2 em { font-style: italic; color: var(--accent); }
+    .cta-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.8px;
+      margin-bottom: 20px;
+    }
 
-    .final p {
-      font-size: 16px;
+    .cta-title em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .cta-lead {
       color: var(--ink-2);
-      max-width: 48ch;
-      margin: 0 auto 36px;
+      margin-bottom: 32px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .cta-form {
+      display: flex;
+      gap: 8px;
+      max-width: 440px;
+      margin: 0 auto 20px;
+    }
+
+    .cta-input {
+      flex: 1;
+      padding: 14px 18px;
+      background: var(--bg-2);
+      border: 1px solid var(--border-2);
+      border-radius: 10px;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .cta-input:focus {
+      border-color: var(--accent);
+    }
+
+    .cta-input::placeholder {
+      color: var(--ink-3);
+    }
+
+    .cta-btn {
+      padding: 14px 22px;
+      background: var(--coral);
+      color: #FDF8F0;
+      border: none;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+      letter-spacing: 0.3px;
+    }
+
+    .cta-btn:hover {
+      background: #B84A3A;
+    }
+
+    .cta-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-3);
+      letter-spacing: 0.3px;
+    }
+
+    .cta-meta strong {
+      color: var(--ink-2);
+      font-weight: 600;
     }
 
     /* ═══ FOOTER ═══ */
     footer {
-      padding: 28px 0 36px;
+      padding: 40px 0;
       border-top: 1px solid var(--border);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
+      font-size: 12px;
       color: var(--ink-3);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.3px;
     }
 
-    .footer-row {
+    .footer-grid {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -475,386 +541,233 @@
       transition: color 0.2s;
     }
 
-    .footer-links a:hover { color: var(--accent); }
-
-
-
-    /* Signup form */
-    .signup-form {
-      display: flex;
-      gap: 10px;
-      max-width: 480px;
-      margin: 0 auto;
-      flex-wrap: wrap;
+    .footer-links a:hover {
+      color: var(--accent);
     }
 
-    .signup-form input[type="email"] {
-      flex: 1;
-      min-width: 220px;
-      padding: 14px 18px;
-      border: 1px solid var(--border-2);
-      border-radius: 6px;
-      background: rgba(245, 240, 224, 0.03);
-      color: var(--ink);
-      font-family: inherit;
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.2s, background 0.2s;
+    /* ═══ RWD ═══ */
+    @media (max-width: 640px) {
+      .hero { padding: 60px 0 40px; }
+      .cta-form { flex-direction: column; }
+      .phones-row { grid-template-columns: 1fr; gap: 36px; }
     }
-
-    .signup-form input[type="email"]::placeholder { color: var(--ink-3); }
-    .signup-form input[type="email"]:focus {
-      border-color: var(--accent);
-      background: rgba(245, 240, 224, 0.05);
-    }
-
-    .signup-success {
-      display: none;
-      margin-top: 24px;
-      padding: 14px 20px;
-      background: rgba(107, 142, 111, 0.14);
-      border: 1px solid var(--sage);
-      border-radius: 8px;
-      color: var(--sage);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .signup-form.success { display: none; }
-    .signup-form.success + .signup-success { display: block; }
-
-
-
-    /* ═══ SCREENSHOTS ═══ */
-    .screens {
-      padding: 80px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .screens-row {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      padding: 20px 0 30px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--border-2) transparent;
-      scroll-snap-type: x mandatory;
-    }
-
-    .screens-row::-webkit-scrollbar { height: 6px; }
-    .screens-row::-webkit-scrollbar-thumb { background: var(--border-2); border-radius: 3px; }
-
-    .screen {
-      flex: 0 0 220px;
-      scroll-snap-align: start;
-    }
-
-    .screen-img {
-      width: 100%;
-      aspect-ratio: 9 / 19.5;
-      background: var(--bg-2);
-      border-radius: 24px;
-      border: 6px solid var(--bg-2);
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), 0 20px 50px rgba(0, 0, 0, 0.25);
-      object-fit: cover;
-      display: block;
-    }
-
-    .screen-caption {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--ink-3);
-      margin-top: 14px;
-      line-height: 1.5;
-    }
-
-    .screen-caption strong {
-      font-weight: 600;
-      color: var(--ink);
-      display: block;
-      font-size: 11px;
-      letter-spacing: 0.1em;
-      margin-bottom: 4px;
-    }
-
-    /* ═══ ANIMATIONS ═══ */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .fade-up { animation: fadeUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
-    .delay-4 { animation-delay: 0.4s; }
   </style>
 </head>
-
 <body>
 
-  <!-- ═══ HEADER ═══ -->
   <header>
     <div class="container">
       <nav class="nav">
-        <a href="/ps5-vault/" class="logo">
-          <span class="logo-icon">V</span>
-          PS5_VAULT
+        <a href="/" class="logo">
+          <div class="logo-mark">S</div>
+          <div class="logo-text">skudev · <em>ps5 vault</em></div>
         </a>
-        <a href="/" class="back-link">← skudev.pl</a>
+        <a href="/" class="nav-back">← wszystkie projekty</a>
       </nav>
     </div>
   </header>
 
-  <!-- ═══ HERO ═══ -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-tag fade-up">CLOSED TESTING · ANDROID</div>
+  <main>
 
-      <h1 class="fade-up delay-1">
-        Wiesz jakie masz gry <em>na PS5?</em>
-      </h1>
-
-      <p class="lead fade-up delay-2">
-        Ja też nie wiedziałem. Kupowałem na promkach rzeczy których nigdy nie uruchomiłem,
-        dubletowałem, zapominałem o premierach. Zrobiłem sobie apkę, wyszło w miarę — więc
-        dzielę się. Teraz w zamkniętych testach Google Play.
-      </p>
-
-      <div class="hero-ctas fade-up delay-3">
-        <a href="#signup" class="btn btn-primary">
-          Dołącz do beta testów →
-        </a>
-        <a href="#features" class="btn btn-secondary">
-          Co potrafi
-        </a>
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-eyebrow">// Tracker gier PlayStation · Android</div>
+        <h1>Twoje gry. Twoje <em>pieniądze</em>. Twój czas.</h1>
+        <p class="hero-lead">
+          Kolekcja z automatycznymi okładkami z RAWG, realny koszt kolekcji per gra i łącznie,
+          tracker godzin grania z heatmapą miesiąca. Bez konta, bez serwera, bez reklam.
+          Wszystko lokalnie na Twoim urządzeniu.
+        </p>
+        <div class="hero-status">closed testing · Android · premiera początek maja 2026</div>
       </div>
+    </section>
 
-      <div class="hero-meta fade-up delay-4">
-        <span>Android</span>
-        <span>Zamknięte testy Play Store</span>
-        <span>Bez konta</span>
-        <span>Bez reklam</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ STATS ═══ -->
-  <section class="stats">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat">
-          <div class="stat-val">500K+</div>
-          <div class="stat-lbl">Gier w bazie RAWG</div>
-        </div>
-        <div class="stat">
-          <div class="stat-val">6</div>
-          <div class="stat-lbl">Statusów w kolekcji</div>
-        </div>
-        <div class="stat">
-          <div class="stat-val">0 zł</div>
-          <div class="stat-lbl">Za używanie</div>
-        </div>
-        <div class="stat">
-          <div class="stat-val">0</div>
-          <div class="stat-lbl">Reklam</div>
+    <!-- ═══ STORY ═══ -->
+    <section class="story">
+      <div class="container">
+        <div class="story-inner">
+          <div class="story-label">// dlaczego ta apka</div>
+          <p class="story-quote">
+            Mam PS5 od premiery. Kupuję gry w promkach, niektóre otwieram, większości nigdy.
+            <em>Trzy razy</em> kupiłem tę samą grę zanim zrozumiałem że to problem.
+            Zrobiłem apkę żeby wiedzieć co mam — i szybko okazało się że ciekawsze jest <em>ile to kosztowało</em>.
+          </p>
+          <div class="story-author">— Mateusz, właściciel PS5, twórca</div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══ FEATURES ═══ -->
-  <section class="features" id="features">
-    <div class="container">
-      <div class="section-label">// FUNKCJE</div>
-      <h2 class="section-h">Co w niej <em>siedzi</em>.</h2>
+    <!-- ═══ FEATURES ═══ -->
+    <section class="features">
+      <div class="container">
+        <div class="section-label">// co dostajesz</div>
+        <h2 class="section-title">Sześć rzeczy, których <em>brakuje</em> w innych trackerach.</h2>
 
-      <div class="feat-grid">
-
-        <div class="feat">
-          <div class="feat-icon">01 · COLLECTION</div>
-          <h3>Sześć statusów kolekcji</h3>
-          <p>Mam · gram teraz · skończyłem · odłożyłem · planuję · ukryłem. Plus własna notatka i ocena. Liczniki żeby widzieć co i ile masz.</p>
-        </div>
-
-        <div class="feat">
-          <div class="feat-icon">02 · RAWG</div>
-          <h3>Automatycznie dociąga dane</h3>
-          <p>Wpisujesz nazwę, apka dociąga okładkę, opis, datę premiery, gatunek, oceny. Nie klepiesz ręcznie jak w Excelu.</p>
-        </div>
-
-        <div class="feat">
-          <div class="feat-icon">03 · PREMIERY</div>
-          <h3>Countdown do premier</h3>
-          <p>Lista "planuję" sortuje się po najbliższej premierze. Pokazuje ile dni zostało. Przypomni 3 dni przed.</p>
-        </div>
-
-        <div class="feat">
-          <div class="feat-icon">04 · WISHLIST</div>
-          <h3>Lista życzeń z priorytetem</h3>
-          <p>Bardzo chcę · może kiedyś · na promkę. Gdy gra tanieje, wiadomo czy to "kupuj od razu" czy "odłóż".</p>
-        </div>
-
-        <div class="feat">
-          <div class="feat-icon">05 · OFFLINE</div>
-          <h3>Działa bez netu</h3>
-          <p>Przeglądasz kolekcję, oznaczasz statusy, piszesz notatki bez internetu. Tylko wyszukiwanie nowych gier wymaga wi-fi.</p>
-        </div>
-
-        <div class="feat">
-          <div class="feat-icon">06 · PRIVACY</div>
-          <h3>Nie wysyłam nigdzie Twoich danych</h3>
-          <p>Nie ma konta. Nie ma serwera. Nie ma analityki. Dane żyją na Twoim urządzeniu i nigdzie ich nie wysyłam.</p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ SCREENSHOTS ═══ -->
-  <section class="screens">
-    <div class="container">
-      <div class="section-label">// PODGLĄD</div>
-      <h2 class="section-h">Jak to <em>wygląda</em>.</h2>
-
-      <div class="screens-row">
-        <div class="screen">
-          <img src="screenshots/01-home.png" alt="Ekran główny" class="screen-img" onerror="this.style.background='linear-gradient(135deg, var(--bg-2), var(--bg-3))';this.alt=''">
-          <div class="screen-caption">
-            <strong>01 · Kolekcja</strong>
-            Lista Twoich gier z podziałem na statusy.
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature-num">01</div>
+            <span class="feature-emoji">💰</span>
+            <h3>Finanse z realnym kosztem</h3>
+            <p>Osobna zakładka. Realny koszt kolekcji, koszt na godzinę, ROI sprzedanych gier, wykresy wydatków wg sklepu i gatunku. Widzisz która gra była Twoją najlepszą inwestycją w zł/h.</p>
           </div>
-        </div>
 
-        <div class="screen">
-          <img src="screenshots/02-collection.png" alt="Statusy" class="screen-img" onerror="this.style.background='linear-gradient(135deg, var(--bg-2), var(--bg-3))';this.alt=''">
-          <div class="screen-caption">
-            <strong>02 · Statusy</strong>
-            Mam · Gram · Skończyłem · Planuję.
+          <div class="feature">
+            <div class="feature-num">02</div>
+            <span class="feature-emoji">⏱</span>
+            <h3>Tracker godzin grania</h3>
+            <p>Session timer z pauzą. Streak dni z grą. Heatmap miesiąca jak GitHub contributions. Najdłuższa sesja, średnia sesja, porównanie tydzień do tygodnia.</p>
           </div>
-        </div>
 
-        <div class="screen">
-          <img src="screenshots/03-search.png" alt="Wyszukiwanie" class="screen-img" onerror="this.style.background='linear-gradient(135deg, var(--bg-2), var(--bg-3))';this.alt=''">
-          <div class="screen-caption">
-            <strong>03 · Dodawanie</strong>
-            Wpisujesz nazwę — RAWG dociąga resztę.
+          <div class="feature">
+            <div class="feature-num">03</div>
+            <span class="feature-emoji">📅</span>
+            <h3>Premiery z countdownem</h3>
+            <p>Gry z datą premiery sortują się same. Powiadomienia 30 / 7 / 3 dni przed i w dniu wydania. Wiesz co wychodzi w tym miesiącu bez klepania w kalendarz.</p>
           </div>
-        </div>
 
-        <div class="screen">
-          <img src="screenshots/04-releases.png" alt="Premiery" class="screen-img" onerror="this.style.background='linear-gradient(135deg, var(--bg-2), var(--bg-3))';this.alt=''">
-          <div class="screen-caption">
-            <strong>04 · Premiery</strong>
-            Countdown do najbliższych.
+          <div class="feature">
+            <div class="feature-num">04</div>
+            <span class="feature-emoji">🎮</span>
+            <h3>Pięć statusów + platinum</h3>
+            <p>Gram · PS Plus · Ukończone · Planuję · Porzucone. Dla ukończonych toggle Platinum 🏆. Plus filtr sprzedanych i multi-platform: PS5, PS4, Xbox, PC, Switch, Mobile.</p>
           </div>
-        </div>
 
-        <div class="screen">
-          <img src="screenshots/05-details.png" alt="Szczegóły gry" class="screen-img" onerror="this.style.background='linear-gradient(135deg, var(--bg-2), var(--bg-3))';this.alt=''">
-          <div class="screen-caption">
-            <strong>05 · Detale</strong>
-            Okładka, opis, Twoja notatka.
+          <div class="feature">
+            <div class="feature-num">05</div>
+            <span class="feature-emoji">💳</span>
+            <h3>Budżet miesięczny</h3>
+            <p>Ustawiasz ile chcesz wydawać na gry miesięcznie. Apka liczy co wydałeś na gry, DLC i mikrotransakcje w bieżącym miesiącu. Alert gdy przekraczasz.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">06</div>
+            <span class="feature-emoji">🔒</span>
+            <h3>Bez konta, bez serwera</h3>
+            <p>Dane żyją w Twoim telefonie. Zero analityki, zero reklam, zero serwera. Eksportujesz backup JSON kiedy chcesz — importujesz na drugie urządzenie w trybie merge lub replace.</p>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══ HOW IT WORKS ═══ -->
-  <section class="how">
-    <div class="container">
-      <div class="section-label">// JAK TO DZIAŁA</div>
-      <h2 class="section-h">Trzy kliknięcia i jesteś <em>w domu</em>.</h2>
+    <!-- ═══ PREVIEW: PHONES ═══ -->
+    <section class="preview">
+      <div class="container">
+        <div class="section-label">// podgląd apki</div>
+        <h2 class="section-title">Co realnie <em>widzisz</em> gdy ją otworzysz.</h2>
 
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">01</div>
-          <h3>Dołączasz do testów</h3>
-          <p>Wpisujesz email, dostajesz zaproszenie do zamkniętych testów Google Play. Instalujesz jak każdą inną apkę.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">02</div>
-          <h3>Dodajesz swoje gry</h3>
-          <p>Wpisujesz nazwę, apka dociąga dane z RAWG. Wybierasz status, dodajesz notatkę, zapisujesz.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">03</div>
-          <h3>Dajesz feedback</h3>
-          <p>Coś Ci się nie podoba? Napisz. Jestem jedną osobą, odpisuję sam, bug fix może iść szybko.</p>
+        <div class="phones-row">
+
+          <div class="phone">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <img src="screenshots/01-home.png" alt="Ekran główny — Continue playing z session timerem">
+              </div>
+            </div>
+            <div class="phone-meta">
+              <div class="phone-label">01 · Home</div>
+              <div class="phone-title">Continue playing + insights</div>
+              <div class="phone-desc">Aktywna gra z timerem, najbliższa premiera, realny koszt kolekcji.</div>
+            </div>
+          </div>
+
+          <div class="phone">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <img src="screenshots/02-finance.png" alt="Zakładka Finanse — KPI + wykresy">
+              </div>
+            </div>
+            <div class="phone-meta">
+              <div class="phone-label">02 · Finanse</div>
+              <div class="phone-title">Koszt na godzinę i ROI</div>
+              <div class="phone-desc">Ile wydałeś, ile odzyskałeś, co warto sprzedać.</div>
+            </div>
+          </div>
+
+          <div class="phone">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <img src="screenshots/03-time-tracking.png" alt="Czas grania — streak i heatmap miesiąca">
+              </div>
+            </div>
+            <div class="phone-meta">
+              <div class="phone-label">03 · Czas</div>
+              <div class="phone-title">Streak i heatmap miesiąca</div>
+              <div class="phone-desc">Widzisz kiedy grałeś dzień po dniu — jak GitHub contributions.</div>
+            </div>
+          </div>
+
+          <div class="phone">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <img src="screenshots/04-collection.png" alt="Kolekcja gier z filtrami i sortowaniem">
+              </div>
+            </div>
+            <div class="phone-meta">
+              <div class="phone-label">04 · Kolekcja</div>
+              <div class="phone-title">Filtr, sort, status</div>
+              <div class="phone-desc">Wszystkie gry na jednym ekranie — z okładkami RAWG.</div>
+            </div>
+          </div>
+
+          <div class="phone">
+            <div class="phone-frame">
+              <div class="phone-screen">
+                <img src="screenshots/05-releases.png" alt="Premiery z countdownem">
+              </div>
+            </div>
+            <div class="phone-meta">
+              <div class="phone-label">05 · Premiery</div>
+              <div class="phone-title">Countdown do wydania</div>
+              <div class="phone-desc">Alerty 30 / 7 / 3 dni i w dniu premiery.</div>
+            </div>
+          </div>
+
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══ CTA FINAL ═══ -->
-  <section class="final" id="signup">
-    <div class="container">
-      <h2>Dołącz do <em>beta testów.</em></h2>
-      <p>Wpisz email — wyślę Ci zaproszenie do zamkniętych testów Google Play gdy apka będzie gotowa. Zero spamu, jeden email i koniec.</p>
+    <!-- ═══ CTA ═══ -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta-inner">
+          <div class="section-label">// early access</div>
+          <h2 class="cta-title">Chcesz testować <em>przed premierą</em>?</h2>
+          <p class="cta-lead">
+            Apka jest w zamkniętych testach Google Play. Wyślij email, dorzucę Cię do listy testerów — dostaniesz link do instalacji ze Sklepu Play w ciągu 24h. Produkcja na początku maja.
+          </p>
 
-      <form class="signup-form" onsubmit="return handleSignup(event)">
-        <input type="email" name="email" placeholder="twoj@email.pl" required autocomplete="email">
-        <input type="hidden" name="source" value="skudev.pl/ps5-vault / final">
-        <button type="submit" class="btn btn-primary">
-          Zapisz mnie →
-        </button>
-      </form>
+          <form class="cta-form" action="mailto:skudev6@gmail.com" method="post" enctype="text/plain">
+            <input
+              class="cta-input"
+              type="email"
+              name="email"
+              placeholder="twój@email.pl"
+              required>
+            <button class="cta-btn" type="submit">Dołącz do testów →</button>
+          </form>
 
-      <div class="signup-success">
-        ✓ Gotowe! Odezwę się z zaproszeniem gdy apka będzie gotowa do testów.
+          <div class="cta-meta">
+            🔒 <strong>Jeden email z linkiem do testów</strong>, drugi w dniu premiery. Zero spamu.
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══ FOOTER ═══ -->
+  </main>
+
   <footer>
     <div class="container">
-      <div class="footer-row">
-        <div>PS5_VAULT · część <a href="/" style="color:var(--accent);text-decoration:none">skudev.pl</a></div>
+      <div class="footer-grid">
+        <div>PS5 Vault · projekt <a href="/" style="color:var(--accent-dim);text-decoration:none;">skudev</a> · 2026</div>
         <ul class="footer-links">
-          <li><a href="/">SkuDev</a></li>
-          <li><a href="https://github.com/matiseekk-dot/Games" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="mailto:skudev6@gmail.com">Email</a></li>
+          <li><a href="mailto:skudev6@gmail.com">email</a></li>
+          <li><a href="https://matiseekk-dot.github.io/Games/privacy.html" target="_blank" rel="noopener">privacy</a></li>
+          <li><a href="https://github.com/matiseekk-dot/Games" target="_blank" rel="noopener">github</a></li>
         </ul>
       </div>
     </div>
   </footer>
-
-
-  <script>
-    const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mkokvjjo';
-
-    async function handleSignup(e) {
-      e.preventDefault();
-      const form = e.target;
-      const email = form.querySelector('input[type="email"]').value.trim();
-      if (!email) return false;
-
-      try {
-        const res = await fetch(FORMSPREE_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email,
-            source: form.querySelector('input[name="source"]').value,
-            app: 'PS5 Vault',
-          }),
-        });
-        if (res.ok) {
-          form.classList.add('success');
-        } else {
-          alert('Ups, coś poszło nie tak. Napisz do mnie: skudev6@gmail.com');
-        }
-      } catch (err) {
-        alert('Brak połączenia. Spróbuj ponownie.');
-      }
-      return false;
-    }
-  </script>
 
 </body>
 </html>
