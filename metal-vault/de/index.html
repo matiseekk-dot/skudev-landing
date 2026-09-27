@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metal Vault · Vinyl-Sammlung und Konzert-Tracker · SkuDev</title>
+  <meta name="description" content="Vinyl-Sammlung mit echtem Discogs-Marktwert pro Pressung, eine Brücke zwischen Spotify/Last.fm und deinem Regal, ein Konzertkalender mit Festival-Live-Modus und Push-Benachrichtigungen. Englisch, Polnisch und Deutsch, ohne Werbung. Kostenlos bei Google Play.">
+  <meta property="og:title" content="Metal Vault · Deine Platten, dein Gewinn, deine Konzerte">
+  <meta property="og:description" content="Ein Vinyl-Tracker, der den Marktwert kennt und die Konzerte deiner Lieblingsbands im Blick behält.">
+  <meta property="og:type" content="website">
+  <link rel="alternate" hreflang="pl" href="https://skudev.pl/metal-vault/">
+  <link rel="alternate" hreflang="en" href="https://skudev.pl/metal-vault/en/">
+  <link rel="alternate" hreflang="de" href="https://skudev.pl/metal-vault/de/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230A0A0A'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23F5C842' font-family='monospace' font-weight='700'%3EM%3C/text%3E%3C/svg%3E">
+
+  <style>
+    :root {
+      --bg:          #0A0A0A;
+      --bg-2:        #161616;
+      --bg-3:        #232323;
+      --ink:         #F2F0EA;
+      --ink-2:       #B8B4A8;
+      --ink-3:       #7A776C;
+      --accent:      #F5C842;
+      --accent-dim:  #B89530;
+      --red:         #DC2626;
+      --green:       #4ADE80;
+      --border:      rgba(242, 240, 234, 0.08);
+      --border-2:    rgba(242, 240, 234, 0.16);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(242, 240, 234, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(242, 240, 234, 0.02) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 75% 15%, rgba(220, 38, 38, 0.10) 0%, transparent 50%),
+        radial-gradient(circle at 15% 85%, rgba(245, 200, 66, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* HEADER */
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(10, 10, 10, 0.85);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .logo-mark {
+      width: 36px; height: 36px;
+      background: var(--red);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      color: #FDF8F0;
+      font-size: 18px;
+    }
+
+    .logo-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-text em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-back, .nav-lang {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-3);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-back:hover, .nav-lang:hover { color: var(--accent); }
+    .nav-lang { border: 1px solid var(--border-2); border-radius: 20px; padding: 6px 12px; }
+
+    /* HERO */
+    .hero {
+      padding: 80px 0 60px;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(44px, 7vw, 76px);
+      line-height: 1.02;
+      letter-spacing: 0.5px;
+      margin-bottom: 28px;
+      max-width: 15ch;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-lead {
+      font-size: 19px;
+      color: var(--ink-2);
+      line-height: 1.6;
+      max-width: 54ch;
+      margin-bottom: 36px;
+    }
+
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 22px; border-radius: 12px;
+      font-family: inherit; font-size: 15px; font-weight: 700; letter-spacing: 0.2px;
+      text-decoration: none; transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .btn-play { background: var(--red); color: #FDF8F0; }
+    .btn-play:hover { background: #B91C1C; }
+    .btn-play svg { width: 20px; height: 20px; }
+
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      background: rgba(74, 222, 128, 0.1);
+      border: 1px solid rgba(74, 222, 128, 0.3);
+      border-radius: 20px;
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--green);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-status::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* STORY */
+    .story {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .story-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .story-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-3);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .story-quote {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(20px, 2.8vw, 25px);
+      line-height: 1.5;
+      color: var(--ink);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.2px;
+      margin-bottom: 24px;
+    }
+
+    .story-quote em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .story-author {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      color: var(--ink-3);
+    }
+
+    /* FEATURES */
+    .features {
+      padding: 80px 0 60px;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      font-weight: 700;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(32px, 5vw, 48px);
+      line-height: 1.08;
+      letter-spacing: 0.3px;
+      max-width: 20ch;
+      margin-bottom: 60px;
+    }
+
+    .section-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .feature {
+      background: var(--bg);
+      padding: 32px 28px;
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .feature:hover {
+      background: var(--bg-2);
+    }
+
+    .feature-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-3);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .feature-emoji {
+      font-size: 32px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .feature h3 {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+
+    .feature p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink-2);
+    }
+
+    /* PREVIEW */
+    .preview {
+      padding: 80px 0 60px;
+      border-top: 1px solid var(--border);
+    }
+
+    .preview-shot {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .preview-shot img {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      display: block;
+      border-radius: 22px;
+      border: 1px solid var(--border-2);
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .preview-shot img:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 40px 80px -20px rgba(220, 38, 38, 0.3);
+    }
+
+    /* CTA */
+    .cta {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .cta-inner {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(28px, 4vw, 40px);
+      line-height: 1.15;
+      letter-spacing: 0.3px;
+      margin-bottom: 20px;
+    }
+
+    .cta-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .cta-lead {
+      color: var(--ink-2);
+      margin-bottom: 32px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .cta-meta {
+      margin-top: 20px;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-3);
+      letter-spacing: 0.3px;
+    }
+
+    .cta-meta a {
+      color: var(--ink-2);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-3);
+      letter-spacing: 0.3px;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--ink-3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    /* RWD */
+    @media (max-width: 640px) {
+      .hero { padding: 60px 0 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="logo">
+          <div class="logo-mark">M</div>
+          <div class="logo-text">skudev · <em>metal vault</em></div>
+        </a>
+        <div class="nav-links">
+          <a href="/metal-vault/" class="nav-lang">PL</a>
+          <a href="/metal-vault/en/" class="nav-lang">EN</a>
+          <a href="/" class="nav-back">← alle Projekte</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-eyebrow">// Vinyl-Sammlung und Konzert-Tracker · Android</div>
+        <h1>Deine Platten. Dein <em>Gewinn</em>. Deine Konzerte.</h1>
+        <p class="hero-lead">
+          Eine Vinyl-Sammlung mit echtem Discogs-Marktwert für jede Pressung, eine Brücke zwischen
+          Spotify und Last.fm und deinem Regal, ein Konzertkalender mit Festival-Live-Modus und
+          Push-Benachrichtigungen, wenn eine Lieblingsband eine Neuauflage bekommt oder in deiner
+          Stadt spielt.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=pl.skudev.metalvault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dhero" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19l10-9.5L4 2.5zm11.4 10.8l2.6 2.5-11.2 6.3 8.6-8.8zm0-2.6L6.8 1.9 18 8.2l-2.6 2.5zm4.3-1.5l3 1.7c.8.5.8 1.7 0 2.2l-3 1.7-2.8-2.8 2.8-2.8z"/></svg>
+            Bei Google Play laden
+          </a>
+        </div>
+        <div class="hero-status">bei Google Play · EN/PL/DE · ohne Werbung</div>
+      </div>
+    </section>
+
+    <!-- STORY -->
+    <section class="story">
+      <div class="container">
+        <div class="story-inner">
+          <div class="story-label">// warum diese App</div>
+          <p class="story-quote">
+            Meine Platten liegen an drei verschiedenen Orten verstreut, und ich wusste nie, wie viel
+            die ganze Sammlung eigentlich wert ist. Discogs zeigt dir den Preis einer Platte, nicht
+            die Summe aller zusammen, dazu noch getrennt nach Pressung und Edition. Ich habe
+            angefangen aufzuschreiben, was ich habe, dann kamen Konzerte dazu, damit ich eine
+            Lieblingsband in der Stadt <em>nie mehr verpasse</em>.
+          </p>
+          <div class="story-author">Mateusz, Vinyl-Sammler, Entwickler</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+      <div class="container">
+        <div class="section-label">// was du bekommst</div>
+        <h2 class="section-title">Alles, was <em>andere Tracker</em> nicht hatten.</h2>
+
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature-num">01</div>
+            <span class="feature-emoji">💿</span>
+            <h3>Discogs-Wert, nach Pressung</h3>
+            <p>Echter Marktwert für jede Platte, getrennt erfasst nach Vinylfarbe, Pressung und Edition. Der Gesamtwert deiner Sammlung bewegt sich mit dem Markt, nicht nur mit dem, was du bezahlt hast.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">02</div>
+            <span class="feature-emoji">🎧</span>
+            <h3>Brücke von Spotify/Last.fm zu Vinyl</h3>
+            <p>Die App findet die Künstler, die du am meisten streamst und noch nicht auf Vinyl hast. Deine Kaufliste baut sich von selbst auf.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">03</div>
+            <span class="feature-emoji">🎫</span>
+            <h3>Konzerte mit Festival-Modus</h3>
+            <p>Du trägst Konzerte deiner Lieblingsbands ein und bekommst rechtzeitig Erinnerungen. Auf dem Festival zeigt der Live-Modus, wer gerade spielt und was als Nächstes kommt.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">04</div>
+            <span class="feature-emoji">🎲</span>
+            <h3>Vinyl Roulette</h3>
+            <p>Nicht sicher, was du heute auflegen sollst? Ein Tipp wählt eine Platte aus deiner Sammlung, bevorzugt die, die am längsten im Regal stand.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">05</div>
+            <span class="feature-emoji">🔔</span>
+            <h3>Push-Benachrichtigungen</h3>
+            <p>Neuauflage eines Lieblingsalbums, Preissenkung bei Discogs, bevorstehendes Konzert. Benachrichtigungen kommen aufs Handy, auch wenn die App geschlossen ist.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">06</div>
+            <span class="feature-emoji">💰</span>
+            <h3>Realisierter Gewinn aus Verkäufen</h3>
+            <p>Eine eigene Statistik zeigt, wie viel du mit verkauften Platten tatsächlich verdient hast, nicht nur den geschätzten Wert dessen, was noch im Regal steht.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">07</div>
+            <span class="feature-emoji">📦</span>
+            <h3>Vorbestellung und Lieferstatus</h3>
+            <p>Ein Tipp auf das Abzeichen markiert eine Platte als bestellt. Die App behält das Erscheinungsdatum im Blick und erinnert dich ans Paket.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">08</div>
+            <span class="feature-emoji">🎁</span>
+            <h3>Platten als Geschenk</h3>
+            <p>Markierst du eine Platte als Geschenk, zählt sie nicht zu deinen Ausgaben oder zur Verkaufssammlung.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">09</div>
+            <span class="feature-emoji">🌍</span>
+            <h3>3 Sprachen, ohne Werbung</h3>
+            <p>Englisch, Polnisch und Deutsch. Der Kern der App bleibt für immer kostenlos, Pro schaltet erweiterte Statistiken frei.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREVIEW -->
+    <section class="preview">
+      <div class="container">
+        <div class="section-label">// in der App</div>
+        <h2 class="section-title">Sammlung, Bewertung und Vault Score <em>auf einen Blick</em>.</h2>
+
+        <div class="preview-shot">
+          <img src="../screenshots/01-vault.png" width="1044" height="2408" loading="lazy" alt="Vault-Tab: Sammlungswert, Gewinn, Vault Score und die Plattenliste mit Discogs-Preisen">
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta-inner">
+          <div class="section-label">// jetzt laden</div>
+          <h2 class="cta-title">Kostenlos, <em>ohne Werbung</em>, in 3 Sprachen.</h2>
+          <p class="cta-lead">
+            Installiere die App bei Google Play und füge sofort Platten hinzu: von Hand, per
+            Barcode-Scan des Covers oder per Discogs-Synchronisierung.
+          </p>
+
+          <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=pl.skudev.metalvault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dcta" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19l10-9.5L4 2.5zm11.4 10.8l2.6 2.5-11.2 6.3 8.6-8.8zm0-2.6L6.8 1.9 18 8.2l-2.6 2.5zm4.3-1.5l3 1.7c.8.5.8 1.7 0 2.2l-3 1.7-2.8-2.8 2.8-2.8z"/></svg>
+            Bei Google Play laden
+          </a>
+
+          <div class="cta-meta">
+            Idee oder Fehler gefunden? Schreib an <a href="mailto:skudev6@gmail.com">skudev6@gmail.com</a>.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>Metal Vault · ein <a href="/" style="color:var(--accent-dim);text-decoration:none;">skudev</a>-Projekt · 2026</div>
+        <ul class="footer-links">
+          <li><a href="mailto:skudev6@gmail.com">email</a></li>
+          <li><a href="https://metal-vault-six.vercel.app/privacy" target="_blank" rel="noopener">privacy</a></li>
+          <li><a href="https://github.com/matiseekk-dot/Games" target="_blank" rel="noopener">github</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
