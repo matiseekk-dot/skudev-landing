@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PS5 Vault · Tracker gier PlayStation 5 · SkuDev</title>
-  <meta name="description" content="Tracker gier PS5 z realnym kosztem kolekcji, trackerem godzin grania i countdownem do premier. Multi-platform, PL/EN, bez konta, bez reklam. W zamkniętych testach Google Play.">
+  <title>PS5 Vault · Tracker kolekcji gier · SkuDev</title>
+  <meta name="description" content="Tracker kolekcji gier na Androida: realny koszt kolekcji, godziny grania, kalendarz premier i import ze Steam, Xboxa, PSN i Playnite. PL/EN/ES, bez konta, bez reklam. Za darmo w Google Play.">
   <meta property="og:title" content="PS5 Vault · Twoje gry, Twoje pieniądze, Twój czas">
   <meta property="og:description" content="Tracker który liczy kolekcję — i rachunek za nią.">
   <meta property="og:type" content="website">
@@ -181,6 +181,18 @@
       margin-bottom: 36px;
     }
 
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 22px; border-radius: 12px;
+      font-family: inherit; font-size: 15px; font-weight: 700; letter-spacing: 0.2px;
+      text-decoration: none; transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .btn-play { background: var(--coral); color: #FDF8F0; }
+    .btn-play:hover { background: #B84A3A; }
+    .btn-play svg { width: 20px; height: 20px; }
+
     .hero-status {
       display: inline-flex;
       align-items: center;
@@ -341,81 +353,25 @@
       border-top: 1px solid var(--border);
     }
 
-    .phones-row {
+    .shots {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
       margin-top: 40px;
     }
 
-    .phone {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .phone-frame {
-      position: relative;
-      padding: 8px;
-      background: linear-gradient(145deg, #2A342A, #1E2618);
-      border-radius: 36px;
-      box-shadow:
-        0 1px 0 rgba(255,255,255,0.05) inset,
-        0 30px 60px -20px rgba(0,0,0,0.5);
+    .shots img {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      display: block;
+      border-radius: 18px;
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .phone-frame:hover {
+    .shots img:hover {
       transform: translateY(-4px);
-      box-shadow:
-        0 1px 0 rgba(255,255,255,0.05) inset,
-        0 40px 80px -20px rgba(201, 90, 72, 0.3);
-    }
-
-    .phone-screen {
-      width: 100%;
-      aspect-ratio: 9 / 19.5;
-      background: #080B14;
-      border-radius: 28px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .phone-screen img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: top center;
-      display: block;
-    }
-
-    .phone-meta {
-      padding: 0 4px;
-    }
-
-    .phone-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--accent);
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      font-weight: 600;
-      margin-bottom: 6px;
-    }
-
-    .phone-title {
-      font-family: 'Fraunces', serif;
-      font-size: 17px;
-      font-weight: 500;
-      line-height: 1.3;
-      letter-spacing: -0.3px;
-      margin-bottom: 4px;
-    }
-
-    .phone-desc {
-      font-size: 13px;
-      line-height: 1.5;
-      color: var(--ink-3);
+      box-shadow: 0 40px 80px -20px rgba(201, 90, 72, 0.3);
     }
 
     /* ═══ CTA ═══ */
@@ -452,63 +408,16 @@
       line-height: 1.6;
     }
 
-    .cta-form {
-      display: flex;
-      gap: 8px;
-      max-width: 440px;
-      margin: 0 auto 20px;
-    }
-
-    .cta-input {
-      flex: 1;
-      padding: 14px 18px;
-      background: var(--bg-2);
-      border: 1px solid var(--border-2);
-      border-radius: 10px;
-      color: var(--ink);
-      font-family: inherit;
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .cta-input:focus {
-      border-color: var(--accent);
-    }
-
-    .cta-input::placeholder {
-      color: var(--ink-3);
-    }
-
-    .cta-btn {
-      padding: 14px 22px;
-      background: var(--coral);
-      color: #FDF8F0;
-      border: none;
-      border-radius: 10px;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.2s;
-      letter-spacing: 0.3px;
-    }
-
-    .cta-btn:hover {
-      background: #B84A3A;
-    }
-
     .cta-meta {
+      margin-top: 20px;
       font-family: 'JetBrains Mono', monospace;
       font-size: 11px;
       color: var(--ink-3);
       letter-spacing: 0.3px;
     }
 
-    .cta-meta strong {
+    .cta-meta a {
       color: var(--ink-2);
-      font-weight: 600;
     }
 
     /* ═══ FOOTER ═══ */
@@ -546,10 +455,12 @@
     }
 
     /* ═══ RWD ═══ */
+    @media (max-width: 800px) {
+      .shots { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    }
+
     @media (max-width: 640px) {
       .hero { padding: 60px 0 40px; }
-      .cta-form { flex-direction: column; }
-      .phones-row { grid-template-columns: 1fr; gap: 36px; }
     }
   </style>
 </head>
@@ -572,14 +483,20 @@
     <!-- ═══ HERO ═══ -->
     <section class="hero">
       <div class="container">
-        <div class="hero-eyebrow">// Tracker gier PlayStation · Android</div>
+        <div class="hero-eyebrow">// Tracker kolekcji gier · Android</div>
         <h1>Twoje gry. Twoje <em>pieniądze</em>. Twój czas.</h1>
         <p class="hero-lead">
-          Kolekcja z automatycznymi okładkami z RAWG, realny koszt kolekcji per gra i łącznie,
-          tracker godzin grania z heatmapą miesiąca. Bez konta, bez serwera, bez reklam.
-          Wszystko lokalnie na Twoim urządzeniu.
+          Kolekcja z okładkami z RAWG, realny koszt kolekcji per gra i łącznie, godziny grania
+          i kalendarz premier. Całą bibliotekę zaimportujesz ze Steam, Xboxa, PSN albo Playnite.
+          Bez konta i bez reklam, kolekcja zostaje na Twoim telefonie.
         </p>
-        <div class="hero-status">closed testing · Android · premiera początek maja 2026</div>
+        <div class="hero-ctas">
+          <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.skudev.ps5vault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dhero" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19l10-9.5L4 2.5zm11.4 10.8l2.6 2.5-11.2 6.3 8.6-8.8zm0-2.6L6.8 1.9 18 8.2l-2.6 2.5zm4.3-1.5l3 1.7c.8.5.8 1.7 0 2.2l-3 1.7-2.8-2.8 2.8-2.8z"/></svg>
+            Pobierz z Google Play
+          </a>
+        </div>
+        <div class="hero-status">w Google Play · za darmo · polski, angielski, hiszpański</div>
       </div>
     </section>
 
@@ -602,7 +519,7 @@
     <section class="features">
       <div class="container">
         <div class="section-label">// co dostajesz</div>
-        <h2 class="section-title">Sześć rzeczy, których <em>brakuje</em> w innych trackerach.</h2>
+        <h2 class="section-title">Wszystko, czego <em>brakowało</em> mi w innych trackerach.</h2>
 
         <div class="features-grid">
           <div class="feature">
@@ -614,23 +531,23 @@
 
           <div class="feature">
             <div class="feature-num">02</div>
-            <span class="feature-emoji">⏱</span>
-            <h3>Tracker godzin grania</h3>
-            <p>Session timer z pauzą. Streak dni z grą. Heatmap miesiąca jak GitHub contributions. Najdłuższa sesja, średnia sesja, porównanie tydzień do tygodnia.</p>
+            <span class="feature-emoji">🔁</span>
+            <h3>Import całej biblioteki</h3>
+            <p>Wklejasz albo wgrywasz eksport ze Steam, Xboxa, PSN albo Playnite. Apka dopasowuje gry do bazy RAWG i ustawia statusy na podstawie godzin i postępu trofeów. Kilkaset gier w parę minut.</p>
           </div>
 
           <div class="feature">
             <div class="feature-num">03</div>
             <span class="feature-emoji">📅</span>
             <h3>Premiery z countdownem</h3>
-            <p>Gry z datą premiery sortują się same. Powiadomienia 30 / 7 / 3 dni przed i w dniu wydania. Wiesz co wychodzi w tym miesiącu bez klepania w kalendarz.</p>
+            <p>Gry z datą premiery sortują się same. Przypomnienia na 30, 7 i 1–3 dni przed premierą oraz w dniu wydania, gdy otworzysz apkę. Preordery nie wliczają się do wydatków miesiąca przed premierą.</p>
           </div>
 
           <div class="feature">
             <div class="feature-num">04</div>
             <span class="feature-emoji">🎮</span>
-            <h3>Pięć statusów + platinum</h3>
-            <p>Gram · PS Plus · Ukończone · Planuję · Porzucone. Dla ukończonych toggle Platinum 🏆. Plus filtr sprzedanych i multi-platform: PS5, PS4, Xbox, PC, Switch, Mobile.</p>
+            <h3>Statusy, platyny, subskrypcje</h3>
+            <p>Gram · Ukończone · Planuję · Porzucone, dla ukończonych toggle Platinum 🏆. Gry z PS Plus, Game Passa czy EA Play nie liczą się do wydatków. Multi-platform: PS5, PS4, Xbox, PC, Switch, Mobile.</p>
           </div>
 
           <div class="feature">
@@ -642,9 +559,30 @@
 
           <div class="feature">
             <div class="feature-num">06</div>
+            <span class="feature-emoji">🔍</span>
+            <h3>Wyszukiwarka i sortowanie</h3>
+            <p>Szukasz po tytule, filtrujesz po statusie, platformie i źródle, sortujesz po dacie dodania, ocenie, godzinach albo dacie ukończenia. Działa płynnie nawet przy 700+ grach.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">07</div>
+            <span class="feature-emoji">🎲</span>
+            <h3>Losowarka z backlogu</h3>
+            <p>Nie wiesz w co zagrać? Jedno stuknięcie losuje grę z tych, które czekają w kolejce. Od razu możesz ją oznaczyć jako Gram albo losować dalej.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">08</div>
+            <span class="feature-emoji">🎁</span>
+            <h3>Rok w grach</h3>
+            <p>Podsumowanie roku w stylu Spotify Wrapped: godziny, ukończone gry, platyny i najczęściej grane tytuły. Udostępniasz je jako obrazek.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">09</div>
             <span class="feature-emoji">🔒</span>
-            <h3>Bez konta, bez serwera</h3>
-            <p>Dane żyją w Twoim telefonie. Zero analityki, zero reklam, zero serwera. Eksportujesz backup JSON kiedy chcesz — importujesz na drugie urządzenie w trybie merge lub replace.</p>
+            <h3>Bez konta, bez reklam</h3>
+            <p>Kolekcja żyje w Twoim telefonie. Backup JSON eksportujesz kiedy chcesz i importujesz na drugie urządzenie (scalanie albo zastąpienie). Jedyna statystyka to anonimowy licznik odwiedzin Cloudflare, bez cookies.</p>
           </div>
         </div>
       </div>
@@ -654,75 +592,15 @@
     <section class="preview">
       <div class="container">
         <div class="section-label">// podgląd apki</div>
-        <h2 class="section-title">Co realnie <em>widzisz</em> gdy ją otworzysz.</h2>
+        <h2 class="section-title">Najważniejsze funkcje <em>w skrócie</em>.</h2>
 
-        <div class="phones-row">
-
-          <div class="phone">
-            <div class="phone-frame">
-              <div class="phone-screen">
-                <img src="screenshots/01-home.png" alt="Ekran główny — Continue playing z session timerem">
-              </div>
-            </div>
-            <div class="phone-meta">
-              <div class="phone-label">01 · Home</div>
-              <div class="phone-title">Continue playing + insights</div>
-              <div class="phone-desc">Aktywna gra z timerem, najbliższa premiera, realny koszt kolekcji.</div>
-            </div>
-          </div>
-
-          <div class="phone">
-            <div class="phone-frame">
-              <div class="phone-screen">
-                <img src="screenshots/02-finance.png" alt="Zakładka Finanse — KPI + wykresy">
-              </div>
-            </div>
-            <div class="phone-meta">
-              <div class="phone-label">02 · Finanse</div>
-              <div class="phone-title">Koszt na godzinę i ROI</div>
-              <div class="phone-desc">Ile wydałeś, ile odzyskałeś, co warto sprzedać.</div>
-            </div>
-          </div>
-
-          <div class="phone">
-            <div class="phone-frame">
-              <div class="phone-screen">
-                <img src="screenshots/03-time-tracking.png" alt="Czas grania — streak i heatmap miesiąca">
-              </div>
-            </div>
-            <div class="phone-meta">
-              <div class="phone-label">03 · Czas</div>
-              <div class="phone-title">Streak i heatmap miesiąca</div>
-              <div class="phone-desc">Widzisz kiedy grałeś dzień po dniu — jak GitHub contributions.</div>
-            </div>
-          </div>
-
-          <div class="phone">
-            <div class="phone-frame">
-              <div class="phone-screen">
-                <img src="screenshots/04-collection.png" alt="Kolekcja gier z filtrami i sortowaniem">
-              </div>
-            </div>
-            <div class="phone-meta">
-              <div class="phone-label">04 · Kolekcja</div>
-              <div class="phone-title">Filtr, sort, status</div>
-              <div class="phone-desc">Wszystkie gry na jednym ekranie — z okładkami RAWG.</div>
-            </div>
-          </div>
-
-          <div class="phone">
-            <div class="phone-frame">
-              <div class="phone-screen">
-                <img src="screenshots/05-releases.png" alt="Premiery z countdownem">
-              </div>
-            </div>
-            <div class="phone-meta">
-              <div class="phone-label">05 · Premiery</div>
-              <div class="phone-title">Countdown do wydania</div>
-              <div class="phone-desc">Alerty 30 / 7 / 3 dni i w dniu premiery.</div>
-            </div>
-          </div>
-
+        <div class="shots">
+          <img src="screenshots/01-wyszukiwarka-sort.webp" width="720" height="1280" loading="lazy" alt="Kolekcja z wyszukiwarką, filtrami i sortowaniem — 700+ gier bez problemu">
+          <img src="screenshots/02-losowarka.webp" width="720" height="1280" loading="lazy" alt="Losowarka wybiera grę z backlogu">
+          <img src="screenshots/03-wrapped.webp" width="720" height="1280" loading="lazy" alt="Rok w grach — godziny, ukończone gry, platyny i najczęściej grane tytuły">
+          <img src="screenshots/05-import.webp" width="720" height="1280" loading="lazy" alt="Import biblioteki ze Steam, Xboxa, PSN i Playnite">
+          <img src="screenshots/06-budzet.webp" width="720" height="1280" loading="lazy" alt="Finansowy insight — realny koszt kolekcji i wydatki w tym miesiącu">
+          <img src="screenshots/04-offline-privacy.webp" width="720" height="1280" loading="lazy" alt="Bez konta i bez reklam — dane zostają na telefonie">
         </div>
       </div>
     </section>
@@ -731,24 +609,20 @@
     <section class="cta">
       <div class="container">
         <div class="cta-inner">
-          <div class="section-label">// early access</div>
-          <h2 class="cta-title">Chcesz testować <em>przed premierą</em>?</h2>
+          <div class="section-label">// pobierz</div>
+          <h2 class="cta-title">Za darmo, <em>bez konta</em> i bez reklam.</h2>
           <p class="cta-lead">
-            Apka jest w zamkniętych testach Google Play. Wyślij email, dorzucę Cię do listy testerów — dostaniesz link do instalacji ze Sklepu Play w ciągu 24h. Produkcja na początku maja.
+            Instalujesz z Google Play i od razu dodajesz gry: ręcznie, skanerem kodów z pudełek
+            albo importem całej biblioteki.
           </p>
 
-          <form class="cta-form" action="mailto:skudev6@gmail.com" method="post" enctype="text/plain">
-            <input
-              class="cta-input"
-              type="email"
-              name="email"
-              placeholder="twój@email.pl"
-              required>
-            <button class="cta-btn" type="submit">Dołącz do testów →</button>
-          </form>
+          <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.skudev.ps5vault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dcta" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19l10-9.5L4 2.5zm11.4 10.8l2.6 2.5-11.2 6.3 8.6-8.8zm0-2.6L6.8 1.9 18 8.2l-2.6 2.5zm4.3-1.5l3 1.7c.8.5.8 1.7 0 2.2l-3 1.7-2.8-2.8 2.8-2.8z"/></svg>
+            Pobierz z Google Play
+          </a>
 
           <div class="cta-meta">
-            🔒 <strong>Jeden email z linkiem do testów</strong>, drugi w dniu premiery. Zero spamu.
+            Pomysł albo błąd? Napisz na <a href="mailto:skudev6@gmail.com">skudev6@gmail.com</a>.
           </div>
         </div>
       </div>
