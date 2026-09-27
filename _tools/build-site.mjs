@@ -16,6 +16,7 @@
 // Run: node _tools/build-site.mjs
 
 import fs from 'fs'
+import crypto from 'crypto'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import pl from './content/pl.mjs'
@@ -30,6 +31,10 @@ const UPDATED = '2026-09-27'
 const LANGS = [pl, en, de, fr, es]
 const X_DEFAULT = 'en'
 const SITEMAP = 'sitemap-spokojny-rodzic.xml'
+
+// Wersja w adresie arkusza stylów: po każdej zmianie sr.css przeglądarki
+// pobierają nowy plik zamiast trzymać stary w pamięci (GitHub Pages: 10 min).
+const CSS_VERSION = crypto.createHash('md5').update(fs.readFileSync(path.join(ROOT, 'assets', 'sr.css'))).digest('hex').slice(0, 8)
 
 const play = (medium, campaign) =>
   `https://play.google.com/store/apps/details?id=pl.skudev.spokojnyrodzic&amp;referrer=utm_source%3Dskudev%26utm_medium%3D${medium}%26utm_campaign%3D${campaign}`
@@ -74,7 +79,7 @@ ${alts.map(a => `  <link rel="alternate" hreflang="${a.lang}" href="${a.href}">`
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="/spokojny-rodzic/icon-192.png">
-  <link rel="stylesheet" href="/assets/sr.css">
+  <link rel="stylesheet" href="/assets/sr.css?v=${CSS_VERSION}">
   <script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
 </head>
 <body>`
@@ -216,7 +221,7 @@ ${header(L, `skudev · <em>${L.appName.toLowerCase()}</em>`, alts)}
           ${T.phones.map(p => `<div class="phone">
             <div class="phone-frame">
               <div class="phone-screen">
-                <img src="${img}/${p.img}.webp" width="600" height="1200" loading="lazy" alt="${attr(p.alt)}">
+                <img src="${img}/${p.img}.webp" width="600" height="1200" alt="${attr(p.alt)}">
               </div>
             </div>
             <div class="phone-meta">
