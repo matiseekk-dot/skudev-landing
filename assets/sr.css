@@ -634,3 +634,14 @@ tr.urgent td.num { color: #E07A66; }
   td.num { font-size: 19px; }
   .nav .logo-text { font-size: 16px; }
 }
+
+/* Przełącznik języka w nagłówku */
+.lang-switch { display: flex; gap: 2px; margin-left: 6px; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+.lang-switch a, .lang-switch span { padding: 4px 6px; border-radius: 6px; color: var(--ink-3); text-decoration: none; letter-spacing: 0.5px; }
+.lang-switch a:hover { color: var(--accent); }
+.lang-switch .lang-current { color: var(--ink); background: var(--bg-3); }
+td.num { white-space: normal; min-width: 8.5em; }
+@media (max-width: 640px) {
+  .nav { flex-wrap: wrap; row-gap: 10px; }
+  .nav-links { gap: 14px; flex-wrap: wrap; }
+}
