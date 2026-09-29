@@ -28,6 +28,10 @@ import es from './content/es.mjs'
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const SITE = 'https://skudev.pl'
 const UPDATED = '2026-09-27'
+// Artykuł z własną datą (pole published, ISO) pokazuje ją w języku strony.
+const articleDate = (L, a) => (a.published
+  ? new Intl.DateTimeFormat(L.lang, { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${a.published}T12:00:00`))
+  : L.ui.date)
 const LANGS = [pl, en, de, fr, es]
 const X_DEFAULT = 'en'
 const SITEMAP = 'sitemap-spokojny-rodzic.xml'
@@ -269,8 +273,8 @@ function articlePage(L, a) {
         headline: a.title,
         description: a.description,
         inLanguage: L.lang,
-        datePublished: UPDATED,
-        dateModified: UPDATED,
+        datePublished: a.published || UPDATED,
+        dateModified: a.published || UPDATED,
         mainEntityOfPage: SITE + url,
         image: `${SITE}/assets/sr/${L.lang}/og.jpg`,
         author: { '@type': 'Person', name: 'Mateusz', url: `${SITE}/` },
@@ -292,7 +296,7 @@ ${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
       <div class="container">
         <div class="crumbs"><a href="${L.guidePath}">${L.ui.guideName}</a> / ${a.title}</div>
         <h1>${a.title}</h1>
-        <div class="article-meta">${L.ui.updated}: ${L.ui.date} · ${L.ui.basedOn}: ${a.basedOn}</div>
+        <div class="article-meta">${L.ui.updated}: ${articleDate(L, a)} · ${L.ui.basedOn}: ${a.basedOn}</div>
 
         <div class="answer">
           <div class="answer-label">${L.ui.answer}</div>
