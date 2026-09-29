@@ -58,6 +58,11 @@ export default {
     ctaLead: 'Po 14 dniach dalej używasz wersji podstawowej: zapis karmień, snu, temperatury i leków zostaje za darmo. Premium kupujesz tylko wtedy, gdy chcesz.',
     disclaimer: 'Spokojny Rodzic nie jest wyrobem medycznym. Nie diagnozuje, nie wylicza dawek leków i nie zastępuje lekarza. W zagrożeniu życia dzwoń 112.',
   },
+  cheatsheet: {
+    title: 'Ściągawka na lodówkę (PDF)',
+    text: 'Progi gorączki według wieku, kiedy dzwonić pod 112, test szklanki i miejsce na telefon do pediatry. Jedna strona A4 do wydruku.',
+    link: 'Pobierz ściągawkę',
+  },
   index: {
     title: 'Poradnik dla rodziców niemowląt',
     description: 'Gorączka, karmienie, pieluchy, sen i objawy alarmowe u niemowlęcia. Krótko i konkretnie, na podstawie wytycznych pediatrów.',

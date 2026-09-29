@@ -58,6 +58,11 @@ export default {
     ctaLead: 'After 14 days you keep the basic version: logging feedings, sleep, temperature and medicines stays free. You only buy Premium if you want to.',
     disclaimer: 'Calm Parent is not a medical device. It does not diagnose, does not calculate medicine doses and does not replace a doctor. In an emergency, call your local emergency number.',
   },
+  cheatsheet: {
+    title: 'Fridge cheat sheet (PDF)',
+    text: 'Fever thresholds by age, when to call emergency services, the glass test and space for your pediatrician’s number. One A4 page to print.',
+    link: 'Download the cheat sheet',
+  },
   index: {
     title: 'Guide for parents of babies',
     description: 'Fever, feeding, diapers, sleep and warning signs in babies. Short and clear, based on pediatric guidelines.',

@@ -135,6 +135,12 @@ function footer(L) {
 `
 }
 
+// Ściągawka do druku (PDF w assets/sr/{lang}/), na stronie poradnika i przy gorączce/objawach.
+const cheatsheetBox = L => (L.cheatsheet
+  ? `<div class="callout"><div class="callout-title">${L.cheatsheet.title}</div><p>${L.cheatsheet.text} <a href="/assets/sr/${L.lang}/sciagawka.pdf" download>${L.cheatsheet.link}</a></p></div>`
+  : '')
+const CHEATSHEET_ARTICLES = new Set(['fever', 'warning', 'thermometer', 'glass'])
+
 const guideCard = (L, a) =>
   `<a class="guide-card" href="${L.guidePath}${a.slug}/"><span class="guide-emoji">${a.emoji}</span><h3>${a.title}</h3><p>${a.teaser}</p></a>`
 
@@ -304,6 +310,7 @@ ${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
         </div>
 
         ${a.blocks.map(block).join('\n        ')}
+        ${CHEATSHEET_ARTICLES.has(a.id) ? cheatsheetBox(L) : ''}
 
         <div class="app-card">
           <img src="/spokojny-rodzic/icon-192.png" alt="" width="64" height="64">
@@ -356,6 +363,7 @@ ${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
         <div class="guide-grid">
           ${L.articles.map(a => guideCard(L, a)).join('\n          ')}
         </div>
+        ${cheatsheetBox(L)}
         <p class="disclaimer">${L.index.disclaimer}</p>
       </div>
     </section>

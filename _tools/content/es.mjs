@@ -58,6 +58,11 @@ export default {
     ctaLead: 'Después de 14 días sigues con la versión básica: registrar tomas, sueño, temperatura y medicamentos sigue siendo gratis. Solo compras Premium si quieres.',
     disclaimer: 'Calm Parent no es un dispositivo médico. No diagnostica, no calcula dosis y no sustituye a un médico. En caso de emergencia, llama al 112.',
   },
+  cheatsheet: {
+    title: 'Chuleta para la nevera (PDF)',
+    text: 'Umbrales de fiebre según la edad, cuándo llamar al 112, la prueba del vaso y espacio para el teléfono de tu pediatra. Una página A4 para imprimir.',
+    link: 'Descargar la chuleta',
+  },
   index: {
     title: 'Guía para padres de bebés',
     description: 'Fiebre, tomas, pañales, sueño y señales de alarma en el bebé. Breve y claro, según las guías pediátricas.',

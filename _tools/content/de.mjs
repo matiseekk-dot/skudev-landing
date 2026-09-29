@@ -58,6 +58,11 @@ export default {
     ctaLead: 'Nach 14 Tagen nutzen Sie die Basisversion weiter: Mahlzeiten, Schlaf, Temperatur und Medikamente erfassen bleibt kostenlos. Premium kaufen Sie nur, wenn Sie möchten.',
     disclaimer: 'Calm Parent ist kein Medizinprodukt. Die App stellt keine Diagnose, berechnet keine Dosierungen und ersetzt keinen Arzt. Im Notfall rufen Sie die 112 an.',
   },
+  cheatsheet: {
+    title: 'Spickzettel für den Kühlschrank (PDF)',
+    text: 'Fieber-Grenzwerte nach Alter, wann Sie die 112 rufen, der Glastest und Platz für die Nummer Ihres Kinderarztes. Eine A4-Seite zum Ausdrucken.',
+    link: 'Spickzettel herunterladen',
+  },
   index: {
     title: 'Ratgeber für Eltern von Babys',
     description: 'Fieber, Mahlzeiten, Windeln, Schlaf und Warnzeichen beim Baby. Kurz und klar, nach kinderärztlichen Leitlinien.',

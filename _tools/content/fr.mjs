@@ -59,6 +59,11 @@ export default {
     ctaLead: 'Après 14 jours, vous gardez la version de base : noter repas, sommeil, température et médicaments reste gratuit. Vous achetez Premium seulement si vous le souhaitez.',
     disclaimer: 'Calm Parent n’est pas un dispositif médical. L’appli ne pose pas de diagnostic, ne calcule pas les doses et ne remplace pas un médecin. En cas d’urgence vitale, appelez le 15 ou le 112.',
   },
+  cheatsheet: {
+    title: 'Pense-bête pour le frigo (PDF)',
+    text: 'Seuils de fièvre selon l’âge, quand appeler le 15, le test du verre et une place pour le numéro de votre médecin. Une page A4 à imprimer.',
+    link: 'Télécharger le pense-bête',
+  },
   index: {
     title: 'Guide pour les parents de bébés',
     description: 'Fièvre, repas, couches, sommeil et signes d’alerte chez bébé. Court et clair, d’après les recommandations pédiatriques.',
