@@ -24,6 +24,7 @@ import en from './content/en.mjs'
 import de from './content/de.mjs'
 import fr from './content/fr.mjs'
 import es from './content/es.mjs'
+import { VIDEOS, VIDEO_UI } from './content/videos.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const SITE = 'https://skudev.pl'
@@ -141,8 +142,47 @@ const cheatsheetBox = L => (L.cheatsheet
   : '')
 const CHEATSHEET_ARTICLES = new Set(['fever', 'warning', 'thermometer', 'glass'])
 
-const guideCard = (L, a) =>
-  `<a class="guide-card" href="${L.guidePath}${a.slug}/"><span class="guide-emoji">${a.emoji}</span><h3>${a.title}</h3><p>${a.teaser}</p></a>`
+// Film z YouTube (content/videos.mjs): na stronie najpierw nasza okładka,
+// odtwarzacz youtube-nocookie ładuje się dopiero po kliknięciu.
+const videoFor = (L, a) => VIDEOS[L.lang]?.[a.id]
+const videoBlock = (L, a, v) => `<figure class="video">
+          <a class="video-link" href="https://www.youtube.com/shorts/${v.id}" data-yt="${v.id}" aria-label="${attr(`${VIDEO_UI[L.lang].play}: ${v.title}`)}">
+            <img src="/assets/sr/${L.lang}/video/${a.id}.jpg" alt="" width="360" height="640">
+            <span class="video-play" aria-hidden="true"></span>
+          </a>
+          <figcaption>${VIDEO_UI[L.lang].note(v.sec)}</figcaption>
+        </figure>
+        <script>
+          document.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('a[data-yt]')
+            if (!a || e.ctrlKey || e.metaKey || e.shiftKey || e.button) return
+            e.preventDefault()
+            var f = document.createElement('iframe')
+            f.src = 'https://www.youtube-nocookie.com/embed/' + a.getAttribute('data-yt') + '?autoplay=1&playsinline=1&rel=0'
+            f.title = a.getAttribute('aria-label')
+            f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'
+            f.allowFullscreen = true
+            f.className = 'video-frame'
+            a.replaceWith(f)
+          })
+        </script>`
+const videoLd = (L, a, v) => ({
+  '@type': 'VideoObject',
+  name: v.title,
+  description: a.description,
+  thumbnailUrl: `${SITE}/assets/sr/${L.lang}/video/${a.id}.jpg`,
+  uploadDate: v.date,
+  duration: `PT${v.sec}S`,
+  embedUrl: `https://www.youtube.com/embed/${v.id}`,
+  url: `https://www.youtube.com/shorts/${v.id}`,
+  inLanguage: L.lang,
+})
+
+const guideCard = (L, a) => {
+  const v = videoFor(L, a)
+  const badge = v ? `<span class="guide-video" aria-hidden="true">▶ ${v.sec} s</span>` : ''
+  return `<a class="guide-card" href="${L.guidePath}${a.slug}/"><span class="guide-emoji">${a.emoji}</span>${badge}<h3>${a.title}</h3><p>${a.teaser}</p></a>`
+}
 
 function block(b) {
   if (b.h2) return `<h2>${b.h2}</h2>`
@@ -295,6 +335,8 @@ function articlePage(L, a) {
       },
     ],
   }
+  const video = videoFor(L, a)
+  if (video) jsonLd['@graph'].push(videoLd(L, a, video))
   const related = a.related.map(id => L.articles.find(x => x.id === id))
   return `${head({ L, title: `${a.metaTitle} | ${L.appName}`, description: a.description, url, image: `/assets/sr/${L.lang}/og.jpg`, alts, jsonLd })}
 ${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
@@ -309,6 +351,7 @@ ${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
           <p>${a.answer}</p>
         </div>
 
+        ${video ? videoBlock(L, a, video) : ''}
         ${a.blocks.map(block).join('\n        ')}
         ${CHEATSHEET_ARTICLES.has(a.id) ? cheatsheetBox(L) : ''}
 
