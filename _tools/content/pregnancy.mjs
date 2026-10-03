@@ -890,7 +890,15 @@ const exams = {
 }
 
 const ui = {
-  pl: { tools: 'Narzędzia', pregnancy: 'Ciąża', baby: 'Niemowlę', toolCta: 'Policz termin porodu', faq: 'Najczęstsze pytania' },
+  pl: {
+    tools: 'Narzędzia', pregnancy: 'Ciąża', baby: 'Niemowlę', toolCta: 'Policz termin porodu', faq: 'Najczęstsze pytania',
+    sheet: {
+      title: 'Ściągawka ciążowa na lodówkę (PDF)',
+      text: 'Badania według tygodni, objawy, z którymi jedziesz do szpitala od razu, torba i miejsce na telefony. Jedna strona A4 do wydruku.',
+      link: 'Pobierz ściągawkę ciążową',
+      href: '/assets/sr/pl/sciagawka-ciaza.pdf',
+    },
+  },
   en: { tools: 'Tools', pregnancy: 'Pregnancy', baby: 'Baby', toolCta: 'Calculate your due date', faq: 'Frequently asked questions' },
   de: { tools: 'Rechner', pregnancy: 'Schwangerschaft', baby: 'Baby', toolCta: 'Geburtstermin berechnen', faq: 'Häufige Fragen' },
   fr: { tools: 'Outils', pregnancy: 'Grossesse', baby: 'Bébé', toolCta: 'Calculer la date d’accouchement', faq: 'Questions fréquentes' },

@@ -157,6 +157,10 @@ const cheatsheetBox = L => (L.cheatsheet
   ? `<div class="callout"><div class="callout-title">${L.cheatsheet.title}</div><p>${L.cheatsheet.text} <a href="/assets/sr/${L.lang}/sciagawka.pdf" download>${L.cheatsheet.link}</a></p></div>`
   : '')
 const CHEATSHEET_ARTICLES = new Set(['fever', 'warning', 'thermometer', 'glass'])
+// Ściągawka ciążowa (na razie tylko PL): babylog/scripts/build-pregnancy-cheatsheet.mjs
+const pregSheetBox = L => (L.pui.sheet
+  ? `<div class="callout"><div class="callout-title">${L.pui.sheet.title}</div><p>${L.pui.sheet.text} <a href="${L.pui.sheet.href}" download>${L.pui.sheet.link}</a></p></div>`
+  : '')
 
 // Film z YouTube (content/videos.mjs): na stronie najpierw nasza okładka,
 // odtwarzacz youtube-nocookie ładuje się dopiero po kliknięciu.
@@ -390,6 +394,7 @@ ${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
         ${a.tool ? toolBox(L, a.tool) : ''}
         ${a.blocks.map(b => articleBlock(L, b)).join('\n        ')}
         ${CHEATSHEET_ARTICLES.has(a.id) ? cheatsheetBox(L) : ''}
+        ${a.section === 'pregnancy' ? pregSheetBox(L) : ''}
 
         <div class="app-card">
           <img src="/spokojny-rodzic/icon-192.png" alt="" width="64" height="64">
@@ -447,6 +452,7 @@ ${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
           ${L.tools.map(tool => toolCard(L, tool)).join('\n          ')}
         </div>
         ${sectionGrid(L, 'pregnancy')}
+        ${pregSheetBox(L)}
         ${sectionGrid(L, 'baby')}
         ${cheatsheetBox(L)}
         <p class="disclaimer">${L.index.disclaimer}</p>
@@ -686,6 +692,7 @@ ${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
         </section>
 
         ${tool.blocks.map(block).join('\n        ')}
+        ${pregSheetBox(L)}
 
         <h2>${L.pui.faq}</h2>
         <div class="faq">

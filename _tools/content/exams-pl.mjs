@@ -6,6 +6,7 @@
 // KOPIA babylog/src/data/pregnancyExamsPl.js (źródło dla aplikacji, strony,
 // pliku .ics i ściągawki PDF): zmieniaj w obu miejscach. Treść medyczna: przed zmianą sprawdź z położną.
 //
+// label/short: skrót do ściągawki PDF (scripts/build-pregnancy-cheatsheet.mjs).
 // startWeek/endWeek: pełne tygodnie (24 = 24+0). Zgodnie z praktyką: badanie
 // "od 11. do 14. tygodnia" zaczyna się od 11+0 (np. USG 1. trymestru),
 // "od 24. do 28." od 24+0 (test obciążenia glukozą).
@@ -15,6 +16,8 @@ export const EXAMS_SOURCE = 'Standard organizacyjny opieki okołoporodowej, teks
 export const EXAM_PERIODS = [
   {
     id: 'w0',
+    label: 'Do 10. tyg.',
+    short: 'grupa krwi i Rh, przeciwciała, morfologia i ferrytyna, mocz, cytologia, glukoza na czczo, VDRL, HIV, HCV, toksoplazmoza, TSH, HBs, stomatolog',
     startWeek: 0, endWeek: 10,
     when: 'Do 10. tygodnia albo na pierwszej wizycie',
     tests: [
@@ -34,6 +37,8 @@ export const EXAM_PERIODS = [
   },
   {
     id: 'w11',
+    label: '11. do 14. tyg.',
+    short: 'USG 1. trymestru, ocena nastroju',
     startWeek: 11, endWeek: 14,
     when: 'Od 11. do 14. tygodnia',
     tests: [
@@ -43,18 +48,24 @@ export const EXAM_PERIODS = [
   },
   {
     id: 'w15',
+    label: '15. do 20. tyg.',
+    short: 'morfologia, mocz',
     startWeek: 15, endWeek: 20,
     when: 'Od 15. do 20. tygodnia',
     tests: ['Morfologia krwi', 'Badanie ogólne moczu'],
   },
   {
     id: 'w18',
+    label: '18. do 22. tyg.',
+    short: 'USG połówkowe',
     startWeek: 18, endWeek: 22,
     when: 'Od 18. do 22. tygodnia',
     tests: ['USG połówkowe (według zaleceń PTGiP)'],
   },
   {
     id: 'w21',
+    label: '21. do 26. tyg.',
+    short: 'mocz, toksoplazmoza (gdy wcześniej ujemna)',
     startWeek: 21, endWeek: 26,
     when: 'Od 21. do 26. tygodnia',
     tests: [
@@ -64,6 +75,8 @@ export const EXAM_PERIODS = [
   },
   {
     id: 'w24',
+    label: '24. do 28. tyg.',
+    short: 'test obciążenia glukozą 75 g, przeciwciała anty-D przy Rh ujemnym',
     startWeek: 24, endWeek: 28,
     when: 'Od 24. do 28. tygodnia',
     tests: [
@@ -73,6 +86,8 @@ export const EXAM_PERIODS = [
   },
   {
     id: 'w27',
+    label: '27. do 32. tyg.',
+    short: 'morfologia, mocz, USG 3. trymestru, immunoglobulina anty-D od 28. do 30. tyg., jeśli wskazana',
     startWeek: 27, endWeek: 32,
     when: 'Od 27. do 32. tygodnia',
     tests: [
@@ -84,6 +99,8 @@ export const EXAM_PERIODS = [
   },
   {
     id: 'w33',
+    label: '33. do 37. tyg.',
+    short: 'morfologia, mocz, HBs, HIV, posiew GBS (35. do 37. tyg.), konsultacja anestezjologiczna',
     startWeek: 33, endWeek: 37,
     when: 'Od 33. do 37. tygodnia',
     tests: [
@@ -99,6 +116,8 @@ export const EXAM_PERIODS = [
   },
   {
     id: 'w38',
+    label: '38. do 39. tyg.',
+    short: 'morfologia, mocz',
     startWeek: 38, endWeek: 39,
     when: 'Od 38. do 39. tygodnia',
     tests: [
@@ -109,6 +128,8 @@ export const EXAM_PERIODS = [
   },
   {
     id: 'w40',
+    label: 'Po 40. tyg.',
+    short: 'KTG i USG co 7 dni, ustalenie przyjęcia do szpitala',
     startWeek: 40, endWeek: 42,
     when: 'Zaraz po 40. tygodniu',
     tests: [
