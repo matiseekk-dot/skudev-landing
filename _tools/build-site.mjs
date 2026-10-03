@@ -25,6 +25,7 @@ import de from './content/de.mjs'
 import fr from './content/fr.mjs'
 import es from './content/es.mjs'
 import { VIDEOS, VIDEO_UI } from './content/videos.mjs'
+import PREGNANCY from './content/pregnancy.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const SITE = 'https://skudev.pl'
@@ -34,6 +35,13 @@ const articleDate = (L, a) => (a.published
   ? new Intl.DateTimeFormat(L.lang, { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${a.published}T12:00:00`))
   : L.ui.date)
 const LANGS = [pl, en, de, fr, es]
+// Ciąża (paź 2026): narzędzia i artykuły ciążowe przed artykułami o niemowlęciu.
+for (const L of LANGS) {
+  const P = PREGNANCY[L.lang]
+  L.pui = P.ui
+  L.tools = P.tools
+  L.articles = [...P.articles, ...L.articles.filter(a => !P.articles.some(x => x.id === a.id))]
+}
 const X_DEFAULT = 'en'
 const SITEMAP = 'sitemap-spokojny-rodzic.xml'
 
@@ -54,6 +62,7 @@ const plain = s => String(s).replace(/<[^>]+>/g, '')
 const landingUrl = L => L.appPath
 const indexUrl = L => L.guidePath
 const articleUrl = (L, id) => `${L.guidePath}${L.articles.find(a => a.id === id).slug}/`
+const toolUrl = (L, id) => `${L.guidePath}${L.tools.find(t => t.id === id).slug}/`
 
 function alternates(urlFor) {
   return LANGS.map(L => ({ lang: L.lang, href: SITE + urlFor(L) }))
@@ -184,6 +193,24 @@ const guideCard = (L, a) => {
   return `<a class="guide-card" href="${L.guidePath}${a.slug}/"><span class="guide-emoji">${a.emoji}</span>${badge}<h3>${a.title}</h3><p>${a.teaser}</p></a>`
 }
 
+const toolCard = (L, tool) =>
+  `<a class="guide-card tool-card" href="${toolUrl(L, tool.id)}"><span class="guide-emoji">${tool.emoji}</span><span class="guide-video" aria-hidden="true">${L.pui.tools}</span><h3>${tool.title}</h3><p>${tool.teaser}</p></a>`
+
+// Odnośnik z artykułu do narzędzia (np. torba do szpitala → kalkulator terminu).
+const toolBox = (L, id) => {
+  const tool = L.tools.find(t => t.id === id)
+  return tool ? `<a class="tool-box" href="${toolUrl(L, id)}"><span class="tool-box-emoji">${tool.emoji}</span><span>${L.pui.toolCta}</span><span aria-hidden="true">›</span></a>` : ''
+}
+
+// Sekcje poradnika: ciąża i niemowlę osobno.
+const sectionGrid = (L, section) => {
+  const list = L.articles.filter(a => (a.section || 'baby') === section)
+  return list.length ? `<h2 class="guide-section-title">${L.pui[section]}</h2>
+        <div class="guide-grid">
+          ${list.map(a => guideCard(L, a)).join('\n          ')}
+        </div>` : ''
+}
+
 function block(b) {
   if (b.h2) return `<h2>${b.h2}</h2>`
   if (b.p) return `<p>${b.p}</p>`
@@ -289,6 +316,7 @@ ${header(L, `skudev · <em>${L.appName.toLowerCase()}</em>`, alts)}
         <div class="section-label">${T.guidesLabel}</div>
         <h2 class="section-title">${L.index.h1}</h2>
         <div class="guide-grid">
+          ${L.tools.map(tool => toolCard(L, tool)).join('\n          ')}
           ${L.articles.map(a => guideCard(L, a)).join('\n          ')}
         </div>
       </div>
@@ -352,6 +380,7 @@ ${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
         </div>
 
         ${video ? videoBlock(L, a, video) : ''}
+        ${a.tool ? toolBox(L, a.tool) : ''}
         ${a.blocks.map(block).join('\n        ')}
         ${CHEATSHEET_ARTICLES.has(a.id) ? cheatsheetBox(L) : ''}
 
@@ -390,7 +419,10 @@ function indexPage(L) {
     name: L.index.title,
     url: SITE + url,
     inLanguage: L.lang,
-    hasPart: L.articles.map(a => ({ '@type': 'Article', headline: a.title, url: SITE + articleUrl(L, a.id) })),
+    hasPart: [
+      ...L.tools.map(tool => ({ '@type': 'WebApplication', name: tool.title, url: SITE + toolUrl(L, tool.id) })),
+      ...L.articles.map(a => ({ '@type': 'Article', headline: a.title, url: SITE + articleUrl(L, a.id) })),
+    ],
   }
   return `${head({ L, title: `${L.index.title} | ${L.appName}`, description: L.index.description, url, image: `/assets/sr/${L.lang}/og.jpg`, alts, jsonLd, type: 'website' })}
 ${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
@@ -403,13 +435,184 @@ ${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
     </section>
     <section class="guides" style="border-top:none;padding-top:0">
       <div class="container">
+        <h2 class="guide-section-title">${L.pui.tools}</h2>
         <div class="guide-grid">
-          ${L.articles.map(a => guideCard(L, a)).join('\n          ')}
+          ${L.tools.map(tool => toolCard(L, tool)).join('\n          ')}
         </div>
+        ${sectionGrid(L, 'pregnancy')}
+        ${sectionGrid(L, 'baby')}
         ${cheatsheetBox(L)}
         <p class="disclaimer">${L.index.disclaimer}</p>
       </div>
     </section>
+${footer(L)}`
+}
+
+// ─── Kalkulator terminu porodu ──────────────────────────────────────────────
+// Liczy w przeglądarce, daty nigdzie nie wychodzą. Teksty z content/pregnancy.mjs
+// lecą w <script type="application/json">, logika w DUE_DATE_JS.
+
+const jsonForScript = obj => JSON.stringify(obj).replace(/</g, '\\u003c')
+
+const DUE_DATE_JS = String.raw`(function () {
+  var C = JSON.parse(document.getElementById('calc-data').textContent)
+  var $ = function (id) { return document.getElementById(id) }
+  var DAY = 864e5
+  function pad(n) { return (n < 10 ? '0' : '') + n }
+  function ymd(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) }
+  function noon(s) { var d = new Date(s + 'T12:00:00'); return isNaN(d.getTime()) ? null : d }
+  function add(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x }
+  function diff(a, b) { return Math.round((noon(ymd(b)) - noon(ymd(a))) / DAY) }
+  function tpl(s, v) { return s.replace(/\{(\w+)\}/g, function (m, k) { return v[k] }) }
+  function plural(arr, n) { return tpl(n === 1 ? arr[0] : arr[1], { n: n }) }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] }) }
+  var fmt = new Intl.DateTimeFormat(C.lang, { day: 'numeric', month: 'long', year: 'numeric' })
+  var today = noon(ymd(new Date()))
+  var method = $('calc-method'), date = $('calc-date'), res = $('calc-res'), err = $('calc-err')
+  function sync() {
+    var m = method.value
+    $('calc-date-label').textContent = C.form.dateLabels[m]
+    $('calc-cycle-row').hidden = m !== 'lmp'
+    date.max = ymd(m === 'due' ? add(today, C.termDays) : today)
+    date.min = ymd(m === 'due' ? add(today, -28) : add(today, -44 * 7))
+  }
+  method.addEventListener('change', function () { sync(); res.hidden = true; err.textContent = '' })
+  sync()
+  $('calc-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    err.textContent = ''
+    var m = method.value, d = noon(date.value)
+    if (!d) { err.textContent = C.errors.empty; res.hidden = true; return }
+    var cycle = Math.min(45, Math.max(21, parseInt($('calc-cycle').value, 10) || 28))
+    var lmp = m === 'lmp' ? add(d, cycle - 28) : m === 'conception' ? add(d, -14) : add(d, -C.termDays)
+    var elapsed = diff(lmp, today)
+    if (elapsed < 0 || elapsed > 44 * 7) { err.textContent = C.errors.range; res.hidden = true; return }
+    var due = add(lmp, C.termDays)
+    var w = Math.floor(elapsed / 7), v = { week: w + 1, w: w, d: elapsed % 7 }
+    var left = diff(today, due)
+    var tri = w < 14 ? 1 : w < 28 ? 2 : 3
+    $('r-due').textContent = fmt.format(due)
+    $('r-week').textContent = tpl(C.fmt.weekBig, v)
+    $('r-week-small').textContent = tpl(C.fmt.weekSmall, v)
+    $('r-tri').textContent = Array.isArray(C.fmt.trimester) ? C.fmt.trimester[tri - 1] : tpl(C.fmt.trimester, { n: tri })
+    $('r-left').textContent = left > 0 ? plural(C.fmt.days, left) : left === 0 ? C.fmt.today : plural(C.fmt.overdue, -left)
+    var at = { t1: 13 * 7 + 6, t2: 27 * 7 + 6, term: 37 * 7, due: C.termDays, post: 42 * 7 }
+    $('r-ms').innerHTML = C.milestones.map(function (k) {
+      var dt = add(lmp, at[k])
+      return '<li' + (diff(dt, today) > 0 ? ' class="past"' : '') + '><span>' + esc(C.result.ms[k]) + '</span><strong>' + esc(fmt.format(dt)) + '</strong></li>'
+    }).join('')
+    res.hidden = false
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+})()`
+
+function dueDatePage(L, tool) {
+  const url = toolUrl(L, tool.id)
+  const alts = alternates(X => toolUrl(X, tool.id))
+  const F = tool.form
+  const R = tool.result
+  const milestones = tool.milestones || ['t1', 't2', 'term', 'due', 'post']
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebApplication',
+        name: tool.title,
+        description: tool.description,
+        url: SITE + url,
+        inLanguage: L.lang,
+        applicationCategory: 'HealthApplication',
+        operatingSystem: 'Any',
+        offers: { '@type': 'Offer', price: '0', priceCurrency: L.currency },
+      },
+      {
+        '@type': 'FAQPage',
+        mainEntity: tool.faq.map(x => ({ '@type': 'Question', name: x.q, acceptedAnswer: { '@type': 'Answer', text: x.a } })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: L.ui.guideName, item: SITE + L.guidePath },
+          { '@type': 'ListItem', position: 2, name: tool.title, item: SITE + url },
+        ],
+      },
+    ],
+  }
+  const data = { lang: L.lang, termDays: tool.termDays, form: F, result: R, fmt: tool.fmt, errors: tool.errors, milestones }
+  const related = tool.related.map(id => L.articles.find(x => x.id === id))
+  return `${head({ L, title: `${tool.metaTitle} | ${L.appName}`, description: tool.description, url, image: `/assets/sr/${L.lang}/og.jpg`, alts, jsonLd, type: 'website' })}
+${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
+    <article class="article">
+      <div class="container">
+        <div class="crumbs"><a href="${L.guidePath}">${L.ui.guideName}</a> / ${tool.title}</div>
+        <h1>${tool.title}</h1>
+        <div class="answer">
+          <div class="answer-label">${L.ui.answer}</div>
+          <p>${tool.answer}</p>
+        </div>
+
+        <form class="calc" id="calc-form" novalidate>
+          <div class="calc-row">
+            <label for="calc-method">${F.method}</label>
+            <select id="calc-method">
+              ${['lmp', 'conception', 'due'].map(m => `<option value="${m}">${F.methods[m]}</option>`).join('')}
+            </select>
+          </div>
+          <div class="calc-row">
+            <label for="calc-date" id="calc-date-label">${F.dateLabels.lmp}</label>
+            <input type="date" id="calc-date" required>
+          </div>
+          <div class="calc-row" id="calc-cycle-row">
+            <label for="calc-cycle">${F.cycle}</label>
+            <input type="number" id="calc-cycle" min="21" max="45" value="28" inputmode="numeric">
+            <p class="calc-hint">${F.cycleHint}</p>
+          </div>
+          <button type="submit" class="btn btn-play calc-btn">${F.button}</button>
+          <p class="calc-error" id="calc-err" role="alert"></p>
+        </form>
+
+        <section class="calc-result" id="calc-res" hidden aria-live="polite">
+          <div class="calc-due"><span>${R.due}</span><strong id="r-due"></strong></div>
+          <div class="calc-stats">
+            <div><strong id="r-week"></strong><span id="r-week-small"></span></div>
+            <div><strong id="r-tri"></strong><span>${R.trimester}</span></div>
+            <div><strong id="r-left"></strong><span>${R.left}</span></div>
+          </div>
+          <h2>${R.milestones}</h2>
+          <ul class="calc-ms" id="r-ms"></ul>
+          <div class="app-card">
+            <img src="/spokojny-rodzic/icon-192.png" alt="" width="64" height="64">
+            <div>
+              <h3>${R.saveTitle}</h3>
+              <p>${R.saveText}</p>
+              <a class="btn btn-play" href="${play('narzedzie', `${L.lang}-termin`)}" rel="noopener">${L.ui.cta}</a>
+            </div>
+          </div>
+        </section>
+
+        ${tool.blocks.map(block).join('\n        ')}
+
+        <h2>${L.pui.faq}</h2>
+        <div class="faq">
+          ${tool.faq.map(x => `<details><summary>${x.q}</summary><p>${x.a}</p></details>`).join('\n          ')}
+        </div>
+
+        <div class="sources">
+          <h2>${L.ui.sources}</h2>
+          <ul>${tool.sources.map(src => `<li>${src}</li>`).join('')}</ul>
+          <p style="margin-top:14px">${L.ui.articleDisclaimer}</p>
+        </div>
+
+        <div class="related">
+          <h2>${L.ui.related}</h2>
+          <div class="guide-grid">
+            ${related.map(r => guideCard(L, r)).join('\n            ')}
+          </div>
+        </div>
+      </div>
+    </article>
+    <script type="application/json" id="calc-data">${jsonForScript(data)}</script>
+    <script>${DUE_DATE_JS}</script>
 ${footer(L)}`
 }
 
@@ -419,6 +622,7 @@ function sitemap() {
   const groups = [
     alternates(landingUrl),
     alternates(indexUrl),
+    ...pl.tools.map(tool => alternates(X => toolUrl(X, tool.id))),
     ...pl.articles.map(a => alternates(X => articleUrl(X, a.id))),
   ]
   const entries = groups.flatMap(alts => alts.map(a => `  <url>
@@ -450,6 +654,7 @@ for (const L of LANGS) {
   write(L, L.appPath, landingPage(L))
   write(L, L.guidePath, indexPage(L))
   for (const a of L.articles) write(L, `${L.guidePath}${a.slug}/`, articlePage(L, a))
+  for (const tool of L.tools) write(L, `${L.guidePath}${tool.slug}/`, dueDatePage(L, tool))
 }
 fs.writeFileSync(path.join(ROOT, SITEMAP), sitemap())
 
@@ -457,4 +662,4 @@ const robotsFile = path.join(ROOT, 'robots.txt')
 const robots = fs.readFileSync(robotsFile, 'utf8')
 if (!robots.includes(SITEMAP)) fs.writeFileSync(robotsFile, robots.trimEnd() + `\nSitemap: ${SITE}/${SITEMAP}\n`)
 
-console.log(`${LANGS.length} języków: strona aplikacji, poradnik i ${pl.articles.length} artykułów w każdym; ${SITEMAP}`)
+console.log(`${LANGS.length} języków: strona aplikacji, poradnik, ${pl.tools.length} narzędzie i ${pl.articles.length} artykułów w każdym; ${SITEMAP}`)

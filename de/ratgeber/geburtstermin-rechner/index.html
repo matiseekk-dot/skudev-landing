@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geburtstermin berechnen: in welcher SSW bin ich? | Calm Parent</title>
+  <meta name="description" content="Berechnen Sie den Geburtstermin aus der letzten Periode, dem Empfängnisdatum oder dem Termin aus dem Ultraschall. Mit SSW, Trimester und Tagen bis zur Geburt.">
+  <link rel="canonical" href="https://skudev.pl/de/ratgeber/geburtstermin-rechner/">
+  <link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kalkulator-terminu-porodu/">
+  <link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/due-date-calculator/">
+  <link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/geburtstermin-rechner/">
+  <link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/calcul-date-accouchement/">
+  <link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/calculadora-fecha-de-parto/">
+  <link rel="alternate" hreflang="x-default" href="https://skudev.pl/en/guide/due-date-calculator/">
+  <meta property="og:title" content="Geburtstermin berechnen: in welcher SSW bin ich? | Calm Parent">
+  <meta property="og:description" content="Berechnen Sie den Geburtstermin aus der letzten Periode, dem Empfängnisdatum oder dem Termin aus dem Ultraschall. Mit SSW, Trimester und Tagen bis zur Geburt.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skudev.pl/de/ratgeber/geburtstermin-rechner/">
+  <meta property="og:image" content="https://skudev.pl/assets/sr/de/og.jpg">
+  <meta property="og:locale" content="de_DE">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/spokojny-rodzic/icon-192.png">
+  <link rel="stylesheet" href="/assets/sr.css?v=03ec7940">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Geburtstermin-Rechner und Schwangerschaftswoche","description":"Berechnen Sie den Geburtstermin aus der letzten Periode, dem Empfängnisdatum oder dem Termin aus dem Ultraschall. Mit SSW, Trimester und Tagen bis zur Geburt.","url":"https://skudev.pl/de/ratgeber/geburtstermin-rechner/","inLanguage":"de","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Ab wann zählt die Schwangerschaftswoche?","acceptedAnswer":{"@type":"Answer","text":"Ab dem ersten Tag der letzten Periode. Deshalb sind Sie bei der Empfängnis bereits etwa in der 3. SSW."}},{"@type":"Question","name":"Was bedeutet 24+3?","acceptedAnswer":{"@type":"Answer","text":"24 vollendete Wochen und 3 Tage. Sie sind dann in der 25. SSW."}},{"@type":"Question","name":"Wie lange dauern die Trimester?","acceptedAnswer":{"@type":"Answer","text":"Das erste Trimester bis zum Ende der 13. Woche (13+6), das zweite bis zum Ende der 27. Woche (27+6), das dritte ab der 28. Woche bis zur Geburt."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Ratgeber","item":"https://skudev.pl/de/ratgeber/"},{"@type":"ListItem","position":2,"name":"Geburtstermin-Rechner und Schwangerschaftswoche","item":"https://skudev.pl/de/ratgeber/geburtstermin-rechner/"}]}]}</script>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="/de/" class="logo">
+          <div class="logo-mark">S</div>
+          <div class="logo-text">skudev · <em>ratgeber</em></div>
+        </a>
+        <div class="nav-links">
+          <a href="/de/ratgeber/" class="nav-back">ratgeber</a>
+          <a href="/de/" class="nav-back">app</a>
+          <div class="lang-switch"><a href="/poradnik/kalkulator-terminu-porodu/" hreflang="pl" lang="pl">PL</a><a href="/en/guide/due-date-calculator/" hreflang="en" lang="en">EN</a><span class="lang-current" aria-current="true">DE</span><a href="/fr/guide/calcul-date-accouchement/" hreflang="fr" lang="fr">FR</a><a href="/es/guia/calculadora-fecha-de-parto/" hreflang="es" lang="es">ES</a></div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <article class="article">
+      <div class="container">
+        <div class="crumbs"><a href="/de/ratgeber/">Ratgeber</a> / Geburtstermin-Rechner und Schwangerschaftswoche</div>
+        <h1>Geburtstermin-Rechner und Schwangerschaftswoche</h1>
+        <div class="answer">
+          <div class="answer-label">Kurz gesagt</div>
+          <p>Der Geburtstermin liegt 280 Tage (40 Wochen) nach dem ersten Tag der letzten Periode. Geben Sie ein Datum ein, und der Rechner zeigt den Termin, die aktuelle Schwangerschaftswoche, das Trimester und wichtige Daten.</p>
+        </div>
+
+        <form class="calc" id="calc-form" novalidate>
+          <div class="calc-row">
+            <label for="calc-method">Berechnen nach</label>
+            <select id="calc-method">
+              <option value="lmp">letzter Periode</option><option value="conception">Empfängnisdatum</option><option value="due">Termin aus dem Ultraschall</option>
+            </select>
+          </div>
+          <div class="calc-row">
+            <label for="calc-date" id="calc-date-label">Erster Tag der letzten Periode</label>
+            <input type="date" id="calc-date" required>
+          </div>
+          <div class="calc-row" id="calc-cycle-row">
+            <label for="calc-cycle">Zykluslänge (Tage)</label>
+            <input type="number" id="calc-cycle" min="21" max="45" value="28" inputmode="numeric">
+            <p class="calc-hint">Meist 28. Bei einem längeren Zyklus verschiebt sich der Termin um die zusätzlichen Tage nach hinten.</p>
+          </div>
+          <button type="submit" class="btn btn-play calc-btn">Termin berechnen</button>
+          <p class="calc-error" id="calc-err" role="alert"></p>
+        </form>
+
+        <section class="calc-result" id="calc-res" hidden aria-live="polite">
+          <div class="calc-due"><span>Geburtstermin</span><strong id="r-due"></strong></div>
+          <div class="calc-stats">
+            <div><strong id="r-week"></strong><span id="r-week-small"></span></div>
+            <div><strong id="r-tri"></strong><span>Trimester</span></div>
+            <div><strong id="r-left"></strong><span>Bis zum Termin</span></div>
+          </div>
+          <h2>Wichtige Daten</h2>
+          <ul class="calc-ms" id="r-ms"></ul>
+          <div class="app-card">
+            <img src="/spokojny-rodzic/icon-192.png" alt="" width="64" height="64">
+            <div>
+              <h3>Termin in der App speichern</h3>
+              <p>Calm Parent zählt die Schwangerschaftswoche jeden Tag und hat einen Wehen-Timer. Nach der Geburt wird daraus mit einem Tipp ein Baby-Tagebuch.</p>
+              <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=pl.skudev.spokojnyrodzic&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dnarzedzie%26utm_campaign%3Dde-termin" rel="noopener">Jetzt bei Google Play</a>
+            </div>
+          </div>
+        </section>
+
+        <h2>So wird der Geburtstermin berechnet</h2>
+        <p>Ärztinnen und Ärzte zählen die Schwangerschaft ab dem ersten Tag der letzten Periode, nicht ab der Empfängnis. Der Termin ist dieser Tag plus 280 Tage, also 40 Wochen (Naegele-Regel). Ist der Zyklus länger oder kürzer als 28 Tage, verschiebt sich der Termin um die Differenz.</p>
+        <h2>Der Termin aus dem Ultraschall ist genauer</h2>
+        <p>Am genauesten bestimmt ein Ultraschall im ersten Trimester den Termin. Steht Ihr Termin laut Ultraschall im Mutterpass, wählen Sie „Termin aus dem Ultraschall“: Der Rechner bestimmt daraus die Schwangerschaftswoche.</p>
+        <h2>Nur wenige Kinder kommen genau am Termin</h2>
+        <p>Der Termin ist eine Schätzung. Ab 37 Wochen gilt ein Kind als reif, eine Geburt zwischen vollendeter 37. und 42. Woche ist termingerecht. Packen Sie die Kliniktasche deshalb schon um die 36. Woche.</p>
+
+        <h2>Häufige Fragen</h2>
+        <div class="faq">
+          <details><summary>Ab wann zählt die Schwangerschaftswoche?</summary><p>Ab dem ersten Tag der letzten Periode. Deshalb sind Sie bei der Empfängnis bereits etwa in der 3. SSW.</p></details>
+          <details><summary>Was bedeutet 24+3?</summary><p>24 vollendete Wochen und 3 Tage. Sie sind dann in der 25. SSW.</p></details>
+          <details><summary>Wie lange dauern die Trimester?</summary><p>Das erste Trimester bis zum Ende der 13. Woche (13+6), das zweite bis zum Ende der 27. Woche (27+6), das dritte ab der 28. Woche bis zur Geburt.</p></details>
+        </div>
+
+        <div class="sources">
+          <h2>Quellen</h2>
+          <ul><li>ACOG Committee Opinion No. 700: Methods for Estimating the Due Date (2017)</li><li>WHO: Preterm birth, Definitionen von Früh- und Termingeburt (2023)</li></ul>
+          <p style="margin-top:14px">Dieser Artikel dient nur der Information und ersetzt keine ärztliche Beratung. Wenn Sie etwas beunruhigt, wenden Sie sich an einen Arzt. Im Notfall rufen Sie die 112 an.</p>
+        </div>
+
+        <div class="related">
+          <h2>Weiterlesen</h2>
+          <div class="guide-grid">
+            <a class="guide-card" href="/de/ratgeber/kliniktasche-checkliste/"><span class="guide-emoji">🧳</span><h3>Kliniktasche für die Geburt: Checkliste</h3><p>Dokumente, Sachen für Mama und Baby.</p></a>
+            <a class="guide-card" href="/de/ratgeber/wann-in-die-klinik-zur-geburt/"><span class="guide-emoji">🏥</span><h3>Wann in die Klinik zur Geburt?</h3><p>Wehen, Blasensprung und Warnzeichen.</p></a>
+          </div>
+        </div>
+      </div>
+    </article>
+    <script type="application/json" id="calc-data">{"lang":"de","termDays":280,"form":{"method":"Berechnen nach","methods":{"lmp":"letzter Periode","conception":"Empfängnisdatum","due":"Termin aus dem Ultraschall"},"dateLabels":{"lmp":"Erster Tag der letzten Periode","conception":"Empfängnisdatum","due":"Geburtstermin laut Ultraschall"},"cycle":"Zykluslänge (Tage)","cycleHint":"Meist 28. Bei einem längeren Zyklus verschiebt sich der Termin um die zusätzlichen Tage nach hinten.","button":"Termin berechnen"},"result":{"due":"Geburtstermin","week":"Schwangerschaftswoche","trimester":"Trimester","left":"Bis zum Termin","milestones":"Wichtige Daten","ms":{"t1":"Ende 1. Trimester (13+6)","t2":"Ende 2. Trimester (27+6)","term":"Reifes Kind ab (37+0)","due":"Geburtstermin (40+0)","post":"42 vollendete Wochen (42+0)"},"saveTitle":"Termin in der App speichern","saveText":"Calm Parent zählt die Schwangerschaftswoche jeden Tag und hat einen Wehen-Timer. Nach der Geburt wird daraus mit einem Tipp ein Baby-Tagebuch."},"fmt":{"weekBig":"{week}. SSW","weekSmall":"{w}+{d}","trimester":"{n}. Trimester","days":["{n} Tag","{n} Tage"],"overdue":["{n} Tag nach dem Termin","{n} Tage nach dem Termin"],"today":"Heute ist der Geburtstermin"},"errors":{"empty":"Bitte ein Datum auswählen.","range":"Dieses Datum passt nicht zu einer laufenden Schwangerschaft. Bitte prüfen."},"milestones":["t1","t2","term","due","post"]}</script>
+    <script>(function () {
+  var C = JSON.parse(document.getElementById('calc-data').textContent)
+  var $ = function (id) { return document.getElementById(id) }
+  var DAY = 864e5
+  function pad(n) { return (n < 10 ? '0' : '') + n }
+  function ymd(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) }
+  function noon(s) { var d = new Date(s + 'T12:00:00'); return isNaN(d.getTime()) ? null : d }
+  function add(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x }
+  function diff(a, b) { return Math.round((noon(ymd(b)) - noon(ymd(a))) / DAY) }
+  function tpl(s, v) { return s.replace(/\{(\w+)\}/g, function (m, k) { return v[k] }) }
+  function plural(arr, n) { return tpl(n === 1 ? arr[0] : arr[1], { n: n }) }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] }) }
+  var fmt = new Intl.DateTimeFormat(C.lang, { day: 'numeric', month: 'long', year: 'numeric' })
+  var today = noon(ymd(new Date()))
+  var method = $('calc-method'), date = $('calc-date'), res = $('calc-res'), err = $('calc-err')
+  function sync() {
+    var m = method.value
+    $('calc-date-label').textContent = C.form.dateLabels[m]
+    $('calc-cycle-row').hidden = m !== 'lmp'
+    date.max = ymd(m === 'due' ? add(today, C.termDays) : today)
+    date.min = ymd(m === 'due' ? add(today, -28) : add(today, -44 * 7))
+  }
+  method.addEventListener('change', function () { sync(); res.hidden = true; err.textContent = '' })
+  sync()
+  $('calc-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    err.textContent = ''
+    var m = method.value, d = noon(date.value)
+    if (!d) { err.textContent = C.errors.empty; res.hidden = true; return }
+    var cycle = Math.min(45, Math.max(21, parseInt($('calc-cycle').value, 10) || 28))
+    var lmp = m === 'lmp' ? add(d, cycle - 28) : m === 'conception' ? add(d, -14) : add(d, -C.termDays)
+    var elapsed = diff(lmp, today)
+    if (elapsed < 0 || elapsed > 44 * 7) { err.textContent = C.errors.range; res.hidden = true; return }
+    var due = add(lmp, C.termDays)
+    var w = Math.floor(elapsed / 7), v = { week: w + 1, w: w, d: elapsed % 7 }
+    var left = diff(today, due)
+    var tri = w < 14 ? 1 : w < 28 ? 2 : 3
+    $('r-due').textContent = fmt.format(due)
+    $('r-week').textContent = tpl(C.fmt.weekBig, v)
+    $('r-week-small').textContent = tpl(C.fmt.weekSmall, v)
+    $('r-tri').textContent = Array.isArray(C.fmt.trimester) ? C.fmt.trimester[tri - 1] : tpl(C.fmt.trimester, { n: tri })
+    $('r-left').textContent = left > 0 ? plural(C.fmt.days, left) : left === 0 ? C.fmt.today : plural(C.fmt.overdue, -left)
+    var at = { t1: 13 * 7 + 6, t2: 27 * 7 + 6, term: 37 * 7, due: C.termDays, post: 42 * 7 }
+    $('r-ms').innerHTML = C.milestones.map(function (k) {
+      var dt = add(lmp, at[k])
+      return '<li' + (diff(dt, today) > 0 ? ' class="past"' : '') + '><span>' + esc(C.result.ms[k]) + '</span><strong>' + esc(fmt.format(dt)) + '</strong></li>'
+    }).join('')
+    res.hidden = false
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+})()</script>
+
+  </main>
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>Calm Parent · ein Projekt von <a href="/" style="color:var(--accent-dim);text-decoration:none;">skudev</a> · 2026</div>
+        <ul class="footer-links">
+          <li><a href="/de/ratgeber/">ratgeber</a></li>
+          <li><a href="mailto:skudev6@gmail.com">email</a></li>
+          <li><a href="https://matiseekk-dot.github.io/babylog/privacy.html" target="_blank" rel="noopener">datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

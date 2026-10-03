@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator terminu porodu: który to tydzień ciąży? | Spokojny Rodzic</title>
+  <meta name="description" content="Policz termin porodu z daty ostatniej miesiączki, daty poczęcia albo terminu z USG. Zobaczysz tydzień ciąży, trymestr i ile dni zostało do porodu.">
+  <link rel="canonical" href="https://skudev.pl/poradnik/kalkulator-terminu-porodu/">
+  <link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kalkulator-terminu-porodu/">
+  <link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/due-date-calculator/">
+  <link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/geburtstermin-rechner/">
+  <link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/calcul-date-accouchement/">
+  <link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/calculadora-fecha-de-parto/">
+  <link rel="alternate" hreflang="x-default" href="https://skudev.pl/en/guide/due-date-calculator/">
+  <meta property="og:title" content="Kalkulator terminu porodu: który to tydzień ciąży? | Spokojny Rodzic">
+  <meta property="og:description" content="Policz termin porodu z daty ostatniej miesiączki, daty poczęcia albo terminu z USG. Zobaczysz tydzień ciąży, trymestr i ile dni zostało do porodu.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skudev.pl/poradnik/kalkulator-terminu-porodu/">
+  <meta property="og:image" content="https://skudev.pl/assets/sr/pl/og.jpg">
+  <meta property="og:locale" content="pl_PL">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/spokojny-rodzic/icon-192.png">
+  <link rel="stylesheet" href="/assets/sr.css?v=03ec7940">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Kalkulator terminu porodu i tygodnia ciąży","description":"Policz termin porodu z daty ostatniej miesiączki, daty poczęcia albo terminu z USG. Zobaczysz tydzień ciąży, trymestr i ile dni zostało do porodu.","url":"https://skudev.pl/poradnik/kalkulator-terminu-porodu/","inLanguage":"pl","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"PLN"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Od kiedy liczy się tydzień ciąży?","acceptedAnswer":{"@type":"Answer","text":"Od pierwszego dnia ostatniej miesiączki. Dlatego w chwili poczęcia jesteś już mniej więcej w 3. tygodniu ciąży."}},{"@type":"Question","name":"Co znaczy zapis 24+3?","acceptedAnswer":{"@type":"Answer","text":"24 pełne tygodnie i 3 dni. Trwa wtedy 25. tydzień ciąży."}},{"@type":"Question","name":"Ile trwają trymestry?","acceptedAnswer":{"@type":"Answer","text":"Pierwszy do końca 13. tygodnia (13+6), drugi do końca 27. tygodnia (27+6), trzeci od 28. tygodnia do porodu."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Poradnik","item":"https://skudev.pl/poradnik/"},{"@type":"ListItem","position":2,"name":"Kalkulator terminu porodu i tygodnia ciąży","item":"https://skudev.pl/poradnik/kalkulator-terminu-porodu/"}]}]}</script>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="logo">
+          <div class="logo-mark">S</div>
+          <div class="logo-text">skudev · <em>poradnik</em></div>
+        </a>
+        <div class="nav-links">
+          <a href="/poradnik/" class="nav-back">poradnik</a>
+          <a href="/spokojny-rodzic/" class="nav-back">aplikacja</a>
+          <div class="lang-switch"><span class="lang-current" aria-current="true">PL</span><a href="/en/guide/due-date-calculator/" hreflang="en" lang="en">EN</a><a href="/de/ratgeber/geburtstermin-rechner/" hreflang="de" lang="de">DE</a><a href="/fr/guide/calcul-date-accouchement/" hreflang="fr" lang="fr">FR</a><a href="/es/guia/calculadora-fecha-de-parto/" hreflang="es" lang="es">ES</a></div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <article class="article">
+      <div class="container">
+        <div class="crumbs"><a href="/poradnik/">Poradnik</a> / Kalkulator terminu porodu i tygodnia ciąży</div>
+        <h1>Kalkulator terminu porodu i tygodnia ciąży</h1>
+        <div class="answer">
+          <div class="answer-label">W skrócie</div>
+          <p>Termin porodu to 280 dni (40 tygodni) od pierwszego dnia ostatniej miesiączki. Wpisz datę, a kalkulator pokaże termin, obecny tydzień ciąży, trymestr i najważniejsze daty.</p>
+        </div>
+
+        <form class="calc" id="calc-form" novalidate>
+          <div class="calc-row">
+            <label for="calc-method">Licz na podstawie</label>
+            <select id="calc-method">
+              <option value="lmp">ostatniej miesiączki</option><option value="conception">daty poczęcia</option><option value="due">terminu z USG</option>
+            </select>
+          </div>
+          <div class="calc-row">
+            <label for="calc-date" id="calc-date-label">Pierwszy dzień ostatniej miesiączki</label>
+            <input type="date" id="calc-date" required>
+          </div>
+          <div class="calc-row" id="calc-cycle-row">
+            <label for="calc-cycle">Długość cyklu (dni)</label>
+            <input type="number" id="calc-cycle" min="21" max="45" value="28" inputmode="numeric">
+            <p class="calc-hint">Zwykle 28. Przy dłuższym cyklu termin przesuwa się o tyle dni, o ile cykl jest dłuższy.</p>
+          </div>
+          <button type="submit" class="btn btn-play calc-btn">Policz termin</button>
+          <p class="calc-error" id="calc-err" role="alert"></p>
+        </form>
+
+        <section class="calc-result" id="calc-res" hidden aria-live="polite">
+          <div class="calc-due"><span>Termin porodu</span><strong id="r-due"></strong></div>
+          <div class="calc-stats">
+            <div><strong id="r-week"></strong><span id="r-week-small"></span></div>
+            <div><strong id="r-tri"></strong><span>Trymestr</span></div>
+            <div><strong id="r-left"></strong><span>Do terminu</span></div>
+          </div>
+          <h2>Ważne daty</h2>
+          <ul class="calc-ms" id="r-ms"></ul>
+          <div class="app-card">
+            <img src="/spokojny-rodzic/icon-192.png" alt="" width="64" height="64">
+            <div>
+              <h3>Zapisz termin w aplikacji</h3>
+              <p>Spokojny Rodzic liczy tydzień ciąży każdego dnia i ma licznik skurczy. Po porodzie jednym przyciskiem przechodzi w dziennik niemowlaka.</p>
+              <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=pl.skudev.spokojnyrodzic&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dnarzedzie%26utm_campaign%3Dpl-termin" rel="noopener">Pobierz z Google Play</a>
+            </div>
+          </div>
+        </section>
+
+        <h2>Jak liczy się termin porodu</h2>
+        <p>Lekarze liczą ciążę od pierwszego dnia ostatniej miesiączki, a nie od poczęcia. Termin to ten dzień plus 280 dni, czyli 40 tygodni (reguła Naegelego). Przy cyklu dłuższym albo krótszym niż 28 dni termin przesuwa się o różnicę.</p>
+        <h2>Termin z USG jest dokładniejszy</h2>
+        <p>Najdokładniej termin wyznacza USG w pierwszym trymestrze. Jeśli lekarz ustalił termin na podstawie USG, wybierz „terminu z USG”: kalkulator policzy z niego tydzień ciąży.</p>
+        <h2>Dokładnie w terminie rodzi się niewiele dzieci</h2>
+        <p>Termin to przybliżenie. Ciąża jest donoszona od 37. tygodnia, a poród między ukończonym 37. a 42. tygodniem to poród o czasie. Dlatego warto mieć spakowaną torbę już około 36. tygodnia.</p>
+
+        <h2>Najczęstsze pytania</h2>
+        <div class="faq">
+          <details><summary>Od kiedy liczy się tydzień ciąży?</summary><p>Od pierwszego dnia ostatniej miesiączki. Dlatego w chwili poczęcia jesteś już mniej więcej w 3. tygodniu ciąży.</p></details>
+          <details><summary>Co znaczy zapis 24+3?</summary><p>24 pełne tygodnie i 3 dni. Trwa wtedy 25. tydzień ciąży.</p></details>
+          <details><summary>Ile trwają trymestry?</summary><p>Pierwszy do końca 13. tygodnia (13+6), drugi do końca 27. tygodnia (27+6), trzeci od 28. tygodnia do porodu.</p></details>
+        </div>
+
+        <div class="sources">
+          <h2>Źródła</h2>
+          <ul><li>ACOG Committee Opinion No. 700: Methods for Estimating the Due Date (2017)</li><li>WHO: Preterm birth, definicje porodu przedwczesnego i o czasie (2023)</li></ul>
+          <p style="margin-top:14px">Ten artykuł ma charakter informacyjny i nie zastępuje porady lekarza. Gdy coś Cię niepokoi, skontaktuj się z lekarzem. W zagrożeniu życia dzwoń 112.</p>
+        </div>
+
+        <div class="related">
+          <h2>Przeczytaj też</h2>
+          <div class="guide-grid">
+            <a class="guide-card" href="/poradnik/torba-do-szpitala-lista/"><span class="guide-emoji">🧳</span><h3>Torba do szpitala: lista rzeczy do porodu</h3><p>Dokumenty, rzeczy dla mamy i dziecka.</p></a>
+            <a class="guide-card" href="/poradnik/kiedy-jechac-do-szpitala-na-porod/"><span class="guide-emoji">🏥</span><h3>Kiedy jechać do szpitala na poród?</h3><p>Skurcze, wody i objawy, z którymi nie czekasz.</p></a>
+          </div>
+        </div>
+      </div>
+    </article>
+    <script type="application/json" id="calc-data">{"lang":"pl","termDays":280,"form":{"method":"Licz na podstawie","methods":{"lmp":"ostatniej miesiączki","conception":"daty poczęcia","due":"terminu z USG"},"dateLabels":{"lmp":"Pierwszy dzień ostatniej miesiączki","conception":"Data poczęcia","due":"Termin porodu z USG"},"cycle":"Długość cyklu (dni)","cycleHint":"Zwykle 28. Przy dłuższym cyklu termin przesuwa się o tyle dni, o ile cykl jest dłuższy.","button":"Policz termin"},"result":{"due":"Termin porodu","week":"Tydzień ciąży","trimester":"Trymestr","left":"Do terminu","milestones":"Ważne daty","ms":{"t1":"Koniec 1. trymestru (13+6)","t2":"Koniec 2. trymestru (27+6)","term":"Ciąża donoszona od (37+0)","due":"Termin porodu (40+0)","post":"Ukończone 42 tygodnie (42+0)"},"saveTitle":"Zapisz termin w aplikacji","saveText":"Spokojny Rodzic liczy tydzień ciąży każdego dnia i ma licznik skurczy. Po porodzie jednym przyciskiem przechodzi w dziennik niemowlaka."},"fmt":{"weekBig":"{week}. tydzień ciąży","weekSmall":"{w}+{d}","trimester":"{n}. trymestr","days":["{n} dzień","{n} dni"],"overdue":["Termin minął {n} dzień temu","Termin minął {n} dni temu"],"today":"Termin jest dziś"},"errors":{"empty":"Wybierz datę.","range":"Ta data nie pasuje do trwającej ciąży. Sprawdź, czy wpisujesz dobrą datę."},"milestones":["t1","t2","term","due","post"]}</script>
+    <script>(function () {
+  var C = JSON.parse(document.getElementById('calc-data').textContent)
+  var $ = function (id) { return document.getElementById(id) }
+  var DAY = 864e5
+  function pad(n) { return (n < 10 ? '0' : '') + n }
+  function ymd(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) }
+  function noon(s) { var d = new Date(s + 'T12:00:00'); return isNaN(d.getTime()) ? null : d }
+  function add(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x }
+  function diff(a, b) { return Math.round((noon(ymd(b)) - noon(ymd(a))) / DAY) }
+  function tpl(s, v) { return s.replace(/\{(\w+)\}/g, function (m, k) { return v[k] }) }
+  function plural(arr, n) { return tpl(n === 1 ? arr[0] : arr[1], { n: n }) }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] }) }
+  var fmt = new Intl.DateTimeFormat(C.lang, { day: 'numeric', month: 'long', year: 'numeric' })
+  var today = noon(ymd(new Date()))
+  var method = $('calc-method'), date = $('calc-date'), res = $('calc-res'), err = $('calc-err')
+  function sync() {
+    var m = method.value
+    $('calc-date-label').textContent = C.form.dateLabels[m]
+    $('calc-cycle-row').hidden = m !== 'lmp'
+    date.max = ymd(m === 'due' ? add(today, C.termDays) : today)
+    date.min = ymd(m === 'due' ? add(today, -28) : add(today, -44 * 7))
+  }
+  method.addEventListener('change', function () { sync(); res.hidden = true; err.textContent = '' })
+  sync()
+  $('calc-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    err.textContent = ''
+    var m = method.value, d = noon(date.value)
+    if (!d) { err.textContent = C.errors.empty; res.hidden = true; return }
+    var cycle = Math.min(45, Math.max(21, parseInt($('calc-cycle').value, 10) || 28))
+    var lmp = m === 'lmp' ? add(d, cycle - 28) : m === 'conception' ? add(d, -14) : add(d, -C.termDays)
+    var elapsed = diff(lmp, today)
+    if (elapsed < 0 || elapsed > 44 * 7) { err.textContent = C.errors.range; res.hidden = true; return }
+    var due = add(lmp, C.termDays)
+    var w = Math.floor(elapsed / 7), v = { week: w + 1, w: w, d: elapsed % 7 }
+    var left = diff(today, due)
+    var tri = w < 14 ? 1 : w < 28 ? 2 : 3
+    $('r-due').textContent = fmt.format(due)
+    $('r-week').textContent = tpl(C.fmt.weekBig, v)
+    $('r-week-small').textContent = tpl(C.fmt.weekSmall, v)
+    $('r-tri').textContent = Array.isArray(C.fmt.trimester) ? C.fmt.trimester[tri - 1] : tpl(C.fmt.trimester, { n: tri })
+    $('r-left').textContent = left > 0 ? plural(C.fmt.days, left) : left === 0 ? C.fmt.today : plural(C.fmt.overdue, -left)
+    var at = { t1: 13 * 7 + 6, t2: 27 * 7 + 6, term: 37 * 7, due: C.termDays, post: 42 * 7 }
+    $('r-ms').innerHTML = C.milestones.map(function (k) {
+      var dt = add(lmp, at[k])
+      return '<li' + (diff(dt, today) > 0 ? ' class="past"' : '') + '><span>' + esc(C.result.ms[k]) + '</span><strong>' + esc(fmt.format(dt)) + '</strong></li>'
+    }).join('')
+    res.hidden = false
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+})()</script>
+
+  </main>
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>Spokojny Rodzic · projekt <a href="/" style="color:var(--accent-dim);text-decoration:none;">skudev</a> · 2026</div>
+        <ul class="footer-links">
+          <li><a href="/poradnik/">poradnik</a></li>
+          <li><a href="mailto:skudev6@gmail.com">email</a></li>
+          <li><a href="https://matiseekk-dot.github.io/babylog/privacy.html" target="_blank" rel="noopener">prywatność</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

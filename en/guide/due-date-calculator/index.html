@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Due date calculator: how many weeks pregnant am I? | Calm Parent</title>
+  <meta name="description" content="Work out your due date from your last period, conception date or ultrasound due date. See your pregnancy week, trimester and how many days are left.">
+  <link rel="canonical" href="https://skudev.pl/en/guide/due-date-calculator/">
+  <link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kalkulator-terminu-porodu/">
+  <link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/due-date-calculator/">
+  <link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/geburtstermin-rechner/">
+  <link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/calcul-date-accouchement/">
+  <link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/calculadora-fecha-de-parto/">
+  <link rel="alternate" hreflang="x-default" href="https://skudev.pl/en/guide/due-date-calculator/">
+  <meta property="og:title" content="Due date calculator: how many weeks pregnant am I? | Calm Parent">
+  <meta property="og:description" content="Work out your due date from your last period, conception date or ultrasound due date. See your pregnancy week, trimester and how many days are left.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skudev.pl/en/guide/due-date-calculator/">
+  <meta property="og:image" content="https://skudev.pl/assets/sr/en/og.jpg">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/spokojny-rodzic/icon-192.png">
+  <link rel="stylesheet" href="/assets/sr.css?v=03ec7940">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Due date and pregnancy week calculator","description":"Work out your due date from your last period, conception date or ultrasound due date. See your pregnancy week, trimester and how many days are left.","url":"https://skudev.pl/en/guide/due-date-calculator/","inLanguage":"en","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"When does pregnancy week counting start?","acceptedAnswer":{"@type":"Answer","text":"From the first day of your last period. That’s why at conception you are already about 3 weeks pregnant."}},{"@type":"Question","name":"What does 24w 3d mean?","acceptedAnswer":{"@type":"Answer","text":"24 full weeks and 3 days. You are then in week 25 of pregnancy."}},{"@type":"Question","name":"How long is each trimester?","acceptedAnswer":{"@type":"Answer","text":"The first trimester lasts until the end of week 13 (13w 6d), the second until the end of week 27 (27w 6d), and the third from week 28 until birth."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Guide","item":"https://skudev.pl/en/guide/"},{"@type":"ListItem","position":2,"name":"Due date and pregnancy week calculator","item":"https://skudev.pl/en/guide/due-date-calculator/"}]}]}</script>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="/en/" class="logo">
+          <div class="logo-mark">S</div>
+          <div class="logo-text">skudev · <em>guide</em></div>
+        </a>
+        <div class="nav-links">
+          <a href="/en/guide/" class="nav-back">guide</a>
+          <a href="/en/" class="nav-back">app</a>
+          <div class="lang-switch"><a href="/poradnik/kalkulator-terminu-porodu/" hreflang="pl" lang="pl">PL</a><span class="lang-current" aria-current="true">EN</span><a href="/de/ratgeber/geburtstermin-rechner/" hreflang="de" lang="de">DE</a><a href="/fr/guide/calcul-date-accouchement/" hreflang="fr" lang="fr">FR</a><a href="/es/guia/calculadora-fecha-de-parto/" hreflang="es" lang="es">ES</a></div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <article class="article">
+      <div class="container">
+        <div class="crumbs"><a href="/en/guide/">Guide</a> / Due date and pregnancy week calculator</div>
+        <h1>Due date and pregnancy week calculator</h1>
+        <div class="answer">
+          <div class="answer-label">In short</div>
+          <p>Your due date is 280 days (40 weeks) after the first day of your last period. Enter a date and the calculator shows your due date, current pregnancy week, trimester and key dates.</p>
+        </div>
+
+        <form class="calc" id="calc-form" novalidate>
+          <div class="calc-row">
+            <label for="calc-method">Calculate from</label>
+            <select id="calc-method">
+              <option value="lmp">last period</option><option value="conception">conception date</option><option value="due">ultrasound due date</option>
+            </select>
+          </div>
+          <div class="calc-row">
+            <label for="calc-date" id="calc-date-label">First day of your last period</label>
+            <input type="date" id="calc-date" required>
+          </div>
+          <div class="calc-row" id="calc-cycle-row">
+            <label for="calc-cycle">Cycle length (days)</label>
+            <input type="number" id="calc-cycle" min="21" max="45" value="28" inputmode="numeric">
+            <p class="calc-hint">Usually 28. With a longer cycle, the due date moves later by the extra days.</p>
+          </div>
+          <button type="submit" class="btn btn-play calc-btn">Calculate</button>
+          <p class="calc-error" id="calc-err" role="alert"></p>
+        </form>
+
+        <section class="calc-result" id="calc-res" hidden aria-live="polite">
+          <div class="calc-due"><span>Due date</span><strong id="r-due"></strong></div>
+          <div class="calc-stats">
+            <div><strong id="r-week"></strong><span id="r-week-small"></span></div>
+            <div><strong id="r-tri"></strong><span>Trimester</span></div>
+            <div><strong id="r-left"></strong><span>Until due date</span></div>
+          </div>
+          <h2>Key dates</h2>
+          <ul class="calc-ms" id="r-ms"></ul>
+          <div class="app-card">
+            <img src="/spokojny-rodzic/icon-192.png" alt="" width="64" height="64">
+            <div>
+              <h3>Save your due date in the app</h3>
+              <p>Calm Parent counts your pregnancy week every day and has a contraction timer. After the birth, one tap turns it into a baby log.</p>
+              <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=pl.skudev.spokojnyrodzic&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dnarzedzie%26utm_campaign%3Den-termin" rel="noopener">Get it on Google Play</a>
+            </div>
+          </div>
+        </section>
+
+        <h2>How the due date is calculated</h2>
+        <p>Doctors count pregnancy from the first day of your last period, not from conception. The due date is that day plus 280 days, or 40 weeks (Naegele’s rule). If your cycle is longer or shorter than 28 days, the due date moves by the difference.</p>
+        <h2>An ultrasound due date is more accurate</h2>
+        <p>An ultrasound in the first trimester gives the most accurate due date. If your doctor set your due date from a scan, choose “ultrasound due date” and the calculator will work out your pregnancy week from it.</p>
+        <h2>Few babies arrive exactly on the due date</h2>
+        <p>The due date is an estimate. A pregnancy is full term from 37 weeks, and a birth between 37 and 42 completed weeks counts as on time. That’s why it’s worth having your hospital bag ready by about 36 weeks.</p>
+
+        <h2>Frequently asked questions</h2>
+        <div class="faq">
+          <details><summary>When does pregnancy week counting start?</summary><p>From the first day of your last period. That’s why at conception you are already about 3 weeks pregnant.</p></details>
+          <details><summary>What does 24w 3d mean?</summary><p>24 full weeks and 3 days. You are then in week 25 of pregnancy.</p></details>
+          <details><summary>How long is each trimester?</summary><p>The first trimester lasts until the end of week 13 (13w 6d), the second until the end of week 27 (27w 6d), and the third from week 28 until birth.</p></details>
+        </div>
+
+        <div class="sources">
+          <h2>Sources</h2>
+          <ul><li>ACOG Committee Opinion No. 700: Methods for Estimating the Due Date (2017)</li><li>WHO: Preterm birth, definitions of preterm and term birth (2023)</li></ul>
+          <p style="margin-top:14px">This article is for information only and does not replace medical advice. If something worries you, contact a doctor. In an emergency, call your local emergency number.</p>
+        </div>
+
+        <div class="related">
+          <h2>Read next</h2>
+          <div class="guide-grid">
+            <a class="guide-card" href="/en/guide/hospital-bag-checklist/"><span class="guide-emoji">🧳</span><h3>Hospital bag checklist for labour</h3><p>Documents, things for you and your baby.</p></a>
+            <a class="guide-card" href="/en/guide/when-to-go-to-hospital-in-labour/"><span class="guide-emoji">🏥</span><h3>When to go to the hospital in labour</h3><p>Contractions, waters and signs not to wait.</p></a>
+          </div>
+        </div>
+      </div>
+    </article>
+    <script type="application/json" id="calc-data">{"lang":"en","termDays":280,"form":{"method":"Calculate from","methods":{"lmp":"last period","conception":"conception date","due":"ultrasound due date"},"dateLabels":{"lmp":"First day of your last period","conception":"Conception date","due":"Due date from ultrasound"},"cycle":"Cycle length (days)","cycleHint":"Usually 28. With a longer cycle, the due date moves later by the extra days.","button":"Calculate"},"result":{"due":"Due date","week":"Pregnancy week","trimester":"Trimester","left":"Until due date","milestones":"Key dates","ms":{"t1":"End of 1st trimester (13w 6d)","t2":"End of 2nd trimester (27w 6d)","term":"Full term from (37w 0d)","due":"Due date (40w 0d)","post":"42 weeks (42w 0d)"},"saveTitle":"Save your due date in the app","saveText":"Calm Parent counts your pregnancy week every day and has a contraction timer. After the birth, one tap turns it into a baby log."},"fmt":{"weekBig":"Week {week}","weekSmall":"{w}w {d}d","trimester":["1st trimester","2nd trimester","3rd trimester"],"days":["{n} day","{n} days"],"overdue":["{n} day past the due date","{n} days past the due date"],"today":"Your due date is today"},"errors":{"empty":"Choose a date.","range":"This date doesn’t match an ongoing pregnancy. Please check it."},"milestones":["t1","t2","term","due","post"]}</script>
+    <script>(function () {
+  var C = JSON.parse(document.getElementById('calc-data').textContent)
+  var $ = function (id) { return document.getElementById(id) }
+  var DAY = 864e5
+  function pad(n) { return (n < 10 ? '0' : '') + n }
+  function ymd(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) }
+  function noon(s) { var d = new Date(s + 'T12:00:00'); return isNaN(d.getTime()) ? null : d }
+  function add(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x }
+  function diff(a, b) { return Math.round((noon(ymd(b)) - noon(ymd(a))) / DAY) }
+  function tpl(s, v) { return s.replace(/\{(\w+)\}/g, function (m, k) { return v[k] }) }
+  function plural(arr, n) { return tpl(n === 1 ? arr[0] : arr[1], { n: n }) }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] }) }
+  var fmt = new Intl.DateTimeFormat(C.lang, { day: 'numeric', month: 'long', year: 'numeric' })
+  var today = noon(ymd(new Date()))
+  var method = $('calc-method'), date = $('calc-date'), res = $('calc-res'), err = $('calc-err')
+  function sync() {
+    var m = method.value
+    $('calc-date-label').textContent = C.form.dateLabels[m]
+    $('calc-cycle-row').hidden = m !== 'lmp'
+    date.max = ymd(m === 'due' ? add(today, C.termDays) : today)
+    date.min = ymd(m === 'due' ? add(today, -28) : add(today, -44 * 7))
+  }
+  method.addEventListener('change', function () { sync(); res.hidden = true; err.textContent = '' })
+  sync()
+  $('calc-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    err.textContent = ''
+    var m = method.value, d = noon(date.value)
+    if (!d) { err.textContent = C.errors.empty; res.hidden = true; return }
+    var cycle = Math.min(45, Math.max(21, parseInt($('calc-cycle').value, 10) || 28))
+    var lmp = m === 'lmp' ? add(d, cycle - 28) : m === 'conception' ? add(d, -14) : add(d, -C.termDays)
+    var elapsed = diff(lmp, today)
+    if (elapsed < 0 || elapsed > 44 * 7) { err.textContent = C.errors.range; res.hidden = true; return }
+    var due = add(lmp, C.termDays)
+    var w = Math.floor(elapsed / 7), v = { week: w + 1, w: w, d: elapsed % 7 }
+    var left = diff(today, due)
+    var tri = w < 14 ? 1 : w < 28 ? 2 : 3
+    $('r-due').textContent = fmt.format(due)
+    $('r-week').textContent = tpl(C.fmt.weekBig, v)
+    $('r-week-small').textContent = tpl(C.fmt.weekSmall, v)
+    $('r-tri').textContent = Array.isArray(C.fmt.trimester) ? C.fmt.trimester[tri - 1] : tpl(C.fmt.trimester, { n: tri })
+    $('r-left').textContent = left > 0 ? plural(C.fmt.days, left) : left === 0 ? C.fmt.today : plural(C.fmt.overdue, -left)
+    var at = { t1: 13 * 7 + 6, t2: 27 * 7 + 6, term: 37 * 7, due: C.termDays, post: 42 * 7 }
+    $('r-ms').innerHTML = C.milestones.map(function (k) {
+      var dt = add(lmp, at[k])
+      return '<li' + (diff(dt, today) > 0 ? ' class="past"' : '') + '><span>' + esc(C.result.ms[k]) + '</span><strong>' + esc(fmt.format(dt)) + '</strong></li>'
+    }).join('')
+    res.hidden = false
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+})()</script>
+
+  </main>
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>Calm Parent · a <a href="/" style="color:var(--accent-dim);text-decoration:none;">skudev</a> project · 2026</div>
+        <ul class="footer-links">
+          <li><a href="/en/guide/">guide</a></li>
+          <li><a href="mailto:skudev6@gmail.com">email</a></li>
+          <li><a href="https://matiseekk-dot.github.io/babylog/privacy.html" target="_blank" rel="noopener">privacy</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

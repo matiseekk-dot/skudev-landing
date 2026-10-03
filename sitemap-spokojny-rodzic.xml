@@ -91,6 +91,141 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/"/>
   </url>
   <url>
+    <loc>https://skudev.pl/poradnik/kalkulator-terminu-porodu/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kalkulator-terminu-porodu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/due-date-calculator/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/geburtstermin-rechner/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/calcul-date-accouchement/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/calculadora-fecha-de-parto/"/>
+  </url>
+  <url>
+    <loc>https://skudev.pl/en/guide/due-date-calculator/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kalkulator-terminu-porodu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/due-date-calculator/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/geburtstermin-rechner/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/calcul-date-accouchement/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/calculadora-fecha-de-parto/"/>
+  </url>
+  <url>
+    <loc>https://skudev.pl/de/ratgeber/geburtstermin-rechner/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kalkulator-terminu-porodu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/due-date-calculator/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/geburtstermin-rechner/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/calcul-date-accouchement/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/calculadora-fecha-de-parto/"/>
+  </url>
+  <url>
+    <loc>https://skudev.pl/fr/guide/calcul-date-accouchement/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kalkulator-terminu-porodu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/due-date-calculator/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/geburtstermin-rechner/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/calcul-date-accouchement/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/calculadora-fecha-de-parto/"/>
+  </url>
+  <url>
+    <loc>https://skudev.pl/es/guia/calculadora-fecha-de-parto/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kalkulator-terminu-porodu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/due-date-calculator/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/geburtstermin-rechner/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/calcul-date-accouchement/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/calculadora-fecha-de-parto/"/>
+  </url>
+  <url>
+    <loc>https://skudev.pl/poradnik/torba-do-szpitala-lista/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/torba-do-szpitala-lista/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/hospital-bag-checklist/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/kliniktasche-checkliste/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/valise-maternite-liste/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/bolsa-del-hospital-lista/"/>
+  </url>
+  <url>
+    <loc>https://skudev.pl/en/guide/hospital-bag-checklist/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/torba-do-szpitala-lista/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/hospital-bag-checklist/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/kliniktasche-checkliste/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/valise-maternite-liste/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/bolsa-del-hospital-lista/"/>
+  </url>
+  <url>
+    <loc>https://skudev.pl/de/ratgeber/kliniktasche-checkliste/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/torba-do-szpitala-lista/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/hospital-bag-checklist/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/kliniktasche-checkliste/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/valise-maternite-liste/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/bolsa-del-hospital-lista/"/>
+  </url>
+  <url>
+    <loc>https://skudev.pl/fr/guide/valise-maternite-liste/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/torba-do-szpitala-lista/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/hospital-bag-checklist/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/kliniktasche-checkliste/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/valise-maternite-liste/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/bolsa-del-hospital-lista/"/>
+  </url>
+  <url>
+    <loc>https://skudev.pl/es/guia/bolsa-del-hospital-lista/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/torba-do-szpitala-lista/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/hospital-bag-checklist/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/kliniktasche-checkliste/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/valise-maternite-liste/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/bolsa-del-hospital-lista/"/>
+  </url>
+  <url>
+    <loc>https://skudev.pl/poradnik/kiedy-jechac-do-szpitala-na-porod/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kiedy-jechac-do-szpitala-na-porod/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/when-to-go-to-hospital-in-labour/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/wann-in-die-klinik-zur-geburt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/quand-partir-a-la-maternite/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/cuando-ir-al-hospital-de-parto/"/>
+  </url>
+  <url>
+    <loc>https://skudev.pl/en/guide/when-to-go-to-hospital-in-labour/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kiedy-jechac-do-szpitala-na-porod/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/when-to-go-to-hospital-in-labour/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/wann-in-die-klinik-zur-geburt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/quand-partir-a-la-maternite/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/cuando-ir-al-hospital-de-parto/"/>
+  </url>
+  <url>
+    <loc>https://skudev.pl/de/ratgeber/wann-in-die-klinik-zur-geburt/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kiedy-jechac-do-szpitala-na-porod/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/when-to-go-to-hospital-in-labour/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/wann-in-die-klinik-zur-geburt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/quand-partir-a-la-maternite/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/cuando-ir-al-hospital-de-parto/"/>
+  </url>
+  <url>
+    <loc>https://skudev.pl/fr/guide/quand-partir-a-la-maternite/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kiedy-jechac-do-szpitala-na-porod/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/when-to-go-to-hospital-in-labour/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/wann-in-die-klinik-zur-geburt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/quand-partir-a-la-maternite/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/cuando-ir-al-hospital-de-parto/"/>
+  </url>
+  <url>
+    <loc>https://skudev.pl/es/guia/cuando-ir-al-hospital-de-parto/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kiedy-jechac-do-szpitala-na-porod/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/when-to-go-to-hospital-in-labour/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/wann-in-die-klinik-zur-geburt/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/quand-partir-a-la-maternite/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/cuando-ir-al-hospital-de-parto/"/>
+  </url>
+  <url>
     <loc>https://skudev.pl/poradnik/goraczka-u-niemowlaka-kiedy-do-lekarza/</loc>
     <lastmod>2026-09-27</lastmod>
     <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/goraczka-u-niemowlaka-kiedy-do-lekarza/"/>

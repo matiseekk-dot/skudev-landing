@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculer sa date d’accouchement : à combien de SA suis-je ? | Calm Parent</title>
+  <meta name="description" content="Calculez la date prévue d’accouchement à partir des dernières règles, de la date de conception ou du terme de l’échographie. Avec les SA, le trimestre et les jours restants.">
+  <link rel="canonical" href="https://skudev.pl/fr/guide/calcul-date-accouchement/">
+  <link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kalkulator-terminu-porodu/">
+  <link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/due-date-calculator/">
+  <link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/geburtstermin-rechner/">
+  <link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/calcul-date-accouchement/">
+  <link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/calculadora-fecha-de-parto/">
+  <link rel="alternate" hreflang="x-default" href="https://skudev.pl/en/guide/due-date-calculator/">
+  <meta property="og:title" content="Calculer sa date d’accouchement : à combien de SA suis-je ? | Calm Parent">
+  <meta property="og:description" content="Calculez la date prévue d’accouchement à partir des dernières règles, de la date de conception ou du terme de l’échographie. Avec les SA, le trimestre et les jours restants.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skudev.pl/fr/guide/calcul-date-accouchement/">
+  <meta property="og:image" content="https://skudev.pl/assets/sr/fr/og.jpg">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/spokojny-rodzic/icon-192.png">
+  <link rel="stylesheet" href="/assets/sr.css?v=03ec7940">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Calcul de la date d’accouchement et de la semaine de grossesse","description":"Calculez la date prévue d’accouchement à partir des dernières règles, de la date de conception ou du terme de l’échographie. Avec les SA, le trimestre et les jours restants.","url":"https://skudev.pl/fr/guide/calcul-date-accouchement/","inLanguage":"fr","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Quelle différence entre SA et SG ?","acceptedAnswer":{"@type":"Answer","text":"Les SA comptent depuis les dernières règles, les semaines de grossesse (SG) depuis la conception. SA = SG + 2."}},{"@type":"Question","name":"Que signifie 24 SA + 3 j ?","acceptedAnswer":{"@type":"Answer","text":"24 semaines complètes et 3 jours depuis les dernières règles : vous êtes dans la 25e semaine d’aménorrhée."}},{"@type":"Question","name":"Pourquoi 41 SA en France ?","acceptedAnswer":{"@type":"Answer","text":"C’est la convention française du CNGOF. Au-delà de 41 SA, l’équipe médicale renforce la surveillance ; le terme est dépassé à 42 SA."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Guide","item":"https://skudev.pl/fr/guide/"},{"@type":"ListItem","position":2,"name":"Calcul de la date d’accouchement et de la semaine de grossesse","item":"https://skudev.pl/fr/guide/calcul-date-accouchement/"}]}]}</script>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="/fr/" class="logo">
+          <div class="logo-mark">S</div>
+          <div class="logo-text">skudev · <em>guide</em></div>
+        </a>
+        <div class="nav-links">
+          <a href="/fr/guide/" class="nav-back">guide</a>
+          <a href="/fr/" class="nav-back">appli</a>
+          <div class="lang-switch"><a href="/poradnik/kalkulator-terminu-porodu/" hreflang="pl" lang="pl">PL</a><a href="/en/guide/due-date-calculator/" hreflang="en" lang="en">EN</a><a href="/de/ratgeber/geburtstermin-rechner/" hreflang="de" lang="de">DE</a><span class="lang-current" aria-current="true">FR</span><a href="/es/guia/calculadora-fecha-de-parto/" hreflang="es" lang="es">ES</a></div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <article class="article">
+      <div class="container">
+        <div class="crumbs"><a href="/fr/guide/">Guide</a> / Calcul de la date d’accouchement et de la semaine de grossesse</div>
+        <h1>Calcul de la date d’accouchement et de la semaine de grossesse</h1>
+        <div class="answer">
+          <div class="answer-label">En bref</div>
+          <p>En France, la date prévue d’accouchement est fixée à 41 semaines d’aménorrhée (SA), soit 287 jours après le premier jour des dernières règles. Entrez une date : le calculateur affiche le terme, les SA, le trimestre et les dates clés.</p>
+        </div>
+
+        <form class="calc" id="calc-form" novalidate>
+          <div class="calc-row">
+            <label for="calc-method">Calculer à partir</label>
+            <select id="calc-method">
+              <option value="lmp">des dernières règles</option><option value="conception">de la date de conception</option><option value="due">du terme de l’échographie</option>
+            </select>
+          </div>
+          <div class="calc-row">
+            <label for="calc-date" id="calc-date-label">Premier jour des dernières règles</label>
+            <input type="date" id="calc-date" required>
+          </div>
+          <div class="calc-row" id="calc-cycle-row">
+            <label for="calc-cycle">Durée du cycle (jours)</label>
+            <input type="number" id="calc-cycle" min="21" max="45" value="28" inputmode="numeric">
+            <p class="calc-hint">Souvent 28. Avec un cycle plus long, le terme recule d’autant de jours.</p>
+          </div>
+          <button type="submit" class="btn btn-play calc-btn">Calculer</button>
+          <p class="calc-error" id="calc-err" role="alert"></p>
+        </form>
+
+        <section class="calc-result" id="calc-res" hidden aria-live="polite">
+          <div class="calc-due"><span>Date prévue d’accouchement</span><strong id="r-due"></strong></div>
+          <div class="calc-stats">
+            <div><strong id="r-week"></strong><span id="r-week-small"></span></div>
+            <div><strong id="r-tri"></strong><span>Trimestre</span></div>
+            <div><strong id="r-left"></strong><span>Avant le terme</span></div>
+          </div>
+          <h2>Dates clés</h2>
+          <ul class="calc-ms" id="r-ms"></ul>
+          <div class="app-card">
+            <img src="/spokojny-rodzic/icon-192.png" alt="" width="64" height="64">
+            <div>
+              <h3>Enregistrer le terme dans l’appli</h3>
+              <p>Calm Parent compte les SA chaque jour et propose un minuteur de contractions. Après la naissance, un seul bouton le transforme en carnet de bébé.</p>
+              <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=pl.skudev.spokojnyrodzic&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dnarzedzie%26utm_campaign%3Dfr-termin" rel="noopener">Disponible sur Google Play</a>
+            </div>
+          </div>
+        </section>
+
+        <h2>Comment le terme est calculé</h2>
+        <p>Les médecins comptent la grossesse en semaines d’aménorrhée (SA), à partir du premier jour des dernières règles. En France, le terme est fixé à 41 SA, soit 287 jours. Dans beaucoup d’autres pays, on le fixe à 40 SA (280 jours) : ne vous étonnez pas si une appli étrangère donne une date une semaine plus tôt.</p>
+        <h2>Le terme de l’échographie est plus précis</h2>
+        <p>L’échographie de datation du premier trimestre donne le terme le plus fiable. Si votre terme a été fixé à l’échographie, choisissez « du terme de l’échographie » : le calculateur en déduit les SA.</p>
+        <h2>Peu de bébés naissent le jour du terme</h2>
+        <p>Le terme est une estimation. La grossesse est à terme dès 37 SA, et une naissance entre 37 et 42 SA est considérée comme à terme. Préparez donc votre valise de maternité vers 36 SA.</p>
+
+        <h2>Questions fréquentes</h2>
+        <div class="faq">
+          <details><summary>Quelle différence entre SA et SG ?</summary><p>Les SA comptent depuis les dernières règles, les semaines de grossesse (SG) depuis la conception. SA = SG + 2.</p></details>
+          <details><summary>Que signifie 24 SA + 3 j ?</summary><p>24 semaines complètes et 3 jours depuis les dernières règles : vous êtes dans la 25e semaine d’aménorrhée.</p></details>
+          <details><summary>Pourquoi 41 SA en France ?</summary><p>C’est la convention française du CNGOF. Au-delà de 41 SA, l’équipe médicale renforce la surveillance ; le terme est dépassé à 42 SA.</p></details>
+        </div>
+
+        <div class="sources">
+          <h2>Sources</h2>
+          <ul><li>CNGOF : grossesse prolongée et terme dépassé, recommandations pour la pratique clinique</li><li>ACOG Committee Opinion No. 700 : Methods for Estimating the Due Date (2017)</li><li>OMS : naissances prématurées, définitions (2023)</li></ul>
+          <p style="margin-top:14px">Cet article est informatif et ne remplace pas l’avis d’un médecin. En cas de doute, contactez un médecin. En cas d’urgence vitale, appelez le 15 ou le 112.</p>
+        </div>
+
+        <div class="related">
+          <h2>À lire aussi</h2>
+          <div class="guide-grid">
+            <a class="guide-card" href="/fr/guide/valise-maternite-liste/"><span class="guide-emoji">🧳</span><h3>Valise de maternité : la liste complète</h3><p>Papiers, affaires pour maman et bébé.</p></a>
+            <a class="guide-card" href="/fr/guide/quand-partir-a-la-maternite/"><span class="guide-emoji">🏥</span><h3>Quand partir à la maternité ?</h3><p>Contractions, perte des eaux et signes d’alerte.</p></a>
+          </div>
+        </div>
+      </div>
+    </article>
+    <script type="application/json" id="calc-data">{"lang":"fr","termDays":287,"form":{"method":"Calculer à partir","methods":{"lmp":"des dernières règles","conception":"de la date de conception","due":"du terme de l’échographie"},"dateLabels":{"lmp":"Premier jour des dernières règles","conception":"Date de conception","due":"Date prévue selon l’échographie"},"cycle":"Durée du cycle (jours)","cycleHint":"Souvent 28. Avec un cycle plus long, le terme recule d’autant de jours.","button":"Calculer"},"result":{"due":"Date prévue d’accouchement","week":"Âge de la grossesse","trimester":"Trimestre","left":"Avant le terme","milestones":"Dates clés","ms":{"t1":"Fin du 1er trimestre","t2":"Fin du 2e trimestre","term":"Grossesse à terme (37 SA)","due":"Date prévue d’accouchement (41 SA)","post":"Terme dépassé (42 SA)"},"saveTitle":"Enregistrer le terme dans l’appli","saveText":"Calm Parent compte les SA chaque jour et propose un minuteur de contractions. Après la naissance, un seul bouton le transforme en carnet de bébé."},"fmt":{"weekBig":"{w} SA + {d} j","weekSmall":"{week}e semaine d’aménorrhée","trimester":["1er trimestre","2e trimestre","3e trimestre"],"days":["{n} jour","{n} jours"],"overdue":["{n} jour après le terme","{n} jours après le terme"],"today":"C’est la date prévue aujourd’hui"},"errors":{"empty":"Choisissez une date.","range":"Cette date ne correspond pas à une grossesse en cours. Vérifiez-la."},"milestones":["term","due","post"]}</script>
+    <script>(function () {
+  var C = JSON.parse(document.getElementById('calc-data').textContent)
+  var $ = function (id) { return document.getElementById(id) }
+  var DAY = 864e5
+  function pad(n) { return (n < 10 ? '0' : '') + n }
+  function ymd(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) }
+  function noon(s) { var d = new Date(s + 'T12:00:00'); return isNaN(d.getTime()) ? null : d }
+  function add(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x }
+  function diff(a, b) { return Math.round((noon(ymd(b)) - noon(ymd(a))) / DAY) }
+  function tpl(s, v) { return s.replace(/\{(\w+)\}/g, function (m, k) { return v[k] }) }
+  function plural(arr, n) { return tpl(n === 1 ? arr[0] : arr[1], { n: n }) }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] }) }
+  var fmt = new Intl.DateTimeFormat(C.lang, { day: 'numeric', month: 'long', year: 'numeric' })
+  var today = noon(ymd(new Date()))
+  var method = $('calc-method'), date = $('calc-date'), res = $('calc-res'), err = $('calc-err')
+  function sync() {
+    var m = method.value
+    $('calc-date-label').textContent = C.form.dateLabels[m]
+    $('calc-cycle-row').hidden = m !== 'lmp'
+    date.max = ymd(m === 'due' ? add(today, C.termDays) : today)
+    date.min = ymd(m === 'due' ? add(today, -28) : add(today, -44 * 7))
+  }
+  method.addEventListener('change', function () { sync(); res.hidden = true; err.textContent = '' })
+  sync()
+  $('calc-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    err.textContent = ''
+    var m = method.value, d = noon(date.value)
+    if (!d) { err.textContent = C.errors.empty; res.hidden = true; return }
+    var cycle = Math.min(45, Math.max(21, parseInt($('calc-cycle').value, 10) || 28))
+    var lmp = m === 'lmp' ? add(d, cycle - 28) : m === 'conception' ? add(d, -14) : add(d, -C.termDays)
+    var elapsed = diff(lmp, today)
+    if (elapsed < 0 || elapsed > 44 * 7) { err.textContent = C.errors.range; res.hidden = true; return }
+    var due = add(lmp, C.termDays)
+    var w = Math.floor(elapsed / 7), v = { week: w + 1, w: w, d: elapsed % 7 }
+    var left = diff(today, due)
+    var tri = w < 14 ? 1 : w < 28 ? 2 : 3
+    $('r-due').textContent = fmt.format(due)
+    $('r-week').textContent = tpl(C.fmt.weekBig, v)
+    $('r-week-small').textContent = tpl(C.fmt.weekSmall, v)
+    $('r-tri').textContent = Array.isArray(C.fmt.trimester) ? C.fmt.trimester[tri - 1] : tpl(C.fmt.trimester, { n: tri })
+    $('r-left').textContent = left > 0 ? plural(C.fmt.days, left) : left === 0 ? C.fmt.today : plural(C.fmt.overdue, -left)
+    var at = { t1: 13 * 7 + 6, t2: 27 * 7 + 6, term: 37 * 7, due: C.termDays, post: 42 * 7 }
+    $('r-ms').innerHTML = C.milestones.map(function (k) {
+      var dt = add(lmp, at[k])
+      return '<li' + (diff(dt, today) > 0 ? ' class="past"' : '') + '><span>' + esc(C.result.ms[k]) + '</span><strong>' + esc(fmt.format(dt)) + '</strong></li>'
+    }).join('')
+    res.hidden = false
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+})()</script>
+
+  </main>
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>Calm Parent · un projet <a href="/" style="color:var(--accent-dim);text-decoration:none;">skudev</a> · 2026</div>
+        <ul class="footer-links">
+          <li><a href="/fr/guide/">guide</a></li>
+          <li><a href="mailto:skudev6@gmail.com">email</a></li>
+          <li><a href="https://matiseekk-dot.github.io/babylog/privacy.html" target="_blank" rel="noopener">confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

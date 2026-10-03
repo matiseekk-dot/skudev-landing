@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de fecha de parto: ¿de cuántas semanas estoy? | Calm Parent</title>
+  <meta name="description" content="Calcula la fecha probable de parto a partir de la última regla, la fecha de concepción o la fecha de la ecografía. Con la semana de embarazo, el trimestre y los días que faltan.">
+  <link rel="canonical" href="https://skudev.pl/es/guia/calculadora-fecha-de-parto/">
+  <link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/kalkulator-terminu-porodu/">
+  <link rel="alternate" hreflang="en" href="https://skudev.pl/en/guide/due-date-calculator/">
+  <link rel="alternate" hreflang="de" href="https://skudev.pl/de/ratgeber/geburtstermin-rechner/">
+  <link rel="alternate" hreflang="fr" href="https://skudev.pl/fr/guide/calcul-date-accouchement/">
+  <link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/calculadora-fecha-de-parto/">
+  <link rel="alternate" hreflang="x-default" href="https://skudev.pl/en/guide/due-date-calculator/">
+  <meta property="og:title" content="Calculadora de fecha de parto: ¿de cuántas semanas estoy? | Calm Parent">
+  <meta property="og:description" content="Calcula la fecha probable de parto a partir de la última regla, la fecha de concepción o la fecha de la ecografía. Con la semana de embarazo, el trimestre y los días que faltan.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skudev.pl/es/guia/calculadora-fecha-de-parto/">
+  <meta property="og:image" content="https://skudev.pl/assets/sr/es/og.jpg">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/spokojny-rodzic/icon-192.png">
+  <link rel="stylesheet" href="/assets/sr.css?v=03ec7940">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Calculadora de fecha de parto y semana de embarazo","description":"Calcula la fecha probable de parto a partir de la última regla, la fecha de concepción o la fecha de la ecografía. Con la semana de embarazo, el trimestre y los días que faltan.","url":"https://skudev.pl/es/guia/calculadora-fecha-de-parto/","inLanguage":"es","applicationCategory":"HealthApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Desde cuándo se cuentan las semanas de embarazo?","acceptedAnswer":{"@type":"Answer","text":"Desde el primer día de la última regla. Por eso, en el momento de la concepción ya estás aproximadamente en la semana 3 de embarazo."}},{"@type":"Question","name":"¿Qué significa 24+3?","acceptedAnswer":{"@type":"Answer","text":"24 semanas completas y 3 días. Estás entonces en la semana 25 de embarazo."}},{"@type":"Question","name":"¿Cuánto dura cada trimestre?","acceptedAnswer":{"@type":"Answer","text":"El primero hasta el final de la semana 13 (13+6), el segundo hasta el final de la semana 27 (27+6) y el tercero desde la semana 28 hasta el parto."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Guía","item":"https://skudev.pl/es/guia/"},{"@type":"ListItem","position":2,"name":"Calculadora de fecha de parto y semana de embarazo","item":"https://skudev.pl/es/guia/calculadora-fecha-de-parto/"}]}]}</script>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="/es/" class="logo">
+          <div class="logo-mark">S</div>
+          <div class="logo-text">skudev · <em>guía</em></div>
+        </a>
+        <div class="nav-links">
+          <a href="/es/guia/" class="nav-back">guía</a>
+          <a href="/es/" class="nav-back">app</a>
+          <div class="lang-switch"><a href="/poradnik/kalkulator-terminu-porodu/" hreflang="pl" lang="pl">PL</a><a href="/en/guide/due-date-calculator/" hreflang="en" lang="en">EN</a><a href="/de/ratgeber/geburtstermin-rechner/" hreflang="de" lang="de">DE</a><a href="/fr/guide/calcul-date-accouchement/" hreflang="fr" lang="fr">FR</a><span class="lang-current" aria-current="true">ES</span></div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <article class="article">
+      <div class="container">
+        <div class="crumbs"><a href="/es/guia/">Guía</a> / Calculadora de fecha de parto y semana de embarazo</div>
+        <h1>Calculadora de fecha de parto y semana de embarazo</h1>
+        <div class="answer">
+          <div class="answer-label">En resumen</div>
+          <p>La fecha probable de parto es 280 días (40 semanas) después del primer día de la última regla. Introduce una fecha y la calculadora te muestra la fecha de parto, la semana de embarazo, el trimestre y las fechas clave.</p>
+        </div>
+
+        <form class="calc" id="calc-form" novalidate>
+          <div class="calc-row">
+            <label for="calc-method">Calcular a partir de</label>
+            <select id="calc-method">
+              <option value="lmp">la última regla</option><option value="conception">la fecha de concepción</option><option value="due">la fecha de la ecografía</option>
+            </select>
+          </div>
+          <div class="calc-row">
+            <label for="calc-date" id="calc-date-label">Primer día de la última regla</label>
+            <input type="date" id="calc-date" required>
+          </div>
+          <div class="calc-row" id="calc-cycle-row">
+            <label for="calc-cycle">Duración del ciclo (días)</label>
+            <input type="number" id="calc-cycle" min="21" max="45" value="28" inputmode="numeric">
+            <p class="calc-hint">Normalmente 28. Con un ciclo más largo, la fecha se retrasa tantos días como sea más largo.</p>
+          </div>
+          <button type="submit" class="btn btn-play calc-btn">Calcular</button>
+          <p class="calc-error" id="calc-err" role="alert"></p>
+        </form>
+
+        <section class="calc-result" id="calc-res" hidden aria-live="polite">
+          <div class="calc-due"><span>Fecha probable de parto</span><strong id="r-due"></strong></div>
+          <div class="calc-stats">
+            <div><strong id="r-week"></strong><span id="r-week-small"></span></div>
+            <div><strong id="r-tri"></strong><span>Trimestre</span></div>
+            <div><strong id="r-left"></strong><span>Hasta la fecha</span></div>
+          </div>
+          <h2>Fechas clave</h2>
+          <ul class="calc-ms" id="r-ms"></ul>
+          <div class="app-card">
+            <img src="/spokojny-rodzic/icon-192.png" alt="" width="64" height="64">
+            <div>
+              <h3>Guarda la fecha en la app</h3>
+              <p>Calm Parent cuenta la semana de embarazo cada día y tiene un contador de contracciones. Después del parto, con un toque se convierte en un diario del bebé.</p>
+              <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=pl.skudev.spokojnyrodzic&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dnarzedzie%26utm_campaign%3Des-termin" rel="noopener">Disponible en Google Play</a>
+            </div>
+          </div>
+        </section>
+
+        <h2>Cómo se calcula la fecha de parto</h2>
+        <p>Los médicos cuentan el embarazo desde el primer día de la última regla, no desde la concepción. La fecha probable de parto es ese día más 280 días, es decir, 40 semanas (regla de Naegele). Si tu ciclo es más largo o más corto de 28 días, la fecha se desplaza la diferencia.</p>
+        <h2>La fecha de la ecografía es más precisa</h2>
+        <p>La ecografía del primer trimestre es la que mejor fija la fecha de parto. Si tu médico la calculó con una ecografía, elige «la fecha de la ecografía» y la calculadora sacará de ella la semana de embarazo.</p>
+        <h2>Pocos bebés nacen justo en la fecha</h2>
+        <p>La fecha es una estimación. El embarazo es a término desde la semana 37, y un parto entre las 37 y las 42 semanas cumplidas se considera a término. Por eso conviene tener la bolsa del hospital lista hacia la semana 36.</p>
+
+        <h2>Preguntas frecuentes</h2>
+        <div class="faq">
+          <details><summary>¿Desde cuándo se cuentan las semanas de embarazo?</summary><p>Desde el primer día de la última regla. Por eso, en el momento de la concepción ya estás aproximadamente en la semana 3 de embarazo.</p></details>
+          <details><summary>¿Qué significa 24+3?</summary><p>24 semanas completas y 3 días. Estás entonces en la semana 25 de embarazo.</p></details>
+          <details><summary>¿Cuánto dura cada trimestre?</summary><p>El primero hasta el final de la semana 13 (13+6), el segundo hasta el final de la semana 27 (27+6) y el tercero desde la semana 28 hasta el parto.</p></details>
+        </div>
+
+        <div class="sources">
+          <h2>Fuentes</h2>
+          <ul><li>ACOG Committee Opinion No. 700: Methods for Estimating the Due Date (2017)</li><li>OMS: Nacimientos prematuros, definiciones de parto prematuro y a término (2023)</li></ul>
+          <p style="margin-top:14px">Este artículo es informativo y no sustituye el consejo médico. Si algo te preocupa, consulta con un médico. En caso de emergencia, llama al 112.</p>
+        </div>
+
+        <div class="related">
+          <h2>Lee también</h2>
+          <div class="guide-grid">
+            <a class="guide-card" href="/es/guia/bolsa-del-hospital-lista/"><span class="guide-emoji">🧳</span><h3>Bolsa del hospital para el parto: lista completa</h3><p>Documentos, cosas para mamá y bebé.</p></a>
+            <a class="guide-card" href="/es/guia/cuando-ir-al-hospital-de-parto/"><span class="guide-emoji">🏥</span><h3>¿Cuándo ir al hospital de parto?</h3><p>Contracciones, romper aguas y señales de alarma.</p></a>
+          </div>
+        </div>
+      </div>
+    </article>
+    <script type="application/json" id="calc-data">{"lang":"es","termDays":280,"form":{"method":"Calcular a partir de","methods":{"lmp":"la última regla","conception":"la fecha de concepción","due":"la fecha de la ecografía"},"dateLabels":{"lmp":"Primer día de la última regla","conception":"Fecha de concepción","due":"Fecha probable de parto según la ecografía"},"cycle":"Duración del ciclo (días)","cycleHint":"Normalmente 28. Con un ciclo más largo, la fecha se retrasa tantos días como sea más largo.","button":"Calcular"},"result":{"due":"Fecha probable de parto","week":"Semana de embarazo","trimester":"Trimestre","left":"Hasta la fecha","milestones":"Fechas clave","ms":{"t1":"Fin del primer trimestre (13+6)","t2":"Fin del segundo trimestre (27+6)","term":"Embarazo a término desde (37+0)","due":"Fecha probable de parto (40+0)","post":"42 semanas cumplidas (42+0)"},"saveTitle":"Guarda la fecha en la app","saveText":"Calm Parent cuenta la semana de embarazo cada día y tiene un contador de contracciones. Después del parto, con un toque se convierte en un diario del bebé."},"fmt":{"weekBig":"Semana {week}","weekSmall":"{w}+{d}","trimester":["Primer trimestre","Segundo trimestre","Tercer trimestre"],"days":["{n} día","{n} días"],"overdue":["{n} día después de la fecha","{n} días después de la fecha"],"today":"Hoy es la fecha probable de parto"},"errors":{"empty":"Elige una fecha.","range":"Esta fecha no corresponde a un embarazo en curso. Revísala."},"milestones":["t1","t2","term","due","post"]}</script>
+    <script>(function () {
+  var C = JSON.parse(document.getElementById('calc-data').textContent)
+  var $ = function (id) { return document.getElementById(id) }
+  var DAY = 864e5
+  function pad(n) { return (n < 10 ? '0' : '') + n }
+  function ymd(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) }
+  function noon(s) { var d = new Date(s + 'T12:00:00'); return isNaN(d.getTime()) ? null : d }
+  function add(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x }
+  function diff(a, b) { return Math.round((noon(ymd(b)) - noon(ymd(a))) / DAY) }
+  function tpl(s, v) { return s.replace(/\{(\w+)\}/g, function (m, k) { return v[k] }) }
+  function plural(arr, n) { return tpl(n === 1 ? arr[0] : arr[1], { n: n }) }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] }) }
+  var fmt = new Intl.DateTimeFormat(C.lang, { day: 'numeric', month: 'long', year: 'numeric' })
+  var today = noon(ymd(new Date()))
+  var method = $('calc-method'), date = $('calc-date'), res = $('calc-res'), err = $('calc-err')
+  function sync() {
+    var m = method.value
+    $('calc-date-label').textContent = C.form.dateLabels[m]
+    $('calc-cycle-row').hidden = m !== 'lmp'
+    date.max = ymd(m === 'due' ? add(today, C.termDays) : today)
+    date.min = ymd(m === 'due' ? add(today, -28) : add(today, -44 * 7))
+  }
+  method.addEventListener('change', function () { sync(); res.hidden = true; err.textContent = '' })
+  sync()
+  $('calc-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    err.textContent = ''
+    var m = method.value, d = noon(date.value)
+    if (!d) { err.textContent = C.errors.empty; res.hidden = true; return }
+    var cycle = Math.min(45, Math.max(21, parseInt($('calc-cycle').value, 10) || 28))
+    var lmp = m === 'lmp' ? add(d, cycle - 28) : m === 'conception' ? add(d, -14) : add(d, -C.termDays)
+    var elapsed = diff(lmp, today)
+    if (elapsed < 0 || elapsed > 44 * 7) { err.textContent = C.errors.range; res.hidden = true; return }
+    var due = add(lmp, C.termDays)
+    var w = Math.floor(elapsed / 7), v = { week: w + 1, w: w, d: elapsed % 7 }
+    var left = diff(today, due)
+    var tri = w < 14 ? 1 : w < 28 ? 2 : 3
+    $('r-due').textContent = fmt.format(due)
+    $('r-week').textContent = tpl(C.fmt.weekBig, v)
+    $('r-week-small').textContent = tpl(C.fmt.weekSmall, v)
+    $('r-tri').textContent = Array.isArray(C.fmt.trimester) ? C.fmt.trimester[tri - 1] : tpl(C.fmt.trimester, { n: tri })
+    $('r-left').textContent = left > 0 ? plural(C.fmt.days, left) : left === 0 ? C.fmt.today : plural(C.fmt.overdue, -left)
+    var at = { t1: 13 * 7 + 6, t2: 27 * 7 + 6, term: 37 * 7, due: C.termDays, post: 42 * 7 }
+    $('r-ms').innerHTML = C.milestones.map(function (k) {
+      var dt = add(lmp, at[k])
+      return '<li' + (diff(dt, today) > 0 ? ' class="past"' : '') + '><span>' + esc(C.result.ms[k]) + '</span><strong>' + esc(fmt.format(dt)) + '</strong></li>'
+    }).join('')
+    res.hidden = false
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+})()</script>
+
+  </main>
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>Calm Parent · un proyecto de <a href="/" style="color:var(--accent-dim);text-decoration:none;">skudev</a> · 2026</div>
+        <ul class="footer-links">
+          <li><a href="/es/guia/">guía</a></li>
+          <li><a href="mailto:skudev6@gmail.com">email</a></li>
+          <li><a href="https://matiseekk-dot.github.io/babylog/privacy.html" target="_blank" rel="noopener">privacidad</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
