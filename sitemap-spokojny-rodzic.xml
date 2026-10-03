@@ -136,6 +136,11 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://skudev.pl/es/guia/calculadora-fecha-de-parto/"/>
   </url>
   <url>
+    <loc>https://skudev.pl/poradnik/badania-w-ciazy-harmonogram/</loc>
+    <lastmod>2026-09-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/badania-w-ciazy-harmonogram/"/>
+  </url>
+  <url>
     <loc>https://skudev.pl/poradnik/torba-do-szpitala-lista/</loc>
     <lastmod>2026-09-27</lastmod>
     <xhtml:link rel="alternate" hreflang="pl" href="https://skudev.pl/poradnik/torba-do-szpitala-lista/"/>

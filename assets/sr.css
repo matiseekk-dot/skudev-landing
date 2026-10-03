@@ -705,3 +705,10 @@ td.num { white-space: normal; min-width: 8.5em; }
 .faq details p { margin-top: 10px; }
 /* Długie złożenia (np. niemieckie „Schwangerschaftswoche”) dzielą się na wąskim ekranie. */
 .article h1, .article h2, .guide-card h3 { overflow-wrap: break-word; hyphens: auto; }
+
+/* Harmonogram badań w ciąży (PL) */
+.exam-list { display: grid; gap: 12px; margin: 16px 0 18px; }
+.exam-period { background: var(--bg-2); border: 1px solid var(--border-2); border-radius: 14px; padding: 16px 18px; }
+.exam-when { font-family: 'JetBrains Mono', monospace; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+.article .exam-period ul { gap: 6px; }
+.article .exam-period li { font-size: 16px; }

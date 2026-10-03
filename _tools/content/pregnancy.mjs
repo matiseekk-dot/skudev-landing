@@ -849,6 +849,46 @@ const labor = {
   },
 }
 
+// Tylko PL: harmonogram według polskiego standardu opieki okołoporodowej.
+const exams = {
+  id: 'exams',
+  onlyLangs: ['pl'],
+  published: '2026-10-03',
+  slug: 'badania-w-ciazy-harmonogram',
+  emoji: '🩺',
+  title: 'Badania w ciąży: harmonogram tydzień po tygodniu',
+  metaTitle: 'Badania w ciąży 2026: harmonogram według tygodni ciąży',
+  description: 'Jakie badania w którym tygodniu ciąży według standardu opieki okołoporodowej, stan na 2026 rok. Lista do wydruku i plik do kalendarza z przypomnieniami.',
+  teaser: 'Co i kiedy zrobić, plus plik do kalendarza.',
+  basedOn: 'standard opieki okołoporodowej (Dz.U. 2026 poz. 1140)',
+  answer: 'W ciąży o prawidłowym przebiegu wizyta jest nie rzadziej niż co 4 tygodnie. Najwięcej badań robi się do 10. tygodnia, USG w 11. do 14., 18. do 22. i 27. do 32. tygodniu, test obciążenia glukozą w 24. do 28. tygodniu, a posiew w kierunku GBS w 35. do 37. tygodniu. Wpisz termin porodu poniżej, a pobierzesz cały harmonogram do kalendarza.',
+  blocks: [
+    { ics: {
+      title: 'Harmonogram w Twoim kalendarzu',
+      label: 'Termin porodu',
+      button: 'Pobierz plik do kalendarza (.ics)',
+      note: 'Plik otworzysz w Kalendarzu Google, Apple albo Outlook. Każde badanie ma przypomnienie dzień wcześniej. Data zostaje w Twojej przeglądarce, nigdzie jej nie wysyłamy.',
+      noDue: 'Nie znasz terminu? <a href="/poradnik/kalkulator-terminu-porodu/">Policz termin porodu</a>.',
+      error: 'Wybierz termin porodu z najbliższych 40 tygodni.',
+      done: 'Gotowe: plik z badaniami jest w pobranych.',
+      eventPrefix: 'Badania w ciąży',
+      fileName: 'badania-w-ciazy.ics',
+    } },
+    { h2: 'Harmonogram badań' },
+    { schedule: true },
+    { callout: { title: 'Badania prenatalne', text: 'Badania prenatalne finansowane przez NFZ, na przykład test PAPP-A razem z USG w 11. do 14. tygodniu, omów z lekarzem na pierwszej wizycie, żeby zdążyć w terminie.' } },
+    { h2: 'Wizyty co 4 tygodnie' },
+    { p: 'Lekarz albo położna na każdej wizycie mierzy ciśnienie i masę ciała i ocenia przebieg ciąży. Od 21. tygodnia ocenia też czynność serca dziecka, a od 33. tygodnia ruchy dziecka. Gdy coś odbiega od normy, lekarz może zlecić więcej badań albo częstsze wizyty.' },
+  ],
+  sources: [
+    'Obwieszczenie Ministra Zdrowia z 18 sierpnia 2026 r. w sprawie ogłoszenia jednolitego tekstu rozporządzenia w sprawie standardu organizacyjnego opieki okołoporodowej (Dz.U. 2026 poz. 1140)',
+    'Rozporządzenie Ministra Zdrowia z 23 października 2025 r. zmieniające rozporządzenie w sprawie standardu organizacyjnego opieki okołoporodowej (Dz.U. 2025 poz. 1525)',
+  ],
+  app: 'W trybie ciąży aplikacja liczy tydzień i dni do terminu i ma licznik skurczy. Lista badań z przypomnieniami jest w przygotowaniu.',
+  related: ['bag', 'labor'],
+  tool: 'dueDate',
+}
+
 const ui = {
   pl: { tools: 'Narzędzia', pregnancy: 'Ciąża', baby: 'Niemowlę', toolCta: 'Policz termin porodu', faq: 'Najczęstsze pytania' },
   en: { tools: 'Tools', pregnancy: 'Pregnancy', baby: 'Baby', toolCta: 'Calculate your due date', faq: 'Frequently asked questions' },
@@ -861,5 +901,5 @@ const LANGS = ['pl', 'en', 'de', 'fr', 'es']
 export default Object.fromEntries(LANGS.map(l => [l, {
   ui: ui[l],
   tools: [dueDate[l]],
-  articles: [bag[l], labor[l]].map(a => ({ ...a, section: 'pregnancy' })),
+  articles: [...(l === 'pl' ? [exams] : []), bag[l], labor[l]].map(a => ({ ...a, section: 'pregnancy' })),
 }]))

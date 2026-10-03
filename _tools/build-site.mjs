@@ -26,6 +26,7 @@ import fr from './content/fr.mjs'
 import es from './content/es.mjs'
 import { VIDEOS, VIDEO_UI } from './content/videos.mjs'
 import PREGNANCY from './content/pregnancy.mjs'
+import { EXAM_PERIODS, EXAM_VISITS_NOTE } from './content/exams-pl.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const SITE = 'https://skudev.pl'
@@ -62,16 +63,22 @@ const plain = s => String(s).replace(/<[^>]+>/g, '')
 const landingUrl = L => L.appPath
 const indexUrl = L => L.guidePath
 const articleUrl = (L, id) => `${L.guidePath}${L.articles.find(a => a.id === id).slug}/`
+const articleUrlOrNull = (L, id) => (hasArticle(L, id) ? articleUrl(L, id) : null)
 const toolUrl = (L, id) => `${L.guidePath}${L.tools.find(t => t.id === id).slug}/`
 
 function alternates(urlFor) {
-  return LANGS.map(L => ({ lang: L.lang, href: SITE + urlFor(L) }))
+  return LANGS.map(L => {
+    const rel = urlFor(L)
+    return rel ? { lang: L.lang, href: SITE + rel } : { lang: L.lang, href: SITE + L.guidePath, missing: true }
+  })
 }
+const hasArticle = (L, id) => L.articles.some(a => a.id === id)
 
 // ─── Wspólne kawałki HTML ────────────────────────────────────────────────────
 
 function head({ L, title, description, url, image, alts, jsonLd, type = 'article' }) {
-  const xdef = alts.find(a => a.lang === X_DEFAULT)
+  const real = alts.filter(a => !a.missing)
+  const xdef = real.find(a => a.lang === X_DEFAULT) || real[0]
   return `<!DOCTYPE html>
 <html lang="${L.lang}">
 <head>
@@ -80,7 +87,7 @@ function head({ L, title, description, url, image, alts, jsonLd, type = 'article
   <title>${plain(title)}</title>
   <meta name="description" content="${attr(description)}">
   <link rel="canonical" href="${SITE}${url}">
-${alts.map(a => `  <link rel="alternate" hreflang="${a.lang}" href="${a.href}">`).join('\n')}
+${real.map(a => `  <link rel="alternate" hreflang="${a.lang}" href="${a.href}">`).join('\n')}
   <link rel="alternate" hreflang="x-default" href="${xdef.href}">
   <meta property="og:title" content="${attr(plain(title))}">
   <meta property="og:description" content="${attr(description)}">
@@ -338,7 +345,7 @@ ${footer(L)}`
 
 function articlePage(L, a) {
   const url = articleUrl(L, a.id)
-  const alts = alternates(X => articleUrl(X, a.id))
+  const alts = alternates(X => articleUrlOrNull(X, a.id))
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -381,7 +388,7 @@ ${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
 
         ${video ? videoBlock(L, a, video) : ''}
         ${a.tool ? toolBox(L, a.tool) : ''}
-        ${a.blocks.map(block).join('\n        ')}
+        ${a.blocks.map(b => articleBlock(L, b)).join('\n        ')}
         ${CHEATSHEET_ARTICLES.has(a.id) ? cheatsheetBox(L) : ''}
 
         <div class="app-card">
@@ -446,6 +453,94 @@ ${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
       </div>
     </section>
 ${footer(L)}`
+}
+
+// ─── Harmonogram badań (PL) i plik .ics ─────────────────────────────────────
+// Dane: content/exams-pl.mjs (kopia babylog/src/data/pregnancyExamsPl.js).
+// Plik .ics powstaje w przeglądarce z terminu porodu: jedno wydarzenie całodniowe
+// na początek każdego okresu badań, z przypomnieniem dzień wcześniej.
+
+const scheduleHtml = () => `<div class="exam-list">
+          ${EXAM_PERIODS.map(p => `<div class="exam-period"><div class="exam-when">${p.when}</div><ul>${p.tests.map(x => `<li>${x}</li>`).join('')}</ul></div>`).join('\n          ')}
+        </div>
+        <p>${EXAM_VISITS_NOTE}</p>`
+
+const ICS_JS = String.raw`(function () {
+  var C = JSON.parse(document.getElementById('ics-data').textContent)
+  var $ = function (id) { return document.getElementById(id) }
+  var DAY = 864e5
+  function pad(n) { return (n < 10 ? '0' : '') + n }
+  function ymd(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) }
+  function noon(s) { var d = new Date(s + 'T12:00:00'); return isNaN(d.getTime()) ? null : d }
+  function add(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x }
+  function diff(a, b) { return Math.round((noon(ymd(b)) - noon(ymd(a))) / DAY) }
+  function icsDate(d) { return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) }
+  function esc(s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n') }
+  // Linie .ics najwyżej 75 bajtów: dłuższe łamiemy (kontynuacja od spacji).
+  function fold(line) {
+    var out = [], cur = '', bytes = 0
+    for (var i = 0; i < line.length; i++) {
+      var ch = line[i], b = unescape(encodeURIComponent(ch)).length
+      if (bytes + b > 73) { out.push(cur); cur = ' '; bytes = 1 }
+      cur += ch; bytes += b
+    }
+    out.push(cur)
+    return out.join('\r\n')
+  }
+  var today = noon(ymd(new Date()))
+  var input = $('ics-due')
+  input.min = ymd(add(today, -14))
+  input.max = ymd(add(today, 280))
+  $('ics-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var due = noon(input.value)
+    $('ics-msg').textContent = ''
+    if (!due || diff(today, due) < -14 || diff(today, due) > 280) { $('ics-msg').textContent = C.error; return }
+    var lmp = add(due, -280)
+    var stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z')
+    var lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//skudev.pl//Spokojny Rodzic//PL', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'X-WR-CALNAME:' + esc(C.eventPrefix)]
+    C.periods.forEach(function (p) {
+      var start = add(lmp, p.startWeek * 7)
+      var end = add(lmp, p.endWeek * 7 + 6)
+      if (diff(end, today) > 0) return
+      if (diff(start, today) > 0) start = today
+      lines.push('BEGIN:VEVENT', 'UID:' + p.id + '-' + ymd(due) + '@skudev.pl', 'DTSTAMP:' + stamp,
+        'DTSTART;VALUE=DATE:' + icsDate(start), 'DTEND;VALUE=DATE:' + icsDate(add(start, 1)),
+        'SUMMARY:' + esc(C.eventPrefix + ': ' + p.when),
+        'DESCRIPTION:' + esc(p.tests.map(function (x) { return '• ' + x }).join('\n')),
+        'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + esc(C.eventPrefix), 'TRIGGER:-PT15H', 'END:VALARM',
+        'END:VEVENT')
+    })
+    lines.push('END:VCALENDAR')
+    var blob = new Blob([lines.map(fold).join('\r\n') + '\r\n'], { type: 'text/calendar;charset=utf-8' })
+    var a = document.createElement('a')
+    a.href = URL.createObjectURL(blob)
+    a.download = C.fileName
+    document.body.appendChild(a)
+    a.click()
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove() }, 1000)
+    $('ics-msg').textContent = C.done
+  })
+})()`
+
+const icsHtml = c => `<form class="calc" id="ics-form" novalidate>
+          <h2 style="margin:0">${c.title}</h2>
+          <div class="calc-row">
+            <label for="ics-due">${c.label}</label>
+            <input type="date" id="ics-due" required>
+            <p class="calc-hint">${c.noDue}</p>
+          </div>
+          <button type="submit" class="btn btn-play calc-btn">${c.button}</button>
+          <p class="calc-hint" id="ics-msg" role="status" aria-live="polite"></p>
+          <p class="calc-hint">${c.note}</p>
+        </form>
+        <script type="application/json" id="ics-data">${jsonForScript({ ...c, periods: EXAM_PERIODS })}</script>
+        <script>${ICS_JS}</script>`
+
+function articleBlock(L, b) {
+  if (b.schedule) return scheduleHtml()
+  if (b.ics) return icsHtml(b.ics)
+  return block(b)
 }
 
 // ─── Kalkulator terminu porodu ──────────────────────────────────────────────
@@ -623,9 +718,9 @@ function sitemap() {
     alternates(landingUrl),
     alternates(indexUrl),
     ...pl.tools.map(tool => alternates(X => toolUrl(X, tool.id))),
-    ...pl.articles.map(a => alternates(X => articleUrl(X, a.id))),
+    ...pl.articles.map(a => alternates(X => articleUrlOrNull(X, a.id)).filter(x => !x.missing)),
   ]
-  const entries = groups.flatMap(alts => alts.map(a => `  <url>
+  const entries = groups.map(alts => alts.filter(x => !x.missing)).flatMap(alts => alts.map(a => `  <url>
     <loc>${a.href}</loc>
     <lastmod>${UPDATED}</lastmod>
 ${alts.map(x => `    <xhtml:link rel="alternate" hreflang="${x.lang}" href="${x.href}"/>`).join('\n')}
@@ -650,7 +745,8 @@ function write(L, rel, html) {
 }
 
 for (const L of LANGS) {
-  if (L.articles.length !== pl.articles.length) throw new Error(`${L.lang}: brak artykułów`)
+  const missing = pl.articles.filter(x => !(x.onlyLangs && !x.onlyLangs.includes(L.lang)) && !hasArticle(L, x.id))
+  if (missing.length) throw new Error(`${L.lang}: brak artykułów ${missing.map(x => x.id).join(", ")}`)
   write(L, L.appPath, landingPage(L))
   write(L, L.guidePath, indexPage(L))
   for (const a of L.articles) write(L, `${L.guidePath}${a.slug}/`, articlePage(L, a))
@@ -662,4 +758,4 @@ const robotsFile = path.join(ROOT, 'robots.txt')
 const robots = fs.readFileSync(robotsFile, 'utf8')
 if (!robots.includes(SITEMAP)) fs.writeFileSync(robotsFile, robots.trimEnd() + `\nSitemap: ${SITE}/${SITEMAP}\n`)
 
-console.log(`${LANGS.length} języków: strona aplikacji, poradnik, ${pl.tools.length} narzędzie i ${pl.articles.length} artykułów w każdym; ${SITEMAP}`)
+console.log(`${LANGS.length} języków: strona aplikacji, poradnik, ${pl.tools.length} narzędzie, artykuły: ${LANGS.map(L => L.lang + " " + L.articles.length).join(", ")}; ${SITEMAP}`)
