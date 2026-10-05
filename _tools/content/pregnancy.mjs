@@ -892,6 +892,7 @@ const exams = {
 const ui = {
   pl: {
     tools: 'Narzędzia', pregnancy: 'Ciąża', baby: 'Niemowlę', toolCta: 'Policz termin porodu', faq: 'Najczęstsze pytania',
+    toolApp: 'Tryb ciąży z licznikiem skurczy i badaniami, a po porodzie dziennik karmień, snu i zdrowia dla obojga rodziców.',
     sheet: {
       title: 'Ściągawka ciążowa na lodówkę (PDF)',
       text: 'Badania według tygodni, objawy, z którymi jedziesz do szpitala od razu, torba i miejsce na telefony. Jedna strona A4 do wydruku.',

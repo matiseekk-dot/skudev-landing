@@ -27,6 +27,7 @@ import es from './content/es.mjs'
 import { VIDEOS, VIDEO_UI } from './content/videos.mjs'
 import PREGNANCY from './content/pregnancy.mjs'
 import { EXAM_PERIODS, EXAM_VISITS_NOTE } from './content/exams-pl.mjs'
+import { RULES as BENEFIT_RULES, WIZARD_ITEMS, benefitsCalc, benefitsWizard } from './content/benefits-pl.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const SITE = 'https://skudev.pl'
@@ -40,7 +41,8 @@ const LANGS = [pl, en, de, fr, es]
 for (const L of LANGS) {
   const P = PREGNANCY[L.lang]
   L.pui = P.ui
-  L.tools = P.tools
+  // Kalkulator zasiłku i kreator świadczeń: polskie przepisy, tylko PL.
+  L.tools = L.lang === 'pl' ? [...P.tools, benefitsCalc, benefitsWizard] : P.tools
   L.articles = [...P.articles, ...L.articles.filter(a => !P.articles.some(x => x.id === a.id))]
 }
 const X_DEFAULT = 'en'
@@ -65,6 +67,7 @@ const indexUrl = L => L.guidePath
 const articleUrl = (L, id) => `${L.guidePath}${L.articles.find(a => a.id === id).slug}/`
 const articleUrlOrNull = (L, id) => (hasArticle(L, id) ? articleUrl(L, id) : null)
 const toolUrl = (L, id) => `${L.guidePath}${L.tools.find(t => t.id === id).slug}/`
+const toolUrlOrNull = (L, id) => (L.tools.some(t => t.id === id) ? toolUrl(L, id) : null)
 
 function alternates(urlFor) {
   return LANGS.map(L => {
@@ -718,13 +721,269 @@ ${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
 ${footer(L)}`
 }
 
+// ─── Kalkulator zasiłku i kreator świadczeń (PL) ────────────────────────────
+// Dane i progi: content/benefits-pl.mjs (RULES, WIZARD_ITEMS). Liczy przeglądarka.
+
+// Wspólna rama strony narzędzia: okruszki, odpowiedź, środek, bloki, FAQ, źródła.
+function toolShell(L, tool, inner) {
+  const url = toolUrl(L, tool.id)
+  const alts = alternates(X => toolUrlOrNull(X, tool.id))
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      { '@type': 'WebApplication', name: tool.title, description: tool.description, url: SITE + url, inLanguage: L.lang,
+        applicationCategory: 'FinanceApplication', operatingSystem: 'Any', offers: { '@type': 'Offer', price: '0', priceCurrency: L.currency } },
+      { '@type': 'FAQPage', mainEntity: tool.faq.map(x => ({ '@type': 'Question', name: x.q, acceptedAnswer: { '@type': 'Answer', text: x.a } })) },
+      { '@type': 'BreadcrumbList', itemListElement: [
+        { '@type': 'ListItem', position: 1, name: L.ui.guideName, item: SITE + L.guidePath },
+        { '@type': 'ListItem', position: 2, name: tool.title, item: SITE + url },
+      ] },
+    ],
+  }
+  const related = tool.related.map(id => L.articles.find(x => x.id === id)).filter(Boolean)
+  return `${head({ L, title: `${tool.metaTitle} | ${L.appName}`, description: tool.description, url, image: `/assets/sr/${L.lang}/og.jpg`, alts, jsonLd, type: 'website' })}
+${header(L, `skudev · <em>${L.ui.guideName.toLowerCase()}</em>`, alts)}
+    <article class="article">
+      <div class="container">
+        <div class="crumbs"><a href="${L.guidePath}">${L.ui.guideName}</a> / ${tool.title}</div>
+        <h1>${tool.title}</h1>
+        <div class="answer">
+          <div class="answer-label">${L.ui.answer}</div>
+          <p>${tool.answer}</p>
+        </div>
+        ${inner}
+        ${tool.blocks.map(block).join('\n        ')}
+        <h2>${L.pui.faq}</h2>
+        <div class="faq">
+          ${tool.faq.map(x => `<details><summary>${x.q}</summary><p>${x.a}</p></details>`).join('\n          ')}
+        </div>
+        <div class="app-card">
+          <img src="/spokojny-rodzic/icon-192.png" alt="" width="64" height="64">
+          <div>
+            <h3>${L.appName}</h3>
+            <p>${L.pui.toolApp || ''} ${L.ui.appSuffix}</p>
+            <a class="btn btn-play" href="${play('narzedzie', `${L.lang}-${tool.id}`)}" rel="noopener">${L.ui.cta}</a>
+          </div>
+        </div>
+        <div class="sources">
+          <h2>${L.ui.sources}</h2>
+          <ul>${tool.sources.map(src => `<li>${src}</li>`).join('')}</ul>
+          <p style="margin-top:14px">${tool.disclaimer}</p>
+        </div>
+        ${related.length ? `<div class="related">
+          <h2>${L.ui.related}</h2>
+          <div class="guide-grid">
+            ${related.map(r => guideCard(L, r)).join('\n            ')}
+          </div>
+        </div>` : ''}
+      </div>
+    </article>
+${footer(L)}`
+}
+
+const BENEFITS_CALC_JS = String.raw`(function () {
+  var C = JSON.parse(document.getElementById('bc-data').textContent)
+  var R = C.rules, $ = function (id) { return document.getElementById(id) }
+  var zl = new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN', maximumFractionDigits: 0 })
+  function money(n) { return zl.format(Math.round(n)) }
+  function monthly(base, rate) { return Math.max(R.minMonthly, base * rate) }
+  function net(g) { return g - Math.round(g * R.pitRate) }
+  function total(m, weeks) { return m / 30 * weeks * 7 }
+  // 1 tydzień, 2 do 4 tygodnie (bez 12 do 14), reszta tygodni
+  function weeksWord(n) {
+    var f = C.result.weekForms
+    if (n === 1) return f[0]
+    return n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? f[1] : f[2]
+  }
+  // taxFree: świadczenie rodzicielskie jest wolne od podatku (1000 zł na rękę)
+  function row(label, m, weeks, taxFree) {
+    return '<li><span>' + label + ' · ' + weeks + ' ' + weeksWord(weeks) + '</span><strong>' + money(m) + '</strong><em>' +
+      (taxFree ? '' : C.result.net + ' ' + money(net(m)) + ' · ') + C.result.total + ' ' + money(total(m, weeks)) + '</em></li>'
+  }
+  function sync() {
+    var s = $('bc-status').value
+    $('bc-amount-row').hidden = s === 'none'
+    $('bc-partner-row').hidden = s === 'none'
+    if (s !== 'none') $('bc-amount-label').textContent = C.form.amount[s]
+  }
+  $('bc-status').addEventListener('change', function () { sync(); $('bc-res').hidden = true })
+  sync()
+  $('bc-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var s = $('bc-status').value, kids = $('bc-kids').value === '2' ? 2 : 1, res = $('bc-res'), html = ''
+    $('bc-err').textContent = ''
+    if (s === 'none') {
+      var w = R.parentalBenefitWeeks[kids]
+      html = '<div class="calc-due"><span>' + C.result.benefit + '</span><strong>' + money(R.parentalBenefit) + ' / mies.</strong></div>' +
+        '<p class="calc-hint">' + C.result.benefitHint + '</p><ul class="calc-ms">' + row(C.result.benefit, R.parentalBenefit, w, true) + '</ul>'
+    } else {
+      var gross = parseFloat(String($('bc-amount').value).replace(',', '.'))
+      if (!(gross > 0)) { $('bc-err').textContent = C.result.error; res.hidden = true; return }
+      var base = gross * (1 - R.contributions), wk = R.weeks[kids]
+      var long = monthly(base, R.rateLong), full = monthly(base, R.rateMaternity), part = monthly(base, R.rateParental)
+      html = '<div class="calc-due"><span>' + C.result.base + '</span><strong>' + money(base) + '</strong></div>' +
+        '<h2>' + C.result.optionLong + '</h2><p class="calc-hint">' + C.result.optionLongHint + '</p><ul class="calc-ms">' +
+        row(C.result.maternity + ' + ' + C.result.parental, long, wk[0] + wk[1]) + '</ul>' +
+        '<h2>' + C.result.optionSplit + '</h2><p class="calc-hint">' + C.result.optionSplitHint + '</p><ul class="calc-ms">' +
+        row(C.result.maternity, full, wk[0]) + row(C.result.parental, part, wk[1]) + '</ul>'
+      var pg = parseFloat(String($('bc-partner').value).replace(',', '.'))
+      if (pg > 0) html += '<ul class="calc-ms">' + row(C.result.other, monthly(pg * (1 - R.contributions), R.rateParental), R.otherParentWeeks) + '</ul>'
+      html += '<p class="calc-hint">' + C.result.netNote + ' ' + C.result.minNote + '</p>'
+    }
+    res.innerHTML = html
+    res.hidden = false
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+})()`
+
+function benefitsCalcPage(L, tool) {
+  const F = tool.form
+  const inner = `<form class="calc" id="bc-form" novalidate>
+          <div class="calc-row">
+            <label for="bc-status">${F.status}</label>
+            <select id="bc-status">${Object.entries(F.statuses).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select>
+          </div>
+          <div class="calc-row" id="bc-amount-row">
+            <label for="bc-amount" id="bc-amount-label">${F.amount.employee}</label>
+            <input type="number" id="bc-amount" min="0" step="100" inputmode="decimal" placeholder="np. 7000">
+          </div>
+          <div class="calc-row">
+            <label for="bc-kids">${F.kids}</label>
+            <select id="bc-kids">${Object.entries(F.kidsOptions).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select>
+          </div>
+          <div class="calc-row" id="bc-partner-row">
+            <label for="bc-partner">${F.partner}</label>
+            <input type="number" id="bc-partner" min="0" step="100" inputmode="decimal">
+            <p class="calc-hint">${F.partnerHint}</p>
+          </div>
+          <button type="submit" class="btn btn-play calc-btn">${F.button}</button>
+          <p class="calc-error" id="bc-err" role="alert"></p>
+        </form>
+        <section class="calc-result" id="bc-res" hidden aria-live="polite"></section>
+        <script type="application/json" id="bc-data">${jsonForScript({ rules: BENEFIT_RULES, form: F, result: tool.result })}</script>
+        <script>${BENEFITS_CALC_JS}</script>`
+  return toolShell(L, tool, inner)
+}
+
+const BENEFITS_WIZARD_JS = String.raw`(function () {
+  var C = JSON.parse(document.getElementById('bw-data').textContent)
+  var $ = function (id) { return document.getElementById(id) }
+  function pad(n) { return (n < 10 ? '0' : '') + n }
+  function ymd(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) }
+  function noon(s) { var d = new Date(s + 'T12:00:00'); return isNaN(d.getTime()) ? null : d }
+  function addD(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x }
+  function addM(d, n) { var x = new Date(d.getTime()); var day = x.getDate(); x.setDate(1); x.setMonth(x.getMonth() + n); var last = new Date(x.getFullYear(), x.getMonth() + 1, 0).getDate(); x.setDate(Math.min(day, last)); return x }
+  function shift(d, o) { return o.d ? addD(d, o.d) : addM(d, o.m) }
+  var fmt = new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' })
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c] }) }
+  function tpl(s, v) { return s.replace(/\{(\w+)\}/g, function (m, k) { return v[k] }) }
+  var today = noon(ymd(new Date())), lastEvents = []
+  function radio(name) { var r = document.querySelector('input[name="' + name + '"]:checked'); return r ? r.value : '' }
+  $('bw-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var born = noon($('bw-date').value), res = $('bw-res')
+    $('bw-err').textContent = ''
+    if (!born) { $('bw-err').textContent = C.result.error; res.hidden = true; return }
+    var insured = radio('bw-insured') === 'yes', partner = radio('bw-partner') === 'yes'
+    var inc = parseFloat(String($('bw-income').value).replace(',', '.'))
+    var hasInc = inc >= 0 && $('bw-income').value !== ''
+    var rows = [], events = []
+    C.items.forEach(function (it) {
+      var check = false
+      if (it.when === 'insured' && !insured) return
+      if (it.when === 'uninsured' && insured) return
+      if (it.when === 'partner' && !partner) return
+      if (it.when === 'income1922' || it.when === 'income674') {
+        var limit = it.when === 'income1922' ? 1922 : 674
+        if (hasInc && inc > limit) return
+        check = !hasInc
+      }
+      var dateText = '', sort = 0
+      if (it.due && it.due.taxYear) { dateText = tpl(C.result.taxYear, { year: born.getFullYear() }); sort = 9e15 }
+      else if (it.due) {
+        var d = shift(born, it.due); sort = d.getTime()
+        dateText = tpl(d < today ? C.result.passed : C.result.until, { date: fmt.format(d) })
+        if (d >= today) events.push({ id: it.id, date: d, title: it.title, text: it.text })
+      } else if (it.from) { var f = shift(born, it.from); sort = f.getTime(); dateText = tpl(C.result.from, { date: fmt.format(f) }) }
+      rows.push({ sort: sort, html: '<li class="bw-item"><div class="bw-head"><strong>' + esc(it.title) + '</strong><span>' + esc(dateText) + '</span></div>' +
+        '<div class="bw-amount">' + esc(it.amount) + (check ? ' · ' + esc(C.result.check) : '') + '</div><p>' + esc(it.text) +
+        (it.link ? ' <a href="' + it.link.href + '">' + esc(it.link.text) + '</a>' : '') + '</p></li>' })
+    })
+    rows.sort(function (a, b) { return a.sort - b.sort })
+    lastEvents = events
+    res.innerHTML = '<h2>' + C.result.title + '</h2>' + (born > today ? '<p class="calc-hint">' + C.result.fromDue + '</p>' : '') +
+      '<ul class="bw-list">' + rows.map(function (r) { return r.html }).join('') + '</ul>' +
+      (events.length ? '<button type="button" class="btn btn-ghost calc-btn" id="bw-ics">' + C.result.ics + '</button>' : '')
+    res.hidden = false
+    var btn = $('bw-ics'); if (btn) btn.addEventListener('click', ics)
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+  function icsEsc(s) { return String(s).replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n') }
+  function fold(line) {
+    var out = [], cur = '', bytes = 0
+    for (var i = 0; i < line.length; i++) { var ch = line[i], b = unescape(encodeURIComponent(ch)).length
+      if (bytes + b > 73) { out.push(cur); cur = ' '; bytes = 1 } cur += ch; bytes += b }
+    out.push(cur); return out.join('\r\n')
+  }
+  function d8(d) { return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) }
+  function ics() {
+    var stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z')
+    var L = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//skudev.pl//Spokojny Rodzic//PL', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH', 'X-WR-CALNAME:' + icsEsc(C.result.icsName)]
+    lastEvents.forEach(function (ev) {
+      L.push('BEGIN:VEVENT', 'UID:' + ev.id + '-' + d8(ev.date) + '@skudev.pl', 'DTSTAMP:' + stamp,
+        'DTSTART;VALUE=DATE:' + d8(addD(ev.date, -3)), 'DTEND;VALUE=DATE:' + d8(addD(ev.date, -2)),
+        'SUMMARY:' + icsEsc(ev.title + ' (termin ' + fmt.format(ev.date) + ')'), 'DESCRIPTION:' + icsEsc(ev.text),
+        'BEGIN:VALARM', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsEsc(ev.title), 'TRIGGER:-PT15H', 'END:VALARM', 'END:VEVENT')
+    })
+    L.push('END:VCALENDAR')
+    var a = document.createElement('a')
+    a.href = URL.createObjectURL(new Blob([L.map(fold).join('\r\n') + '\r\n'], { type: 'text/calendar;charset=utf-8' }))
+    a.download = C.result.icsFile
+    document.body.appendChild(a); a.click()
+    setTimeout(function () { URL.revokeObjectURL(a.href); a.remove() }, 1000)
+  }
+})()`
+
+function benefitsWizardPage(L, tool) {
+  const F = tool.form
+  const yesNo = name => `<div class="bw-radios"><label><input type="radio" name="${name}" value="yes" checked> ${F.yes}</label><label><input type="radio" name="${name}" value="no"> ${F.no}</label></div>`
+  const inner = `<form class="calc" id="bw-form" novalidate>
+          <div class="calc-row">
+            <label for="bw-date">${F.date}</label>
+            <input type="date" id="bw-date" required>
+          </div>
+          <div class="calc-row">
+            <div class="calc-label">${F.insured}</div>
+            ${yesNo('bw-insured')}
+            <p class="calc-hint">${F.insuredHint}</p>
+          </div>
+          <div class="calc-row">
+            <div class="calc-label">${F.partner}</div>
+            ${yesNo('bw-partner')}
+          </div>
+          <div class="calc-row">
+            <label for="bw-income">${F.income}</label>
+            <input type="number" id="bw-income" min="0" step="50" inputmode="decimal">
+            <p class="calc-hint">${F.incomeHint}</p>
+          </div>
+          <button type="submit" class="btn btn-play calc-btn">${F.button}</button>
+          <p class="calc-error" id="bw-err" role="alert"></p>
+        </form>
+        <section class="calc-result" id="bw-res" hidden aria-live="polite"></section>
+        <script type="application/json" id="bw-data">${jsonForScript({ items: WIZARD_ITEMS, result: tool.result })}</script>
+        <script>${BENEFITS_WIZARD_JS}</script>`
+  return toolShell(L, tool, inner)
+}
+
+const TOOL_PAGES = { dueDate: (L, t) => dueDatePage(L, t), benefitsCalc: benefitsCalcPage, benefitsWizard: benefitsWizardPage }
+
 // ─── Mapa stron ──────────────────────────────────────────────────────────────
 
 function sitemap() {
   const groups = [
     alternates(landingUrl),
     alternates(indexUrl),
-    ...pl.tools.map(tool => alternates(X => toolUrl(X, tool.id))),
+    ...pl.tools.map(tool => alternates(X => toolUrlOrNull(X, tool.id))),
     ...pl.articles.map(a => alternates(X => articleUrlOrNull(X, a.id)).filter(x => !x.missing)),
   ]
   const entries = groups.map(alts => alts.filter(x => !x.missing)).flatMap(alts => alts.map(a => `  <url>
@@ -757,7 +1016,7 @@ for (const L of LANGS) {
   write(L, L.appPath, landingPage(L))
   write(L, L.guidePath, indexPage(L))
   for (const a of L.articles) write(L, `${L.guidePath}${a.slug}/`, articlePage(L, a))
-  for (const tool of L.tools) write(L, `${L.guidePath}${tool.slug}/`, dueDatePage(L, tool))
+  for (const tool of L.tools) write(L, `${L.guidePath}${tool.slug}/`, TOOL_PAGES[tool.type || 'dueDate'](L, tool))
 }
 fs.writeFileSync(path.join(ROOT, SITEMAP), sitemap())
 
