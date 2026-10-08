@@ -72,6 +72,7 @@ export const benefitsCalc = {
     { p: 'Wniosek o urlop macierzyński i rodzicielski złożony w ciągu 21 dni od porodu daje 81,5% podstawy przez cały okres. Bez takiego wniosku dostajesz 100% za 20 tygodni urlopu macierzyńskiego, a potem 70% za urlop rodzicielski. Łącznie wychodzi prawie tyle samo, różni się tylko rozłożenie pieniędzy w czasie.' },
     { h2: '9 tygodni dla drugiego rodzica' },
     { p: 'Z 41 tygodni urlopu rodzicielskiego 9 tygodni przysługuje wyłącznie drugiemu rodzicowi i nie przechodzi na mamę. Za ten czas zasiłek wynosi zawsze 70% podstawy drugiego rodzica.' },
+    { p: 'Daty urlopów i dzień powrotu do pracy policzysz w <a href="/poradnik/kalkulator-urlopu-macierzynskiego/">kalkulatorze urlopu macierzyńskiego i rodzicielskiego</a>.' },
     { h2: 'Bez ubezpieczenia chorobowego' },
     { p: 'Gdy nie masz prawa do zasiłku macierzyńskiego, przysługuje świadczenie rodzicielskie: 1000 zł miesięcznie przez 52 tygodnie (przy bliźniętach 65), bez kryterium dochodowego.' },
   ],

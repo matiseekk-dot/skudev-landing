@@ -727,3 +727,7 @@ td.num { white-space: normal; min-width: 8.5em; }
 .article .bw-item p { font-size: 15px; }
 .calc-ms li em { display: block; font-style: normal; font-size: 13px; color: var(--ink-3); width: 100%; }
 .calc-ms li { flex-wrap: wrap; }
+/* Kalkulator urlopów (paź 2026) */
+.lc-check { display: flex !important; align-items: flex-start; gap: 10px; font-weight: 500 !important; color: var(--ink) !important; cursor: pointer; }
+.lc-check input { width: 20px; height: 20px; min-height: 0; margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; }
+.bw-item.lc-past { opacity: 0.55; }

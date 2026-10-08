@@ -28,6 +28,7 @@ import { VIDEOS, VIDEO_UI } from './content/videos.mjs'
 import PREGNANCY from './content/pregnancy.mjs'
 import { EXAM_PERIODS, EXAM_VISITS_NOTE } from './content/exams-pl.mjs'
 import { RULES as BENEFIT_RULES, WIZARD_ITEMS, benefitsCalc, benefitsWizard } from './content/benefits-pl.mjs'
+import { LEAVE_RULES, leaveCalc } from './content/leave-pl.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const SITE = 'https://skudev.pl'
@@ -42,7 +43,7 @@ for (const L of LANGS) {
   const P = PREGNANCY[L.lang]
   L.pui = P.ui
   // Kalkulator zasiłku i kreator świadczeń: polskie przepisy, tylko PL.
-  L.tools = L.lang === 'pl' ? [...P.tools, benefitsCalc, benefitsWizard] : P.tools
+  L.tools = L.lang === 'pl' ? [...P.tools, benefitsCalc, leaveCalc, benefitsWizard] : P.tools
   L.articles = [...P.articles, ...L.articles.filter(a => !P.articles.some(x => x.id === a.id))]
 }
 const X_DEFAULT = 'en'
@@ -975,7 +976,117 @@ function benefitsWizardPage(L, tool) {
   return toolShell(L, tool, inner)
 }
 
-const TOOL_PAGES = { dueDate: (L, t) => dueDatePage(L, t), benefitsCalc: benefitsCalcPage, benefitsWizard: benefitsWizardPage }
+// ─── Kalkulator urlopu macierzyńskiego i rodzicielskiego (PL) ──────────────
+// Dane: content/leave-pl.mjs (LEAVE_RULES). Liczy przeglądarka.
+
+const LEAVE_CALC_JS = String.raw`(function () {
+  var C = JSON.parse(document.getElementById('lc-data').textContent)
+  var R = C.rules, $ = function (id) { return document.getElementById(id) }
+  function pad(n) { return (n < 10 ? '0' : '') + n }
+  function ymd(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) }
+  function noon(s) { var d = new Date(s + 'T12:00:00'); return isNaN(d.getTime()) ? null : d }
+  function addD(d, n) { var x = new Date(d.getTime()); x.setDate(x.getDate() + n); return x }
+  function addM(d, n) { var x = new Date(d.getTime()); var day = x.getDate(); x.setDate(1); x.setMonth(x.getMonth() + n); var last = new Date(x.getFullYear(), x.getMonth() + 1, 0).getDate(); x.setDate(Math.min(day, last)); return x }
+  var fmt = new Intl.DateTimeFormat('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' })
+  var today = noon(ymd(new Date()))
+  function tpl(s, v) { return s.replace(/\{(\w+)\}/g, function (m, k) { return v[k] }) }
+  function weeksWord(n) {
+    var f = C.result.weekForms
+    if (n === 1) return f[0]
+    return n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > 14) ? f[1] : f[2]
+  }
+  function head(label, weeks) {
+    return '<div class="bw-head"><strong>' + label + '</strong><span>' + weeks + ' ' + weeksWord(weeks) + '</span></div>'
+  }
+  function period(label, from, weeks) {
+    var to = addD(from, weeks * 7 - 1)
+    return { to: to, html: '<li class="bw-item">' + head(label, weeks) + '<div class="bw-amount">' + fmt.format(from) + ' do ' + fmt.format(to) + '</div></li>' }
+  }
+  function deadline(label, d) {
+    var past = d < today
+    return '<li class="bw-item' + (past ? ' lc-past' : '') + '"><div class="bw-head"><strong>' + label + '</strong></div>' +
+      '<div class="bw-amount">' + fmt.format(d) + (past ? ' (' + C.result.passed + ')' : '') + '</div></li>'
+  }
+  function sync() { $('lc-hweeks-row').hidden = $('lc-hospital').value === 'no' }
+  $('lc-hospital').addEventListener('change', sync)
+  sync()
+  $('lc-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var born = noon($('lc-date').value), res = $('lc-res')
+    $('lc-err').textContent = ''
+    if (!born) { $('lc-err').textContent = C.result.error; res.hidden = true; return }
+    var kids = parseInt($('lc-kids').value, 10) || 1
+    var before = Math.min(R.maxBeforeBirthWeeks, Math.max(0, parseInt($('lc-before').value, 10) || 0))
+    var hosp = $('lc-hospital').value
+    var hw = Math.ceil((parseInt($('lc-hweeks').value, 10) || 0) / 7)
+    var otherNow = $('lc-other').checked
+    var list = [], cur
+    var mat = period(C.result.maternity, addD(born, -before * 7), R.maternity[kids])
+    list.push(mat.html); cur = addD(mat.to, 1)
+    var sup = hosp === 'no' ? 0 : Math.min(R.supplementCap[hosp] || 0, Math.max(0, hw))
+    if (sup > 0) { var s = period(C.result.supplement, cur, sup); list.push(s.html); cur = addD(s.to, 1) }
+    var parTotal = kids > 1 ? R.parental.multiple : R.parental.single
+    var parStart = cur
+    var par = period(C.result.parental, cur, parTotal - R.otherParentWeeks)
+    list.push(par.html)
+    var back = addD(par.to, 1)
+    var limit = new Date(born.getFullYear() + R.parentalUntilAge, 11, 31, 12)
+    var home = null
+    if (otherNow) { var o = period(C.result.other, back, R.otherParentWeeks); list.push(o.html); home = o.to }
+    else list.push('<li class="bw-item">' + head(C.result.other, R.otherParentWeeks) + '<p>' + tpl(C.result.otherLater, { date: fmt.format(limit) }) + '</p></li>')
+    var dl = [deadline(C.result.dl81, addD(born, R.applicationDays)), deadline(C.result.dlParental, addD(parStart, -R.applicationDays))]
+    if (sup > 0) dl.push(deadline(C.result.dlSupplement, addD(mat.to, -R.applicationDays)))
+    dl.push(deadline(C.result.dlPaternity, addD(addM(born, R.paternityMonths), -1)))
+    res.innerHTML = '<div class="calc-due"><span>' + C.result.back + '</span><strong>' + fmt.format(back) + '</strong></div>' +
+      '<p class="calc-hint">' + C.result.backHint + '</p>' +
+      (home ? '<p class="calc-hint">' + tpl(C.result.homeUntil, { date: fmt.format(home), next: fmt.format(addD(home, 1)) }) + '</p>' : '') + (born > today ? '<p class="calc-hint">' + C.result.planned + '</p>' : '') +
+      '<h2>' + C.result.title + '</h2><ul class="bw-list">' + list.join('') + '</ul>' +
+      '<h2>' + C.result.deadlines + '</h2><ul class="bw-list">' + dl.join('') + '</ul>' +
+      '<p class="calc-hint"><a href="/poradnik/kalkulator-zasilku-macierzynskiego/">' + C.result.zasilek + '</a></p>'
+    res.hidden = false
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+})()`
+
+function leaveCalcPage(L, tool) {
+  const F = tool.form
+  const opts = o => Object.entries(o).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')
+  const inner = `<form class="calc" id="lc-form" novalidate>
+          <div class="calc-row">
+            <label for="lc-date">${F.date}</label>
+            <input type="date" id="lc-date" required>
+          </div>
+          <div class="calc-row">
+            <label for="lc-kids">${F.kids}</label>
+            <select id="lc-kids">${opts(F.kidsOptions)}</select>
+          </div>
+          <div class="calc-row">
+            <label for="lc-before">${F.before}</label>
+            <select id="lc-before">${[0, 1, 2, 3, 4, 5, 6].map(n => `<option value="${n}">${n}</option>`).join('')}</select>
+            <p class="calc-hint">${F.beforeHint}</p>
+          </div>
+          <div class="calc-row">
+            <label for="lc-hospital">${F.hospital}</label>
+            <select id="lc-hospital">${opts(F.hospitalOptions)}</select>
+          </div>
+          <div class="calc-row" id="lc-hweeks-row" hidden>
+            <label for="lc-hweeks">${F.hospitalDays}</label>
+            <input type="number" id="lc-hweeks" min="0" max="365" step="1" inputmode="numeric" placeholder="np. 17">
+            <p class="calc-hint">${F.hospitalHint}</p>
+          </div>
+          <div class="calc-row">
+            <label class="lc-check"><input type="checkbox" id="lc-other"> ${F.otherNow}</label>
+          </div>
+          <button type="submit" class="btn btn-play calc-btn">${F.button}</button>
+          <p class="calc-error" id="lc-err" role="alert"></p>
+        </form>
+        <section class="calc-result" id="lc-res" hidden aria-live="polite"></section>
+        <script type="application/json" id="lc-data">${jsonForScript({ rules: LEAVE_RULES, result: tool.result })}</script>
+        <script>${LEAVE_CALC_JS}</script>`
+  return toolShell(L, tool, inner)
+}
+
+const TOOL_PAGES = { dueDate: (L, t) => dueDatePage(L, t), benefitsCalc: benefitsCalcPage, benefitsWizard: benefitsWizardPage, leaveCalc: leaveCalcPage }
 
 // ─── Mapa stron ──────────────────────────────────────────────────────────────
 
