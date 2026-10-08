@@ -134,7 +134,8 @@ export const WIZARD_ITEMS = [
   { id: 'pit', when: 'all', due: { taxYear: true },
     title: 'Ulga na dziecko w PIT',
     amount: '1112,04 zł rocznie na pierwsze i drugie dziecko',
-    text: 'Odliczasz w zeznaniu podatkowym za rok, w którym dziecko się urodziło. Przy jednym dziecku obowiązuje limit dochodu rodziców.' },
+    text: 'Odliczasz w zeznaniu podatkowym za rok, w którym dziecko się urodziło. Przy jednym dziecku obowiązuje limit dochodu rodziców.',
+    link: { href: '/poradnik/kalkulator-ulgi-na-dziecko/', text: 'Policz ulgę' } },
 ]
 
 export const benefitsWizard = {

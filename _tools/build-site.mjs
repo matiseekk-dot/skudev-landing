@@ -29,6 +29,7 @@ import PREGNANCY from './content/pregnancy.mjs'
 import { EXAM_PERIODS, EXAM_VISITS_NOTE } from './content/exams-pl.mjs'
 import { RULES as BENEFIT_RULES, WIZARD_ITEMS, benefitsCalc, benefitsWizard } from './content/benefits-pl.mjs'
 import { LEAVE_RULES, leaveCalc } from './content/leave-pl.mjs'
+import { ULGA_RULES, ulgaCalc } from './content/ulga-pl.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const SITE = 'https://skudev.pl'
@@ -43,7 +44,7 @@ for (const L of LANGS) {
   const P = PREGNANCY[L.lang]
   L.pui = P.ui
   // Kalkulator zasiłku i kreator świadczeń: polskie przepisy, tylko PL.
-  L.tools = L.lang === 'pl' ? [...P.tools, benefitsCalc, leaveCalc, benefitsWizard] : P.tools
+  L.tools = L.lang === 'pl' ? [...P.tools, benefitsCalc, leaveCalc, benefitsWizard, ulgaCalc] : P.tools
   L.articles = [...P.articles, ...L.articles.filter(a => !P.articles.some(x => x.id === a.id))]
 }
 const X_DEFAULT = 'en'
@@ -1086,7 +1087,109 @@ function leaveCalcPage(L, tool) {
   return toolShell(L, tool, inner)
 }
 
-const TOOL_PAGES = { dueDate: (L, t) => dueDatePage(L, t), benefitsCalc: benefitsCalcPage, benefitsWizard: benefitsWizardPage, leaveCalc: leaveCalcPage }
+// ─── Kalkulator ulgi na dziecko w PIT (PL) ──────────────────────────────────
+// Dane: content/ulga-pl.mjs (ULGA_RULES). Liczy przeglądarka.
+
+const ULGA_CALC_JS = String.raw`(function () {
+  var C = JSON.parse(document.getElementById('uc-data').textContent)
+  var R = C.rules, $ = function (id) { return document.getElementById(id) }
+  var zl = new Intl.NumberFormat('pl-PL', { style: 'currency', currency: 'PLN', minimumFractionDigits: 2, maximumFractionDigits: 2 })
+  function money(n) { return zl.format(Math.round(n * 100) / 100) }
+  function num(id) { var v = String($(id).value).replace(/\s/g, '').replace(',', '.'); return v === '' ? null : parseFloat(v) }
+  function tpl(s, v) { return s.replace(/\{(\w+)\}/g, function (m, k) { return v[k] }) }
+  function sync() { $('uc-single-rows').hidden = $('uc-kids').value !== '1' }
+  $('uc-kids').addEventListener('change', sync)
+  sync()
+  $('uc-form').addEventListener('submit', function (e) {
+    e.preventDefault()
+    var res = $('uc-res'), kids = parseInt($('uc-kids').value, 10) || 1
+    $('uc-err').textContent = ''
+    var born = $('uc-born').value, lastMonths = born === 'no' ? 12 : 12 - parseInt(born, 10)
+    var html = '', total = 0, rows = ''
+    if (kids === 1 && !$('uc-disability').checked) {
+      var income = num('uc-income')
+      if (income === null || !(income >= 0)) { $('uc-err').textContent = C.result.error; res.hidden = true; return }
+      var limit = R.limits[$('uc-status').value]
+      if (income > limit) {
+        res.innerHTML = '<div class="calc-due"><span>' + C.result.total + '</span><strong>' + money(0) + '</strong></div><p class="calc-hint">' +
+          tpl(C.result.overLimit, { limit: money(limit) }) + '</p>'
+        res.hidden = false; res.scrollIntoView({ behavior: 'smooth', block: 'start' }); return
+      }
+    }
+    for (var i = 0; i < kids; i++) {
+      var m = R.monthly[Math.min(i, R.monthly.length - 1)], months = i === kids - 1 ? lastMonths : 12
+      var amount = m * months
+      total += amount
+      rows += '<li><span>' + tpl(C.result.child, { n: i + 1 }) + ' · ' + tpl(C.result.perMonth, { amount: money(m), months: months }) + '</span><strong>' + money(amount) + '</strong></li>'
+    }
+    html = '<div class="calc-due"><span>' + C.result.total + '</span><strong>' + money(total) + '</strong></div><ul class="calc-ms">' + rows + '</ul>'
+    var tax = num('uc-tax'), contrib = num('uc-contrib')
+    if (tax !== null && tax >= 0) {
+      var deducted = Math.min(total, tax), rest = total - deducted
+      html += '<ul class="calc-ms"><li><span>' + C.result.deducted + '</span><strong>' + money(deducted) + '</strong></li>'
+      if (rest > 0 && contrib !== null && contrib >= 0) {
+        var refund = Math.min(rest, contrib)
+        html += '<li><span>' + C.result.refund + '</span><strong>' + money(refund) + '</strong></li>'
+        if (rest - refund > 0.004) html += '<li><span>' + C.result.lost + '</span><strong>' + money(rest - refund) + '</strong></li>'
+        html += '</ul>'
+      } else {
+        html += '</ul>' + (rest > 0 ? '<p class="calc-hint">' + tpl(C.result.refundMax, { amount: money(rest) }) + '</p>' : '')
+      }
+    }
+    html += '<p class="calc-hint">' + C.result.split + ' ' + C.result.linear + '</p>'
+    res.innerHTML = html
+    res.hidden = false
+    res.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+})()`
+
+function ulgaCalcPage(L, tool) {
+  const F = tool.form
+  const opts = o => Object.entries(o).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')
+  const inner = `<form class="calc" id="uc-form" novalidate>
+          <div class="calc-row">
+            <label for="uc-kids">${F.kids}</label>
+            <select id="uc-kids">${[1, 2, 3, 4, 5, 6, 7, 8].map(n => `<option value="${n}">${n}</option>`).join('')}</select>
+            <p class="calc-hint">${F.kidsHint}</p>
+          </div>
+          <div class="calc-row">
+            <label for="uc-born">${F.born}</label>
+            <select id="uc-born"><option value="no">${F.bornNo}</option>${F.months.map((m, i) => `<option value="${i}">${m}</option>`).join('')}</select>
+          </div>
+          <div id="uc-single-rows">
+            <div class="calc-row">
+              <label for="uc-status">${F.status}</label>
+              <select id="uc-status">${opts(F.statuses)}</select>
+            </div>
+            <div class="calc-row">
+              <label for="uc-income">${F.income}</label>
+              <input type="text" id="uc-income" inputmode="decimal" placeholder="np. 95000">
+              <p class="calc-hint">${F.incomeHint}</p>
+            </div>
+            <div class="calc-row">
+              <label class="lc-check"><input type="checkbox" id="uc-disability"> ${F.disability}</label>
+            </div>
+          </div>
+          <div class="calc-row">
+            <label for="uc-tax">${F.tax}</label>
+            <input type="text" id="uc-tax" inputmode="decimal">
+            <p class="calc-hint">${F.taxHint}</p>
+          </div>
+          <div class="calc-row">
+            <label for="uc-contrib">${F.contrib}</label>
+            <input type="text" id="uc-contrib" inputmode="decimal">
+            <p class="calc-hint">${F.contribHint}</p>
+          </div>
+          <button type="submit" class="btn btn-play calc-btn">${F.button}</button>
+          <p class="calc-error" id="uc-err" role="alert"></p>
+        </form>
+        <section class="calc-result" id="uc-res" hidden aria-live="polite"></section>
+        <script type="application/json" id="uc-data">${jsonForScript({ rules: ULGA_RULES, result: tool.result })}</script>
+        <script>${ULGA_CALC_JS}</script>`
+  return toolShell(L, tool, inner)
+}
+
+const TOOL_PAGES = { dueDate: (L, t) => dueDatePage(L, t), benefitsCalc: benefitsCalcPage, benefitsWizard: benefitsWizardPage, leaveCalc: leaveCalcPage, ulgaCalc: ulgaCalcPage }
 
 // ─── Mapa stron ──────────────────────────────────────────────────────────────
 
