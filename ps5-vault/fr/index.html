@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="fr-FR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PS5 Vault · Suivi de collection de jeux : dépenses, pile de la honte, année en jeux</title>
+  <meta name="description" content="Combien dépenses-tu vraiment en jeux et combien d’argent dort sur ton étagère ? PS5 Vault suit ta collection, tes dépenses, tes heures et ta pile de la honte. Import Steam, PSN, Xbox et Playnite. Gratuit, sans compte, sans pub.">
+  <link rel="canonical" href="https://skudev.pl/ps5-vault/fr/">
+  <link rel="alternate" hreflang="pl" href="https://skudev.pl/ps5-vault/">
+  <link rel="alternate" hreflang="en" href="https://skudev.pl/ps5-vault/en/">
+  <link rel="alternate" hreflang="es" href="https://skudev.pl/ps5-vault/es/">
+  <link rel="alternate" hreflang="de" href="https://skudev.pl/ps5-vault/de/">
+  <link rel="alternate" hreflang="fr" href="https://skudev.pl/ps5-vault/fr/">
+  <link rel="alternate" hreflang="it" href="https://skudev.pl/ps5-vault/it/">
+  <link rel="alternate" hreflang="pt-BR" href="https://skudev.pl/ps5-vault/pt/">
+  <link rel="alternate" hreflang="x-default" href="https://skudev.pl/ps5-vault/en/">
+  <meta property="og:title" content="PS5 Vault · Combien d’argent dort sur ton étagère ?">
+  <meta property="og:description" content="Un suivi de jeux qui compte ta collection. Et ce qu’elle t’a coûté.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skudev.pl/ps5-vault/fr/">
+  <meta property="og:image" content="https://skudev.pl/ps5-vault/og/fr.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="fr_FR">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231A1F18'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23D4A547' font-family='monospace' font-weight='700'%3EV%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/assets/ps5.css?v=dbc150d4">
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PS5 Vault","operatingSystem":"Android","applicationCategory":"EntertainmentApplication","description":"Combien dépenses-tu vraiment en jeux et combien d’argent dort sur ton étagère ? PS5 Vault suit ta collection, tes dépenses, tes heures et ta pile de la honte. Import Steam, PSN, Xbox et Playnite. Gratuit, sans compte, sans pub.","inLanguage":"fr-FR","url":"https://skudev.pl/ps5-vault/fr/","downloadUrl":"https://play.google.com/store/apps/details?id=com.skudev.ps5vault","offers":{"@type":"Offer","price":"0","priceCurrency":"PLN"},"author":{"@type":"Person","name":"Mateusz","url":"https://skudev.pl/"}},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment voir combien j’ai dépensé sur le PS Store ?","acceptedAnswer":{"@type":"Answer","text":"Sur la console : Paramètres → Utilisateurs et comptes → Compte → Paiement et abonnements → Historique des transactions. Le même historique apparaît en te connectant à ton compte PlayStation dans un navigateur. Note les montants dans PS5 Vault et l’app les additionne avec les DLC et microtransactions."}},{"@type":"Question","name":"C’est quoi, une pile de la honte ?","acceptedAnswer":{"@type":"Answer","text":"Des jeux achetés (souvent en solde) et jamais commencés. PS5 Vault compte combien tu en as, combien tu les as payés et lequel attend depuis le plus longtemps. Tu peux partager le résultat en image."}},{"@type":"Question","name":"L’app se connecte-t-elle à mon compte PSN ?","acceptedAnswer":{"@type":"Answer","text":"Non. Pas de compte ni de connexion. Ta bibliothèque PSN s’importe en copiant le tableau du site public PSN-Profiles. Tout reste sur ton téléphone."}},{"@type":"Question","name":"C’est seulement pour la PS5 ?","acceptedAnswer":{"@type":"Answer","text":"Non. Ajoute des jeux PS5, PS4, Xbox, PC, Switch et mobile, et importe depuis Steam, PSN, Xbox et Playnite."}},{"@type":"Question","name":"PS5 Vault est-il gratuit ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Collection, finances, pile de la honte, sorties, liste de souhaits et année en jeux sont gratuits et sans pub. Pro est un achat unique (sans abonnement) avec import illimité, coût par heure, budget et scanner en série."}},{"@type":"Question","name":"Sur quels téléphones ça marche ?","acceptedAnswer":{"@type":"Answer","text":"Sur Android, via Google Play."}}]}]</script>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="logo">
+          <div class="logo-mark">S</div>
+          <div class="logo-text">skudev · <em>ps5 vault</em></div>
+        </a>
+        <div class="nav-links">
+          <div class="nav-langs">
+            <a href="/ps5-vault/" class="nav-lang" hreflang="pl" lang="pl">PL</a>
+            <a href="/ps5-vault/en/" class="nav-lang" hreflang="en" lang="en">EN</a>
+            <a href="/ps5-vault/es/" class="nav-lang" hreflang="es" lang="es">ES</a>
+            <a href="/ps5-vault/de/" class="nav-lang" hreflang="de" lang="de">DE</a>
+            <a href="/ps5-vault/fr/" class="nav-lang" hreflang="fr" lang="fr" aria-current="page">FR</a>
+            <a href="/ps5-vault/it/" class="nav-lang" hreflang="it" lang="it">IT</a>
+            <a href="/ps5-vault/pt/" class="nav-lang" hreflang="pt" lang="pt">PT</a>
+          </div>
+          <a href="/" class="nav-back">← tous les projets</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-eyebrow">// Suivi de collection de jeux · Android</div>
+          <h1>Tes jeux. Ton <em>argent</em>. Ton temps.</h1>
+          <p class="hero-lead">Combien tu as vraiment dépensé en jeux, combien d’heures tu y as passé et combien sont encore sous blister. Importe toute ta bibliothèque depuis Steam, PSN, Xbox ou Playnite. Sans compte et sans pub, ta collection reste sur ton téléphone.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.skudev.ps5vault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dhero" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19l10-9.5L4 2.5zm11.4 10.8l2.6 2.5-11.2 6.3 8.6-8.8zm0-2.6L6.8 1.9 18 8.2l-2.6 2.5zm4.3-1.5l3 1.7c.8.5.8 1.7 0 2.2l-3 1.7-2.8-2.8 2.8-2.8z"/></svg>Disponible sur Google Play</a>
+            <a class="btn btn-ghost" href="#kalkulator">Compte ta pile de la honte ↓</a>
+          </div>
+          <div class="hero-status">sur Google Play · gratuit · 7 langues</div>
+        </div>
+        <div class="hero-video">
+          <video src="/ps5-vault/video/fr.mp4" poster="/ps5-vault/video/fr.jpg" autoplay muted loop playsinline preload="metadata" width="540" height="960" aria-label="Pile de la honte : combien d’argent dort sur l’étagère"></video>
+          <div class="hero-video-note">Vidéo de 16 s, sans son</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story">
+      <div class="container">
+        <div class="story-inner">
+          <div class="story-label">// pourquoi cette app</div>
+          <p class="story-quote">J’ai une PS5 depuis sa sortie. J’achète des jeux en solde, j’en lance quelques-uns et la plupart jamais. J’ai acheté le même jeu <em>trois fois</em> avant de comprendre que c’était un problème. J’ai fait l’app pour savoir ce que j’ai, et très vite le plus intéressant, c’était <em>combien tout ça avait coûté</em>.</p>
+          <div class="story-author">Mateusz, joueur PS5, créateur</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="calcs" id="kalkulator">
+      <div class="container">
+        <div class="section-label">// fais le calcul</div>
+        <h2 class="section-title">Deux calculs <em>rapides</em> de joueur.</h2>
+        <div class="calc-grid">
+          <form class="calc" id="calc-shame" onsubmit="return false">
+            <h3>📦 Combien d’argent dort sur ton étagère ?</h3>
+            <label for="s-n">Jeux achetés et jamais lancés</label>
+            <input id="s-n" name="n" type="number" inputmode="numeric" min="0" max="5000" value="12">
+            <label for="s-p">Prix moyen d’un jeu (€)</label>
+            <input id="s-p" name="p" type="number" inputmode="decimal" min="0" max="10000" step="any" value="40">
+            <label for="s-h">Heures moyennes par jeu</label>
+            <input id="s-h" name="h" type="number" inputmode="numeric" min="0" max="1000" value="25">
+            <div class="calc-out" aria-live="polite"></div>
+            <button type="button" class="calc-share">Partager le résultat</button>
+          </form>
+          <form class="calc" id="calc-hour" onsubmit="return false">
+            <h3>⏱ Combien te coûte une heure de jeu ?</h3>
+            <label for="h-p">Prix du jeu (€)</label>
+            <input id="h-p" name="hp" type="number" inputmode="decimal" min="0" max="10000" step="any" value="80">
+            <label for="h-h">Heures jouées</label>
+            <input id="h-h" name="hh" type="number" inputmode="decimal" min="0" max="10000" step="any" value="40">
+            <div class="calc-out" aria-live="polite"></div>
+            <button type="button" class="calc-share">Partager le résultat</button>
+          </form>
+        </div>
+        <p class="calc-cta">PS5 Vault le calcule pour toute ta collection, jeu par jeu. <a href="https://play.google.com/store/apps/details?id=com.skudev.ps5vault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dkalkulator" rel="noopener">Disponible sur Google Play →</a></p>
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="container">
+        <div class="section-label">// ce que tu obtiens</div>
+        <h2 class="section-title">Tout ce qui me <em>manquait</em> dans les autres suivis.</h2>
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature-num">01</div>
+            <span class="feature-emoji">💰</span>
+            <h3>Des finances honnêtes</h3>
+            <p>Ce que tu as dépensé en jeux, DLC et microtransactions, ce que tu as récupéré en revendant, mois par mois. Les jeux PS Plus et Game Pass ne comptent pas comme dépenses.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-num">02</div>
+            <span class="feature-emoji">📦</span>
+            <h3>Pile de la honte</h3>
+            <p>Les jeux achetés et jamais lancés, comptés en titres et en euros. Une image prête à partager.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-num">03</div>
+            <span class="feature-emoji">🔁</span>
+            <h3>Importe toute ta bibliothèque</h3>
+            <p>Steam, PSN, Xbox ou Playnite. L’app associe les jeux à la base RAWG et règle leur statut. Gratuit jusqu’à 50 jeux, sans limite avec Pro.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-num">04</div>
+            <span class="feature-emoji">🎯</span>
+            <h3>Liste de souhaits avec prix cible</h3>
+            <p>Indique ton prix. Quand tu vois une promo sur le PS Store, l’app te dit que c’est le moment.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-num">05</div>
+            <span class="feature-emoji">📅</span>
+            <h3>Compte à rebours des sorties</h3>
+            <p>Les jeux avec une date de sortie ont leur onglet avec compteur de jours. Rappel 3 jours avant et le jour J.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-num">06</div>
+            <span class="feature-emoji">🎁</span>
+            <h3>Année en jeux</h3>
+            <p>Heures, jeux terminés, platines, titres les plus joués et genre préféré. Partage-la en image dans ta story.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-num">07</div>
+            <span class="feature-emoji">🎲</span>
+            <h3>À quoi jouer ?</h3>
+            <p>Pas d’idée ? Un geste tire un jeu de ta pile. Marque-le En cours ou relance.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-num">08</div>
+            <span class="feature-emoji">📷</span>
+            <h3>Scanner de boîtes</h3>
+            <p>Scanne le code-barres au dos et le jeu est ajouté : titre, genre et année se remplissent seuls. Avec Pro, tu scannes toute l’étagère à la suite.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-num">09</div>
+            <span class="feature-emoji">🔒</span>
+            <h3>Sans compte, sans pub</h3>
+            <p>Ta collection vit sur ton téléphone. Une sauvegarde en un geste. 7 langues et 12 devises.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pro">
+      <div class="container">
+        <div class="pro-box">
+          <div class="section-label">// PS5 Vault Pro</div>
+          <h2 class="section-title">Tu paies une fois, <em>c’est à vie</em>.</h2>
+          <p class="pro-lead">Tout ce qui précède est gratuit. Pro est un achat unique sur Google Play, sans abonnement :</p>
+          <ul class="pro-list"><li>Import de toute ta bibliothèque sans limite</li><li>Coût par heure, ROI, prévision de l’année et analyse des dépenses</li><li>Budget mensuel avec alerte en cas de dépassement</li><li>Scanner en série : plusieurs boîtes à la suite</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="preview">
+      <div class="container">
+        <div class="section-label">// aperçu</div>
+        <h2 class="section-title">Voilà à quoi ça ressemble <em>sur ton téléphone</em>.</h2>
+        <div class="shots shots-4">
+          <img src="/ps5-vault/img/fr/01.webp" width="540" height="960" loading="lazy" alt="Pile de la honte : combien d’argent dort sur l’étagère">
+          <img src="/ps5-vault/img/fr/02.webp" width="540" height="960" loading="lazy" alt="Finances : où tu paies trop et quoi revendre">
+          <img src="/ps5-vault/img/fr/03.webp" width="540" height="960" loading="lazy" alt="Année en jeux : heures, jeux terminés et platines">
+          <img src="/ps5-vault/img/fr/04.webp" width="540" height="960" loading="lazy" alt="Collection et prochaine sortie">
+          <img src="/ps5-vault/img/fr/05.webp" width="540" height="960" loading="lazy" alt="Import Steam, PSN, Xbox et Playnite">
+          <img src="/ps5-vault/img/fr/06.webp" width="540" height="960" loading="lazy" alt="Liste de souhaits avec prix cible">
+          <img src="/ps5-vault/img/fr/07.webp" width="540" height="960" loading="lazy" alt="Stats : top 10 par temps de jeu">
+          <img src="/ps5-vault/img/fr/08.webp" width="540" height="960" loading="lazy" alt="PS5 Vault Pro : achat unique">
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <div class="container">
+        <div class="section-label">// questions</div>
+        <h2 class="section-title">Vous nous <em>demandez</em> souvent.</h2>
+        <details>
+          <summary>Comment voir combien j’ai dépensé sur le PS Store ?</summary>
+          <p>Sur la console : Paramètres → Utilisateurs et comptes → Compte → Paiement et abonnements → Historique des transactions. Le même historique apparaît en te connectant à ton compte PlayStation dans un navigateur. Note les montants dans PS5 Vault et l’app les additionne avec les DLC et microtransactions.</p>
+        </details>
+        <details>
+          <summary>C’est quoi, une pile de la honte ?</summary>
+          <p>Des jeux achetés (souvent en solde) et jamais commencés. PS5 Vault compte combien tu en as, combien tu les as payés et lequel attend depuis le plus longtemps. Tu peux partager le résultat en image.</p>
+        </details>
+        <details>
+          <summary>L’app se connecte-t-elle à mon compte PSN ?</summary>
+          <p>Non. Pas de compte ni de connexion. Ta bibliothèque PSN s’importe en copiant le tableau du site public PSN-Profiles. Tout reste sur ton téléphone.</p>
+        </details>
+        <details>
+          <summary>C’est seulement pour la PS5 ?</summary>
+          <p>Non. Ajoute des jeux PS5, PS4, Xbox, PC, Switch et mobile, et importe depuis Steam, PSN, Xbox et Playnite.</p>
+        </details>
+        <details>
+          <summary>PS5 Vault est-il gratuit ?</summary>
+          <p>Oui. Collection, finances, pile de la honte, sorties, liste de souhaits et année en jeux sont gratuits et sans pub. Pro est un achat unique (sans abonnement) avec import illimité, coût par heure, budget et scanner en série.</p>
+        </details>
+        <details>
+          <summary>Sur quels téléphones ça marche ?</summary>
+          <p>Sur Android, via Google Play.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-inner">
+          <div class="section-label">// télécharger</div>
+          <h2 class="cta-title">Gratuit, <em>sans compte</em> et sans pub.</h2>
+          <p class="cta-lead">Installe-la depuis Google Play et ajoute tes jeux : à la main, en scannant les boîtes ou en important toute ta bibliothèque.</p>
+          <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.skudev.ps5vault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dcta" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19l10-9.5L4 2.5zm11.4 10.8l2.6 2.5-11.2 6.3 8.6-8.8zm0-2.6L6.8 1.9 18 8.2l-2.6 2.5zm4.3-1.5l3 1.7c.8.5.8 1.7 0 2.2l-3 1.7-2.8-2.8 2.8-2.8z"/></svg>Disponible sur Google Play</a>
+          <div class="cta-meta">Une idée ou un bug ? Écris à <a href="mailto:skudev6@gmail.com">skudev6@gmail.com</a>.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>PS5 Vault · un projet <a href="/" style="color:var(--accent-dim);text-decoration:none;">skudev</a> · 2026</div>
+        <ul class="footer-links">
+          <li><a href="mailto:skudev6@gmail.com">email</a></li>
+          <li><a href="https://matiseekk-dot.github.io/Games/privacy.html" target="_blank" rel="noopener">privacy</a></li>
+          <li><a href="https://github.com/matiseekk-dot/Games" target="_blank" rel="noopener">github</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+<script>
+(() => {
+  const T = {"locale":"fr-FR","cur":"€","after":true,"thr":[0.5,2.5],"shameOut":"Sur ton étagère dorment <b>{m}</b>. Pour tout finir, il te faut environ <b>{h} heures</b>, soit <b>{d} jours</b> à 2 heures par jour.","shameShare":"Ma pile de la honte : {m} sur l’étagère. Et toi ?","hourOut":"Une heure de jeu t’a coûté <b>{v}</b>.","great":"Excellent rapport qualité-prix.","ok":"Correct, moins cher qu’une place de cinéma.","bad":"Cher. Tu y retournes ou tu le revends ?","hourShare":"Une heure de mon jeu m’a coûté {v}. Calcule la tienne :","copied":"Lien copié ✓","shareBtn":"Partager le résultat"}
+  const nf = new Intl.NumberFormat(T.locale, { maximumFractionDigits: 2 })
+  const nf0 = new Intl.NumberFormat(T.locale, { maximumFractionDigits: 0 })
+  const money = (v, f) => { const s = (f || nf).format(v); return T.after ? s + '\u00a0' + T.cur : T.cur + '\u00a0' + s }
+  const num = el => Math.max(0, parseFloat(String(el.value).replace(',', '.')) || 0)
+  const fill = (s, o) => s.replace(/\{(\w)\}/g, (_, k) => o[k])
+  const strip = s => s.replace(/<[^>]+>/g, '')
+  // Wynik da się udostępnić linkiem: liczby lądują w adresie (?n=12&p=150...), a strona je wczytuje.
+  const q = new URLSearchParams(location.search)
+  for (const el of document.querySelectorAll('.calc input')) if (q.has(el.name)) el.value = q.get(el.name)
+  const forms = {
+    'calc-shame': f => {
+      const [n, p, h] = ['n', 'p', 'h'].map(k => num(f.elements[k]))
+      const m = money(n * p, nf0), hh = Math.round(n * h)
+      return { html: fill(T.shameOut, { m, h: nf0.format(hh), d: nf0.format(Math.ceil(hh / 2)) }), share: fill(T.shameShare, { m }) }
+    },
+    'calc-hour': f => {
+      const p = num(f.elements.hp), h = num(f.elements.hh)
+      if (!h) return { html: '', share: '' }
+      const v = p / h, vs = money(v)
+      const verdict = v < T.thr[0] ? T.great : v < T.thr[1] ? T.ok : T.bad
+      return { html: fill(T.hourOut, { v: vs }) + '<span class="calc-verdict">' + verdict + '</span>', share: fill(T.hourShare, { v: vs }) }
+    },
+  }
+  for (const [id, calc] of Object.entries(forms)) {
+    const f = document.getElementById(id), out = f.querySelector('.calc-out'), btn = f.querySelector('.calc-share')
+    const run = () => { const r = calc(f); out.innerHTML = r.html; f.dataset.share = r.share }
+    f.addEventListener('input', run)
+    run()
+    btn.addEventListener('click', async () => {
+      const u = new URL(location.href.split('#')[0].split('?')[0])
+      for (const el of f.querySelectorAll('input')) u.searchParams.set(el.name, el.value)
+      u.hash = 'kalkulator'
+      const text = strip(f.dataset.share)
+      try { if (navigator.share) { await navigator.share({ text, url: u.href }); return } } catch (e) { if (e && e.name === 'AbortError') return }
+      try { await navigator.clipboard.writeText(text + ' ' + u.href); btn.textContent = T.copied; setTimeout(() => { btn.textContent = T.shareBtn }, 1800) } catch {}
+    })
+  }
+})()
+</script>
+</body>
+</html>

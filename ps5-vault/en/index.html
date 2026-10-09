@@ -1,491 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PS5 Vault · Game collection tracker · SkuDev</title>
-  <meta name="description" content="Game collection tracker for Android: the real cost of your collection, hours played, a release calendar and import from Steam, Xbox, PSN and Playnite. PL/EN/ES, no account, no ads. Free on Google Play.">
-  <meta property="og:title" content="PS5 Vault · Your games, your money, your time">
-  <meta property="og:description" content="A tracker that counts your collection. And the bill for it.">
-  <meta property="og:type" content="website">
+  <title>PS5 Vault · Game collection tracker: spending, pile of shame, year in games</title>
+  <meta name="description" content="How much do you really spend on games, and how much money is sitting on your shelf? PS5 Vault tracks your collection, spending, hours and pile of shame. Import from Steam, PSN, Xbox and Playnite. Free, no account, no ads.">
+  <link rel="canonical" href="https://skudev.pl/ps5-vault/en/">
   <link rel="alternate" hreflang="pl" href="https://skudev.pl/ps5-vault/">
   <link rel="alternate" hreflang="en" href="https://skudev.pl/ps5-vault/en/">
   <link rel="alternate" hreflang="es" href="https://skudev.pl/ps5-vault/es/">
-
+  <link rel="alternate" hreflang="de" href="https://skudev.pl/ps5-vault/de/">
+  <link rel="alternate" hreflang="fr" href="https://skudev.pl/ps5-vault/fr/">
+  <link rel="alternate" hreflang="it" href="https://skudev.pl/ps5-vault/it/">
+  <link rel="alternate" hreflang="pt-BR" href="https://skudev.pl/ps5-vault/pt/">
+  <link rel="alternate" hreflang="x-default" href="https://skudev.pl/ps5-vault/en/">
+  <meta property="og:title" content="PS5 Vault · How much money is sitting on your shelf?">
+  <meta property="og:description" content="A game tracker that counts your collection. And the bill for it.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skudev.pl/ps5-vault/en/">
+  <meta property="og:image" content="https://skudev.pl/ps5-vault/og/en.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231A1F18'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23D4A547' font-family='monospace' font-weight='700'%3EV%3C/text%3E%3C/svg%3E">
-
-  <style>
-    :root {
-      --bg:          #141810;
-      --bg-2:        #1E2618;
-      --bg-3:        #2A342A;
-      --ink:         #F5F0E0;
-      --ink-2:       #C5BFA8;
-      --ink-3:       #8A8670;
-      --accent:      #D4A547;
-      --accent-dim:  #9A7F3D;
-      --coral:       #C95A48;
-      --sage:        #6B8E6F;
-      --border:      rgba(245, 240, 224, 0.08);
-      --border-2:    rgba(245, 240, 224, 0.16);
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Manrope', -apple-system, sans-serif;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 1.55;
-      color: var(--ink);
-      background: var(--bg);
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(245, 240, 224, 0.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(245, 240, 224, 0.015) 1px, transparent 1px);
-      background-size: 48px 48px;
-      pointer-events: none;
-      z-index: 0;
-      mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
-      -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 75% 15%, rgba(201, 90, 72, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 15% 85%, rgba(212, 165, 71, 0.04) 0%, transparent 50%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .container {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 28px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ═══ HEADER ═══ */
-    header {
-      padding: 20px 0;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(12px);
-      background: rgba(20, 24, 16, 0.85);
-    }
-
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--ink);
-    }
-
-    .logo-mark {
-      width: 36px; height: 36px;
-      background: var(--coral);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      color: #FDF8F0;
-      font-size: 18px;
-    }
-
-    .logo-text {
-      font-family: 'Fraunces', serif;
-      font-size: 18px;
-      font-weight: 500;
-      letter-spacing: -0.3px;
-    }
-
-    .logo-text em {
-      font-style: italic;
-      color: var(--accent);
-      font-weight: 400;
-    }
-
-    .nav-back {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--ink-3);
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-back:hover { color: var(--accent); }
-
-    .nav-links { display: flex; align-items: center; gap: 16px; }
-    .nav-langs { display: flex; gap: 6px; }
-    .nav-lang {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--ink-3);
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      border: 1px solid var(--border-2);
-      border-radius: 20px;
-      padding: 5px 10px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    .nav-lang:hover, .nav-lang[aria-current="page"] { color: var(--accent); border-color: var(--accent); }
-
-    @media (max-width: 520px) {
-      .nav-back { display: none; }
-    }
-
-    /* ═══ HERO ═══ */
-    .hero {
-      padding: 80px 0 60px;
-      position: relative;
-    }
-
-    .hero-eyebrow {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--accent);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-      font-weight: 600;
-    }
-
-    h1 {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(40px, 6vw, 68px);
-      font-weight: 500;
-      line-height: 1.05;
-      letter-spacing: -2px;
-      margin-bottom: 28px;
-      max-width: 14ch;
-    }
-
-    h1 em {
-      font-style: italic;
-      color: var(--accent);
-      font-weight: 400;
-    }
-
-    .hero-lead {
-      font-size: 19px;
-      color: var(--ink-2);
-      line-height: 1.6;
-      max-width: 52ch;
-      margin-bottom: 36px;
-    }
-
-    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
-
-    .btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 14px 22px; border-radius: 12px;
-      font-family: inherit; font-size: 15px; font-weight: 700; letter-spacing: 0.2px;
-      text-decoration: none; transition: background 0.2s, border-color 0.2s, color 0.2s;
-    }
-    .btn-play { background: var(--coral); color: #FDF8F0; }
-    .btn-play:hover { background: #B84A3A; }
-    .btn-play svg { width: 20px; height: 20px; }
-
-    .hero-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 14px;
-      background: rgba(107, 142, 111, 0.1);
-      border: 1px solid rgba(107, 142, 111, 0.3);
-      border-radius: 20px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--sage);
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-
-    .hero-status::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--sage);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--sage);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    /* ═══ STORY ═══ */
-    .story {
-      padding: 60px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .story-inner {
-      max-width: 720px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .story-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--ink-3);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-
-    .story-quote {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(22px, 3vw, 28px);
-      line-height: 1.45;
-      color: var(--ink);
-      font-style: italic;
-      font-weight: 400;
-      letter-spacing: -0.3px;
-      margin-bottom: 24px;
-    }
-
-    .story-quote em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
-    .story-author {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      color: var(--ink-3);
-    }
-
-    /* ═══ FEATURES ═══ */
-    .features {
-      padding: 80px 0 60px;
-      border-top: 1px solid var(--border);
-    }
-
-    .section-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--accent);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-      font-weight: 600;
-    }
-
-    .section-title {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(30px, 4.5vw, 44px);
-      font-weight: 500;
-      line-height: 1.1;
-      letter-spacing: -1.2px;
-      max-width: 20ch;
-      margin-bottom: 60px;
-    }
-
-    .section-title em {
-      font-style: italic;
-      color: var(--accent);
-      font-weight: 400;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .feature {
-      background: var(--bg);
-      padding: 32px 28px;
-      position: relative;
-      transition: background 0.2s;
-    }
-
-    .feature:hover {
-      background: var(--bg-2);
-    }
-
-    .feature-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--ink-3);
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-    }
-
-    .feature-emoji {
-      font-size: 32px;
-      margin-bottom: 16px;
-      display: block;
-    }
-
-    .feature h3 {
-      font-family: 'Fraunces', serif;
-      font-size: 20px;
-      font-weight: 500;
-      line-height: 1.25;
-      margin-bottom: 10px;
-      letter-spacing: -0.4px;
-    }
-
-    .feature p {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--ink-2);
-    }
-
-    /* ═══ PREVIEW (phones) ═══ */
-    .preview {
-      padding: 80px 0 60px;
-      border-top: 1px solid var(--border);
-    }
-
-    .shots {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 40px;
-    }
-
-    .shots img {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 9 / 16;
-      display: block;
-      border-radius: 18px;
-      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .shots img:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 40px 80px -20px rgba(201, 90, 72, 0.3);
-    }
-
-    /* ═══ CTA ═══ */
-    .cta {
-      padding: 80px 0;
-      border-top: 1px solid var(--border);
-      text-align: center;
-    }
-
-    .cta-inner {
-      max-width: 560px;
-      margin: 0 auto;
-    }
-
-    .cta-title {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(26px, 3.5vw, 36px);
-      font-weight: 500;
-      line-height: 1.2;
-      letter-spacing: -0.8px;
-      margin-bottom: 20px;
-    }
-
-    .cta-title em {
-      font-style: italic;
-      color: var(--accent);
-      font-weight: 400;
-    }
-
-    .cta-lead {
-      color: var(--ink-2);
-      margin-bottom: 32px;
-      font-size: 15px;
-      line-height: 1.6;
-    }
-
-    .cta-meta {
-      margin-top: 20px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
-      color: var(--ink-3);
-      letter-spacing: 0.3px;
-    }
-
-    .cta-meta a {
-      color: var(--ink-2);
-    }
-
-    /* ═══ FOOTER ═══ */
-    footer {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--ink-3);
-      letter-spacing: 0.3px;
-    }
-
-    .footer-grid {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 20px;
-      list-style: none;
-    }
-
-    .footer-links a {
-      color: var(--ink-3);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover {
-      color: var(--accent);
-    }
-
-    /* ═══ RWD ═══ */
-    @media (max-width: 800px) {
-      .shots { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    }
-
-    @media (max-width: 640px) {
-      .hero { padding: 60px 0 40px; }
-    }
-  </style>
+  <link rel="stylesheet" href="/assets/ps5.css?v=dbc150d4">
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PS5 Vault","operatingSystem":"Android","applicationCategory":"EntertainmentApplication","description":"How much do you really spend on games, and how much money is sitting on your shelf? PS5 Vault tracks your collection, spending, hours and pile of shame. Import from Steam, PSN, Xbox and Playnite. Free, no account, no ads.","inLanguage":"en-US","url":"https://skudev.pl/ps5-vault/en/","downloadUrl":"https://play.google.com/store/apps/details?id=com.skudev.ps5vault","offers":{"@type":"Offer","price":"0","priceCurrency":"PLN"},"author":{"@type":"Person","name":"Mateusz","url":"https://skudev.pl/"}},{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I check how much I spent on PS Store?","acceptedAnswer":{"@type":"Answer","text":"On the console: Settings → Users and Accounts → Account → Payment and Subscriptions → Transaction History. You can see the same history by signing in to your PlayStation account in a browser. Enter the amounts with your games in PS5 Vault and the app adds them up with DLC and microtransactions."}},{"@type":"Question","name":"What is a pile of shame?","acceptedAnswer":{"@type":"Answer","text":"Games you bought (often on sale) and never started. PS5 Vault counts how many you have, what you paid for them and which one has waited the longest. You can share the result as an image."}},{"@type":"Question","name":"Does the app connect to my PSN account?","acceptedAnswer":{"@type":"Answer","text":"No. You need no account and no sign-in. You import your PSN library by copying the table from the public PSN-Profiles site. Everything stays on your phone."}},{"@type":"Question","name":"Is it only for PS5?","acceptedAnswer":{"@type":"Answer","text":"No. Add games from PS5, PS4, Xbox, PC, Switch and mobile, and import from Steam, PSN, Xbox and Playnite."}},{"@type":"Question","name":"Is PS5 Vault free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Collection, finances, pile of shame, releases, wishlist and year in games are free with no ads. Pro is a one-time purchase (no subscription) with unlimited import, cost per hour, a budget and the serial scanner."}},{"@type":"Question","name":"Which phones does it run on?","acceptedAnswer":{"@type":"Answer","text":"Android, from Google Play."}}]}]</script>
 </head>
 <body>
 
@@ -501,6 +44,10 @@
             <a href="/ps5-vault/" class="nav-lang" hreflang="pl" lang="pl">PL</a>
             <a href="/ps5-vault/en/" class="nav-lang" hreflang="en" lang="en" aria-current="page">EN</a>
             <a href="/ps5-vault/es/" class="nav-lang" hreflang="es" lang="es">ES</a>
+            <a href="/ps5-vault/de/" class="nav-lang" hreflang="de" lang="de">DE</a>
+            <a href="/ps5-vault/fr/" class="nav-lang" hreflang="fr" lang="fr">FR</a>
+            <a href="/ps5-vault/it/" class="nav-lang" hreflang="it" lang="it">IT</a>
+            <a href="/ps5-vault/pt/" class="nav-lang" hreflang="pt" lang="pt">PT</a>
           </div>
           <a href="/" class="nav-back">← all projects</a>
         </div>
@@ -510,150 +57,195 @@
 
   <main>
 
-    <!-- ═══ HERO ═══ -->
     <section class="hero">
-      <div class="container">
-        <div class="hero-eyebrow">// Game collection tracker · Android</div>
-        <h1>Your games. Your <em>money</em>. Your time.</h1>
-        <p class="hero-lead">
-          Your collection with cover art from RAWG, the real cost per game and in total, hours played
-          and a release calendar. Import your whole library from Steam, Xbox, PSN or Playnite.
-          No account and no ads, your collection stays on your phone.
-        </p>
-        <div class="hero-ctas">
-          <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.skudev.ps5vault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dhero" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19l10-9.5L4 2.5zm11.4 10.8l2.6 2.5-11.2 6.3 8.6-8.8zm0-2.6L6.8 1.9 18 8.2l-2.6 2.5zm4.3-1.5l3 1.7c.8.5.8 1.7 0 2.2l-3 1.7-2.8-2.8 2.8-2.8z"/></svg>
-            Get it on Google Play
-          </a>
+      <div class="container hero-grid">
+        <div>
+          <div class="hero-eyebrow">// Game collection tracker · Android</div>
+          <h1>Your games. Your <em>money</em>. Your time.</h1>
+          <p class="hero-lead">How much you really spent on games, how many hours went into them and how many titles are still in the shrink wrap. Import your whole library from Steam, PSN, Xbox or Playnite. No account and no ads, your collection stays on your phone.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.skudev.ps5vault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dhero" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19l10-9.5L4 2.5zm11.4 10.8l2.6 2.5-11.2 6.3 8.6-8.8zm0-2.6L6.8 1.9 18 8.2l-2.6 2.5zm4.3-1.5l3 1.7c.8.5.8 1.7 0 2.2l-3 1.7-2.8-2.8 2.8-2.8z"/></svg>Get it on Google Play</a>
+            <a class="btn btn-ghost" href="#kalkulator">Count your pile of shame ↓</a>
+          </div>
+          <div class="hero-status">on Google Play · free · 7 languages</div>
         </div>
-        <div class="hero-status">on Google Play · free · Polish, English, Spanish</div>
+        <div class="hero-video">
+          <video src="/ps5-vault/video/en.mp4" poster="/ps5-vault/video/en.jpg" autoplay muted loop playsinline preload="metadata" width="540" height="960" aria-label="Pile of shame: how much money is sitting on the shelf"></video>
+          <div class="hero-video-note">16 s video, no sound</div>
+        </div>
       </div>
     </section>
 
-    <!-- ═══ STORY ═══ -->
     <section class="story">
       <div class="container">
         <div class="story-inner">
           <div class="story-label">// why this app</div>
-          <p class="story-quote">
-            I've had a PS5 since launch. I buy games on sale, open some of them, most never.
-            I bought the same game <em>three times</em> before I realized that was a problem.
-            I built the app to know what I own, and it quickly turned out the more interesting part is <em>what it all cost</em>.
-          </p>
-          <div class="story-author">Mateusz, PS5 owner and the app's creator</div>
+          <p class="story-quote">I have had a PS5 since launch. I buy games on sale, open some of them and never touch most. I bought the same game <em>three times</em> before I realized it was a problem. I built the app to know what I own, and it quickly turned out the more interesting part was <em>what it all cost</em>.</p>
+          <div class="story-author">Mateusz, PS5 owner, maker</div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ FEATURES ═══ -->
+    <section class="calcs" id="kalkulator">
+      <div class="container">
+        <div class="section-label">// do the math</div>
+        <h2 class="section-title">Two quick <em>gamer</em> calculations.</h2>
+        <div class="calc-grid">
+          <form class="calc" id="calc-shame" onsubmit="return false">
+            <h3>📦 How much money is sitting on your shelf?</h3>
+            <label for="s-n">Games bought and never played</label>
+            <input id="s-n" name="n" type="number" inputmode="numeric" min="0" max="5000" value="12">
+            <label for="s-p">Average game price ($)</label>
+            <input id="s-p" name="p" type="number" inputmode="decimal" min="0" max="10000" step="any" value="40">
+            <label for="s-h">Average hours per game</label>
+            <input id="s-h" name="h" type="number" inputmode="numeric" min="0" max="1000" value="25">
+            <div class="calc-out" aria-live="polite"></div>
+            <button type="button" class="calc-share">Share your result</button>
+          </form>
+          <form class="calc" id="calc-hour" onsubmit="return false">
+            <h3>⏱ What does one hour of gaming cost you?</h3>
+            <label for="h-p">Game price ($)</label>
+            <input id="h-p" name="hp" type="number" inputmode="decimal" min="0" max="10000" step="any" value="80">
+            <label for="h-h">Hours you played</label>
+            <input id="h-h" name="hh" type="number" inputmode="decimal" min="0" max="10000" step="any" value="40">
+            <div class="calc-out" aria-live="polite"></div>
+            <button type="button" class="calc-share">Share your result</button>
+          </form>
+        </div>
+        <p class="calc-cta">PS5 Vault works this out for your whole collection, game by game. <a href="https://play.google.com/store/apps/details?id=com.skudev.ps5vault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dkalkulator" rel="noopener">Get it on Google Play →</a></p>
+      </div>
+    </section>
+
     <section class="features">
       <div class="container">
         <div class="section-label">// what you get</div>
-        <h2 class="section-title">Everything I was <em>missing</em> in other trackers.</h2>
-
+        <h2 class="section-title">Everything I <em>missed</em> in other trackers.</h2>
         <div class="features-grid">
           <div class="feature">
             <div class="feature-num">01</div>
             <span class="feature-emoji">💰</span>
-            <h3>Finances with the real cost</h3>
-            <p>A separate tab. The real cost of your collection, cost per hour, ROI on games you sold, spending charts by store and genre. You see which game was your best investment per hour played.</p>
+            <h3>Honest finances</h3>
+            <p>What you spent on games, DLC and microtransactions, what you got back from selling, and how it looks month by month. PS Plus and Game Pass games don’t count as spending.</p>
           </div>
-
           <div class="feature">
             <div class="feature-num">02</div>
-            <span class="feature-emoji">🔁</span>
-            <h3>Import your whole library</h3>
-            <p>Paste or upload an export from Steam, Xbox, PSN or Playnite. The app matches games against the RAWG database and sets statuses from hours played and trophy progress. Hundreds of games in a few minutes.</p>
+            <span class="feature-emoji">📦</span>
+            <h3>Pile of shame</h3>
+            <p>Games you bought and never played, counted in titles and in money. A ready image to share with friends.</p>
           </div>
-
           <div class="feature">
             <div class="feature-num">03</div>
-            <span class="feature-emoji">📅</span>
-            <h3>Releases with a countdown</h3>
-            <p>Games with a release date sort themselves. Reminders a month and a week before release, in the last three days and on launch day, when you open the app. Pre-orders don't count toward the month's spending before release.</p>
+            <span class="feature-emoji">🔁</span>
+            <h3>Import your whole library</h3>
+            <p>Steam, PSN, Xbox or Playnite. The app matches games to the RAWG database and sets their status. Free up to 50 games, unlimited with Pro.</p>
           </div>
-
           <div class="feature">
             <div class="feature-num">04</div>
-            <span class="feature-emoji">🎮</span>
-            <h3>Statuses, platinums, subscriptions</h3>
-            <p>Playing · Completed · Planning · Abandoned, plus a Platinum toggle 🏆 for completed games. Games from PS Plus, Game Pass or EA Play don't count toward spending. Multi-platform: PS5, PS4, Xbox, PC, Switch, Mobile.</p>
+            <span class="feature-emoji">🎯</span>
+            <h3>Wishlist with target prices</h3>
+            <p>Set the price you would pay. When you spot a PS Store sale, the app tells you it is time to buy.</p>
           </div>
-
           <div class="feature">
             <div class="feature-num">05</div>
-            <span class="feature-emoji">💳</span>
-            <h3>Monthly budget</h3>
-            <p>Set how much you want to spend on games each month. The app adds up what you spent on games, DLC and microtransactions this month and warns you when you go over.</p>
+            <span class="feature-emoji">📅</span>
+            <h3>Release countdown</h3>
+            <p>Games with a release date get their own tab with a day counter. A reminder 3 days before launch and on launch day.</p>
           </div>
-
           <div class="feature">
             <div class="feature-num">06</div>
-            <span class="feature-emoji">🔍</span>
-            <h3>Search and sort</h3>
-            <p>Search by title, filter by status, platform and source, sort by date added, rating, hours or completion date. Stays smooth even with 700+ games.</p>
+            <span class="feature-emoji">🎁</span>
+            <h3>Year in games</h3>
+            <p>Hours, games finished, platinums, most played titles and favorite genre. Share it as an image for your story.</p>
           </div>
-
           <div class="feature">
             <div class="feature-num">07</div>
             <span class="feature-emoji">🎲</span>
-            <h3>Backlog randomizer</h3>
-            <p>Can't decide what to play? One tap picks a random game from the ones waiting in your queue. Mark it as Playing right away or roll again.</p>
+            <h3>What to play?</h3>
+            <p>Can’t decide? One tap picks a game from your pile of shame. Mark it as Playing or roll again.</p>
           </div>
-
           <div class="feature">
             <div class="feature-num">08</div>
-            <span class="feature-emoji">🎁</span>
-            <h3>Year in Review</h3>
-            <p>A Spotify-Wrapped-style recap of your year: hours, finished games, platinums and your most-played titles. Share it as an image.</p>
+            <span class="feature-emoji">📷</span>
+            <h3>Box scanner</h3>
+            <p>Scan the barcode on the back and the game is in: title, genre and year fill in by themselves. With Pro you scan the whole shelf in a row.</p>
           </div>
-
           <div class="feature">
             <div class="feature-num">09</div>
             <span class="feature-emoji">🔒</span>
             <h3>No account, no ads</h3>
-            <p>Your collection lives on your phone. Export a JSON backup whenever you like and import it on another device (merge or replace). The only statistic is an anonymous Cloudflare visit counter, no cookies.</p>
+            <p>Your collection lives on your phone. Back it up with one tap. 7 languages and 12 currencies.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ═══ PREVIEW: PHONES ═══ -->
-    <section class="preview">
+    <section class="pro">
       <div class="container">
-        <div class="section-label">// app preview</div>
-        <h2 class="section-title">The key features <em>at a glance</em>.</h2>
-
-        <div class="shots">
-          <img src="/ps5-vault/screenshots/en/01-wyszukiwarka-sort.webp" width="720" height="1280" loading="lazy" alt="Library with search, filters and sorting, smooth even with 700+ games">
-          <img src="/ps5-vault/screenshots/en/02-losowarka.webp" width="720" height="1280" loading="lazy" alt="The randomizer picks a game from your backlog">
-          <img src="/ps5-vault/screenshots/en/03-wrapped.webp" width="720" height="1280" loading="lazy" alt="Year in Review: hours, finished games, platinums and most-played titles">
-          <img src="/ps5-vault/screenshots/en/05-import.webp" width="720" height="1280" loading="lazy" alt="Import your library from Steam, Xbox, PSN and Playnite">
-          <img src="/ps5-vault/screenshots/en/06-budzet.webp" width="720" height="1280" loading="lazy" alt="Financial insight: the real cost of your collection and this month's spending">
-          <img src="/ps5-vault/screenshots/en/04-offline-privacy.webp" width="720" height="1280" loading="lazy" alt="No account and no ads, your data stays on your phone">
+        <div class="pro-box">
+          <div class="section-label">// PS5 Vault Pro</div>
+          <h2 class="section-title">Pay once, <em>keep it forever</em>.</h2>
+          <p class="pro-lead">Everything above is free. Pro is a one-time purchase on Google Play, no subscription:</p>
+          <ul class="pro-list"><li>Import your whole library with no limit</li><li>Cost per hour, ROI, yearly forecast and spending analysis</li><li>Monthly budget with an alert when you go over</li><li>Serial scanner: many boxes in a row</li></ul>
         </div>
       </div>
     </section>
 
-    <!-- ═══ CTA ═══ -->
+    <section class="preview">
+      <div class="container">
+        <div class="section-label">// app preview</div>
+        <h2 class="section-title">What it looks like <em>on your phone</em>.</h2>
+        <div class="shots shots-4">
+          <img src="/ps5-vault/img/en/01.webp" width="540" height="960" loading="lazy" alt="Pile of shame: how much money is sitting on the shelf">
+          <img src="/ps5-vault/img/en/02.webp" width="540" height="960" loading="lazy" alt="Finances: where you overpay and what to sell">
+          <img src="/ps5-vault/img/en/03.webp" width="540" height="960" loading="lazy" alt="Year in games: hours, games finished and platinums">
+          <img src="/ps5-vault/img/en/04.webp" width="540" height="960" loading="lazy" alt="Collection and the next release">
+          <img src="/ps5-vault/img/en/05.webp" width="540" height="960" loading="lazy" alt="Import from Steam, PSN, Xbox and Playnite">
+          <img src="/ps5-vault/img/en/06.webp" width="540" height="960" loading="lazy" alt="Wishlist with target prices">
+          <img src="/ps5-vault/img/en/07.webp" width="540" height="960" loading="lazy" alt="Stats: top 10 games by time played">
+          <img src="/ps5-vault/img/en/08.webp" width="540" height="960" loading="lazy" alt="PS5 Vault Pro: a one-time purchase">
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <div class="container">
+        <div class="section-label">// questions</div>
+        <h2 class="section-title">You <em>ask</em>, we answer.</h2>
+        <details>
+          <summary>How do I check how much I spent on PS Store?</summary>
+          <p>On the console: Settings → Users and Accounts → Account → Payment and Subscriptions → Transaction History. You can see the same history by signing in to your PlayStation account in a browser. Enter the amounts with your games in PS5 Vault and the app adds them up with DLC and microtransactions.</p>
+        </details>
+        <details>
+          <summary>What is a pile of shame?</summary>
+          <p>Games you bought (often on sale) and never started. PS5 Vault counts how many you have, what you paid for them and which one has waited the longest. You can share the result as an image.</p>
+        </details>
+        <details>
+          <summary>Does the app connect to my PSN account?</summary>
+          <p>No. You need no account and no sign-in. You import your PSN library by copying the table from the public PSN-Profiles site. Everything stays on your phone.</p>
+        </details>
+        <details>
+          <summary>Is it only for PS5?</summary>
+          <p>No. Add games from PS5, PS4, Xbox, PC, Switch and mobile, and import from Steam, PSN, Xbox and Playnite.</p>
+        </details>
+        <details>
+          <summary>Is PS5 Vault free?</summary>
+          <p>Yes. Collection, finances, pile of shame, releases, wishlist and year in games are free with no ads. Pro is a one-time purchase (no subscription) with unlimited import, cost per hour, a budget and the serial scanner.</p>
+        </details>
+        <details>
+          <summary>Which phones does it run on?</summary>
+          <p>Android, from Google Play.</p>
+        </details>
+      </div>
+    </section>
+
     <section class="cta">
       <div class="container">
         <div class="cta-inner">
           <div class="section-label">// download</div>
           <h2 class="cta-title">Free, <em>no account</em> and no ads.</h2>
-          <p class="cta-lead">
-            Install it from Google Play and start adding games right away: by hand, by scanning
-            the barcode on the box or by importing your whole library.
-          </p>
-
-          <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.skudev.ps5vault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dcta" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19l10-9.5L4 2.5zm11.4 10.8l2.6 2.5-11.2 6.3 8.6-8.8zm0-2.6L6.8 1.9 18 8.2l-2.6 2.5zm4.3-1.5l3 1.7c.8.5.8 1.7 0 2.2l-3 1.7-2.8-2.8 2.8-2.8z"/></svg>
-            Get it on Google Play
-          </a>
-
-          <div class="cta-meta">
-            An idea or a bug? Write to <a href="mailto:skudev6@gmail.com">skudev6@gmail.com</a>.
-          </div>
+          <p class="cta-lead">Install it from Google Play and start adding games: by hand, by scanning box barcodes or by importing your whole library.</p>
+          <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.skudev.ps5vault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dcta" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19l10-9.5L4 2.5zm11.4 10.8l2.6 2.5-11.2 6.3 8.6-8.8zm0-2.6L6.8 1.9 18 8.2l-2.6 2.5zm4.3-1.5l3 1.7c.8.5.8 1.7 0 2.2l-3 1.7-2.8-2.8 2.8-2.8z"/></svg>Get it on Google Play</a>
+          <div class="cta-meta">An idea or a bug? Write to <a href="mailto:skudev6@gmail.com">skudev6@gmail.com</a>.</div>
         </div>
       </div>
     </section>
@@ -663,7 +255,7 @@
   <footer>
     <div class="container">
       <div class="footer-grid">
-        <div>PS5 Vault · a <a href="/" style="color:var(--accent-dim);text-decoration:none;">skudev</a> project · 2026</div>
+        <div>PS5 Vault · a project by <a href="/" style="color:var(--accent-dim);text-decoration:none;">skudev</a> · 2026</div>
         <ul class="footer-links">
           <li><a href="mailto:skudev6@gmail.com">email</a></li>
           <li><a href="https://matiseekk-dot.github.io/Games/privacy.html" target="_blank" rel="noopener">privacy</a></li>
@@ -673,5 +265,47 @@
     </div>
   </footer>
 
+<script>
+(() => {
+  const T = {"locale":"en-US","cur":"$","after":false,"thr":[0.5,2.5],"shameOut":"There is <b>{m}</b> on your shelf. Finishing it all takes about <b>{h} hours</b>, that is <b>{d} days</b> at 2 hours a day.","shameShare":"My pile of shame: {m} sitting on the shelf. What about yours?","hourOut":"One hour of gaming cost you <b>{v}</b>.","great":"Great value.","ok":"Fair, cheaper than a movie ticket.","bad":"Pricey. Time to go back to it, or sell it?","hourShare":"One hour of my game cost me {v}. Work out yours:","copied":"Link copied ✓","shareBtn":"Share your result"}
+  const nf = new Intl.NumberFormat(T.locale, { maximumFractionDigits: 2 })
+  const nf0 = new Intl.NumberFormat(T.locale, { maximumFractionDigits: 0 })
+  const money = (v, f) => { const s = (f || nf).format(v); return T.after ? s + '\u00a0' + T.cur : T.cur + '\u00a0' + s }
+  const num = el => Math.max(0, parseFloat(String(el.value).replace(',', '.')) || 0)
+  const fill = (s, o) => s.replace(/\{(\w)\}/g, (_, k) => o[k])
+  const strip = s => s.replace(/<[^>]+>/g, '')
+  // Wynik da się udostępnić linkiem: liczby lądują w adresie (?n=12&p=150...), a strona je wczytuje.
+  const q = new URLSearchParams(location.search)
+  for (const el of document.querySelectorAll('.calc input')) if (q.has(el.name)) el.value = q.get(el.name)
+  const forms = {
+    'calc-shame': f => {
+      const [n, p, h] = ['n', 'p', 'h'].map(k => num(f.elements[k]))
+      const m = money(n * p, nf0), hh = Math.round(n * h)
+      return { html: fill(T.shameOut, { m, h: nf0.format(hh), d: nf0.format(Math.ceil(hh / 2)) }), share: fill(T.shameShare, { m }) }
+    },
+    'calc-hour': f => {
+      const p = num(f.elements.hp), h = num(f.elements.hh)
+      if (!h) return { html: '', share: '' }
+      const v = p / h, vs = money(v)
+      const verdict = v < T.thr[0] ? T.great : v < T.thr[1] ? T.ok : T.bad
+      return { html: fill(T.hourOut, { v: vs }) + '<span class="calc-verdict">' + verdict + '</span>', share: fill(T.hourShare, { v: vs }) }
+    },
+  }
+  for (const [id, calc] of Object.entries(forms)) {
+    const f = document.getElementById(id), out = f.querySelector('.calc-out'), btn = f.querySelector('.calc-share')
+    const run = () => { const r = calc(f); out.innerHTML = r.html; f.dataset.share = r.share }
+    f.addEventListener('input', run)
+    run()
+    btn.addEventListener('click', async () => {
+      const u = new URL(location.href.split('#')[0].split('?')[0])
+      for (const el of f.querySelectorAll('input')) u.searchParams.set(el.name, el.value)
+      u.hash = 'kalkulator'
+      const text = strip(f.dataset.share)
+      try { if (navigator.share) { await navigator.share({ text, url: u.href }); return } } catch (e) { if (e && e.name === 'AbortError') return }
+      try { await navigator.clipboard.writeText(text + ' ' + u.href); btn.textContent = T.copied; setTimeout(() => { btn.textContent = T.shareBtn }, 1800) } catch {}
+    })
+  }
+})()
+</script>
 </body>
 </html>
