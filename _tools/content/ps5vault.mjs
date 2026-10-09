@@ -3,7 +3,7 @@
 // Treść strony PS5 Vault (/ps5-vault/ i /ps5-vault/{en,es,de,fr,it,pt}/) dla _tools/build-ps5vault.mjs.
 // Fakty zgodne z apką 1.21 (repo matiseekk-dot/Games): Pro to jednorazowy zakup
 // (import bez limitu, koszt na godzinę i analiza, budżet, skaner seryjny), import za darmo do 50 gier,
-// przypomnienie o premierze 3 dni przed i w dniu premiery.
+// przypomnienia o premierze: miesiąc, tydzień i 3 dni przed oraz w dniu premiery.
 // **słowo** = wyróżnienie (kursywa w kolorze akcentu). Bez długich myślników.
 
 // Progi oceny kosztu godziny w walucie strony: [świetnie poniżej, w porządku poniżej].
@@ -42,7 +42,7 @@ export const PAGES = [
       ['📦', 'Kupka wstydu', 'Gry kupione i nigdy nieodpalone, policzone w sztukach i w złotówkach. Gotowy obrazek do udostępnienia znajomym.'],
       ['🔁', 'Import całej biblioteki', 'Steam, PSN, Xbox albo Playnite. Apka dopasowuje gry do bazy RAWG i ustawia statusy. Za darmo do 50 gier, w Pro bez limitu.'],
       ['🎯', 'Lista życzeń z ceną docelową', 'Wpisujesz, za ile kupisz grę. Gdy trafisz na promocję w PS Store, apka mówi, że to już ten moment.'],
-      ['📅', 'Premiery z odliczaniem', 'Gry z datą premiery mają osobną zakładkę z licznikiem dni. Przypomnienie 3 dni przed premierą i w dniu premiery.'],
+      ['📅', 'Premiery z odliczaniem', 'Gry z datą premiery mają osobną zakładkę z licznikiem dni. Przypomnienia na miesiąc, tydzień i 3 dni przed premierą oraz w dniu premiery.'],
       ['🎁', 'Rok w grach', 'Godziny, ukończone gry, platyny, najczęściej grane tytuły i ulubiony gatunek. Udostępniasz jako obrazek na story.'],
       ['🎲', 'Co zagrać?', 'Nie wiesz, w co grać? Jedno stuknięcie losuje grę z Twojej kupki wstydu. Od razu oznaczasz ją jako Gram albo losujesz dalej.'],
       ['📷', 'Skaner pudełek', 'Kod kreskowy z tyłu okładki i gra jest w kolekcji: tytuł, gatunek i rok same się wpisują. W Pro skanujesz całą półkę pod rząd.'],
@@ -105,7 +105,7 @@ export const PAGES = [
       ['📦', 'Pile of shame', 'Games you bought and never played, counted in titles and in money. A ready image to share with friends.'],
       ['🔁', 'Import your whole library', 'Steam, PSN, Xbox or Playnite. The app matches games to the RAWG database and sets their status. Free up to 50 games, unlimited with Pro.'],
       ['🎯', 'Wishlist with target prices', 'Set the price you would pay. When you spot a PS Store sale, the app tells you it is time to buy.'],
-      ['📅', 'Release countdown', 'Games with a release date get their own tab with a day counter. A reminder 3 days before launch and on launch day.'],
+      ['📅', 'Release countdown', 'Games with a release date get their own tab with a day counter. Reminders a month, a week and 3 days before launch, and on launch day.'],
       ['🎁', 'Year in games', 'Hours, games finished, platinums, most played titles and favorite genre. Share it as an image for your story.'],
       ['🎲', 'What to play?', 'Can’t decide? One tap picks a game from your pile of shame. Mark it as Playing or roll again.'],
       ['📷', 'Box scanner', 'Scan the barcode on the back and the game is in: title, genre and year fill in by themselves. With Pro you scan the whole shelf in a row.'],
@@ -168,7 +168,7 @@ export const PAGES = [
       ['📦', 'Pila de la vergüenza', 'Juegos comprados y nunca jugados, contados en unidades y en dinero. Una imagen lista para compartir.'],
       ['🔁', 'Importa toda tu biblioteca', 'Steam, PSN, Xbox o Playnite. La app empareja los juegos con la base de datos RAWG y pone su estado. Gratis hasta 50 juegos, sin límite con Pro.'],
       ['🎯', 'Lista de deseos con precio objetivo', 'Indica cuánto pagarías. Cuando veas una oferta en PS Store, la app te avisa de que es el momento.'],
-      ['📅', 'Cuenta atrás de lanzamientos', 'Los juegos con fecha de lanzamiento tienen su pestaña con contador de días. Aviso 3 días antes y el día del lanzamiento.'],
+      ['📅', 'Cuenta atrás de lanzamientos', 'Los juegos con fecha de lanzamiento tienen su pestaña con contador de días. Avisos un mes, una semana y 3 días antes, y el mismo día.'],
       ['🎁', 'Año en juegos', 'Horas, juegos terminados, platinos, títulos más jugados y género favorito. Compártelo como imagen en tu historia.'],
       ['🎲', '¿A qué juego?', '¿No te decides? Un toque elige un juego de tu pila. Lo marcas como Jugando o vuelves a sortear.'],
       ['📷', 'Escáner de cajas', 'Escanea el código de barras y el juego entra: título, género y año se rellenan solos. Con Pro escaneas toda la estantería seguida.'],
@@ -231,7 +231,7 @@ export const PAGES = [
       ['📦', 'Pile of Shame', 'Gekaufte und nie gestartete Spiele, gezählt in Titeln und in Euro. Ein fertiges Bild zum Teilen.'],
       ['🔁', 'Ganze Bibliothek importieren', 'Steam, PSN, Xbox oder Playnite. Die App ordnet die Spiele der RAWG-Datenbank zu und setzt den Status. Kostenlos bis 50 Spiele, mit Pro ohne Limit.'],
       ['🎯', 'Wunschliste mit Zielpreis', 'Trag ein, was du zahlen würdest. Siehst du einen Sale im PS Store, sagt dir die App, dass jetzt der Moment ist.'],
-      ['📅', 'Release-Countdown', 'Spiele mit Erscheinungsdatum bekommen einen eigenen Tab mit Tageszähler. Erinnerung 3 Tage vorher und am Release-Tag.'],
+      ['📅', 'Release-Countdown', 'Spiele mit Erscheinungsdatum bekommen einen eigenen Tab mit Tageszähler. Erinnerungen einen Monat, eine Woche und 3 Tage vorher sowie am Release-Tag.'],
       ['🎁', 'Jahr in Spielen', 'Stunden, beendete Spiele, Platin-Trophäen, meistgespielte Titel und Lieblingsgenre. Teil es als Bild in deiner Story.'],
       ['🎲', 'Was spielen?', 'Keine Idee? Ein Tipp lost ein Spiel aus deinem Stapel aus. Markier es als Spiele gerade oder los nochmal.'],
       ['📷', 'Hüllen-Scanner', 'Barcode auf der Rückseite scannen und das Spiel ist drin: Titel, Genre und Jahr füllen sich selbst. Mit Pro scannst du das ganze Regal am Stück.'],
@@ -294,7 +294,7 @@ export const PAGES = [
       ['📦', 'Pile de la honte', 'Les jeux achetés et jamais lancés, comptés en titres et en euros. Une image prête à partager.'],
       ['🔁', 'Importe toute ta bibliothèque', 'Steam, PSN, Xbox ou Playnite. L’app associe les jeux à la base RAWG et règle leur statut. Gratuit jusqu’à 50 jeux, sans limite avec Pro.'],
       ['🎯', 'Liste de souhaits avec prix cible', 'Indique ton prix. Quand tu vois une promo sur le PS Store, l’app te dit que c’est le moment.'],
-      ['📅', 'Compte à rebours des sorties', 'Les jeux avec une date de sortie ont leur onglet avec compteur de jours. Rappel 3 jours avant et le jour J.'],
+      ['📅', 'Compte à rebours des sorties', 'Les jeux avec une date de sortie ont leur onglet avec compteur de jours. Rappels un mois, une semaine et 3 jours avant, et le jour J.'],
       ['🎁', 'Année en jeux', 'Heures, jeux terminés, platines, titres les plus joués et genre préféré. Partage-la en image dans ta story.'],
       ['🎲', 'À quoi jouer ?', 'Pas d’idée ? Un geste tire un jeu de ta pile. Marque-le En cours ou relance.'],
       ['📷', 'Scanner de boîtes', 'Scanne le code-barres au dos et le jeu est ajouté : titre, genre et année se remplissent seuls. Avec Pro, tu scannes toute l’étagère à la suite.'],
@@ -357,7 +357,7 @@ export const PAGES = [
       ['📦', 'Pila della vergogna', 'Giochi comprati e mai avviati, contati in titoli e in euro. Un’immagine pronta da condividere.'],
       ['🔁', 'Importa tutta la libreria', 'Steam, PSN, Xbox o Playnite. L’app abbina i giochi al database RAWG e imposta lo stato. Gratis fino a 50 giochi, senza limiti con Pro.'],
       ['🎯', 'Lista desideri con prezzo obiettivo', 'Scrivi quanto pagheresti. Quando trovi un saldo sul PS Store, l’app ti dice che è il momento.'],
-      ['📅', 'Conto alla rovescia delle uscite', 'I giochi con data di uscita hanno una scheda con il contatore dei giorni. Promemoria 3 giorni prima e il giorno stesso.'],
+      ['📅', 'Conto alla rovescia delle uscite', 'I giochi con data di uscita hanno una scheda con il contatore dei giorni. Promemoria un mese, una settimana e 3 giorni prima, e il giorno stesso.'],
       ['🎁', 'Anno in giochi', 'Ore, giochi finiti, platini, titoli più giocati e genere preferito. Condividilo come immagine nella storia.'],
       ['🎲', 'A cosa gioco?', 'Indeciso? Un tocco estrae un gioco dalla tua pila. Segnalo come In corso o riprova.'],
       ['📷', 'Scanner di confezioni', 'Scansiona il codice a barre sul retro e il gioco è dentro: titolo, genere e anno si compilano da soli. Con Pro scansioni tutto lo scaffale di fila.'],
@@ -420,7 +420,7 @@ export const PAGES = [
       ['📦', 'Pilha da vergonha', 'Jogos comprados e nunca jogados, contados em títulos e em reais. Uma imagem pronta para compartilhar.'],
       ['🔁', 'Importe a biblioteca inteira', 'Steam, PSN, Xbox ou Playnite. O app associa os jogos à base RAWG e define o status. Grátis até 50 jogos, sem limite no Pro.'],
       ['🎯', 'Lista de desejos com preço-alvo', 'Diga quanto pagaria. Quando aparecer uma promoção na PS Store, o app avisa que chegou a hora.'],
-      ['📅', 'Contagem regressiva de lançamentos', 'Jogos com data de lançamento ganham uma aba com contador de dias. Lembrete 3 dias antes e no dia do lançamento.'],
+      ['📅', 'Contagem regressiva de lançamentos', 'Jogos com data de lançamento ganham uma aba com contador de dias. Lembretes um mês, uma semana e 3 dias antes, e no dia do lançamento.'],
       ['🎁', 'Ano em jogos', 'Horas, jogos zerados, platinas, títulos mais jogados e gênero favorito. Compartilhe como imagem no story.'],
       ['🎲', 'O que jogar?', 'Sem ideia? Um toque sorteia um jogo da sua pilha. Marque como Jogando ou sorteie de novo.'],
       ['📷', 'Scanner de caixas', 'Escaneie o código de barras e o jogo entra: título, gênero e ano se preenchem sozinhos. No Pro você escaneia a estante inteira em sequência.'],
