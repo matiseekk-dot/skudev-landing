@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PS5 Vault · Suivi de ta collection de jeux · SkuDev</title>
+  <meta name="description" content="Suivi de ta collection de jeux sur Android : le coût réel de ta collection, les heures jouées, un calendrier des sorties et l'import depuis Steam, Xbox, PSN et Playnite. 7 langues, sans compte, sans pub. Gratuit sur Google Play, avec un Pro optionnel en achat unique.">
+  <link rel="canonical" href="https://skudev.pl/ps5-vault/fr/">
+  <link rel="alternate" hreflang="pl" href="https://skudev.pl/ps5-vault/">
+  <link rel="alternate" hreflang="en" href="https://skudev.pl/ps5-vault/en/">
+  <link rel="alternate" hreflang="es" href="https://skudev.pl/ps5-vault/es/">
+  <link rel="alternate" hreflang="de" href="https://skudev.pl/ps5-vault/de/">
+  <link rel="alternate" hreflang="fr" href="https://skudev.pl/ps5-vault/fr/">
+  <link rel="alternate" hreflang="it" href="https://skudev.pl/ps5-vault/it/">
+  <link rel="alternate" hreflang="pt" href="https://skudev.pl/ps5-vault/pt/">
+  <link rel="alternate" hreflang="x-default" href="https://skudev.pl/ps5-vault/en/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SkuDev">
+  <meta property="og:url" content="https://skudev.pl/ps5-vault/fr/">
+  <meta property="og:title" content="PS5 Vault · Combien d'argent dort sur ton étagère ?">
+  <meta property="og:description" content="Calcule la valeur de tes jeux jamais lancés et le vrai coût d'une heure de jeu. Un suivi qui compte ta collection. Et la facture qui va avec.">
+  <meta property="og:image" content="https://skudev.pl/assets/ps5/fr/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Combien d'argentdort sur ton étagère ?">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:locale:alternate" content="pl_PL">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="es_ES">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta property="og:locale:alternate" content="it_IT">
+  <meta property="og:locale:alternate" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PS5 Vault · Combien d'argent dort sur ton étagère ?">
+  <meta name="twitter:description" content="Calcule la valeur de tes jeux jamais lancés et le vrai coût d'une heure de jeu. Un suivi qui compte ta collection. Et la facture qui va avec.">
+  <meta name="twitter:image" content="https://skudev.pl/assets/ps5/fr/og.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%231A1F18'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23D4A547' font-family='monospace' font-weight='700'%3EV%3C/text%3E%3C/svg%3E">
+  <script type="application/ld+json">[{"@context":"https://schema.org","@type":"SoftwareApplication","name":"PS5 Vault","operatingSystem":"Android","applicationCategory":"LifestyleApplication","inLanguage":"fr-FR","description":"Suivi de ta collection de jeux sur Android : le coût réel de ta collection, les heures jouées, un calendrier des sorties et l'import depuis Steam, Xbox, PSN et Playnite. 7 langues, sans compte, sans pub. Gratuit sur Google Play, avec un Pro optionnel en achat unique.","url":"https://skudev.pl/ps5-vault/fr/","downloadUrl":"https://play.google.com/store/apps/details?id=com.skudev.ps5vault","image":"https://skudev.pl/assets/ps5/fr/og.jpg","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},{"@context":"https://schema.org","@type":"FAQPage","inLanguage":"fr-FR","mainEntity":[{"@type":"Question","name":"Comment voir combien j'ai dépensé sur le PlayStation Store ?","acceptedAnswer":{"@type":"Answer","text":"Sur PS5 : Paramètres → Utilisateurs et comptes → Compte → Paiement et abonnements → Historique des transactions (dans le menu en anglais : Settings → Users and Accounts → Account → Payment and Subscriptions → Transaction History). Choisis le compte et une période, et la console affiche tes achats du plus récent au plus ancien. Dans un navigateur, connecte-toi à la gestion du compte PlayStation et ouvre l'historique des transactions. Reporte les montants dans PS5 Vault et l'appli calcule le coût réel de ta collection et le coût par heure de jeu."}},{"@type":"Question","name":"Comment calculer combien me coûte une heure de jeu ?","acceptedAnswer":{"@type":"Answer","text":"Divise le prix du jeu (moins ce que tu récupères en le revendant) par le nombre d'heures jouées. Un jeu à 70 € joué 50 heures revient à 1,40 € de l'heure. Utilise le calculateur ci-dessus, et PS5 Vault le fait automatiquement pour chaque jeu de ta collection."}},{"@type":"Question","name":"PS5 Vault se connecte-t-il à mon compte PSN ?","acceptedAnswer":{"@type":"Answer","text":"Non. L'appli ne demande jamais ton identifiant ni ton mot de passe PSN. Tu importes ta bibliothèque PlayStation en copiant le tableau des jeux de psnprofiles.com, et tout reste sur ton téléphone."}},{"@type":"Question","name":"Puis-je suivre aussi mes jeux Steam, Xbox et PC ?","acceptedAnswer":{"@type":"Answer","text":"Oui. L'import fonctionne avec Steam, Xbox (via TrueAchievements), PSN (via PSN-Profiles) et Playnite, qui regroupe les bibliothèques de nombreuses boutiques. Plateformes dans l'appli : PS5, PS4, Xbox, PC, Switch et mobile."}},{"@type":"Question","name":"Que contient PS5 Vault Pro et combien ça coûte ?","acceptedAnswer":{"@type":"Answer","text":"Pro est un achat unique sur Google Play, pas un abonnement. Il débloque l'import illimité, les finances avancées, le budget mensuel et le scanner en série. L'appli affiche le prix dans ta devise avant l'achat. Tout le reste est gratuit."}},{"@type":"Question","name":"PS5 Vault fonctionne-t-il sur iPhone ?","acceptedAnswer":{"@type":"Answer","text":"L'appli est sur Google Play pour Android. Sur iPhone et sur ordinateur, tu peux utiliser la version web : matiseekk-dot.github.io/Games. L'achat de Pro ne fonctionne que dans l'appli Google Play."}},{"@type":"Question","name":"Comment transférer ma collection sur un nouveau téléphone ?","acceptedAnswer":{"@type":"Answer","text":"Dans les réglages, choisis Exporter les données, puis sur le nouveau téléphone Importer des données avec ce fichier. Tu peux fusionner les collections ou remplacer l'une par l'autre."}}]}]</script>
+
+  <style>
+    :root {
+      --bg:          #141810;
+      --bg-2:        #1E2618;
+      --bg-3:        #2A342A;
+      --ink:         #F5F0E0;
+      --ink-2:       #C5BFA8;
+      --ink-3:       #8A8670;
+      --accent:      #D4A547;
+      --accent-dim:  #9A7F3D;
+      --coral:       #C95A48;
+      --sage:        #6B8E6F;
+      --border:      rgba(245, 240, 224, 0.08);
+      --border-2:    rgba(245, 240, 224, 0.16);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Manrope', -apple-system, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245, 240, 224, 0.015) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245, 240, 224, 0.015) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 75% 15%, rgba(201, 90, 72, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 15% 85%, rgba(212, 165, 71, 0.04) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ═══ HEADER ═══ */
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(20, 24, 16, 0.85);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .logo-mark {
+      width: 36px; height: 36px;
+      background: var(--coral);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: #FDF8F0;
+      font-size: 18px;
+    }
+
+    .logo-text {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 500;
+      letter-spacing: -0.3px;
+    }
+
+    .logo-text em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .nav-back {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-3);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--accent); }
+
+    .nav-links { display: flex; align-items: center; gap: 16px; }
+    .nav-langs { display: flex; gap: 6px; }
+    .nav-lang {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-3);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      border: 1px solid var(--border-2);
+      border-radius: 20px;
+      padding: 5px 10px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-lang:hover, .nav-lang[aria-current="page"] { color: var(--accent); border-color: var(--accent); }
+
+    @media (max-width: 520px) {
+      .nav-back { display: none; }
+    }
+
+    /* ═══ HERO ═══ */
+    .hero {
+      padding: 80px 0 60px;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(40px, 6vw, 68px);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 28px;
+      max-width: 14ch;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .hero-lead {
+      font-size: 19px;
+      color: var(--ink-2);
+      line-height: 1.6;
+      max-width: 52ch;
+      margin-bottom: 36px;
+    }
+
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 22px; border-radius: 12px;
+      font-family: inherit; font-size: 15px; font-weight: 700; letter-spacing: 0.2px;
+      text-decoration: none; transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .btn-play { background: var(--coral); color: #FDF8F0; }
+    .btn-play:hover { background: #B84A3A; }
+    .btn-play svg { width: 20px; height: 20px; }
+
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      background: rgba(107, 142, 111, 0.1);
+      border: 1px solid rgba(107, 142, 111, 0.3);
+      border-radius: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--sage);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-status::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--sage);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--sage);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* ═══ STORY ═══ */
+    .story {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .story-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .story-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-3);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .story-quote {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(22px, 3vw, 28px);
+      line-height: 1.45;
+      color: var(--ink);
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.3px;
+      margin-bottom: 24px;
+    }
+
+    .story-quote em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .story-author {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--ink-3);
+    }
+
+    /* ═══ FEATURES ═══ */
+    .features {
+      padding: 80px 0 60px;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(30px, 4.5vw, 44px);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -1.2px;
+      max-width: 20ch;
+      margin-bottom: 60px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .feature {
+      background: var(--bg);
+      padding: 32px 28px;
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .feature:hover {
+      background: var(--bg-2);
+    }
+
+    .feature-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-3);
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .feature-emoji {
+      font-size: 32px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .feature h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 1.25;
+      margin-bottom: 10px;
+      letter-spacing: -0.4px;
+    }
+
+    .feature p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--ink-2);
+    }
+
+    /* ═══ FREE vs PRO ═══ */
+    .plans { padding: 80px 0 60px; border-top: 1px solid var(--border); }
+    .plans-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .plan { border: 1px solid var(--border-2); border-radius: 14px; padding: 28px; background: var(--bg-2); }
+    .plan-pro { border-color: var(--accent-dim); background: linear-gradient(160deg, rgba(212, 165, 71, 0.10), var(--bg-2) 60%); }
+    .plan-name { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-3); margin-bottom: 8px; font-weight: 600; }
+    .plan-pro .plan-name { color: var(--accent); }
+    .plan-price { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 500; margin-bottom: 18px; letter-spacing: -0.5px; }
+    .plan ul { list-style: none; display: grid; gap: 10px; }
+    .plan li { font-size: 14px; color: var(--ink-2); line-height: 1.5; padding-left: 22px; position: relative; }
+    .plan li::before { content: '✓'; position: absolute; left: 0; color: var(--sage); font-weight: 700; }
+    .plan-pro li::before { color: var(--accent); }
+    .plans-note { margin-top: 18px; font-size: 13px; color: var(--ink-3); line-height: 1.6; }
+
+    /* ═══ PREVIEW (phones) ═══ */
+    .preview {
+      padding: 80px 0 60px;
+      border-top: 1px solid var(--border);
+    }
+
+    .shots {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .shots img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 9 / 16;
+      display: block;
+      border-radius: 18px;
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .shots img:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 40px 80px -20px rgba(201, 90, 72, 0.3);
+    }
+
+    /* ═══ CTA ═══ */
+    .cta {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .cta-inner {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .cta-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.8px;
+      margin-bottom: 20px;
+    }
+
+    .cta-title em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .cta-lead {
+      color: var(--ink-2);
+      margin-bottom: 32px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .cta-meta {
+      margin-top: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--ink-3);
+      letter-spacing: 0.3px;
+    }
+
+    .cta-meta a {
+      color: var(--ink-2);
+    }
+
+    /* ═══ FOOTER ═══ */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--ink-3);
+      letter-spacing: 0.3px;
+    }
+
+    .footer-grid {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--ink-3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ═══ RWD ═══ */
+    @media (max-width: 800px) {
+      .shots { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    }
+
+    @media (max-width: 640px) {
+      .hero { padding: 60px 0 40px; }
+    }
+
+    /* ═══ NAV: 7 languages ═══ */
+    .nav-langs { flex-wrap: wrap; justify-content: flex-end; }
+    @media (max-width: 520px) {
+      .logo-text { display: none; }
+      .nav-lang { padding: 4px 7px; font-size: 11px; }
+    }
+
+    /* ═══ CALCULATORS ═══ */
+    .calc { padding: 80px 0 60px; border-top: 1px solid var(--border); scroll-margin-top: 80px; }
+    .calc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .calc-card { border: 1px solid var(--border-2); border-radius: 14px; padding: 26px; background: var(--bg-2); scroll-margin-top: 90px; }
+    .calc-card h3 { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; letter-spacing: -0.4px; margin-bottom: 6px; line-height: 1.25; }
+    .calc-sub { font-size: 13px; color: var(--ink-3); margin-bottom: 18px; }
+    .calc-field { display: block; margin-bottom: 12px; }
+    .calc-field span { display: block; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; color: var(--ink-3); margin-bottom: 6px; }
+    .calc-field input { width: 100%; background: var(--bg); border: 1px solid var(--border-2); border-radius: 10px; padding: 12px 14px; color: var(--ink); font: 600 18px 'Manrope', sans-serif; }
+    .calc-field input:focus { outline: none; border-color: var(--accent); }
+    .calc-out { margin-top: 18px; padding: 18px; border-radius: 12px; background: rgba(212, 165, 71, 0.08); border: 1px solid rgba(212, 165, 71, 0.25); }
+    .calc-big { font-family: 'Fraunces', serif; font-size: clamp(30px, 5vw, 40px); color: var(--accent); line-height: 1.1; overflow-wrap: anywhere; }
+    .calc-big small { font-family: 'Manrope', sans-serif; font-size: 14px; color: var(--ink-2); margin-left: 6px; }
+    .calc-line { font-size: 14px; color: var(--ink-2); margin-top: 8px; line-height: 1.5; }
+    .calc-note { font-size: 12px; color: var(--ink-3); margin-top: 6px; }
+    .calc-share { margin-top: 14px; width: 100%; min-height: 46px; border: 1px solid var(--accent-dim); background: transparent; color: var(--accent); border-radius: 11px; font: 700 14px 'Manrope', sans-serif; cursor: pointer; }
+    .calc-share:hover { background: rgba(212, 165, 71, 0.08); }
+    .calc-msg { font-size: 12px; color: var(--sage); margin-top: 8px; min-height: 16px; }
+    .calc-nudge { margin-top: 22px; font-size: 14px; color: var(--ink-2); text-align: center; }
+    .calc-nudge a { color: var(--accent); font-weight: 700; }
+
+    /* ═══ FAQ ═══ */
+    .faq { padding: 80px 0 60px; border-top: 1px solid var(--border); }
+    .faq-list { max-width: 760px; }
+    .faq details { border-bottom: 1px solid var(--border); padding: 18px 0; }
+    .faq summary { cursor: pointer; font-family: 'Fraunces', serif; font-size: 19px; font-weight: 500; letter-spacing: -0.3px; list-style: none; display: flex; justify-content: space-between; gap: 16px; line-height: 1.35; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: '+'; color: var(--accent); font-family: 'JetBrains Mono', monospace; flex-shrink: 0; }
+    .faq details[open] summary::after { content: '×'; }
+    .faq-a { font-size: 15px; color: var(--ink-2); line-height: 1.65; margin-top: 10px; }
+    .faq-a a { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="logo">
+          <div class="logo-mark">S</div>
+          <div class="logo-text">skudev · <em>ps5 vault</em></div>
+        </a>
+        <div class="nav-links">
+          <div class="nav-langs">
+            <a href="/ps5-vault/" class="nav-lang" hreflang="pl" lang="pl">PL</a>
+            <a href="/ps5-vault/en/" class="nav-lang" hreflang="en" lang="en">EN</a>
+            <a href="/ps5-vault/es/" class="nav-lang" hreflang="es" lang="es">ES</a>
+            <a href="/ps5-vault/de/" class="nav-lang" hreflang="de" lang="de">DE</a>
+            <a href="/ps5-vault/fr/" class="nav-lang" hreflang="fr" lang="fr" aria-current="page">FR</a>
+            <a href="/ps5-vault/it/" class="nav-lang" hreflang="it" lang="it">IT</a>
+            <a href="/ps5-vault/pt/" class="nav-lang" hreflang="pt" lang="pt">PT</a>
+          </div>
+          <a href="/" class="nav-back">← tous les projets</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ═══ HERO ═══ -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-eyebrow">// Suivi de collection de jeux · Android</div>
+        <h1>Tes jeux. Ton <em>argent</em>. Ton temps.</h1>
+        <p class="hero-lead">Ta collection avec les jaquettes de RAWG, le coût réel par jeu et au total, les heures jouées et un calendrier des sorties. Importe toute ta bibliothèque depuis Steam, Xbox, PSN ou Playnite. Sans compte et sans pub, ta collection reste sur ton téléphone.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.skudev.ps5vault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dhero%26utm_content%3Dfr" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19l10-9.5L4 2.5zm11.4 10.8l2.6 2.5-11.2 6.3 8.6-8.8zm0-2.6L6.8 1.9 18 8.2l-2.6 2.5zm4.3-1.5l3 1.7c.8.5.8 1.7 0 2.2l-3 1.7-2.8-2.8 2.8-2.8z"/></svg>
+            Disponible sur Google Play
+          </a>
+        </div>
+        <div class="hero-status">sur Google Play · gratuit · 7 langues</div>
+      </div>
+    </section>
+
+    <!-- ═══ CALCULATORS ═══ -->
+    <section class="calc" id="calc">
+      <div class="container">
+        <div class="section-label">// calculateurs</div>
+        <h2 class="section-title">Deux calculs <em>rapides</em> pour les joueurs.</h2>
+        <div class="calc-grid">
+          <div class="calc-card" id="shelf">
+            <h3>Combien d'argent dort sur ton étagère ?</h3>
+            <p class="calc-sub">Les jeux achetés et jamais lancés.</p>
+            <label class="calc-field"><span>Jeux jamais lancés</span><input id="s-games" type="text" inputmode="decimal" autocomplete="off" value="25"></label>
+            <label class="calc-field"><span>Prix moyen par jeu</span><input id="s-price" type="text" inputmode="decimal" autocomplete="off" value="35"></label>
+            <label class="calc-field"><span>Heures de jeu par semaine</span><input id="s-hpw" type="text" inputmode="decimal" autocomplete="off" value="8"></label>
+            <div class="calc-out" aria-live="polite">
+              <div class="calc-big"><span id="s-value"></span><small>sur ton étagère</small></div>
+              <div class="calc-line" id="s-time"></div>
+              <div class="calc-note">On compte en moyenne 25 h par jeu.</div>
+            </div>
+            <button type="button" class="calc-share" id="s-share">📤 Partager le résultat</button>
+            <div class="calc-msg" id="s-msg"></div>
+          </div>
+          <div class="calc-card" id="cph">
+            <h3>Combien te coûte une heure de jeu ?</h3>
+            <p class="calc-sub">Pour un jeu ou toute ta collection.</p>
+            <label class="calc-field"><span>Prix du jeu</span><input id="c-price" type="text" inputmode="decimal" autocomplete="off" value="70"></label>
+            <label class="calc-field"><span>Heures jouées</span><input id="c-hours" type="text" inputmode="decimal" autocomplete="off" value="50"></label>
+            <label class="calc-field"><span>Prix de revente (facultatif)</span><input id="c-resale" type="text" inputmode="decimal" autocomplete="off" value="0"></label>
+            <div class="calc-out" aria-live="polite">
+              <div class="calc-big"><span id="c-value"></span><small>par heure de jeu</small></div>
+              <div class="calc-line" id="c-verdict"></div>
+            </div>
+            <button type="button" class="calc-share" id="c-share">📤 Partager le résultat</button>
+            <div class="calc-msg" id="c-msg"></div>
+          </div>
+        </div>
+        <p class="calc-nudge">PS5 Vault le calcule automatiquement pour toute ta collection. <a href="https://play.google.com/store/apps/details?id=com.skudev.ps5vault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dcalc%26utm_content%3Dfr" rel="noopener">Télécharger gratuitement →</a></p>
+      </div>
+    </section>
+
+    <!-- ═══ STORY ═══ -->
+    <section class="story">
+      <div class="container">
+        <div class="story-inner">
+          <div class="story-label">// pourquoi cette appli</div>
+          <p class="story-quote">J'ai une PS5 depuis sa sortie. J'achète des jeux en promo, j'en ouvre certains, la plupart jamais. J'ai acheté le même jeu <em>trois fois</em> avant de comprendre que c'était un problème. J'ai créé l'appli pour savoir ce que je possède, et j'ai vite compris que le plus intéressant, c'est <em>ce que tout ça m'a coûté</em>.</p>
+          <div class="story-author">Mateusz, joueur PS5 et créateur de l'appli</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FEATURES ═══ -->
+    <section class="features">
+      <div class="container">
+        <div class="section-label">// ce que tu obtiens</div>
+        <h2 class="section-title">Tout ce qui me <em>manquait</em> dans les autres applis.</h2>
+
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature-num">01</div>
+            <span class="feature-emoji">💰</span>
+            <h3>Finances au coût réel</h3>
+            <p>Un onglet à part. Gratuit : le coût réel de ta collection et les dépenses du mois. Pro : coût par heure, rentabilité des jeux vendus, prévision annuelle et graphiques par boutique et par genre. Tu vois quel jeu a été ton meilleur investissement par heure jouée.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">02</div>
+            <span class="feature-emoji">🔁</span>
+            <h3>Import de toute ta bibliothèque</h3>
+            <p>Colle ou envoie un export de Steam, Xbox, PSN ou Playnite. L'appli associe les jeux à la base RAWG et définit leur statut selon les heures jouées et la progression des trophées. Des centaines de jeux en quelques minutes. Gratuit jusqu'à 50 jeux, sans limite avec Pro.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">03</div>
+            <span class="feature-emoji">📅</span>
+            <h3>Sorties avec compte à rebours</h3>
+            <p>Les jeux avec une date de sortie se trient tout seuls. Rappels un mois et une semaine avant, pendant les trois derniers jours et le jour J, quand tu ouvres l'appli. Les précommandes ne comptent pas dans les dépenses du mois avant la sortie.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">04</div>
+            <span class="feature-emoji">🎮</span>
+            <h3>Statuts, platines, abonnements</h3>
+            <p>En cours · Terminé · Prévu · Abandonné, avec un bouton Platine 🏆 pour les jeux terminés. Les jeux PS Plus, Game Pass ou EA Play ne comptent pas dans les dépenses. Multiplateforme : PS5, PS4, Xbox, PC, Switch, mobile.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">05</div>
+            <span class="feature-emoji">💳</span>
+            <h3>Budget mensuel</h3>
+            <p>Fixe combien tu veux dépenser en jeux chaque mois. L'appli additionne ce que tu as dépensé ce mois-ci en jeux, DLC et microtransactions et t'avertit quand tu dépasses. Fonction Pro.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">06</div>
+            <span class="feature-emoji">🔍</span>
+            <h3>Recherche et tri</h3>
+            <p>Cherche par titre, filtre par statut, plateforme et source, trie par date d'ajout, note, heures ou date de fin. Reste fluide même avec plus de 700 jeux.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">07</div>
+            <span class="feature-emoji">🎲</span>
+            <h3>Tirage au sort dans ta pile</h3>
+            <p>Tu ne sais pas à quoi jouer ? Une touche tire au sort un jeu parmi ceux qui attendent. Passe-le tout de suite En cours ou relance.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">08</div>
+            <span class="feature-emoji">🎁</span>
+            <h3>Ton année de jeu</h3>
+            <p>Un bilan de l'année façon Spotify Wrapped : heures, jeux terminés, platines et titres les plus joués. Partage-le en image.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">09</div>
+            <span class="feature-emoji">🔒</span>
+            <h3>Sans compte, sans pub</h3>
+            <p>Ta collection vit sur ton téléphone. Exporte une sauvegarde JSON quand tu veux et importe-la sur un autre appareil (fusionner ou remplacer). La seule statistique est un compteur de visites anonyme de Cloudflare, sans cookies.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">10</div>
+            <span class="feature-emoji">🎯</span>
+            <h3>Liste de souhaits avec prix cible</h3>
+            <p>Ajoute un jeu et le prix que tu paierais. Quand tu repères une promo, saisis le prix actuel et l'appli te dit si c'est le moment d'acheter. Une touche vérifie le prix sur le PS Store, et une fois acheté, le jeu rejoint ta collection.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">11</div>
+            <span class="feature-emoji">🙈</span>
+            <h3>Pile de la honte</h3>
+            <p>Les jeux achetés et jamais lancés, en une image : ce qu'ils ont coûté, combien d'heures il faudrait pour les finir et lequel attend depuis le plus longtemps. Prêt pour Instagram ou Discord.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">12</div>
+            <span class="feature-emoji">☑️</span>
+            <h3>Sélection de plusieurs jeux</h3>
+            <p>Appui long sur un jeu, puis sélectionne-en d'autres : change le statut ou supprime tout le groupe d'un coup. Chaque suppression s'annule d'une touche.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FREE vs PRO ═══ -->
+    <section class="plans">
+      <div class="container">
+        <div class="section-label">// gratuit et pro</div>
+        <h2 class="section-title">Presque tout est <em>gratuit</em>. Pro une fois, pour toujours.</h2>
+        <div class="plans-grid">
+          <div class="plan">
+            <div class="plan-name">Gratuit</div>
+            <div class="plan-price">0 €</div>
+            <ul>
+              <li>Collection illimitée : statuts, platines, notes et commentaires</li>
+              <li>Le coût réel de ta collection et les dépenses du mois</li>
+              <li>Sorties avec rappels</li>
+              <li>Import jusqu'à 50 jeux depuis Steam, Xbox, PSN et Playnite</li>
+              <li>Scanner de codes-barres, tirage au sort et Ton année de jeu</li>
+              <li>Liste de souhaits, pile de la honte, export et import de sauvegarde</li>
+            </ul>
+          </div>
+          <div class="plan plan-pro">
+            <div class="plan-name">PS5 Vault Pro</div>
+            <div class="plan-price">achat unique</div>
+            <ul>
+              <li>Import de toute ta bibliothèque sans limite</li>
+              <li>Finances avancées : coût par heure, rentabilité, prévision annuelle, graphiques par boutique et par genre</li>
+              <li>Budget mensuel avec alerte</li>
+              <li>Scanner en série pour plein de boîtes à la suite</li>
+              <li>Tu soutiens une appli sans pub développée sur le temps libre</li>
+            </ul>
+          </div>
+        </div>
+        <p class="plans-note">Pro s'achète dans l'appli via Google Play. Sans abonnement et sans compte. Après une réinstallation, l'achat revient sur le même compte Google.</p>
+      </div>
+    </section>
+
+    <!-- ═══ PREVIEW: PHONES ═══ -->
+    <section class="preview">
+      <div class="container">
+        <div class="section-label">// aperçu de l'appli</div>
+        <h2 class="section-title">L'essentiel <em>en un coup d'œil</em>.</h2>
+
+        <div class="shots">
+          <img src="/ps5-vault/screenshots/en/01-wyszukiwarka-sort.webp" width="720" height="1280" loading="lazy" alt="Bibliothèque avec recherche, filtres et tri, fluide même avec plus de 700 jeux">
+          <img src="/ps5-vault/screenshots/en/02-losowarka.webp" width="720" height="1280" loading="lazy" alt="Le tirage au sort choisit un jeu dans ta pile">
+          <img src="/ps5-vault/screenshots/en/03-wrapped.webp" width="720" height="1280" loading="lazy" alt="Ton année de jeu : heures, jeux terminés, platines et titres les plus joués">
+          <img src="/ps5-vault/screenshots/en/05-import.webp" width="720" height="1280" loading="lazy" alt="Import de ta bibliothèque depuis Steam, Xbox, PSN et Playnite">
+          <img src="/ps5-vault/screenshots/en/06-budzet.webp" width="720" height="1280" loading="lazy" alt="Aperçu financier : le coût réel de ta collection et les dépenses du mois">
+          <img src="/ps5-vault/screenshots/en/04-offline-privacy.webp" width="720" height="1280" loading="lazy" alt="Sans compte et sans pub, tes données restent sur ton téléphone">
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ FAQ ═══ -->
+    <section class="faq" id="faq">
+      <div class="container">
+        <div class="section-label">// questions</div>
+        <h2 class="section-title">Questions <em>fréquentes</em>.</h2>
+        <div class="faq-list">
+          <details>
+            <summary>Comment voir combien j'ai dépensé sur le PlayStation Store ?</summary>
+            <p class="faq-a">Sur PS5 : Paramètres → Utilisateurs et comptes → Compte → Paiement et abonnements → Historique des transactions (dans le menu en anglais : Settings → Users and Accounts → Account → Payment and Subscriptions → Transaction History). Choisis le compte et une période, et la console affiche tes achats du plus récent au plus ancien. Dans un navigateur, connecte-toi à la gestion du compte PlayStation et ouvre l'historique des transactions. Reporte les montants dans PS5 Vault et l'appli calcule le coût réel de ta collection et le coût par heure de jeu.</p>
+          </details>
+          <details>
+            <summary>Comment calculer combien me coûte une heure de jeu ?</summary>
+            <p class="faq-a">Divise le prix du jeu (moins ce que tu récupères en le revendant) par le nombre d'heures jouées. Un jeu à 70 € joué 50 heures revient à 1,40 € de l'heure. Utilise le <a href="#calc">calculateur ci-dessus</a>, et PS5 Vault le fait automatiquement pour chaque jeu de ta collection.</p>
+          </details>
+          <details>
+            <summary>PS5 Vault se connecte-t-il à mon compte PSN ?</summary>
+            <p class="faq-a">Non. L'appli ne demande jamais ton identifiant ni ton mot de passe PSN. Tu importes ta bibliothèque PlayStation en copiant le tableau des jeux de psnprofiles.com, et tout reste sur ton téléphone.</p>
+          </details>
+          <details>
+            <summary>Puis-je suivre aussi mes jeux Steam, Xbox et PC ?</summary>
+            <p class="faq-a">Oui. L'import fonctionne avec Steam, Xbox (via TrueAchievements), PSN (via PSN-Profiles) et Playnite, qui regroupe les bibliothèques de nombreuses boutiques. Plateformes dans l'appli : PS5, PS4, Xbox, PC, Switch et mobile.</p>
+          </details>
+          <details>
+            <summary>Que contient PS5 Vault Pro et combien ça coûte ?</summary>
+            <p class="faq-a">Pro est un achat unique sur Google Play, pas un abonnement. Il débloque l'import illimité, les finances avancées, le budget mensuel et le scanner en série. L'appli affiche le prix dans ta devise avant l'achat. Tout le reste est gratuit.</p>
+          </details>
+          <details>
+            <summary>PS5 Vault fonctionne-t-il sur iPhone ?</summary>
+            <p class="faq-a">L'appli est sur Google Play pour Android. Sur iPhone et sur ordinateur, tu peux utiliser la version web : <a href="https://matiseekk-dot.github.io/Games/" rel="noopener">matiseekk-dot.github.io/Games</a>. L'achat de Pro ne fonctionne que dans l'appli Google Play.</p>
+          </details>
+          <details>
+            <summary>Comment transférer ma collection sur un nouveau téléphone ?</summary>
+            <p class="faq-a">Dans les réglages, choisis Exporter les données, puis sur le nouveau téléphone Importer des données avec ce fichier. Tu peux fusionner les collections ou remplacer l'une par l'autre.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CTA ═══ -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta-inner">
+          <div class="section-label">// télécharger</div>
+          <h2 class="cta-title">Gratuit, <em>sans compte</em> et sans pub.</h2>
+          <p class="cta-lead">Installe-la depuis Google Play et ajoute tes jeux tout de suite : à la main, en scannant le code-barres de la boîte ou en important toute ta bibliothèque. Ajoute Pro en achat unique si tu en veux plus.</p>
+
+          <a class="btn btn-play" href="https://play.google.com/store/apps/details?id=com.skudev.ps5vault&amp;referrer=utm_source%3Dskudev%26utm_medium%3Dweb%26utm_campaign%3Dcta%26utm_content%3Dfr" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.5v19l10-9.5L4 2.5zm11.4 10.8l2.6 2.5-11.2 6.3 8.6-8.8zm0-2.6L6.8 1.9 18 8.2l-2.6 2.5zm4.3-1.5l3 1.7c.8.5.8 1.7 0 2.2l-3 1.7-2.8-2.8 2.8-2.8z"/></svg>
+            Disponible sur Google Play
+          </a>
+
+          <div class="cta-meta">Une idée ou un bug ? Écris à <a href="mailto:skudev6@gmail.com">skudev6@gmail.com</a>.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>PS5 Vault · un projet <a href="/" style="color:var(--accent-dim);text-decoration:none;">skudev</a> · 2026</div>
+        <ul class="footer-links">
+          <li><a href="mailto:skudev6@gmail.com">email</a></li>
+          <li><a href="https://matiseekk-dot.github.io/Games/privacy.html" target="_blank" rel="noopener">privacy</a></li>
+          <li><a href="https://github.com/matiseekk-dot/Games" target="_blank" rel="noopener">github</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+(() => {
+  const C = {"lang":"fr","locale":"fr-FR","currency":"EUR","bands":[0.5,1.25,2.5],"shelfTime":"{hours} h de jeu, soit {time} à {hpw} h par semaine.","verdicts":["Excellent investissement : chaque heure ne coûte presque rien.","Bon résultat, le jeu a été rentable.","Moyen. Quelques heures de plus et ça ira mieux.","Cher. Joue davantage ou revends-le tant qu'il a de la valeur."],"copied":"✓ Lien copié. Colle-le sur Discord ou Facebook.","shareShelf":"J'ai {value} de jeux jamais lancés sur mon étagère 🙈 Calcule les tiens :","shareCph":"Une heure de jeu me coûte {value}. Et toi ?","units":{"year":["an","ans"],"month":["mois","mois"],"week":["semaine","semaines"],"and":"et"}};
+  const $ = id => document.getElementById(id);
+  const money = (v, d) => new Intl.NumberFormat(C.locale, { style: 'currency', currency: C.currency, minimumFractionDigits: d, maximumFractionDigits: d }).format(v);
+  const num = el => { const v = parseFloat(String(el.value).replace(',', '.')); return isFinite(v) && v >= 0 ? v : 0; };
+  const plural = (n, f) => {
+    if (f.length === 3) { if (n === 1) return f[0]; const a = n % 10, b = n % 100; return a >= 2 && a <= 4 && (b < 10 || b >= 20) ? f[1] : f[2]; }
+    return (C.lang === 'fr' ? n < 2 : n === 1) ? f[0] : f[1];
+  };
+  const span = weeks => {
+    const U = C.units;
+    if (weeks < 9) { const w = Math.max(1, Math.round(weeks)); return w + ' ' + plural(w, U.week); }
+    const m = Math.round(weeks / 4.345);
+    if (m < 12) return m + ' ' + plural(m, U.month);
+    const y = Math.floor(m / 12), r = m % 12;
+    return y + ' ' + plural(y, U.year) + (r ? ' ' + U.and + ' ' + r + ' ' + plural(r, U.month) : '');
+  };
+  const SHELF = ['s-games', 's-price', 's-hpw'], CPH = ['c-price', 'c-hours', 'c-resale'];
+  function shelf() {
+    const g = num($('s-games')), p = num($('s-price')), h = num($('s-hpw')) || 1, hours = Math.round(g * 25);
+    $('s-value').textContent = money(g * p, 0);
+    $('s-time').textContent = C.shelfTime.replace('{hours}', hours.toLocaleString(C.locale)).replace('{time}', span(hours / h)).replace('{hpw}', h);
+  }
+  function cph() {
+    const p = num($('c-price')), h = num($('c-hours')), r = num($('c-resale'));
+    const v = h > 0 ? Math.max(0, p - r) / h : 0, b = C.bands;
+    $('c-value').textContent = money(v, 2);
+    $('c-verdict').textContent = h > 0 ? C.verdicts[v <= b[0] ? 0 : v <= b[1] ? 1 : v <= b[2] ? 2 : 3] : '';
+  }
+  // A shared link carries the numbers: ?shelf=games_price_hours or ?cph=price_hours_resale
+  const q = new URLSearchParams(location.search);
+  const fill = (ids, raw) => { if (!raw) return false; raw.split('_').forEach((x, i) => { const v = parseFloat(x); if (ids[i] && isFinite(v) && v >= 0) $(ids[i]).value = v; }); return true; };
+  const fromShelf = fill(SHELF, q.get('shelf')), fromCph = fill(CPH, q.get('cph'));
+  SHELF.forEach(id => $(id).addEventListener('input', shelf));
+  CPH.forEach(id => $(id).addEventListener('input', cph));
+  shelf(); cph();
+  if (fromShelf || fromCph) setTimeout(() => $(fromShelf ? 'shelf' : 'cph').scrollIntoView({ behavior: 'smooth', block: 'start' }), 250);
+  async function share(kind) {
+    const ids = kind === 'shelf' ? SHELF : CPH;
+    const url = location.origin + location.pathname + '?' + kind + '=' + ids.map(id => num($(id))).join('_') + '#' + kind;
+    const text = (kind === 'shelf' ? C.shareShelf : C.shareCph).replace('{value}', $(kind === 'shelf' ? 's-value' : 'c-value').textContent);
+    const msg = $(kind === 'shelf' ? 's-msg' : 'c-msg');
+    if (navigator.share) { try { await navigator.share({ title: document.title, text, url }); return; } catch (e) { if (e && e.name === 'AbortError') return; } }
+    try { await navigator.clipboard.writeText(text + ' ' + url); msg.textContent = C.copied; } catch (e) { window.prompt('', text + ' ' + url); }
+  }
+  $('s-share').addEventListener('click', () => share('shelf'));
+  $('c-share').addEventListener('click', () => share('cph'));
+})();
+  </script>
+</body>
+</html>

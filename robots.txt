@@ -3,3 +3,4 @@ Allow: /
 
 Sitemap: https://skudev.pl/sitemap.xml
 Sitemap: https://skudev.pl/sitemap-spokojny-rodzic.xml
+Sitemap: https://skudev.pl/sitemap-ps5-vault.xml
