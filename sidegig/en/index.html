@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidegig · What your side hustle really earns · SkuDev</title>
+  <meta name="description" content="A profit and loss statement for your side income: freelance gigs, reselling on Vinted and eBay, vinyl, book and game collections, investments, rentals. Barcode scanner, Discogs import, any currency, 9 languages. Free, no ads, no sign-up needed.">
+  <meta property="og:title" content="Sidegig · What's really left from your side hustle">
+  <meta property="og:description" content="Gigs, reselling, collections, investments and rentals in one place — with costs and fees, in any currency.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skudev.pl/sidegig/en/">
+  <link rel="canonical" href="https://skudev.pl/sidegig/en/">
+  <link rel="alternate" hreflang="pl" href="https://skudev.pl/sidegig/">
+  <link rel="alternate" hreflang="en" href="https://skudev.pl/sidegig/en/">
+  <link rel="alternate" hreflang="x-default" href="https://skudev.pl/sidegig/en/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23059669'/%3E%3Ctext x='50' y='68' font-size='52' text-anchor='middle' fill='%23ffffff' font-family='monospace' font-weight='700'%3ES%3C/text%3E%3C/svg%3E">
+
+  <style>
+    :root {
+      --bg:          #060B14;
+      --bg-2:        #0D1628;
+      --bg-3:        #1A2744;
+      --ink:         #E2E8F0;
+      --ink-2:       #A3B1C6;
+      --ink-3:       #64748B;
+      --accent:      #34D399;
+      --accent-dim:  #10B981;
+      --brand:       #059669;
+      --red:         #F87171;
+      --border:      rgba(226, 232, 240, 0.08);
+      --border-2:    rgba(226, 232, 240, 0.16);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(226, 232, 240, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(226, 232, 240, 0.02) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 80%);
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 75% 15%, rgba(16, 185, 129, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 15% 85%, rgba(59, 130, 246, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container { max-width: 1080px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+
+    header {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(12px);
+      background: rgba(6, 11, 20, 0.85);
+    }
+    .nav { display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+    .logo-mark {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #059669, #10B981);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Space Mono', monospace; font-weight: 700; color: #fff; font-size: 18px;
+    }
+    .logo-text { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 0.5px; }
+    .logo-text em { font-style: normal; color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 20px; }
+    .nav-back, .nav-lang {
+      font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink-3);
+      text-decoration: none; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.2s;
+    }
+    .nav-back:hover, .nav-lang:hover { color: var(--accent); }
+    .nav-lang { border: 1px solid var(--border-2); border-radius: 20px; padding: 6px 12px; }
+
+    .hero { padding: 80px 0 60px; position: relative; }
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace; font-size: 12px; color: var(--accent);
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 24px; font-weight: 700;
+    }
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(44px, 7vw, 76px);
+      line-height: 1.02; letter-spacing: 0.5px; margin-bottom: 28px; max-width: 15ch;
+    }
+    h1 em { font-style: normal; color: var(--accent); }
+    .hero-lead { font-size: 19px; color: var(--ink-2); line-height: 1.6; max-width: 56ch; margin-bottom: 36px; }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 22px; border-radius: 12px;
+      font-family: inherit; font-size: 15px; font-weight: 700; letter-spacing: 0.2px;
+      text-decoration: none; transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .btn svg { width: 18px; height: 18px; }
+    .btn-main { background: var(--brand); color: #fff; }
+    .btn-main:hover { background: #047857; }
+    .btn-ghost { border: 1px solid var(--border-2); color: var(--ink); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-status {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 8px 14px;
+      background: rgba(52, 211, 153, 0.1);
+      border: 1px solid rgba(52, 211, 153, 0.3);
+      border-radius: 20px;
+      font-family: 'Space Mono', monospace; font-size: 12px; color: var(--accent); font-weight: 600; letter-spacing: 0.5px;
+    }
+    .hero-status::before {
+      content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent); animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+    .story { padding: 60px 0; border-top: 1px solid var(--border); }
+    .story-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+    .story-label {
+      font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink-3);
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 24px;
+    }
+    .story-quote {
+      font-size: clamp(20px, 2.8vw, 25px); line-height: 1.5; color: var(--ink);
+      font-style: italic; letter-spacing: -0.2px; margin-bottom: 24px;
+    }
+    .story-quote em { font-style: italic; color: var(--accent); }
+    .story-author { font-family: 'Space Mono', monospace; font-size: 13px; color: var(--ink-3); }
+
+    .features { padding: 80px 0 60px; border-top: 1px solid var(--border); }
+    .section-label {
+      font-family: 'Space Mono', monospace; font-size: 12px; color: var(--accent);
+      letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; font-weight: 700;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(32px, 5vw, 48px);
+      line-height: 1.08; letter-spacing: 0.3px; max-width: 20ch; margin-bottom: 60px;
+    }
+    .section-title em { font-style: normal; color: var(--accent); }
+
+    .features-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+    }
+    .feature { background: var(--bg); padding: 32px 28px; transition: background 0.2s; }
+    .feature:hover { background: var(--bg-2); }
+    .feature-num { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--ink-3); letter-spacing: 1px; margin-bottom: 12px; }
+    .feature-emoji { font-size: 32px; margin-bottom: 16px; display: block; }
+    .feature h3 { font-size: 18px; font-weight: 700; line-height: 1.25; margin-bottom: 10px; letter-spacing: -0.2px; }
+    .feature p { font-size: 14px; line-height: 1.6; color: var(--ink-2); }
+
+    .modules { padding: 70px 0 60px; border-top: 1px solid var(--border); }
+    .module-list { display: flex; flex-wrap: wrap; gap: 10px; }
+    .module {
+      padding: 10px 16px; border-radius: 12px; background: var(--bg-2); border: 1px solid var(--bg-3);
+      font-size: 14px; font-weight: 600; color: var(--ink);
+    }
+    .module span { color: var(--ink-3); font-weight: 400; margin-left: 6px; }
+
+    .cta { padding: 80px 0; border-top: 1px solid var(--border); text-align: center; }
+    .cta-inner { max-width: 600px; margin: 0 auto; }
+    .cta-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px, 4vw, 40px); line-height: 1.15; letter-spacing: 0.3px; margin-bottom: 20px; }
+    .cta-title em { font-style: normal; color: var(--accent); }
+    .cta-lead { color: var(--ink-2); margin-bottom: 32px; font-size: 15px; line-height: 1.6; }
+    .cta .hero-ctas { justify-content: center; margin-bottom: 0; }
+    .cta-meta { margin-top: 20px; font-family: 'Space Mono', monospace; font-size: 11px; color: var(--ink-3); letter-spacing: 0.3px; line-height: 1.7; }
+    .cta-meta a { color: var(--ink-2); }
+
+    footer { padding: 40px 0; border-top: 1px solid var(--border); font-family: 'Space Mono', monospace; font-size: 12px; color: var(--ink-3); letter-spacing: 0.3px; }
+    .footer-grid { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-links { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
+    .footer-links a { color: var(--ink-3); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+
+    @media (max-width: 640px) {
+      .container { padding: 0 16px; }
+      .hero { padding: 56px 0 40px; }
+      .nav-back { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="logo">
+          <div class="logo-mark">S</div>
+          <div class="logo-text">skudev · <em>sidegig</em></div>
+        </a>
+        <div class="nav-links">
+          <a href="/sidegig/" class="nav-lang" hreflang="pl">PL</a>
+          <a href="/" class="nav-back">← all projects</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="container">
+        <div class="hero-eyebrow">// Side income · web and Android</div>
+        <h1>What your side hustle <em>really</em> earns.</h1>
+        <p class="hero-lead">
+          Freelance gigs, selling on Vinted and eBay, records, games and books, investments, rentals —
+          everything you do outside your salary, in one profit and loss statement. With costs and fees,
+          in any currency, month by month.
+        </p>
+        <div class="hero-ctas">
+          <a class="btn btn-main" href="https://matiseekk-dot.github.io/FinTrack-PRO/" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Open Sidegig
+          </a>
+          <a class="btn btn-ghost" href="#co-dostajesz">What it does</a>
+        </div>
+        <div class="hero-status">free · no ads · no sign-up needed · 9 languages</div>
+      </div>
+    </section>
+
+    <section class="story">
+      <div class="container">
+        <div class="story-inner">
+          <div class="story-label">// why this app</div>
+          <p class="story-quote">
+            I started with a plain expense tracker. It quickly turned out the better question was different:
+            what do the things I do after hours actually bring in? A bank shows one list of payments.
+            Sidegig counts every source separately, with fees and costs, so you can see <em>what's left</em>.
+          </p>
+          <div class="story-author">Mateusz, maker</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="modules">
+      <div class="container">
+        <div class="section-label">// modules</div>
+        <h2 class="section-title">Turn on only <em>what you need</em>.</h2>
+        <div class="module-list">
+          <div class="module">Freelance<span>invoices, gigs, hours</span></div>
+          <div class="module">Reselling<span>Vinted, eBay, Depop, OLX</span></div>
+          <div class="module">Collections<span>vinyl, books, games</span></div>
+          <div class="module">Investments<span>ETFs, stocks, crypto, gold, bonds</span></div>
+          <div class="module">Rentals<span>flat, garage, parking space</span></div>
+          <div class="module">Hobbies &amp; subscriptions<span>Netflix, Spotify, gigs</span></div>
+          <div class="module">Trips<span>budget in any currency</span></div>
+          <div class="module">Betting<span>18+, bankroll and ROI</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="co-dostajesz">
+      <div class="container">
+        <div class="section-label">// what you get</div>
+        <h2 class="section-title">Less typing, <em>more answers</em>.</h2>
+
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature-num">01</div>
+            <span class="feature-emoji">📈</span>
+            <h3>Net side income</h3>
+            <p>One number up front: what your side hustle earned this month after costs. Next to it, last month, the year so far and your goal. Use the arrows to go back to any month.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">02</div>
+            <span class="feature-emoji">🏷️</span>
+            <h3>Sales with fees</h3>
+            <p>What you paid, what you sold it for, what the platform and shipping took. You see the real profit on every item, not just the amount that hit your account.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">03</div>
+            <span class="feature-emoji">💿</span>
+            <h3>Collections with valuations</h3>
+            <p>Import your records from Discogs together with market prices. Every item shows its paper gain, and every collection shows what you spent on it in a given month and year.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">04</div>
+            <span class="feature-emoji">📷</span>
+            <h3>Barcode scanner</h3>
+            <p>The camera reads the ISBN or EAN from the cover and the title and author fill in by themselves. Add a whole shelf in one go and enter what you paid — the expense is recorded for you.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">05</div>
+            <span class="feature-emoji">📊</span>
+            <h3>Investments the way your broker shows them</h3>
+            <p>Enter the average price and the number of units, or simply the value and profit from your broker's app. Crypto and gold prices update by themselves; ETFs and stocks do in the Android app.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">06</div>
+            <span class="feature-emoji">🏠</span>
+            <h3>Rentals without a spreadsheet</h3>
+            <p>Rent for every month, arrears and the costs of a flat, garage or parking space. You can see at a glance what has been paid and what hasn't.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">07</div>
+            <span class="feature-emoji">🔔</span>
+            <h3>Reminders</h3>
+            <p>An invoice due date, a subscription renewal, rent from a tenant. On Android the reminder arrives even when the app is closed.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">08</div>
+            <span class="feature-emoji">💱</span>
+            <h3>Any currency</h3>
+            <p>A gig paid in euros, a record from the UK, a trip in crowns. Every entry keeps its own currency, and totals use the exchange rate from the day of the transaction.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-num">09</div>
+            <span class="feature-emoji">🔒</span>
+            <h3>Your data, your rules</h3>
+            <p>Try it without signing in. A Google account is only used to sync between devices. No ads, no analytics, Excel export, and account deletion with one button.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <div class="cta-inner">
+          <div class="section-label">// get started</div>
+          <h2 class="cta-title">Free, <em>no ads</em>, in 9 languages.</h2>
+          <p class="cta-lead">
+            Sidegig runs in your browser — on a phone you can add it to your home screen like a regular app.
+            The Android version is coming to Google Play soon.
+          </p>
+          <div class="hero-ctas">
+            <a class="btn btn-main" href="https://matiseekk-dot.github.io/FinTrack-PRO/" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              Open Sidegig
+            </a>
+          </div>
+          <div class="cta-meta">
+            English, Polish, German, Spanish, French, Portuguese, Italian, Dutch, Ukrainian.<br>
+            An idea or a bug? Write to <a href="mailto:skudev6@gmail.com">skudev6@gmail.com</a>.
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>Sidegig · a <a href="/" style="color:var(--accent-dim);text-decoration:none;">skudev</a> project · 2026</div>
+        <ul class="footer-links">
+          <li><a href="mailto:skudev6@gmail.com">email</a></li>
+          <li><a href="https://matiseekk-dot.github.io/FinTrack-PRO/privacy.html" rel="noopener">privacy</a></li>
+          <li><a href="https://matiseekk-dot.github.io/FinTrack-PRO/terms.html" rel="noopener">terms</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
